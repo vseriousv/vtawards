@@ -1,35 +1,21 @@
 <template>
   <div>
-    <header-block />
-    <why-us-block />
-    <advantages-block />
-    <portfolio-block />
+    <h1>Main</h1>
   </div>
 </template>
 
 <script>
-  import HeaderBlock from "../components/HeaderBlock/HeaderBlock";
-  import WhyUsBlock from "../components/WhyUsBlock/WhyUsBlock";
-  import AdvantagesBlock from "../components/AdvantagesBlock/AdvantagesBlock";
-  import PortfolioBlock from "../components/PortfolioBlock/PortfolioBlock";
-
-  export default {
+export default {
   name: "App",
 
-  components: {
-    HeaderBlock,
-    WhyUsBlock,
-    AdvantagesBlock,
-    PortfolioBlock
-  },
+  components: {},
 
   data() {
-    return {
-    };
-  },
+    return {};
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/index.scss";
+@import "../assets/styles/index.scss";
 </style>
