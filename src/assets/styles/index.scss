@@ -13,16 +13,15 @@ $subheadSection: 16px;
 $subheadHeightLineSection: 20px;
 
 //Variables for colors
-$primaryColor: #087CEC;
+$primaryColor: #FFB900;
 $primaryDarkColor: #034F99;
 $primarySurface: #449EF5;
-$primaryTextColor: #FF5300;
+$primaryTextColor: #FFB900;
 $secondaryColor: #FFDE73;
 $thirdColor: #FF5300;
 
 //Fonts
-$font-family: 'Montserrat', sans-serif;
-$body-font-family: 'Montserrat', sans-serif;
+
 
 @mixin respond-to($media) {
     @if $media == handhelds {
@@ -42,10 +41,9 @@ $body-font-family: 'Montserrat', sans-serif;
     }
 }
 body{
-  font-family: $font-family !important;
   overflow: hidden;
 }
-
+input:focus {outline: none;}
 .header_section_head {
   font-size: 20px;
   text-align: center;
@@ -73,7 +71,6 @@ body{
 
 //classes for sections
 .headSection {
-  font-family: $font-family;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;

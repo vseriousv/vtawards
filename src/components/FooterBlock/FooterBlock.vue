@@ -5,25 +5,17 @@
 <script>
 export default {
   name: "FooterBlock",
-  props: {
-
-  },
-  computed: {
-  },
+  props: {},
+  computed: {},
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/styles/index";
 .footer-block {
-
 }
 </style>
