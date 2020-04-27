@@ -1,15 +1,17 @@
 <template>
-  <section class="header-block">
+  <header class="header-block">
     <div id="home" class="target-class" />
     <v-container class="mxw1200">
       <v-row class="logoAndLang">
         <v-col cols="12" class="logoAndLang__col">
-          <img
-            class="logotype"
-            width="150"
-            :src="`/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`"
-            alt="vtaward"
-          />
+          <router-link to="/">
+            <img
+              class="logotype"
+              width="150"
+              :src="`/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`"
+              alt="vtaward"
+            />
+          </router-link>
           <div :class="`d-flex align-center lang ${$t('lang')}`">
             <input
               class="langButton ruInput"
@@ -65,7 +67,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </section>
+  </header>
 </template>
 
 <script>
@@ -79,6 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/styles/index";
+
 .header-block {
   background-image: url(/img/imgComponents/HeaderBlock/Header_BG.jpg);
   background-repeat: no-repeat;

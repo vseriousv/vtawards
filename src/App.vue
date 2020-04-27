@@ -1,33 +1,53 @@
 <template>
   <v-app id="inspire">
-    <header-block @switchLang="switchLang" />
-    <app-header :fixedTopMenu="this.fixedTop" />
-    <div :style="`height: 50px; display: ${displayMargin}`"></div>
-    <!-- PAGES BLOCKS  -->
-    <router-view />
-    <div style="height: 1700px;"></div>
-    <footer-block />
+    <!-- NAVICAGTION DRAWER -->
+    <v-navigation-drawer
+      fixed
+      left
+      temporary
+      v-model="drawer"
+      class="hidden-md-and-up"
+      style="z-index: 2147483646;"
+    >
+      <drawer-list/>
+    </v-navigation-drawer>
+
+    <!-- ROUTER VIEW HEADER SITE WITHOUT BODY  -->
+    <router-view name="header" @switchLang="switchLang" :headName_en="headName_en"/>
+
+    <app-header
+      :fixedTopMenu="this.fixedTop"
+      @changeDrawerReverse="changeDrawerReverse"
+    />
+    <div :style="`height: 50px; display: ${displayMargin}`" />
+
+    <!-- ROUTER VIEW BODY SITE WITHOUT HEADER  -->
+    <router-view  name="body"/>
+    <footer-block @switchLang="switchLang" />
   </v-app>
 </template>
 
 <script>
-import HeaderBlock from "./components/HeaderBlock/HeaderBlock";
+import DrawerList from "./components/DrawerList/DrawerList";
 import AppHeader from "./components/AppHeader/AppHeader";
 import FooterBlock from "./components/FooterBlock/FooterBlock";
 
 export default {
   name: "App",
+  props: ['headName_en','headName_ru'],
   components: {
-    HeaderBlock,
+    DrawerList,
     AppHeader,
     FooterBlock
   },
-
+  computed: {
+  },
   data() {
     return {
-      drawer: false,
       fixedTop: "noFixedTop",
-      displayMargin: "none"
+      displayMargin: "none",
+      spec: true,
+      drawer: false
     };
   },
   created() {
