@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>Main</h1>
+    <h1>Result page</h1>
     <div style="height: 700px;"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "MainPage",
+  name: "ResultPage",
 
   components: {},
 

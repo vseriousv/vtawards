@@ -23,19 +23,19 @@ export default {
       {
         id: 1,
         text: "Главная",
-        link: "#home",
+        link: "/",
         target: "_self"
       },
       {
         id: 2,
         text: "Результаты голосования",
-        link: "#voting_results",
+        link: "/result",
         target: "_self"
       },
       {
         id: 3,
         text: "Комиссия",
-        link: "#сommittee",
+        link: "/committee",
         target: "_self"
       },
       {
@@ -44,12 +44,12 @@ export default {
         link: "#participants_I_stage",
         target: "_self"
       },
-      {
-        id: 5,
-        text: "Участники II этапа",
-        link: "#participants_II_stage",
-        target: "_self"
-      },
+      // {
+      //   id: 5,
+      //   text: "Участники II этапа",
+      //   link: "#participants_II_stage",
+      //   target: "_self"
+      // },
       {
         id: 6,
         text: "Архив",
@@ -82,13 +82,13 @@ export default {
       {
         id: 1,
         text: "Home",
-        link: "#home",
+        link: "/",
         target: "_self"
       },
       {
         id: 2,
         text: "Voting results",
-        link: "#voting_results",
+        link: "/result",
         target: "_self"
       },
       {
@@ -103,12 +103,12 @@ export default {
         link: "#participants_I_stage",
         target: "_self"
       },
-      {
-        id: 5,
-        text: "Participants II stage",
-        link: "#participants_II_stage",
-        target: "_self"
-      },
+      // {
+      //   id: 5,
+      //   text: "Participants II stage",
+      //   link: "#participants_II_stage",
+      //   target: "_self"
+      // },
       {
         id: 6,
         text: "Archive",
