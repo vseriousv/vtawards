@@ -2,11 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HeaderBlock from "./components/HeaderBlock/HeaderBlock";
 import HeaderBlockOtherPage from "./components/HeaderBlock/HeaderBlockOtherPage";
+import HeaderBlockLoginPage from "./components/HeaderBlock/HeaderBlockLoginPage";
+import AppHeader from "./components/AppHeader/AppHeader";
+import FooterBlock from "./components/FooterBlock/FooterBlock";
 
 import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
 import ResultPage from "./pages/ResultPage";
-import CommitteePage from "./pages/CommitteePage"
+import CommitteePage from "./pages/CommitteePage";
+import ArchivePage from "./pages/ArchivePage";
 
 Vue.use(VueRouter);
 
@@ -15,14 +21,25 @@ const routes = [
         path: "/login",
         name: "login",
         components: {
-            header: HeaderBlockOtherPage,
+            header: HeaderBlockLoginPage,
             body: LoginPage
         },
-        props: {
-            header: {
-                headName_en: 'login',
-                headName_ru: 'вход'
-            }
+        meta: { guest: true }
+    },
+    {
+        path: "/registration",
+        name: "registration",
+        components: {
+            header: HeaderBlockLoginPage,
+            body: RegistrationPage
+        },
+        meta: { guest: true }
+    },
+    {
+        path: "/logout",
+        name: "logout",
+        components: {
+            body: LogoutPage
         },
         meta: { requiresAuth: true }
     },
@@ -31,7 +48,9 @@ const routes = [
         name: "main",
         components: {
             header: HeaderBlock,
-            body: MainPage
+            body: MainPage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
@@ -46,7 +65,9 @@ const routes = [
         name: "result",
         components: {
             header: HeaderBlockOtherPage,
-            body: ResultPage
+            body: ResultPage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
@@ -61,12 +82,31 @@ const routes = [
         name: "committee",
         components: {
             header: HeaderBlockOtherPage,
-            body: CommitteePage
+            body: CommitteePage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
                 headName_en: 'Committee',
                 headName_ru: 'Комиссия'
+            }
+        },
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/archive",
+        name: "archive",
+        components: {
+            header: HeaderBlockOtherPage,
+            body: ArchivePage,
+            nav: AppHeader,
+            footer: FooterBlock
+        },
+        props: {
+            header: {
+                headName_en: 'Archive',
+                headName_ru: 'Архив'
             }
         },
         meta: { requiresAuth: true }
@@ -78,35 +118,27 @@ const router = new VueRouter({
     mode: "history",
     routes: routes
 });
-//
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         if (localStorage.getItem("jwt") == null) {
-//             next({
-//                 path: "/login",
-//                 params: { nextUrl: to.fullPath }
-//             });
-//         } else {
-//             const user = JSON.parse(localStorage.getItem("user"));
-//             if (to.matched.some(record => record.meta.is_user)) {
-//                 if (user.is_user) {
-//                     next();
-//                 } else {
-//                     next({ name: "main" });
-//                 }
-//             } else {
-//                 next();
-//             }
-//         }
-//     } else if (to.matched.some(record => record.meta.guest)) {
-//         if (localStorage.getItem("jwt") == null) {
-//             next();
-//         } else {
-//             next({ name: "main" });
-//         }
-//     } else {
-//         next();
-//     }
-// });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (localStorage.getItem("jwt") == null) {
+            next({
+                // path: "/login",
+                // params: { nextUrl: to.fullPath }
+                name: "login"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.guest)) {
+        if (localStorage.getItem("jwt") == null) {
+            next();
+        } else {
+            next({ name: "main" });
+        }
+    } else {
+        next();
+    }
+});
 
 export default router;

@@ -15,30 +15,24 @@
     <!-- ROUTER VIEW HEADER SITE WITHOUT BODY  -->
     <router-view name="header" @switchLang="switchLang" :headName_en="headName_en"/>
 
-    <app-header
-      :fixedTopMenu="this.fixedTop"
-      @changeDrawerReverse="changeDrawerReverse"
-    />
+    <router-view name="nav" :fixedTopMenu="this.fixedTop" @changeDrawerReverse="changeDrawerReverse"/>
+
     <div :style="`height: 50px; display: ${displayMargin}`" />
 
     <!-- ROUTER VIEW BODY SITE WITHOUT HEADER  -->
-    <router-view  name="body"/>
-    <footer-block @switchLang="switchLang" />
+    <router-view name="body"/>
+    <router-view name="footer" @switchLang="switchLang" />
   </v-app>
 </template>
 
 <script>
 import DrawerList from "./components/DrawerList/DrawerList";
-import AppHeader from "./components/AppHeader/AppHeader";
-import FooterBlock from "./components/FooterBlock/FooterBlock";
 
 export default {
   name: "App",
   props: ['headName_en','headName_ru'],
   components: {
     DrawerList,
-    AppHeader,
-    FooterBlock
   },
   computed: {
   },

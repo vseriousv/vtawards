@@ -7,7 +7,7 @@
 <script>
 import LoginBlock from "../components/AuthModule/LoginBlock";
 export default {
-  name: "LoginPage",
+  name: "AdminPage",
 
   components: {
     LoginBlock
