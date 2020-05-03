@@ -18,6 +18,25 @@ export default {
         statusStart: "Идет голосовнаие"
       }
     },
+    loginBlock: {
+      headAuth: "Авторизация",
+      headReg: "Регистрация",
+      form: {
+        email: "Email",
+        password: "Пароль",
+        password_repeat: "Повторите пароль",
+        name: "Полное имя",
+        position: "Должность",
+        section: "Офис",
+        state: "Регион",
+        city: "Город",
+        nomination: "Номинация",
+        description: "Описание",
+        role: "Роль",
+        submit: "Отправить",
+        errorPassRepeat: "Пароли должны совпадать"
+      }
+    },
     footerBlock: {},
     menuItems: [
       {
@@ -40,20 +59,20 @@ export default {
       },
       {
         id: 4,
-        text: "Участники I этапа",
-        link: "#participants_I_stage",
+        text: "Участники",
+        link: "#participants",
         target: "_self"
       },
-      // {
-      //   id: 5,
-      //   text: "Участники II этапа",
-      //   link: "#participants_II_stage",
-      //   target: "_self"
-      // },
+      {
+        id: 5,
+        text: "Архив",
+        link: "/archive",
+        target: "_self"
+      },
       {
         id: 6,
-        text: "Архив",
-        link: "#archive",
+        text: "Выход",
+        link: "/logout",
         target: "_self"
       }
     ]
@@ -75,6 +94,25 @@ export default {
         statusEnd: "Voting is closed",
         statusProc: "Voting will begin soon",
         statusStart: "There is a vote"
+      }
+    },
+    loginBlock: {
+      headAuth: "Sing in",
+      headReg: "Registration",
+      form: {
+        email: "Email",
+        password: "Password",
+        password_repeat: "Password repeat",
+        name: "Full name",
+        position: "Position",
+        section: "Section",
+        state: "State",
+        city: "City",
+        nomination: "Nomination",
+        description: "Description",
+        role: "Role",
+        submit: "Send",
+        errorPassRepeat: "Passwords must match"
       }
     },
     footerBlock: {},
@@ -99,20 +137,20 @@ export default {
       },
       {
         id: 4,
-        text: "Participants I stage",
-        link: "#participants_I_stage",
+        text: "Participants",
+        link: "#participants",
         target: "_self"
       },
-      // {
-      //   id: 5,
-      //   text: "Participants II stage",
-      //   link: "#participants_II_stage",
-      //   target: "_self"
-      // },
       {
-        id: 6,
+        id: 5,
         text: "Archive",
         link: "#archive",
+        target: "_self"
+      },
+      {
+        id: 6,
+        text: "Logout",
+        link: "/logout",
         target: "_self"
       }
     ]

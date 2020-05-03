@@ -1,17 +1,15 @@
 <template>
   <div>
-    <login-block/>
+    <h1>Archive Page</h1>
+    <div style="height: 700px;"></div>
   </div>
 </template>
 
 <script>
-import LoginBlock from "../components/AuthModule/LoginBlock";
 export default {
-  name: "LoginPage",
+  name: "ArchivePage",
 
-  components: {
-    LoginBlock
-  },
+  components: {},
 
   data() {
     return {};

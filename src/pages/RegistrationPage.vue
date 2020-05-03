@@ -1,16 +1,16 @@
 <template>
   <div>
-    <login-block/>
+    <registration-block/>
   </div>
 </template>
 
 <script>
-import LoginBlock from "../components/AuthModule/LoginBlock";
+import RegistrationBlock from "../components/AuthModule/RegistrationBlock";
 export default {
-  name: "LoginPage",
+  name: "RegistrationPage",
 
   components: {
-    LoginBlock
+    RegistrationBlock
   },
 
   data() {

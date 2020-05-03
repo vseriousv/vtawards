@@ -1,12 +1,30 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import axios from 'axios';
+import JwtHelper from "./helpers/JwtHelper";
+import config from "./constants/config";
 import HeaderBlock from "./components/HeaderBlock/HeaderBlock";
 import HeaderBlockOtherPage from "./components/HeaderBlock/HeaderBlockOtherPage";
+import HeaderBlockLoginPage from "./components/HeaderBlock/HeaderBlockLoginPage";
+import AppHeader from "./components/AppHeader/AppHeader";
+import FooterBlock from "./components/FooterBlock/FooterBlock";
 
 import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
 import ResultPage from "./pages/ResultPage";
-import CommitteePage from "./pages/CommitteePage"
+import CommitteePage from "./pages/CommitteePage";
+import ArchivePage from "./pages/ArchivePage";
+
+//ADMINKA
+import AdminPanel from "./components/AdminModule/AdminPanel";
+import AdminPage from "./pages/AdminPage";
+import AdminMain from "./components/AdminModule/AdminMain";
+import AdminMembers from "./components/AdminModule/AdminMembers";
+import AdminUsers from "./components/AdminModule/AdminUsers";
+import AdminVoting from "./components/AdminModule/AdminVoting";
+import AdminCatalogs from "./components/AdminModule/AdminCatalogs";
 
 Vue.use(VueRouter);
 
@@ -15,14 +33,25 @@ const routes = [
         path: "/login",
         name: "login",
         components: {
-            header: HeaderBlockOtherPage,
+            header: HeaderBlockLoginPage,
             body: LoginPage
         },
-        props: {
-            header: {
-                headName_en: 'login',
-                headName_ru: 'вход'
-            }
+        meta: { guest: true }
+    },
+    {
+        path: "/registration",
+        name: "registration",
+        components: {
+            header: HeaderBlockLoginPage,
+            body: RegistrationPage
+        },
+        meta: { guest: true }
+    },
+    {
+        path: "/logout",
+        name: "logout",
+        components: {
+            body: LogoutPage
         },
         meta: { requiresAuth: true }
     },
@@ -30,8 +59,11 @@ const routes = [
         path: "/",
         name: "main",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlock,
-            body: MainPage
+            body: MainPage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
@@ -45,8 +77,11 @@ const routes = [
         path: "/result",
         name: "result",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlockOtherPage,
-            body: ResultPage
+            body: ResultPage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
@@ -60,8 +95,11 @@ const routes = [
         path: "/committee",
         name: "committee",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlockOtherPage,
-            body: CommitteePage
+            body: CommitteePage,
+            nav: AppHeader,
+            footer: FooterBlock
         },
         props: {
             header: {
@@ -70,6 +108,39 @@ const routes = [
             }
         },
         meta: { requiresAuth: true }
+    },
+    {
+        path: "/archive",
+        name: "archive",
+        components: {
+            adminPanel: AdminPanel,
+            header: HeaderBlockOtherPage,
+            body: ArchivePage,
+            nav: AppHeader,
+            footer: FooterBlock
+        },
+        props: {
+            header: {
+                headName_en: 'Archive',
+                headName_ru: 'Архив'
+            }
+        },
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/admin",
+        name: "admin",
+        components: { body: AdminPage },
+        redirect: '/admin/general',
+        children: [
+            { name: "generalAdmin",     path: "general",    component: AdminMain,       meta: { isAdmin: true} },
+            { name: "catalogsAdmin",    path: "catalogs",   component: AdminCatalogs,   meta: { isAdmin: true} },
+            { name: "usersAdmin",       path: "users",      component: AdminUsers,      meta: { isAdmin: true} },
+            { name: "membersAdmin",     path: "members",    component: AdminMembers,    meta: { isAdmin: true} },
+            { name: "votingAdmin",      path: "voting",     component: AdminVoting,     meta: { isAdmin: true} }
+
+        ],
+        meta: { isAdmin: true }
     }
 ];
 
@@ -78,35 +149,49 @@ const router = new VueRouter({
     mode: "history",
     routes: routes
 });
-//
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         if (localStorage.getItem("jwt") == null) {
-//             next({
-//                 path: "/login",
-//                 params: { nextUrl: to.fullPath }
-//             });
-//         } else {
-//             const user = JSON.parse(localStorage.getItem("user"));
-//             if (to.matched.some(record => record.meta.is_user)) {
-//                 if (user.is_user) {
-//                     next();
-//                 } else {
-//                     next({ name: "main" });
-//                 }
-//             } else {
-//                 next();
-//             }
-//         }
-//     } else if (to.matched.some(record => record.meta.guest)) {
-//         if (localStorage.getItem("jwt") == null) {
-//             next();
-//         } else {
-//             next({ name: "main" });
-//         }
-//     } else {
-//         next();
-//     }
-// });
+
+const url = config.API_URL + "/users/check";
+
+const jwtHeader = new JwtHelper();
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.isAdmin)){
+        if(jwtHeader.isAdmin()) {
+            next();
+        }else{
+            next({name: "main"});
+        }
+    } else
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!jwtHeader.isJwt()) {
+            next({
+                name: "login"
+            });
+        } else {
+            axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
+            .then(res => {
+                if(res.data.result === true) {
+                    next()
+                }else {
+                    localStorage.removeItem("jwt")
+                    next({name: "login"});
+                }
+            })
+            .catch(error => {
+                console.error("er", error.response.status);
+                localStorage.removeItem("jwt")
+                next({name: "login"});
+            });
+        }
+    } else if (to.matched.some(record => record.meta.guest)) {
+        if (localStorage.getItem("jwt") == null) {
+            next();
+        } else {
+            next({ name: "main" });
+        }
+    } else {
+        next();
+    }
+});
 
 export default router;
