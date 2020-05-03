@@ -32,13 +32,16 @@
                             @click:append="showPass = !showPass"
                             outlined
                         ></v-text-field>
-                        <v-btn
-                            color="warning"
-                            @click="sendHandler"
-                            large
-                        >
-                            {{$t('loginBlock.form.submit')}}
-                        </v-btn>
+                        <div class="btn-field">
+                            <v-btn
+                                color="warning"
+                                @click="sendHandler"
+                                large
+                            >
+                                {{$t('loginBlock.form.submit')}}
+                            </v-btn>
+                            <span class="Error">{{errorStr}}</span>
+                        </div>
                     </v-form>
                 </v-col>
             </v-row>
@@ -54,7 +57,8 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
+import config from "../../constants/config"
 export default {
     name: "LoginBlock",
     data() {
@@ -70,25 +74,36 @@ export default {
               required: value => !!value || 'required'
           },
           showPass: false,
+          errorStr: '',
       }
     },
     methods: {
         sendHandler: function () {
-            // const url = 'localhost:4000';
-            // const result = await axios.post(url,{
-            //     'email': this.email,
-            //     'password': this.password
-            // });
-            // console.log(result.data);
-            console.log("SEND: ", this.email, this.password);
-            if(this.email === 'admin@admin.ru' && this.password === 'postal'){
-                localStorage.setItem('jwt', "calyabalya");
-                this.$router.push({name: 'main'});
-                this.email = '';
-                this.password = '';
+            this.errorStr = '';
+            const url = config.API_URL + "/users/login";
+            const dataSend = {
+                'email': this.email,
+                'password': this.password
+            }
+            if(this.email === '' || this.password === ''){
+                this.errorStr = "Все поля обязательны для заполнения"
             } else {
-                alert('false');
-                this.password = '';
+                axios.post(
+                    url,
+                    dataSend)
+                    .then(result => {
+                        localStorage.setItem('jwt', result.data.token);
+                        this.$router.push({name: 'main'});
+                        this.email = '';
+                        this.password = '';
+                    })
+                    .catch(error => {
+                        if(error.response.status === 400){
+                            this.errorStr = 'Неправильные Email или пароль';
+                        }else{
+                            this.errorStr = error.response.status + '';
+                        }
+                    });
             }
         }
     }
@@ -118,6 +133,18 @@ export default {
             align-items: center;
             .field{
                 width: 100%;
+            }
+            .btn-field{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                .Error{
+                    margin-top: 25px;
+                    text-align: center;
+                    color: #FF5300;
+                }
             }
         }
     }

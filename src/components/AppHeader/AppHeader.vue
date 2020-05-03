@@ -1,5 +1,5 @@
 <template>
-  <nav :class="`AppHeader ${fixedTopMenu}`">
+  <nav :class="`AppHeader ${fixedTopMenu} ${adminTrue}`">
     <div class="appBar mxw1200">
       <router-link
         v-for="menuItem in $t('menuItems')"
@@ -25,7 +25,7 @@
 <script>
 export default {
   name: "AppHeader",
-  props: ["fixedTopMenu"]
+  props: ["fixedTopMenu", "adminTrue"]
 };
 </script>
 
@@ -60,12 +60,12 @@ export default {
 }
 .noFixedTop{
   transition: .2s;
+  top: 0 !important;
   position: relative;
 }
 .fixedTop {
   transition: .2s;
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
   z-index: 999999;

@@ -33,7 +33,8 @@ export default {
         nomination: "Номинация",
         description: "Описание",
         role: "Роль",
-        submit: "Отправить"
+        submit: "Отправить",
+        errorPassRepeat: "Пароли должны совпадать"
       }
     },
     footerBlock: {},
@@ -110,7 +111,8 @@ export default {
         nomination: "Nomination",
         description: "Description",
         role: "Role",
-        submit: "Send"
+        submit: "Send",
+        errorPassRepeat: "Passwords must match"
       }
     },
     footerBlock: {},

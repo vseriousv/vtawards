@@ -1,5 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import axios from 'axios';
+import JwtHelper from "./helpers/JwtHelper";
+import config from "./constants/config";
 import HeaderBlock from "./components/HeaderBlock/HeaderBlock";
 import HeaderBlockOtherPage from "./components/HeaderBlock/HeaderBlockOtherPage";
 import HeaderBlockLoginPage from "./components/HeaderBlock/HeaderBlockLoginPage";
@@ -13,6 +16,15 @@ import MainPage from "./pages/MainPage";
 import ResultPage from "./pages/ResultPage";
 import CommitteePage from "./pages/CommitteePage";
 import ArchivePage from "./pages/ArchivePage";
+
+//ADMINKA
+import AdminPanel from "./components/AdminModule/AdminPanel";
+import AdminPage from "./pages/AdminPage";
+import AdminMain from "./components/AdminModule/AdminMain";
+import AdminMembers from "./components/AdminModule/AdminMembers";
+import AdminUsers from "./components/AdminModule/AdminUsers";
+import AdminVoting from "./components/AdminModule/AdminVoting";
+import AdminCatalogs from "./components/AdminModule/AdminCatalogs";
 
 Vue.use(VueRouter);
 
@@ -47,6 +59,7 @@ const routes = [
         path: "/",
         name: "main",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlock,
             body: MainPage,
             nav: AppHeader,
@@ -64,6 +77,7 @@ const routes = [
         path: "/result",
         name: "result",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlockOtherPage,
             body: ResultPage,
             nav: AppHeader,
@@ -81,6 +95,7 @@ const routes = [
         path: "/committee",
         name: "committee",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlockOtherPage,
             body: CommitteePage,
             nav: AppHeader,
@@ -98,6 +113,7 @@ const routes = [
         path: "/archive",
         name: "archive",
         components: {
+            adminPanel: AdminPanel,
             header: HeaderBlockOtherPage,
             body: ArchivePage,
             nav: AppHeader,
@@ -110,6 +126,21 @@ const routes = [
             }
         },
         meta: { requiresAuth: true }
+    },
+    {
+        path: "/admin",
+        name: "admin",
+        components: { body: AdminPage },
+        redirect: '/admin/general',
+        children: [
+            { name: "generalAdmin",     path: "general",    component: AdminMain,       meta: { isAdmin: true} },
+            { name: "catalogsAdmin",    path: "catalogs",   component: AdminCatalogs,   meta: { isAdmin: true} },
+            { name: "usersAdmin",       path: "users",      component: AdminUsers,      meta: { isAdmin: true} },
+            { name: "membersAdmin",     path: "members",    component: AdminMembers,    meta: { isAdmin: true} },
+            { name: "votingAdmin",      path: "voting",     component: AdminVoting,     meta: { isAdmin: true} }
+
+        ],
+        meta: { isAdmin: true }
     }
 ];
 
@@ -119,16 +150,38 @@ const router = new VueRouter({
     routes: routes
 });
 
+const url = config.API_URL + "/users/check";
+
+const jwtHeader = new JwtHelper();
+
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (localStorage.getItem("jwt") == null) {
+    if(to.matched.some(record => record.meta.isAdmin)){
+        if(jwtHeader.isAdmin()) {
+            next();
+        }else{
+            next({name: "main"});
+        }
+    } else
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!jwtHeader.isJwt()) {
             next({
-                // path: "/login",
-                // params: { nextUrl: to.fullPath }
                 name: "login"
             });
         } else {
-            next();
+            axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
+            .then(res => {
+                if(res.data.result === true) {
+                    next()
+                }else {
+                    localStorage.removeItem("jwt")
+                    next({name: "login"});
+                }
+            })
+            .catch(error => {
+                console.error("er", error.response.status);
+                localStorage.removeItem("jwt")
+                next({name: "login"});
+            });
         }
     } else if (to.matched.some(record => record.meta.guest)) {
         if (localStorage.getItem("jwt") == null) {
