@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import router from "./Router";
+import mainStore from "./stores/mainStore";
 import VueI18n from "vue-i18n";
 import locale from "./constants/locale";
 
@@ -11,6 +12,7 @@ Vue.config.productionTip = false;
 new Vue({
   vuetify,
   router,
+  store: mainStore,
   i18n: {
     messages: {},
     sharedMessages: locale,

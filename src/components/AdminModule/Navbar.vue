@@ -1,5 +1,5 @@
 <template>
-  <v-card color="blue-grey lighten-4" flat tile>
+  <v-card color="blue-grey lighten-4" flat tile dark>
     <v-toolbar dense>
       <v-app-bar-nav-icon @click.stop="handleDrawer" />
       <router-link to="/">
@@ -30,8 +30,7 @@ export default {
       this.$emit("changeDrawer");
     },
     logout: function() {
-      localStorage.removeItem("jwt");
-      this.$router.push("/login");
+      this.$router.push({name: 'main'});
     }
   }
 };
@@ -44,7 +43,7 @@ export default {
   padding-left: 5px !important;
   span {
     padding-left: 5px;
-    color: #202020;
+    color: white;
   }
 }
 a {

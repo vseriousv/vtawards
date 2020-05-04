@@ -7,6 +7,7 @@
                 <router-link to="/admin/users">Управление пользователями</router-link>
                 <router-link to="/admin/members">Управление участниками</router-link>
                 <router-link to="/admin/voting">Управление голосованием</router-link>
+                <router-link to="/admin/catalogs">Управление справочниками</router-link>
             </div>
         </div>
         <div :class="`${adminTrue}`"></div>
