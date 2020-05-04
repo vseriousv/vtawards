@@ -4,6 +4,7 @@
     disable-resize-watcher
     app
     dark
+    src="/img/imgComponents/AdminModule/Drawer/DrawerImg.jpg"
     fixed
     mobile-break-point="300px"
   >
@@ -39,6 +40,7 @@ export default {
         { title: "Users", icon: "mdi-account-group", link: "/admin/users" },
         { title: "Voting", icon: "mdi-ballot-outline", link: "/admin/voting" },
         { title: "Members", icon: "mdi-account-star", link: "/admin/members" },
+        { title: "Сatalogs", icon: "mdi-form-dropdown", link: "/admin/catalogs" },
         { title: "On Site", icon: "mdi-page-next", link: "/" },
       ]
     };
