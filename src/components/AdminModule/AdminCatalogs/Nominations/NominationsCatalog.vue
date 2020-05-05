@@ -16,7 +16,7 @@
                             class="manageBTN"
                             color="blue lighten-2"
                             dark small
-                            @click.stop="getPositions"
+                            @click.stop="getNominations"
                         >
                             Обновить
                         </v-btn>
@@ -30,13 +30,13 @@
                     <tr>
                         <th class="text-left">Номер</th>
                         <th class="text-left">Код</th>
-                        <th class="text-left">Должность (Русский)</th>
-                        <th class="text-left">Должность (Англйиский)</th>
+                        <th class="text-left">Регион (Русский)</th>
+                        <th class="text-left">Регион (Англйиский)</th>
                         <th class="text-right">Удалить/Исправить</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(itemField, id) in positions" :key="`itemField${itemField.id}`">
+                    <tr v-for="(itemField, id) in nominations" :key="`itemField${itemField.id}`">
                         <td>{{ id+1 }}</td>
                         <td>{{ itemField.code }}</td>
                         <td>{{ itemField.value_ru }}</td>
@@ -72,42 +72,42 @@
     import axios from 'axios';
     import config from "../../../../constants/config";
     export default {
-        name: "PositionsCatalog",
+        name: "NominationsCatalog",
         data() {
             return {
-                positions: [],
+                nominations: [],
             }
         },
         created() {
-            this.getPositions();
+            this.getNominations();
         },
         methods: {
             createField: function () {
-                this.$emit('handleModal', null, 'positions');
+                this.$emit('handleModal', null, 'nominations');
             },
             updatePositionID: function (id) {
                 this.$store.commit("setAdminCodeField", '');
                 this.$store.commit("setAdminValueRu", '');
                 this.$store.commit("setAdminValueEn", '');
-                this.$store.commit("setAdminCodeField", this.positions.find(item=>item.id === id).code);
-                this.$store.commit("setAdminValueRu", this.positions.find(item=>item.id === id).value_ru);
-                this.$store.commit("setAdminValueEn", this.positions.find(item=>item.id === id).value_en);
-                this.$emit('handleModal', id, 'positions');
+                this.$store.commit("setAdminCodeField", this.nominations.find(item=>item.id === id).code);
+                this.$store.commit("setAdminValueRu", this.nominations.find(item=>item.id === id).value_ru);
+                this.$store.commit("setAdminValueEn", this.nominations.find(item=>item.id === id).value_en);
+                this.$emit('handleModal', id, 'nominations');
             },
-            getPositions: function () {
-                const url = config.API_URL+'/positions'
+            getNominations: function () {
+                const url = config.API_URL+'/nominations'
                 axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
-                .then(result => this.positions = result.data)
-                .catch(e => console.error("positions-error:", e));
+                .then(result => this.nominations = result.data)
+                .catch(e => console.error("nominations-error:", e));
             },
             removePosition: function (id) {
-                const url = config.API_URL+'/positions/'+id
+                const url = config.API_URL+'/nominations/'+id
                 axios.delete( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
                 .then(result => {
-                    this.getPositions();
+                    this.getNominations();
                     return result;
                 })
-                .catch(e => console.error("positions-error:", e));
+                .catch(e => console.error("nominations-error:", e));
             }
         }
     }

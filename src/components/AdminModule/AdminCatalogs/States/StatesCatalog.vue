@@ -16,7 +16,7 @@
                             class="manageBTN"
                             color="blue lighten-2"
                             dark small
-                            @click.stop="getPositions"
+                            @click.stop="getStates"
                         >
                             Обновить
                         </v-btn>
@@ -30,13 +30,13 @@
                     <tr>
                         <th class="text-left">Номер</th>
                         <th class="text-left">Код</th>
-                        <th class="text-left">Должность (Русский)</th>
-                        <th class="text-left">Должность (Англйиский)</th>
+                        <th class="text-left">Регион (Русский)</th>
+                        <th class="text-left">Регион (Англйиский)</th>
                         <th class="text-right">Удалить/Исправить</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(itemField, id) in positions" :key="`itemField${itemField.id}`">
+                    <tr v-for="(itemField, id) in states" :key="`itemField${itemField.id}`">
                         <td>{{ id+1 }}</td>
                         <td>{{ itemField.code }}</td>
                         <td>{{ itemField.value_ru }}</td>
@@ -72,42 +72,42 @@
     import axios from 'axios';
     import config from "../../../../constants/config";
     export default {
-        name: "PositionsCatalog",
+        name: "StatesCatalog",
         data() {
             return {
-                positions: [],
+                states: [],
             }
         },
         created() {
-            this.getPositions();
+            this.getStates();
         },
         methods: {
             createField: function () {
-                this.$emit('handleModal', null, 'positions');
+                this.$emit('handleModal', null, 'states');
             },
             updatePositionID: function (id) {
                 this.$store.commit("setAdminCodeField", '');
                 this.$store.commit("setAdminValueRu", '');
                 this.$store.commit("setAdminValueEn", '');
-                this.$store.commit("setAdminCodeField", this.positions.find(item=>item.id === id).code);
-                this.$store.commit("setAdminValueRu", this.positions.find(item=>item.id === id).value_ru);
-                this.$store.commit("setAdminValueEn", this.positions.find(item=>item.id === id).value_en);
-                this.$emit('handleModal', id, 'positions');
+                this.$store.commit("setAdminCodeField", this.states.find(item=>item.id === id).code);
+                this.$store.commit("setAdminValueRu", this.states.find(item=>item.id === id).value_ru);
+                this.$store.commit("setAdminValueEn", this.states.find(item=>item.id === id).value_en);
+                this.$emit('handleModal', id, 'states');
             },
-            getPositions: function () {
-                const url = config.API_URL+'/positions'
+            getStates: function () {
+                const url = config.API_URL+'/states'
                 axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
-                .then(result => this.positions = result.data)
-                .catch(e => console.error("positions-error:", e));
+                .then(result => this.states = result.data)
+                .catch(e => console.error("states-error:", e));
             },
             removePosition: function (id) {
-                const url = config.API_URL+'/positions/'+id
+                const url = config.API_URL+'/states/'+id
                 axios.delete( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
                 .then(result => {
-                    this.getPositions();
+                    this.getStates();
                     return result;
                 })
-                .catch(e => console.error("positions-error:", e));
+                .catch(e => console.error("states-error:", e));
             }
         }
     }

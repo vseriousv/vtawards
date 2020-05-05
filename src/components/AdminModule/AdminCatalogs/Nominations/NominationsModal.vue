@@ -15,14 +15,14 @@
                 ></v-text-field>
                 <v-text-field
                         class="form-create__field"
-                        label="Отдел (Русский)"
+                        label="Регион (Русский)"
                         single-line
                         outlined
                         v-model="adminValueRu"
                 ></v-text-field>
                 <v-text-field
                         class="form-create__field"
-                        label="Отдел (Английский)"
+                        label="Регион (Английский)"
                         single-line
                         outlined
                         v-model="adminValueEn"
@@ -55,12 +55,12 @@
 
 <script>
     export default {
-        name: "SectionsModal",
+        name: "NominationsModal",
         props: ['idField', 'dataTable'],
         data(){
             return {
-                dialogHead: 'Отдел',
-                dialogTable: 'sections',
+                dialogHead: 'Регион',
+                dialogTable: 'nominations',
 
                 errForm: ''
             }
@@ -76,9 +76,9 @@
                     this.errForm = 'Все поля обязательны для заполнения';
                 } else {
                     if(this.idField == null) {
-                        this.$emit('addFieldTable', 'sections', dataValue);
+                        this.$emit('addFieldTable', 'nominations', dataValue);
                     }else{
-                        this.$emit('updateFieldTableID', 'sections', dataValue);
+                        this.$emit('updateFieldTableID', 'nominations', dataValue);
                     }
                     this.resetForm();
                 }
