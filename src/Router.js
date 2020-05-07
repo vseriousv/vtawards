@@ -22,7 +22,7 @@ import AdminPanel from "./components/AdminModule/AdminPanel";
 import AdminPage from "./pages/AdminPage";
 import AdminMain from "./components/AdminModule/AdminMain";
 import AdminMembers from "./components/AdminModule/AdminMembers";
-import AdminUsers from "./components/AdminModule/AdminUsers";
+import AdminUsers from "./components/AdminModule/AdminUsers/AdminUsers";
 import AdminVoting from "./components/AdminModule/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
 

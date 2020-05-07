@@ -17,78 +17,78 @@
                     >
                         <div class="otherFields">
                             <v-text-field
-                                    class="field"
-                                    v-model="fullname"
-                                    name="fullname"
-                                    :label="`${$t('loginBlock.form.name')}`"
-                                    required
-                                    outlined
+                                class="field"
+                                v-model="fullname"
+                                name="fullname"
+                                :label="`${$t('loginBlock.form.name')}`"
+                                required
+                                outlined
                             ></v-text-field>
                             <v-autocomplete
-                                    class="field"
-                                    v-model="position_id"
-                                    :items="positionItems"
-                                    outlined
-                                    :label="`${$t('loginBlock.form.position')}`"
+                                class="field"
+                                v-model="position_id"
+                                :items="positionItems"
+                                outlined
+                                :label="`${$t('loginBlock.form.position')}`"
                             ></v-autocomplete>
                             <v-autocomplete
-                                    class="field"
-                                    v-model="section_id"
-                                    :items="sectionItems"
-                                    outlined
-                                    :label="`${$t('loginBlock.form.section')}`"
+                                class="field"
+                                v-model="section_id"
+                                :items="sectionItems"
+                                outlined
+                                :label="`${$t('loginBlock.form.section')}`"
                             ></v-autocomplete>
                             <v-autocomplete
-                                    class="field"
-                                    v-model="state_id"
-                                    :items="stateItems"
-                                    :label="`${$t('loginBlock.form.state')}`"
-                                    outlined
+                                class="field"
+                                v-model="state_id"
+                                :items="stateItems"
+                                :label="`${$t('loginBlock.form.state')}`"
+                                outlined
                             ></v-autocomplete>
                             <v-autocomplete
-                                    class="field"
-                                    v-model="city_id"
-                                    :items="cityItems"
-                                    :label="`${$t('loginBlock.form.city')}`"
-                                    outlined
+                                class="field"
+                                v-model="city_id"
+                                :items="cityItems"
+                                :label="`${$t('loginBlock.form.city')}`"
+                                outlined
                             ></v-autocomplete>
                         </div>
                         <div class="generalFields">
                             <v-text-field
-                                    class="field"
-                                    v-model="email"
-                                    name="email"
-                                    label="E-mail"
-                                    required
-                                    outlined
+                                class="field"
+                                v-model="email"
+                                name="email"
+                                label="E-mail"
+                                required
+                                outlined
                             ></v-text-field>
                             <v-text-field
-                                    class="field"
-                                    v-model="password"
-                                    :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="showPass ? 'text' : 'password'"
-                                    name="password"
-                                    :label="`${$t('loginBlock.form.password')}`"
-                                    @click:append="showPass = !showPass"
-                                    outlined
+                                class="field"
+                                v-model="password"
+                                :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="showPass ? 'text' : 'password'"
+                                name="password"
+                                :label="`${$t('loginBlock.form.password')}`"
+                                @click:append="showPass = !showPass"
+                                outlined
                             ></v-text-field>
                             <v-text-field
-                                    class="field"
-                                    v-model="password_repeat"
-                                    :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="showPass ? 'text' : 'password'"
-                                    name="password_repeat"
-                                    :label="`${$t('loginBlock.form.password_repeat')}`"
-                                    @click:append="showPass = !showPass"
-                                    outlined
+                                class="field"
+                                v-model="password_repeat"
+                                :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="showPass ? 'text' : 'password'"
+                                name="password_repeat"
+                                :label="`${$t('loginBlock.form.password_repeat')}`"
+                                @click:append="showPass = !showPass"
+                                outlined
                             ></v-text-field>
                         </div>
                         <div class="btn-field">
                             <v-btn
-                                    color="warning"
-                                    @click="sendHandler"
-                                    large
-                                    width="300"
+                                color="warning"
+                                @click="sendHandler"
+                                large
+                                width="300"
                             >
                                 {{$t('loginBlock.form.submit')}}
                             </v-btn>
@@ -217,14 +217,16 @@
                     .catch(e => console.error("positions-error:", e));
             },
             parserData: function (data) {
-                let resultData = [];
+                let resultDataRu = [];
+                // let resultDataEn = [];
                 for (let i = 0; i < data.length; i++){
                     const text_ru = data[i].value_ru;
-                    // const text_en = data[i].value_ru;
+                    // const text_en = data[i].value_en;
                     const code = data[i].code;
-                    resultData.push({text: text_ru, value: code })
+                    resultDataRu.push({text: text_ru, value: code });
+                    // resultDataEn.push({text: text_en, value: code });
                 }
-                return resultData;
+                return resultDataRu;
             }
         }
     }
