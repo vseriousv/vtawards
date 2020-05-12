@@ -30,6 +30,7 @@
     width: 100%;
     height: 25px;
     background-color: #202020;
+    z-index: 1000;
     .contentPanel{
         padding: 0 15px;
     }

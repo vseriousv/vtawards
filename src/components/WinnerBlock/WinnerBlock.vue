@@ -1,13 +1,32 @@
 <template>
-  <section class="winner-block mxw1200">
-    <h2>Winner <u>{{year}}</u> year</h2>
+  <section class="winner-block mxw1200 mt-6">
+    <h2 class="text-center">{{$t("winnerBlock.head")}} <u>{{year_block}}</u> {{$t("winnerBlock.year")}}</h2>
   </section>
 </template>
 
 <script>
 export default {
   name: "WinnerBlock",
-  props: ['year']
+  props: ['year'],
+  data() {
+    return {
+      year_block: '',
+      winner_img: '',
+      winner_id: ''
+    }
+  },
+  created() {
+    this.getYear();
+  },
+  methods: {
+    getYear: function () {
+      let date = new Date();
+      this.year_block = (this.$props.year === 'latest') ? date.getFullYear() : this.$props.year;
+    },
+    getWinner: function () {
+
+    }
+  }
 };
 </script>
 

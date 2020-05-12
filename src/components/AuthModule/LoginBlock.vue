@@ -16,9 +16,9 @@
                     >
                         <v-text-field
                             class="field"
-                            v-model="email"
-                            name="email"
-                            label="E-mail"
+                            v-model="tab_number"
+                            name="tab_number"
+                            :label="`${$t('loginBlock.form.tab_number')}`"
                             required
                             outlined
                         ></v-text-field>
@@ -47,8 +47,8 @@
             </v-row>
             <v-row>
                 <v-col class="loginForm">
-                    <router-link to="/registration">
-                        <span>{{$t('loginBlock.headReg')}}</span>
+                    <router-link to="/forget">
+                        <span>{{$t('loginBlock.headForget')}}</span>
                     </router-link>
                 </v-col>
             </v-row>
@@ -64,11 +64,7 @@ export default {
     data() {
       return {
           valid: false,
-          email: '',
-          emailRules: [
-              v => !!v || 'required',
-              v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-          ],
+          tab_number: '',
           password: '',
           passwordRules: {
               required: value => !!value || 'required'
@@ -82,10 +78,10 @@ export default {
             this.errorStr = '';
             const url = config.API_URL + "/users/login";
             const dataSend = {
-                'email': this.email,
+                'tab_number': this.tab_number,
                 'password': this.password
             }
-            if(this.email === '' || this.password === ''){
+            if(this.tab_number === '' || this.password === ''){
                 this.errorStr = "Все поля обязательны для заполнения"
             } else {
                 axios.post(

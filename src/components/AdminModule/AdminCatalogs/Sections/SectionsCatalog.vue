@@ -29,7 +29,6 @@
                     <thead>
                     <tr>
                         <th class="text-left">Номер</th>
-                        <th class="text-left">Код</th>
                         <th class="text-left">Отдел (Русский)</th>
                         <th class="text-left">Отдел (Англйиский)</th>
                         <th class="text-right">Удалить/Исправить</th>
@@ -38,7 +37,6 @@
                     <tbody>
                     <tr v-for="(itemField, id) in sections" :key="`itemField${itemField.id}`">
                         <td>{{ id+1 }}</td>
-                        <td>{{ itemField.code }}</td>
                         <td>{{ itemField.value_ru }}</td>
                         <td>{{ itemField.value_en }}</td>
                         <td class="manageDelete">
@@ -50,14 +48,14 @@
                             >
                                 Исправить
                             </v-btn>
-                            <v-btn
-                                class="manageBTN"
-                                color="red lighten-2"
-                                dark small
-                                @click.stop="removePosition(itemField.id)"
-                            >
-                                Удалить
-                            </v-btn>
+<!--                            <v-btn-->
+<!--                                class="manageBTN"-->
+<!--                                color="red lighten-2"-->
+<!--                                dark small-->
+<!--                                @click.stop="removePosition(itemField.id)"-->
+<!--                            >-->
+<!--                                Удалить-->
+<!--                            </v-btn>-->
                         </td>
                     </tr>
                     </tbody>
@@ -86,10 +84,8 @@
                 this.$emit('handleModal', null, 'sections');
             },
             updatePositionID: function (id) {
-                this.$store.commit("setAdminCodeField", '');
                 this.$store.commit("setAdminValueRu", '');
                 this.$store.commit("setAdminValueEn", '');
-                this.$store.commit("setAdminCodeField", this.sections.find(item=>item.id === id).code);
                 this.$store.commit("setAdminValueRu", this.sections.find(item=>item.id === id).value_ru);
                 this.$store.commit("setAdminValueEn", this.sections.find(item=>item.id === id).value_en);
                 this.$emit('handleModal', id, 'sections');

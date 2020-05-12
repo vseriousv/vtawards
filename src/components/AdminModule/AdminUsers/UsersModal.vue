@@ -6,26 +6,54 @@
 
         <v-card-text class="card-form-create">
             <v-form class="form-create">
+                <v-select
+                        class="form-create__field"
+                        label="Роль"
+                        :items="roleItems"
+                        outlined
+                        v-model="adminUser_role"
+                ></v-select>
+                <v-autocomplete
+                        class="form-create__field"
+                        label="Должность"
+                        :items="positionItems"
+                        outlined
+                        v-model="adminUser_position_id"
+                ></v-autocomplete>
+                <v-autocomplete
+                        class="form-create__field"
+                        label="Отдел"
+                        :items="sectionItems"
+                        outlined
+                        v-model="adminUser_section_id"
+                ></v-autocomplete>
+                <v-autocomplete
+                        class="form-create__field"
+                        label="Регион"
+                        :items="stateItems"
+                        outlined
+                        v-model="adminUser_state_id"
+                ></v-autocomplete>
+                <v-autocomplete
+                        class="form-create__field"
+                        label="Город"
+                        :items="cityItems"
+                        outlined
+                        v-model="adminUser_city_id"
+                ></v-autocomplete>
+                <v-autocomplete
+                        class="form-create__field"
+                        label="Номинация"
+                        :items="nominationItems"
+                        outlined
+                        v-model="adminUser_nomination_id"
+                ></v-autocomplete>
                 <v-text-field
                         class="form-create__field"
-                        label="Code"
+                        label="Количество заявок"
                         single-line
                         outlined
-                        v-model="adminCodeField"
-                ></v-text-field>
-                <v-text-field
-                        class="form-create__field"
-                        label="Должность (Русский)"
-                        single-line
-                        outlined
-                        v-model="adminValueRu"
-                ></v-text-field>
-                <v-text-field
-                        class="form-create__field"
-                        label="Должность (Английский)"
-                        single-line
-                        outlined
-                        v-model="adminValueEn"
+                        v-model="adminUser_count_z"
                 ></v-text-field>
                 <span class="Error">{{errForm}}</span>
             </v-form>
@@ -54,32 +82,57 @@
 </template>
 
 <script>
+    import config from "../../../constants/config";
+    import axios from "axios";
+
     export default {
         name: "UsersModal",
         props: ['idField', 'dataTable'],
         data(){
             return {
-                dialogHead: 'Должность',
-                dialogTable: 'users',
+                dialogHead: "Данные пользователя",
+                dialogTable: "users",
 
-                errForm: ''
+                roleItems: [
+                    {text: "Администратор", value: "admin"},
+                    {text: "Комиссия", value: "comittee"},
+                    {text: "Пользователь", value: "user"},
+                ],
+                positionItems: [],
+                sectionItems: [],
+                stateItems: [],
+                cityItems: [],
+                nominationItems: [],
+
+                errForm: ""
             }
+        },
+        created() {
+            this.getTable("positions");
+            this.getTable("sections");
+            this.getTable("states");
+            this.getTable("cities");
+            this.getTable("nominations");
         },
         methods: {
             sendData: function () {
                 const dataValue = {
-                    'code': this.$store.state.adminCodeField,
-                    'value_ru': this.$store.state.adminValueRu,
-                    'value_en': this.$store.state.adminValueEn
+                    'role': this.$store.state.adminUser_role,
+                    'position_id': this.$store.state.adminUser_position_id,
+                    'section_id': this.$store.state.adminUser_section_id,
+                    'state_id': this.$store.state.adminUser_state_id,
+                    'city_id': this.$store.state.adminUser_city_id,
+                    'nomination_id': this.$store.state.adminUser_nomination_id,
+                    'count_z': +this.$store.state.adminUser_count_z,
                 }
-                if(this.$store.state.adminCodeField === '' || this.$store.state.adminValueRu === '' || this.$store.state.adminValueEn === ''){
-                    this.errForm = 'Все поля обязательны для заполнения';
+                if(
+                    this.$store.state.adminUser_role === '' ||
+                    this.$store.state.adminUser_state_id === '' ||
+                    this.$store.state.adminUser_count_z === ''
+                ){
+                    this.errForm = 'Роль, Регион и количество заявок - обязательные поля';
                 } else {
-                    if(this.idField == null) {
-                        this.$emit('addFieldTable', 'users', dataValue);
-                    }else{
-                        this.$emit('updateFieldTableID', 'users', dataValue);
-                    }
+                    this.$emit('updateFieldTableID', dataValue);
                     this.resetForm();
                 }
             },
@@ -89,28 +142,82 @@
             },
             resetForm: function () {
                 this.errForm = '';
-                this.$store.commit('setAdminCodeField', '');
-                this.$store.commit('setAdminValueRu', '');
-                this.$store.commit('setAdminValueEn', '');
+                this.$store.commit('setAdminUser_role', '');
+                this.$store.commit('setAdminUser_position_id', '');
+                this.$store.commit('setAdminUser_section_id', '');
+                this.$store.commit('setAdminUser_state_id', '');
+                this.$store.commit('setAdminUser_city_id', '');
+                this.$store.commit('setAdminUser_nomination_id', '');
+                this.$store.commit('setAdminUser_count_z', '');
+            },
+            getTable: function (table) {
+                const url = config.API_URL+'/'+table;
+                axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") }} )
+                    .then(result => {
+                        switch (table) {
+                            case 'positions':
+                                this.positionItems = this.parserData(result.data);
+                                break;
+                            case 'sections':
+                                this.sectionItems = this.parserData(result.data);
+                                break;
+                            case 'states':
+                                this.stateItems = this.parserData(result.data);
+                                break;
+                            case 'cities':
+                                this.cityItems = this.parserData(result.data);
+                                break;
+                            case 'nominations':
+                                this.nominationItems = this.parserData(result.data);
+                                break;
+                            default:
+                                console.log("ERRRRRO");
+                                break;
+                        }
+                    })
+                    .catch(e => console.error(table+"-Error:", e));
+            },
+            parserData: function (data) {
+                let resultDataRu = [];
+                for (let i = 0; i < data.length; i++){
+                    const text_ru = data[i].value_ru;
+                    const id = data[i].id;
+                    resultDataRu.push({text: text_ru, value: id });
+                }
+                return resultDataRu;
             }
         },
         computed: {
-            adminIdField: {
-                get () {  return this.$store.state.adminIdField;  },
-                set (id) { this.$store.commit("setAdminIdField", id); }
+            adminUser_role: {
+                get () { return this.$store.state.adminUser_role;  },
+                set (value) { this.$store.commit("setAdminUser_role", value); }
             },
-            adminCodeField: {
-                get () { return this.$store.state.adminCodeField;  },
-                set (value) { this.$store.commit("setAdminCodeField", value); }
+            adminUser_position_id: {
+                get () { return this.$store.state.adminUser_position_id;  },
+                set (value) { this.$store.commit("setAdminUser_position_id", value); }
             },
-            adminValueRu: {
-                get () { return this.$store.state.adminValueRu; },
-                set (value) { this.$store.commit("setAdminValueRu", value); }
+            adminUser_section_id: {
+                get () { return this.$store.state.adminUser_section_id;  },
+                set (value) { this.$store.commit("setAdminUser_section_id", value); }
             },
-            adminValueEn: {
-                get () { return this.$store.state.adminValueEn; },
-                set (value) { this.$store.commit("setAdminValueEn", value); }
+            adminUser_state_id: {
+                get () { return this.$store.state.adminUser_state_id;  },
+                set (value) { this.$store.commit("setAdminUser_state_id", value); }
             },
+            adminUser_city_id: {
+                get () { return this.$store.state.adminUser_city_id;  },
+                set (value) { this.$store.commit("setAdminUser_city_id", value); }
+            },
+            adminUser_nomination_id: {
+                get () { return this.$store.state.adminUser_nomination_id;  },
+                set (value) { this.$store.commit("setAdminUser_nomination_id", value); }
+            },
+            adminUser_count_z: {
+                get () { return this.$store.state.adminUser_count_z;  },
+                set (value) { this.$store.commit("setAdminUser_count_z", value); }
+            },
+
+
             adminErrorStr: {
                 get () { return this.$store.state.adminErrorStr; },
                 set (value) {  this.$store.commit("setAdminErrorStr", value); }

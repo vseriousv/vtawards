@@ -8,13 +8,6 @@
             <v-form class="form-create">
                 <v-text-field
                         class="form-create__field"
-                        label="Code"
-                        single-line
-                        outlined
-                        v-model="adminCodeField"
-                ></v-text-field>
-                <v-text-field
-                        class="form-create__field"
                         label="Регион (Русский)"
                         single-line
                         outlined
@@ -68,11 +61,10 @@
         methods: {
             sendData: function () {
                 const dataValue = {
-                    'code': this.$store.state.adminCodeField,
                     'value_ru': this.$store.state.adminValueRu,
                     'value_en': this.$store.state.adminValueEn
                 }
-                if(this.$store.state.adminCodeField === '' || this.$store.state.adminValueRu === '' || this.$store.state.adminValueEn === ''){
+                if(this.$store.state.adminValueRu === '' || this.$store.state.adminValueEn === ''){
                     this.errForm = 'Все поля обязательны для заполнения';
                 } else {
                     if(this.idField == null) {
@@ -89,7 +81,6 @@
             },
             resetForm: function () {
                 this.errForm = '';
-                this.$store.commit('setAdminCodeField', '');
                 this.$store.commit('setAdminValueRu', '');
                 this.$store.commit('setAdminValueEn', '');
             }
@@ -98,10 +89,6 @@
             adminIdField: {
                 get () {  return this.$store.state.adminIdField;  },
                 set (id) { this.$store.commit("setAdminIdField", id); }
-            },
-            adminCodeField: {
-                get () { return this.$store.state.adminCodeField;  },
-                set (value) { this.$store.commit("setAdminCodeField", value); }
             },
             adminValueRu: {
                 get () { return this.$store.state.adminValueRu; },
