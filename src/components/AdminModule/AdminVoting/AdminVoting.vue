@@ -3,40 +3,12 @@
 <!-- Card   MODAL      -->
         <div>
             <v-dialog  v-model="dialog" width="500" >
-                <positions-modal
-                    v-if="dialogTable === 'positions'"
+                <voting-modal
+                    v-if="dialogTable === 'votings'"
                     @handleReversModal="handleReversModal"
                     @addFieldTable="addFieldTable"
                     @updateFieldTableID="updateFieldTableID"
                     :idField="idField"
-                />
-                <sections-modal
-                    v-if="dialogTable === 'sections'"
-                    @handleReversModal="handleReversModal"
-                    @addFieldTable="addFieldTable"
-                    @updateFieldTableID="updateFieldTableID"
-                    :idField="idField"
-                />
-                <states-modal
-                        v-if="dialogTable === 'states'"
-                        @handleReversModal="handleReversModal"
-                        @addFieldTable="addFieldTable"
-                        @updateFieldTableID="updateFieldTableID"
-                        :idField="idField"
-                />
-                <cities-modal
-                        v-if="dialogTable === 'cities'"
-                        @handleReversModal="handleReversModal"
-                        @addFieldTable="addFieldTable"
-                        @updateFieldTableID="updateFieldTableID"
-                        :idField="idField"
-                />
-                <nominations-modal
-                        v-if="dialogTable === 'nominations'"
-                        @handleReversModal="handleReversModal"
-                        @addFieldTable="addFieldTable"
-                        @updateFieldTableID="updateFieldTableID"
-                        :idField="idField"
                 />
             </v-dialog>
         </div>
@@ -54,19 +26,7 @@
                 >{{tabOne.name}}</v-tab>
 
                 <v-tab-item >
-                    <positions-catalog @handleModal="handleModal" />
-                </v-tab-item>
-                <v-tab-item >
-                    <sections-catalog @handleModal="handleModal" />
-                </v-tab-item>
-                <v-tab-item >
-                    <states-catalog @handleModal="handleModal" />
-                </v-tab-item>
-                <v-tab-item >
-                    <cities-catalog @handleModal="handleModal" />
-                </v-tab-item>
-                <v-tab-item >
-                    <nominations-catalog @handleModal="handleModal" />
+                    <voting-catalog @handleModal="handleModal" />
                 </v-tab-item>
             </v-tabs>
         </v-card>
@@ -75,28 +35,16 @@
 </template>
 
 <script>
-    import PositionsCatalog from "./Positions/PositionsCatalog";
-    import PositionsModal from "./Positions/PositionsModal";
-    import SectionsCatalog from "./Sections/SectionsCatalog";
-    import SectionsModal from "./Sections/SectionsModal";
-    import StatesCatalog from "./States/StatesCatalog";
-    import StatesModal from "./States/StatesModal";
-    import CitiesCatalog from "./Cities/CitiesCatalog";
-    import CitiesModal from "./Cities/CitiesModal";
-    import NominationsCatalog from "./Nominations/NominationsCatalog";
-    import NominationsModal from "./Nominations/NominationsModal";
+    import VotingCatalog from "./VotingCatalog";
+    import VotingModal from "./VotingModal";
 
     import config from "../../../constants/config";
     import axios from "axios";
 
     export default {
-        name: "AdminCatalogs",
+        name: "AdminVotings",
         components: {
-            PositionsCatalog, PositionsModal,
-            SectionsCatalog, SectionsModal,
-            StatesCatalog, StatesModal,
-            CitiesCatalog, CitiesModal,
-            NominationsCatalog, NominationsModal
+            VotingCatalog, VotingModal
         },
         methods: {
             handleReversModal: function () {
@@ -153,11 +101,7 @@
                 tab: null,
                 idField: null,
                 tabs: [
-                    {id: 0, name: "Должности", value: 'positions'},
-                    {id: 1, name: "Отделы", value: 'sections'},
-                    {id: 2, name: "Регионы", value: 'states'},
-                    {id: 3, name: "Города", value: 'cities'},
-                    {id: 4, name: "Номинации", value: 'nominations'},
+                    {id: 0, name: "Голосования", value: 'voting'}
                 ],
             }
         }

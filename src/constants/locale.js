@@ -21,11 +21,13 @@ export default {
     loginBlock: {
       headAuth: "Авторизация",
       headReg: "Регистрация",
+      headForget: "Забыли пароль",
       form: {
         email: "Email",
+        tab_number: "Таб номер",
         password: "Пароль",
         password_repeat: "Повторите пароль",
-        name: "Полное имя",
+        name: "ФИО",
         position: "Должность",
         section: "Офис",
         state: "Регион",
@@ -36,6 +38,15 @@ export default {
         submit: "Отправить",
         errorPassRepeat: "Пароли должны совпадать"
       }
+    },
+    infoBlock: {
+      head: "Открытие ежегодного голосования",
+      img: "image_star",
+      text: "Мы вынуждены отталкиваться от того, что глубокий уровень погружения однозначно фиксирует необходимость своевременного выполнения сверхзадачи. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: курс на социально-ориентированный национальный проект требует определения и уточнения анализа существующих паттернов поведения! Принимая во внимание показатели успешности, выбранный нами инновационный путь влечет за собой процесс внедрения и модернизации направлений прогрессивного развития."
+    },
+    winnerBlock: {
+      head: "Победитель голосования",
+      year: "года"
     },
     footerBlock: {},
     menuItems: [
@@ -60,15 +71,15 @@ export default {
       {
         id: 4,
         text: "Участники",
-        link: "#participants",
+        link: "/participants",
         target: "_self"
       },
-      {
-        id: 5,
-        text: "Архив",
-        link: "/archive",
-        target: "_self"
-      },
+      // {
+      //   id: 5,
+      //   text: "Архив",
+      //   link: "/archive",
+      //   target: "_self"
+      // },
       {
         id: 6,
         text: "Выход",
@@ -99,11 +110,13 @@ export default {
     loginBlock: {
       headAuth: "Sing in",
       headReg: "Registration",
+      headForget: "Forget password",
       form: {
         email: "Email",
+        tab_number: "Tab number",
         password: "Password",
         password_repeat: "Password repeat",
-        name: "Full name",
+        name: "Name and Last name",
         position: "Position",
         section: "Section",
         state: "State",
@@ -114,6 +127,15 @@ export default {
         submit: "Send",
         errorPassRepeat: "Passwords must match"
       }
+    },
+    infoBlock: {
+      head: "Opening of annual voting",
+      img: "image_star",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    winnerBlock: {
+      head: "Voting winner",
+      year: "year"
     },
     footerBlock: {},
     menuItems: [
@@ -138,15 +160,15 @@ export default {
       {
         id: 4,
         text: "Participants",
-        link: "#participants",
+        link: "/participants",
         target: "_self"
       },
-      {
-        id: 5,
-        text: "Archive",
-        link: "#archive",
-        target: "_self"
-      },
+      // {
+      //   id: 5,
+      //   text: "Archive",
+      //   link: "#archive",
+      //   target: "_self"
+      // },
       {
         id: 6,
         text: "Logout",

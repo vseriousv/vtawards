@@ -8,14 +8,14 @@
             <v-form class="form-create">
                 <v-text-field
                         class="form-create__field"
-                        label="Отдел (Русский)"
+                        label="Регион (Русский)"
                         single-line
                         outlined
                         v-model="adminValueRu"
                 ></v-text-field>
                 <v-text-field
                         class="form-create__field"
-                        label="Отдел (Английский)"
+                        label="Регион (Английский)"
                         single-line
                         outlined
                         v-model="adminValueEn"
@@ -48,12 +48,12 @@
 
 <script>
     export default {
-        name: "SectionsModal",
+        name: "StatesModal",
         props: ['idField', 'dataTable'],
         data(){
             return {
-                dialogHead: 'Отдел',
-                dialogTable: 'sections',
+                dialogHead: 'Регион',
+                dialogTable: 'states',
 
                 errForm: ''
             }
@@ -68,9 +68,9 @@
                     this.errForm = 'Все поля обязательны для заполнения';
                 } else {
                     if(this.idField == null) {
-                        this.$emit('addFieldTable', 'sections', dataValue);
+                        this.$emit('addFieldTable', 'states', dataValue);
                     }else{
-                        this.$emit('updateFieldTableID', 'sections', dataValue);
+                        this.$emit('updateFieldTableID', 'states', dataValue);
                     }
                     this.resetForm();
                 }

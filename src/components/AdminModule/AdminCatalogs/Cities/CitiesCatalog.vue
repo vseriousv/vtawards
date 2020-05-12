@@ -16,7 +16,7 @@
                             class="manageBTN"
                             color="blue lighten-2"
                             dark small
-                            @click.stop="getPositions"
+                            @click.stop="getCities"
                         >
                             Обновить
                         </v-btn>
@@ -29,13 +29,13 @@
                     <thead>
                     <tr>
                         <th class="text-left">Номер</th>
-                        <th class="text-left">Должность (Русский)</th>
-                        <th class="text-left">Должность (Англйиский)</th>
+                        <th class="text-left">Регион (Русский)</th>
+                        <th class="text-left">Регион (Англйиский)</th>
                         <th class="text-right">Удалить/Исправить</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(itemField, id) in positions" :key="`itemField${itemField.id}`">
+                    <tr v-for="(itemField, id) in cities" :key="`itemField${itemField.id}`">
                         <td>{{ id+1 }}</td>
                         <td>{{ itemField.value_ru }}</td>
                         <td>{{ itemField.value_en }}</td>
@@ -70,40 +70,40 @@
     import axios from 'axios';
     import config from "../../../../constants/config";
     export default {
-        name: "PositionsCatalog",
+        name: "CitiesCatalog",
         data() {
             return {
-                positions: [],
+                cities: [],
             }
         },
         created() {
-            this.getPositions();
+            this.getCities();
         },
         methods: {
             createField: function () {
-                this.$emit('handleModal', null, 'positions');
+                this.$emit('handleModal', null, 'cities');
             },
             updatePositionID: function (id) {
                 this.$store.commit("setAdminValueRu", '');
                 this.$store.commit("setAdminValueEn", '');
-                this.$store.commit("setAdminValueRu", this.positions.find(item=>item.id === id).value_ru);
-                this.$store.commit("setAdminValueEn", this.positions.find(item=>item.id === id).value_en);
-                this.$emit('handleModal', id, 'positions');
+                this.$store.commit("setAdminValueRu", this.cities.find(item=>item.id === id).value_ru);
+                this.$store.commit("setAdminValueEn", this.cities.find(item=>item.id === id).value_en);
+                this.$emit('handleModal', id, 'cities');
             },
-            getPositions: function () {
-                const url = config.API_URL+'/positions'
+            getCities: function () {
+                const url = config.API_URL+'/cities'
                 axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
-                .then(result => this.positions = result.data)
-                .catch(e => console.error("positions-error:", e));
+                .then(result => this.cities = result.data)
+                .catch(e => console.error("cities-error:", e));
             },
             removePosition: function (id) {
-                const url = config.API_URL+'/positions/'+id
+                const url = config.API_URL+'/cities/'+id
                 axios.delete( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
                 .then(result => {
-                    this.getPositions();
+                    this.getCities();
                     return result;
                 })
-                .catch(e => console.error("positions-error:", e));
+                .catch(e => console.error("cities-error:", e));
             }
         }
     }

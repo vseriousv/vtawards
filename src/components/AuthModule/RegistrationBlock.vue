@@ -17,82 +17,78 @@
                     >
                         <div class="otherFields">
                             <v-text-field
-                                    class="field"
-                                    v-model="fullname"
-                                    name="fullname"
-                                    :label="`${$t('loginBlock.form.name')}`"
-                                    required
-                                    outlined
+                                class="field"
+                                v-model="fullname"
+                                name="fullname"
+                                :label="`${$t('loginBlock.form.name')}`"
+                                required
+                                outlined
                             ></v-text-field>
-                            <v-select
-                                    class="field"
-                                    v-model="position_id"
-                                    :items="positionItems"
-                                    :label="`${$t('loginBlock.form.position')}`"
-                                    outlined
-                                    name="position"
-                            ></v-select>
-                            <v-select
-                                    class="field"
-                                    v-model="section_id"
-                                    :items="sectionItems"
-                                    :label="`${$t('loginBlock.form.section')}`"
-                                    outlined
-                                    name="section"
-                            ></v-select>
-                            <v-select
-                                    class="field"
-                                    v-model="state_id"
-                                    :items="stateItems"
-                                    :label="`${$t('loginBlock.form.state')}`"
-                                    outlined
-                                    name="state"
-                            ></v-select>
-                            <v-select
-                                    class="field"
-                                    v-model="city_id"
-                                    :items="cityItems"
-                                    :label="`${$t('loginBlock.form.city')}`"
-                                    outlined
-                                    name="city"
-                            ></v-select>
+                            <v-autocomplete
+                                class="field"
+                                v-model="position_id"
+                                :items="positionItems"
+                                outlined
+                                :label="`${$t('loginBlock.form.position')}`"
+                            ></v-autocomplete>
+                            <v-autocomplete
+                                class="field"
+                                v-model="section_id"
+                                :items="sectionItems"
+                                outlined
+                                :label="`${$t('loginBlock.form.section')}`"
+                            ></v-autocomplete>
+                            <v-autocomplete
+                                class="field"
+                                v-model="state_id"
+                                :items="stateItems"
+                                :label="`${$t('loginBlock.form.state')}`"
+                                outlined
+                            ></v-autocomplete>
+                            <v-autocomplete
+                                class="field"
+                                v-model="city_id"
+                                :items="cityItems"
+                                :label="`${$t('loginBlock.form.city')}`"
+                                outlined
+                            ></v-autocomplete>
                         </div>
                         <div class="generalFields">
                             <v-text-field
-                                    class="field"
-                                    v-model="email"
-                                    name="email"
-                                    label="E-mail"
-                                    required
-                                    outlined
+                                class="field"
+                                v-model="email"
+                                name="email"
+                                label="E-mail"
+                                required
+                                outlined
                             ></v-text-field>
                             <v-text-field
-                                    class="field"
-                                    v-model="password"
-                                    :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="showPass ? 'text' : 'password'"
-                                    name="password"
-                                    :label="`${$t('loginBlock.form.password')}`"
-                                    @click:append="showPass = !showPass"
-                                    outlined
+                                class="field"
+                                v-model="password"
+                                :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="showPass ? 'text' : 'password'"
+                                name="password"
+                                :label="`${$t('loginBlock.form.password')}`"
+                                @click:append="showPass = !showPass"
+                                outlined
                             ></v-text-field>
                             <v-text-field
-                                    class="field"
-                                    v-model="password_repeat"
-                                    :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="showPass ? 'text' : 'password'"
-                                    name="password_repeat"
-                                    :label="`${$t('loginBlock.form.password_repeat')}`"
-                                    @click:append="showPass = !showPass"
-                                    outlined
+                                class="field"
+                                v-model="password_repeat"
+                                :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="showPass ? 'text' : 'password'"
+                                name="password_repeat"
+                                :label="`${$t('loginBlock.form.password_repeat')}`"
+                                @click:append="showPass = !showPass"
+                                outlined
                             ></v-text-field>
                         </div>
                         <div class="btn-field">
                             <v-btn
-                                    color="warning"
-                                    @click="sendHandler"
-                                    large
-                                    width="300"
+                                color="warning"
+                                @click="sendHandler"
+                                large
+                                width="300"
                             >
                                 {{$t('loginBlock.form.submit')}}
                             </v-btn>
@@ -122,29 +118,13 @@
             return {
                 fullname: '',
                 position_id: '',
-                positionItems: [
-                    {text: 'Администратор', value: 0},
-                    {text:'СофтИнженер', value: 1},
-                    {text:'Джаваскриптизер', value: 2}
-                ],
+                    positionItems: [],
                 section_id: '',
-                sectionItems: [
-                    {text: 'Администраторская', value: 0},
-                    {text:'СофтИнженерская', value: 1},
-                    {text:'Джаваскриптизерная', value: 2}
-                ],
+                    sectionItems: [],
                 state_id: '',
-                stateItems: [
-                    {text: 'Администраторрская область', value: 0},
-                    {text:'СофтИнженер регион', value: 1},
-                    {text:'Джаваскриптизер область', value: 2}
-                ],
+                    stateItems: [],
                 city_id: '',
-                cityItems: [
-                    {text:'Админисинск', value: 0},
-                    {text:'СофтИнженеринск', value: 1},
-                    {text:'Джаваскриптизеринск', value: 2}
-                ],
+                    cityItems: [],
                 email: '',
                 password: '',
                 password_repeat: '',
@@ -159,8 +139,20 @@
                 },
                 showPass: false,
 
-                errorStr: ''
+                errorStr: '',
+
+                descriptionLimit: 60,
+                entries: [],
+                isLoading: false,
+                model: null,
+                search: null,
             }
+        },
+        created() {
+            this.getTable("positions");
+            this.getTable("sections");
+            this.getTable("states");
+            this.getTable("cities");
         },
         methods: {
             sendHandler: function () {
@@ -199,6 +191,42 @@
                     this.errorStr = "Password must match"
                 }
 
+            },
+            getTable: function (table) {
+                const url = config.API_URL+'/'+table;
+                axios.get( url )
+                    .then(result => {
+                        switch (table) {
+                            case 'positions':
+                                this.positionItems = this.parserData(result.data);
+                                break;
+                            case 'sections':
+                                this.sectionItems = this.parserData(result.data);
+                                break;
+                            case 'states':
+                                this.stateItems = this.parserData(result.data);
+                                break;
+                            case 'cities':
+                                this.cityItems = this.parserData(result.data);
+                                break;
+                            default:
+                                console.log("ERRRRRO");
+                                break;
+                        }
+                    })
+                    .catch(e => console.error("positions-error:", e));
+            },
+            parserData: function (data) {
+                let resultDataRu = [];
+                // let resultDataEn = [];
+                for (let i = 0; i < data.length; i++){
+                    const text_ru = data[i].value_ru;
+                    // const text_en = data[i].value_en;
+                    const code = data[i].code;
+                    resultDataRu.push({text: text_ru, value: code });
+                    // resultDataEn.push({text: text_en, value: code });
+                }
+                return resultDataRu;
             }
         }
     }

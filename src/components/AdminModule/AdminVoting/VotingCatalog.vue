@@ -16,7 +16,7 @@
                             class="manageBTN"
                             color="blue lighten-2"
                             dark small
-                            @click.stop="getPositions"
+                            @click.stop="getVoting"
                         >
                             Обновить
                         </v-btn>
@@ -29,33 +29,41 @@
                     <thead>
                     <tr>
                         <th class="text-left">Номер</th>
-                        <th class="text-left">Должность (Русский)</th>
-                        <th class="text-left">Должность (Англйиский)</th>
+                        <th class="text-left">Год</th>
+                        <th class="text-left">Тип голосования</th>
+                        <th class="text-left">Статус</th>
                         <th class="text-right">Удалить/Исправить</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(itemField, id) in positions" :key="`itemField${itemField.id}`">
-                        <td>{{ id+1 }}</td>
-                        <td>{{ itemField.value_ru }}</td>
-                        <td>{{ itemField.value_en }}</td>
-                        <td class="manageDelete">
+                    <tr v-for="(itemField, id) in voting" :key="`itemField${itemField.id}`" class="fieldsRow">
+                        <td class="tdFields">{{ id+1 }}</td>
+                        <td class="tdFields">{{ itemField.year }}</td>
+                        <td class="tdFields">{{ itemField.type_voting }}</td>
+                        <td class="tdFields">
+                            <v-checkbox
+                                v-model="itemField.is_active"
+                                readonly
+                                dense
+                            ></v-checkbox>
+                        </td>
+                        <td class="manageDelete tdFields" >
                             <v-btn
                                 class="manageBTN"
                                 color="green lighten-2"
                                 dark small
-                                @click.stop="updatePositionID(itemField.id)"
+                                @click.stop="updateVotingID(itemField.id)"
                             >
                                 Исправить
                             </v-btn>
-<!--                            <v-btn-->
-<!--                                class="manageBTN"-->
-<!--                                color="red lighten-2"-->
-<!--                                dark small-->
-<!--                                @click.stop="removePosition(itemField.id)"-->
-<!--                            >-->
-<!--                                Удалить-->
-<!--                            </v-btn>-->
+                            <v-btn
+                                class="manageBTN"
+                                color="red lighten-2"
+                                dark small
+                                @click.stop="removeVoting(itemField.id)"
+                            >
+                                Удалить
+                            </v-btn>
                         </td>
                     </tr>
                     </tbody>
@@ -68,42 +76,42 @@
 
 <script>
     import axios from 'axios';
-    import config from "../../../../constants/config";
+    import config from "../../../constants/config";
     export default {
-        name: "PositionsCatalog",
+        name: "VotingCatalog",
         data() {
             return {
-                positions: [],
+                voting: [],
             }
         },
         created() {
-            this.getPositions();
+            this.getVoting();
         },
         methods: {
             createField: function () {
-                this.$emit('handleModal', null, 'positions');
+                this.$emit('handleModal', null, 'votings');
             },
-            updatePositionID: function (id) {
-                this.$store.commit("setAdminValueRu", '');
-                this.$store.commit("setAdminValueEn", '');
-                this.$store.commit("setAdminValueRu", this.positions.find(item=>item.id === id).value_ru);
-                this.$store.commit("setAdminValueEn", this.positions.find(item=>item.id === id).value_en);
-                this.$emit('handleModal', id, 'positions');
+            updateVotingID: function (id) {
+                this.$store.commit("setVotingYear", '');
+                this.$store.commit("setVotingType", '');
+                this.$store.commit("setVotingYear", this.voting.find(item=>item.id === id).year);
+                this.$store.commit("setVotingType", this.voting.find(item=>item.id === id).type_voting);
+                this.$emit('handleModal', id, 'votings');
             },
-            getPositions: function () {
-                const url = config.API_URL+'/positions'
+            getVoting: function () {
+                const url = config.API_URL+'/votings'
                 axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
-                .then(result => this.positions = result.data)
-                .catch(e => console.error("positions-error:", e));
+                .then(result => this.voting = result.data)
+                .catch(e => console.error("voting-error:", e));
             },
-            removePosition: function (id) {
-                const url = config.API_URL+'/positions/'+id
+            removeVoting: function (id) {
+                const url = config.API_URL+'/votings/'+id
                 axios.delete( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
                 .then(result => {
-                    this.getPositions();
+                    this.getVoting();
                     return result;
                 })
-                .catch(e => console.error("positions-error:", e));
+                .catch(e => console.error("voting-error:", e));
             }
         }
     }
@@ -119,6 +127,11 @@
             align-items: center;
             .manageBTN{
                 margin: 0 10px;
+            }
+        }
+        .fieldsRow{
+            .tdFields {
+                min-height: 63px;
             }
         }
     }

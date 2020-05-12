@@ -16,14 +16,16 @@ import MainPage from "./pages/MainPage";
 import ResultPage from "./pages/ResultPage";
 import CommitteePage from "./pages/CommitteePage";
 import ArchivePage from "./pages/ArchivePage";
+import ParticipantsPage from "./pages/ParticipantsPage";
 
 //ADMINKA
 import AdminPanel from "./components/AdminModule/AdminPanel";
 import AdminPage from "./pages/AdminPage";
 import AdminMain from "./components/AdminModule/AdminMain";
-import AdminMembers from "./components/AdminModule/AdminMembers";
-import AdminUsers from "./components/AdminModule/AdminUsers";
-import AdminVoting from "./components/AdminModule/AdminVoting";
+import AdminMembers from "./components/AdminModule/AdminMembers/AdminMembers";
+import AdminUsers from "./components/AdminModule/AdminUsers/AdminUsers";
+import AdminShowUserID from "./components/AdminModule/AdminUsers/AdminShowUserID";
+import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
 
 Vue.use(VueRouter);
@@ -110,6 +112,24 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: "/participants",
+        name: "participants",
+        components: {
+            adminPanel: AdminPanel,
+            header: HeaderBlockOtherPage,
+            body: ParticipantsPage,
+            nav: AppHeader,
+            footer: FooterBlock
+        },
+        props: {
+            header: {
+                headName_en: 'Participants',
+                headName_ru: 'Участники'
+            }
+        },
+        meta: { requiresAuth: true }
+    },
+    {
         path: "/archive",
         name: "archive",
         components: {
@@ -133,11 +153,12 @@ const routes = [
         components: { body: AdminPage },
         redirect: '/admin/general',
         children: [
-            { name: "generalAdmin",     path: "general",    component: AdminMain,       meta: { isAdmin: true} },
-            { name: "catalogsAdmin",    path: "catalogs",   component: AdminCatalogs,   meta: { isAdmin: true} },
-            { name: "usersAdmin",       path: "users",      component: AdminUsers,      meta: { isAdmin: true} },
-            { name: "membersAdmin",     path: "members",    component: AdminMembers,    meta: { isAdmin: true} },
-            { name: "votingAdmin",      path: "voting",     component: AdminVoting,     meta: { isAdmin: true} }
+            { name: "generalAdmin",     path: "general",        component: AdminMain,       meta: { isAdmin: true} },
+            { name: "catalogsAdmin",    path: "catalogs",       component: AdminCatalogs,   meta: { isAdmin: true} },
+            { name: "usersAdmin",       path: "users",          component: AdminUsers,      meta: { isAdmin: true} },
+            { name: "usersIdAdmin",     path: "users/id/:id",   component: AdminShowUserID, meta: { isAdmin: true} },
+            { name: "membersAdmin",     path: "members",        component: AdminMembers,    meta: { isAdmin: true} },
+            { name: "votingAdmin",      path: "voting",         component: AdminVoting,     meta: { isAdmin: true} }
 
         ],
         meta: { isAdmin: true }
