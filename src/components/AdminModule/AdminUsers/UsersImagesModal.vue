@@ -64,11 +64,6 @@
                 this.file = this.$refs.file.files[0];
             },
             sendData: function () {
-                // const dataValue = {
-                //     'description_ru': this.$store.state.adminUser_description_ru
-                // }
-                // this.$emit('updateFieldTableID', dataValue);
-                // this.resetForm();
                 const url_upload = config.API_URL + "/users/avatar/";
 
                 let formData = new FormData();
@@ -83,7 +78,10 @@
                             Authorization: "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                ).then(result => console.log("upload:", result))
+                ).then(result => {
+                    console.log("upload:", result);
+                    this.resetForm();
+                })
                 .catch(error => console.error("ERROR:", error));
 
             },
