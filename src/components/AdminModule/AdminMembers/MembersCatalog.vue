@@ -37,14 +37,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(itemField, id) in participants"  class="tr_row" :key="`itemField${itemField.id}`">
+                    <tr v-for="(itemField, id) in participants"  class="tr_row" :key="`itemMember${id}`">
                         <td class="td_block">{{ id+1 }}</td>
                         <td class="td_block">
                             <div class="avatar">
-                                <img :src="`/img/avatars/users/${itemField.user.img}.png`" />
+                                <img :src="`${URL_AVATARS}${itemField.img}`" />
                             </div>
                         </td>
-                        <td class="td_block">{{ itemField.user.firstname_ru}} {{ itemField.user.patronymic_ru }} {{ itemField.user.lastname_ru }} </td>
+                        <td class="td_block">{{ itemField.name_ru}} </td>
                         <td class="td_block">{{ itemField.voting.year }}</td>
                         <td class="td_block">{{ itemField.voting.type_voting }}</td>
                         <td class="manageDelete td_block">
@@ -82,6 +82,7 @@
         data() {
             return {
                 participants: [],
+                URL_AVATARS: config.URL_AVATARS,
             }
         },
         created() {
@@ -104,10 +105,22 @@
                 const url = config.API_URL+'/participants'
                 axios.get( url, { headers: {  Authorization: "Bearer " + localStorage.getItem("jwt") } } )
                 .then(result => {
-                    console.log(result.data);
-                    this.participants = result.data
+                    this.setUsersArray(result.data);
                 })
                 .catch(e => console.error("participants-error:", e));
+            },
+            setUsersArray: async function (data) {
+                for (let i = 0; i < data.length; i++){
+                    const userObject = {
+                        id: data[i].user.id,
+                        tab_number: data[i].user.tab_number,
+                        img: data[i].user.img ? data[i].user.img  : 'null.png',
+                        name_ru: data[i].user.firstname_ru + ' ' + data[i].user.patronymic_ru + ' ' + data[i].user.lastname_ru,
+                        name_en: data[i].user.firstname_en + ' ' + data[i].user.patronymic_en + ' ' + data[i].user.lastname_en,
+                        voting: data[i].voting
+                    };
+                    this.participants.push(userObject);
+                }
             },
             removeParticipants: function (id) {
                 const url = config.API_URL+'/participants/'+id

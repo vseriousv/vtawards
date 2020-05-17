@@ -178,7 +178,7 @@
             parseDataUser: function (data) {
                 const newObjectData = {
                     tab_number: data.tab_number,
-                    img: data.img,
+                    img: data.img ? data.img  : 'null.png',
                     email: data.email,
                     firstname_ru: data.firstname_ru,
                     lastname_ru: data.lastname_ru,

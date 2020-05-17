@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1>Result page</h1>
-    <div style="height: 700px;"></div>
+    <results-voting />
   </div>
 </template>
 
 <script>
+  import ResultsVoting from "../components/ResultsVoting/ResultsVoting";
 export default {
   name: "ResultPage",
 
-  components: {},
+  components: {
+    ResultsVoting
+  },
 
   data() {
     return {};
