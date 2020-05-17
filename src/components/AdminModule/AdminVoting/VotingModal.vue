@@ -20,7 +20,7 @@
                         single-line
                         outlined
                         v-model="votingType"
-                        :items="itemsVotinType"
+                        :items="itemsVotingType"
                 ></v-select>
                 <v-select
                         class="form-create__field"
@@ -65,7 +65,7 @@
                 dialogHead: 'Голосование',
                 dialogTable: 'votings',
                 itemsYears: [2015,2016,2017,2018,2019,2020,2021,2022,2023],
-                itemsVotinType: [
+                itemsVotingType: [
                     {text: 'Весная "народное"', value: 'spring_users_voting'},
                     {text: 'Весна "звезда"', value: 'spring_committee_voting'},
                     {text: 'Осень "народное"', value: 'autumn_users_voting'},

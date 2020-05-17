@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1>CommitteePage</h1>
-    <div style="height: 700px;"></div>
+    <committee-block />
   </div>
 </template>
 
 <script>
+  import CommitteeBlock from "../components/CommitteeBlock/CommitteeBlock";
 export default {
   name: "CommitteePage",
 
-  components: {},
+  components: {
+    CommitteeBlock
+  },
 
   data() {
     return {};

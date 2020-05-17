@@ -17,6 +17,8 @@ import ResultPage from "./pages/ResultPage";
 import CommitteePage from "./pages/CommitteePage";
 import ArchivePage from "./pages/ArchivePage";
 import ParticipantsPage from "./pages/ParticipantsPage";
+import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
+
 
 //ADMINKA
 import AdminPanel from "./components/AdminModule/AdminPanel";
@@ -27,6 +29,7 @@ import AdminUsers from "./components/AdminModule/AdminUsers/AdminUsers";
 import AdminShowUserID from "./components/AdminModule/AdminUsers/AdminShowUserID";
 import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
+import AdminWinners from "./components/AdminModule/AdminWinners/AdminWinners";
 
 Vue.use(VueRouter);
 
@@ -130,6 +133,24 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: "/participants/id/:id",
+        name: "participantsID",
+        components: {
+            adminPanel: AdminPanel,
+            header: HeaderBlockOtherPage,
+            body: ParticipantBlockID,
+            nav: AppHeader,
+            footer: FooterBlock
+        },
+        props: {
+            header: {
+                headName_en: 'About participant',
+                headName_ru: 'Об участнике'
+            }
+        },
+        meta: { requiresAuth: true }
+    },
+    {
         path: "/archive",
         name: "archive",
         components: {
@@ -158,7 +179,8 @@ const routes = [
             { name: "usersAdmin",       path: "users",          component: AdminUsers,      meta: { isAdmin: true} },
             { name: "usersIdAdmin",     path: "users/id/:id",   component: AdminShowUserID, meta: { isAdmin: true} },
             { name: "membersAdmin",     path: "members",        component: AdminMembers,    meta: { isAdmin: true} },
-            { name: "votingAdmin",      path: "voting",         component: AdminVoting,     meta: { isAdmin: true} }
+            { name: "votingAdmin",      path: "voting",         component: AdminVoting,     meta: { isAdmin: true} },
+            { name: "winnersAdmin",     path: "winners",        component: AdminWinners,    meta: { isAdmin: true} }
 
         ],
         meta: { isAdmin: true }

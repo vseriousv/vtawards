@@ -1,5 +1,5 @@
 <template>
-  <nav :class="`AppHeader ${fixedTopMenu} ${adminTrue}`">
+  <nav :class="`AppHeader ${fixedTopMenu} ${AdminPanel}`">
     <div class="appBar mxw1200">
       <router-link
         v-for="menuItem in $t('menuItems')"
@@ -23,9 +23,28 @@
 </template>
 
 <script>
+  import JwtHelper from "../../helpers/JwtHelper";
 export default {
   name: "AppHeader",
-  props: ["fixedTopMenu", "adminTrue"]
+  props: ["fixedTopMenu", "adminTrue"],
+  data() {
+    return {
+      AdminPanel: ''
+    }
+  },
+  created() {
+    this.checkAdmin();
+  },
+  methods: {
+    checkAdmin: function () {
+      const jwtHelper = new JwtHelper();
+      if (jwtHelper.isAdmin()) {
+        this.AdminPanel = 'adminTrueNavbar';
+      } else {
+        this.AdminPanel = 'adminFalse';
+      }
+    }
+  }
 };
 </script>
 

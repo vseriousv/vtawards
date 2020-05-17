@@ -1,13 +1,22 @@
 <template>
   <div>
     <info-block />
-    <winner-block year="latest" />
-    <winners-all-block year="latest" typeVote="semifinal"/>
-    <winners-all-block year="latest" typeVote="autumnStar"/>
-    <winners-all-block year="latest" typeVote="autumnWin"/>
-    <winners-all-block year="latest" typeVote="springStar"/>
-    <winners-all-block year="latest" typeVote="springWin"/>
-    <div style="height: 700px;"></div>
+
+
+<!--    {text: 'Финал', value: 'final_voting'},                     -->
+    <winner-block voting_id="4"/>
+<!--    {text: 'Полуфинал', value: 'semifinal_voting'},             -->
+    <winners-all-block voting_id="5"/>
+<!--    {text: 'Осень "звезда"', value: 'autumn_committee_voting'}, -->
+    <winners-all-block voting_id="6"/>
+<!--    {text: 'Осень "народное"', value: 'autumn_users_voting'},   -->
+    <winners-all-block voting_id="3"/>
+<!--    {text: 'Весна "звезда"', value: 'spring_committee_voting'}, -->
+    <winners-all-block voting_id="2"/>
+<!--    {text: 'Весная "народное"', value: 'spring_users_voting'},  -->
+    <winners-all-block voting_id="1"/>
+
+
   </div>
 </template>
 

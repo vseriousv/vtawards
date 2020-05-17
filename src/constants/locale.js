@@ -44,9 +44,36 @@ export default {
       img: "image_star",
       text: "Мы вынуждены отталкиваться от того, что глубокий уровень погружения однозначно фиксирует необходимость своевременного выполнения сверхзадачи. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: курс на социально-ориентированный национальный проект требует определения и уточнения анализа существующих паттернов поведения! Принимая во внимание показатели успешности, выбранный нами инновационный путь влечет за собой процесс внедрения и модернизации направлений прогрессивного развития."
     },
+    membersBlock: {
+      table: {
+        head: "Таблица результатов участников",
+        member: "Участник",
+        count_committee_votes: "Баллы комиссии",
+        committee_rating: "Голоса комиссии",
+        sr_rating: "Средний балл комиссии",
+        count_votes: "Голоса сотрудников",
+        result_rating: "Итоговый рейтинг",
+      }
+    },
+    participantID: {
+      buttonVoting: "Голосовать"
+    },
     winnerBlock: {
       head: "Победитель голосования",
-      year: "года"
+      year: "года",
+      more: "Подробнее об участнике"
+    },
+    winnersAllBlock: {
+      head: {
+        text1: "Победители",
+        semifinal_voting: "полуфинала",
+        autumn_committee_voting: 'осеннего голосования "Звезда"',
+        autumn_users_voting: 'осеннего народного голосования',
+        spring_committee_voting: 'весеннего голосования "Звезда"',
+        spring_users_voting: 'весеннего народного голосования',
+      },
+      year: "года",
+      more: "Подробнее об участнике"
     },
     footerBlock: {},
     menuItems: [
@@ -135,7 +162,34 @@ export default {
     },
     winnerBlock: {
       head: "Voting winner",
-      year: "year"
+      year: "year",
+      more: "More about the participant"
+    },
+    winnersAllBlock: {
+      head: {
+        text1: "Winners",
+        semifinal_voting: "semifinal",
+        autumn_committee_voting: 'autumn "Star" voting',
+        autumn_users_voting: 'autumn popular vote',
+        spring_committee_voting: 'spring "Star" voting',
+        spring_users_voting: 'spring popular vote',
+      },
+      year: "year",
+      more: "Member Details"
+    },
+    membersBlock: {
+      table: {
+        head: "Table of results",
+        member: "Participant",
+        count_committee_votes: "Commission points",
+        committee_rating: "Voices of the commission",
+        sr_rating: "Average commission score",
+        count_votes: "Employee Voices",
+        result_rating: "Total rating",
+      }
+    },
+    participantID: {
+      buttonVoting: "Vote"
     },
     footerBlock: {},
     menuItems: [
@@ -154,7 +208,7 @@ export default {
       {
         id: 3,
         text: "Committee",
-        link: "#сommittee",
+        link: "/committee",
         target: "_self"
       },
       {
