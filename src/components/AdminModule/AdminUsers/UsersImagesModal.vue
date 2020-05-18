@@ -80,6 +80,7 @@
                     }
                 ).then(result => {
                     console.log("upload:", result);
+                    this.$emit('updateImageID');
                     this.resetForm();
                 })
                 .catch(error => console.error("ERROR:", error));

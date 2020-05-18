@@ -11,7 +11,7 @@
             <users-images-modal
                     v-if="dialog_name === 'user-images'"
                     @handleReversModal="handleReversModal"
-                    @updateFieldTableID="updateFieldTableID"
+                    @updateImageID="updateImageID"
             />
             <users-modal
                 v-if="dialog_name === 'user-static'"
@@ -174,6 +174,10 @@
                             this.errorStr = error.response.status + '';
                         }
                     });
+            },
+            updateImageID: function () {
+                this.handleReversModal();
+                this.getUserID(this.$route.params.id);
             },
             parseDataUser: function (data) {
                 const newObjectData = {
