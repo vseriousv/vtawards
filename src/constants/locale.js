@@ -42,7 +42,8 @@ export default {
     infoBlock: {
       head: "Открытие ежегодного голосования",
       img: "image_star",
-      text: "Мы вынуждены отталкиваться от того, что глубокий уровень погружения однозначно фиксирует необходимость своевременного выполнения сверхзадачи. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: курс на социально-ориентированный национальный проект требует определения и уточнения анализа существующих паттернов поведения! Принимая во внимание показатели успешности, выбранный нами инновационный путь влечет за собой процесс внедрения и модернизации направлений прогрессивного развития."
+      text:
+        "Мы вынуждены отталкиваться от того, что глубокий уровень погружения однозначно фиксирует необходимость своевременного выполнения сверхзадачи. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: курс на социально-ориентированный национальный проект требует определения и уточнения анализа существующих паттернов поведения! Принимая во внимание показатели успешности, выбранный нами инновационный путь влечет за собой процесс внедрения и модернизации направлений прогрессивного развития."
     },
     membersBlock: {
       table: {
@@ -52,7 +53,7 @@ export default {
         committee_rating: "Голоса комиссии",
         sr_rating: "Средний балл комиссии",
         count_votes: "Голоса сотрудников",
-        result_rating: "Итоговый рейтинг",
+        result_rating: "Итоговый рейтинг"
       }
     },
     participantID: {
@@ -68,9 +69,9 @@ export default {
         text1: "Победители",
         semifinal_voting: "полуфинала",
         autumn_committee_voting: 'осеннего голосования "Звезда"',
-        autumn_users_voting: 'осеннего народного голосования',
+        autumn_users_voting: "осеннего народного голосования",
         spring_committee_voting: 'весеннего голосования "Звезда"',
-        spring_users_voting: 'весеннего народного голосования',
+        spring_users_voting: "весеннего народного голосования"
       },
       year: "года",
       more: "Подробнее об участнике"
@@ -158,7 +159,8 @@ export default {
     infoBlock: {
       head: "Opening of annual voting",
       img: "image_star",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      text:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     winnerBlock: {
       head: "Voting winner",
@@ -170,9 +172,9 @@ export default {
         text1: "Winners",
         semifinal_voting: "semifinal",
         autumn_committee_voting: 'autumn "Star" voting',
-        autumn_users_voting: 'autumn popular vote',
+        autumn_users_voting: "autumn popular vote",
         spring_committee_voting: 'spring "Star" voting',
-        spring_users_voting: 'spring popular vote',
+        spring_users_voting: "spring popular vote"
       },
       year: "year",
       more: "Member Details"
@@ -185,7 +187,7 @@ export default {
         committee_rating: "Voices of the commission",
         sr_rating: "Average commission score",
         count_votes: "Employee Voices",
-        result_rating: "Total rating",
+        result_rating: "Total rating"
       }
     },
     participantID: {

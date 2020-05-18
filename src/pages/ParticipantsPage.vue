@@ -1,22 +1,22 @@
 <template>
-    <participants-block />
+  <participants-block />
 </template>
 
 <script>
-    import ParticipantsBlock from "../components/ParticipantsBlock/ParticipantsBlock";
-    export default {
-        name: "ParticipantsPage",
+import ParticipantsBlock from "../components/ParticipantsBlock/ParticipantsBlock";
+export default {
+  name: "ParticipantsPage",
 
-        components: {
-            ParticipantsBlock
-        },
+  components: {
+    ParticipantsBlock
+  },
 
-        data() {
-            return {};
-        }
-    };
+  data() {
+    return {};
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-    @import "../assets/styles/index.scss";
+@import "../assets/styles/index.scss";
 </style>

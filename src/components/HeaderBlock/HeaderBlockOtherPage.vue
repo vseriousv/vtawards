@@ -14,7 +14,7 @@
             />
             <div class="title-head_col__text">
               <h1>
-                {{ this.$t('lang') === 'en' ? headName_en : headName_ru }}
+                {{ this.$t("lang") === "en" ? headName_en : headName_ru }}
               </h1>
             </div>
           </div>
@@ -41,10 +41,9 @@
 <script>
 export default {
   name: "HeaderBlock",
-  props: ['headName_en', 'headName_ru'],
+  props: ["headName_en", "headName_ru"],
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>

@@ -30,7 +30,7 @@ export default {
       this.$emit("changeDrawer");
     },
     logout: function() {
-      this.$router.push({name: 'main'});
+      this.$router.push({ name: "main" });
     }
   }
 };

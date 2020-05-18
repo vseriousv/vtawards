@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import CommitteeBlock from "../components/CommitteeBlock/CommitteeBlock";
+import CommitteeBlock from "../components/CommitteeBlock/CommitteeBlock";
 export default {
   name: "CommitteePage",
 

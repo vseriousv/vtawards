@@ -7,7 +7,9 @@
             <img
               class="logotype"
               width="150"
-              :src="`/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`"
+              :src="
+                `/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`
+              "
               alt="vtaward"
             />
           </router-link>
