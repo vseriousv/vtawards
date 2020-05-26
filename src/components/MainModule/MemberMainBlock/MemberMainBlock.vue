@@ -1,50 +1,165 @@
 <template>
-  <section class="member container" id="member">
-    <h2>Номинанты</h2>
-    <div class="member-content">
-      <span class="member-card-btn"></span>
+  <section class="member" id="member">
+    <div class="mxw1200">
+      <h2>Номинанты</h2>
+      <div class="member-content">
+        <span class="member-card-btn"></span>
 
-      <!--            ВОТ ТУТ КАПЕЦ ЧТО_ТО            -->
+        <!--            ВОТ ТУТ КАПЕЦ ЧТО_ТО            -->
+        <div class="member-card">
+          <h3 v-if="$t('lang') === 'ru'">{{itemRegionHeader_ru}}</h3>
+          <h3 v-if="$t('lang') === 'en'">{{itemRegionHeader_en}}</h3>
+          <v-list class="member-card-list">
 
-      <!--            ВОТ ДО СЮДА                     -->
-      <div class="member-map member-map-none">
-        <ul class="member-map-list">
-          <li class="member-map-list-item headoffice map-item-active">
-            <a href="#">Головной офис</a>
-          </li>
-          <li class="member-map-list-item kuzbass">
-            <a href="#">Кузбасс</a>
-          </li>
-          <li class="member-map-list-item zapsib">
-            <a href="#">Центральная и Западная Сибирь</a>
-          </li>
-          <li class="member-map-list-item westsib">
-            <a href="#">Восточная Сибирь</a>
-          </li>
-          <li class="member-map-list-item yakutia">
-            <a href="#">Якутия</a>
-          </li>
-          <li class="member-map-list-item fareast">
-            <a href="#">Дальний Восток</a>
-          </li>
-          <li class="member-map-list-item krasnoyarsk">
-            <a href="#">Красноярский край</a>
-          </li>
-          <li class="member-map-list-item novokuz">
-            <a href="#">EMPR</a>
-          </li>
-          <li class="member-map-list-item strong-state">
-            <a href="#">Силовые установки</a>
-          </li>
-        </ul>
+            <template
+              v-for="(item, id) in participants"
+            >
+              <v-list-item
+
+                      :key="`participant${id}`"
+                      class="member-card-list-item d-flex cursor-pointer"
+                      @click.stop="goParticipantCard(item.id)"
+                      v-if="item.region === itemRegionId"
+              >
+                <v-list-item-avatar>
+                  <v-img :src="`${URL_AVATARS}${item.img}`" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name_ru"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+          </v-list>
+          <div class="d-flex justify-center mb-6">
+            <v-btn
+              outlined
+              color="primary"
+              to="/participants"
+            >
+              {{$t('memberMainBlock.button')}}
+            </v-btn>
+          </div>
+        </div>
+        <!--            ВОТ ДО СЮДА                     -->
+        <div class="member-map member-map-none">
+          <ul :class="`member-map-list active_${active}`">
+            <li v-for="(item, id) in itemRegion" :key="`region_${id}`" :class="`member-map-list-item ${item.style} active_${id} `">
+              <span v-if="$t('lang') === 'ru'" @click.stop="setItemActive(id)">{{item.value_ru}}</span>
+              <span v-if="$t('lang') === 'en'" @click.stop="setItemActive(id)">{{item.value_en}}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import config from "../../../constants/config";
+import axios from "axios";
+
 export default {
-  name: "MemberMainBlock"
+  name: "MemberMainBlock",
+  data() {
+    return {
+      active: 5,
+      itemRegion: [],
+      participants: [],
+      URL_AVATARS: config.URL_AVATARS,
+    }
+  },
+  created() {
+    this.getParticipants();
+    this.getRegions();
+  },
+  computed: {
+    itemRegionHeader_ru: function () {
+      if(this.itemRegion.length !== 0) {
+        return this.itemRegion[this.active].value_ru
+      } else {
+        return '';
+      }
+    },
+    itemRegionHeader_en: function () {
+      if(this.itemRegion.length !== 0) {
+        return this.itemRegion[this.active].value_en
+      } else {
+        return '';
+      }
+    },
+    itemRegionId: function () {
+      if(this.itemRegion.length !== 0) {
+        return this.itemRegion[this.active].id
+      } else {
+        return 0;
+      }
+    },
+  },
+  methods: {
+    goParticipantCard: function (id) {
+      this.$router.push("/participants/id/"+id)
+    },
+    setItemActive: function (id) {
+      this.active = id;
+    },
+    getRegions: function () {
+      const url = config.API_URL + "/states";
+      axios.get(url, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+      })
+      .then(result => {
+        this.getRegionsArray(result.data);
+      })
+      .catch(e => console.error("participants-error:", e));
+    },
+    getRegionsArray: async function(data) {
+      for (let i = 0; i < data.length; i++) {
+
+        // Специальные условия:
+        let regionText_ru = '';
+        if (data[i].id === 3) {
+          regionText_ru = data[i].value_en;
+        } else if (data[i].id === 2) {
+          regionText_ru = 'Дальний восток';
+        } else {
+          regionText_ru = data[i].value_ru;
+        }
+
+        const stateObject = {
+          id: data[i].id,
+          value_ru: regionText_ru,
+          value_en: data[i].value_en,
+          style: "state_" + data[i].id
+        };
+        this.itemRegion.push(stateObject);
+      }
+    },
+    getParticipants: function () {
+      const url = config.API_URL + "/participants";
+      axios.get(url, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+        })
+        .then(result => {
+          this.setUsersArray(result.data);
+        })
+        .catch(e => console.error("participants-error:", e));
+    },
+    setUsersArray: async function(data) {
+      for (let i = 0; i < data.length; i++) {
+        const userObject = {
+          id: data[i].user.id,
+          tab_number: data[i].user.tab_number,
+          img: data[i].user.img ? data[i].user.img : "null.png",
+          name_ru: data[i].user.firstname_ru + " " + data[i].user.patronymic_ru + " " + data[i].user.lastname_ru,
+          name_en: data[i].user.firstname_en + " " + data[i].user.patronymic_en + " " + data[i].user.lastname_en,
+          region: data[i].user.state_id,
+          voting: data[i].voting
+        };
+        this.participants.push(userObject);
+      }
+    },
+  }
 };
 </script>
 
@@ -78,9 +193,8 @@ export default {
   position: relative;
   z-index: 1;
 
-  display: none;
   width: 394px;
-  padding: 0px;
+  padding: 0;
 
   border-radius: 10px;
   background-color: #fff;
@@ -135,7 +249,7 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 10px 27px;
+
   width: 100%;
 
   -webkit-transition: all 0.3s ease;
@@ -152,7 +266,6 @@ export default {
 .member-card-list-item img {
   width: 65px;
   height: 65px;
-  margin-right: 15px;
 
   border-radius: 1000px;
   -o-object-fit: cover;
@@ -218,8 +331,8 @@ export default {
   position: absolute;
 }
 
-.member-map-list-item a,
-.member-map-list-item a:visited {
+.member-map-list-item span,
+.member-map-list-item span:visited {
   position: relative;
 
   padding: 3px 10px;
@@ -238,22 +351,31 @@ export default {
   transition: all 0.5s ease;
 }
 
-.member-map-list-item a:hover,
-.member-map-list-item a:focus {
+.member-map-list-item span:hover,
+.member-map-list-item span:focus {
   background-color: #fdcc08;
   color: #000;
+  cursor: pointer;
 }
 
-.map-item-active a {
+.active_0 .active_0 span,
+.active_1 .active_1 span,
+.active_2 .active_2 span,
+.active_3 .active_3 span,
+.active_4 .active_4 span,
+.active_5 .active_5 span,
+.active_6 .active_6 span,
+.active_7 .active_7 span,
+.active_8 .active_8 span,
+{
   background-color: #fdcc08 !important;
   color: #000 !important;
+  &::before span {
+    background-color: #fdcc08 !important;
+  }
 }
 
-.map-item-active a::before {
-  background-color: #fdcc08 !important;
-}
-
-.member-map-list-item a::before {
+.member-map-list-item span::before {
   content: "";
 
   position: absolute;
@@ -269,37 +391,43 @@ export default {
   transition: all 0.5s ease;
 }
 
-.member-map-list-item a:hover::before,
-.member-map-list-item a:focus::before {
+.member-map-list-item span:hover::before,
+.member-map-list-item span:focus::before {
   background-color: #fdcc08;
 }
 
-.headoffice {
+.headoffice,
+.state_6 {
   left: 10%;
   top: 72%;
 }
 
-.kuzbass {
+.kuzbass,
+.state_4 {
   left: 19%;
   top: 78%;
 }
 
-.zapsib {
+.zapsib,
+.state_7 {
   left: 16%;
   top: 64%;
 }
 
-.westsib {
+.westsib,
+.state_1 {
   left: 36%;
   top: 74%;
 }
 
-.yakutia {
+.yakutia,
+.state_8 {
   left: 65%;
   top: 48%;
 }
 
-.fareast {
+.fareast,
+.state_2 {
   left: 78%;
   top: 22%;
 }
@@ -308,12 +436,14 @@ export default {
   display: none;
 }
 
-.krasnoyarsk {
+.krasnoyarsk,
+.state_5 {
   top: 47%;
   left: 30%;
 }
 
-.novokuz {
+.novokuz,
+.state_3 {
   left: 19%;
   top: 86%;
 }
@@ -396,14 +526,14 @@ export default {
     display: none;
   }
 
-  .member-map-list-item a,
-  .member-map-list-item a:visited {
+  .member-map-list-item span,
+  .member-map-list-item span:visited {
     -webkit-box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1),
       0 10px 10px rgba(0, 0, 0, 0.12);
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.12);
   }
 
-  .member-map-list-item a::before {
+  .member-map-list-item span::before {
     display: none;
   }
 }
@@ -423,7 +553,7 @@ export default {
     position: static;
   }
 
-  .member-map-list-item a {
+  .member-map-list-item span {
     display: block;
     width: 90%;
     margin-right: auto;
@@ -494,7 +624,7 @@ export default {
     display: none;
   }
 
-  .member-map-list-item a {
+  .member-map-list-item span {
     width: 100%;
     margin: 0;
     border-bottom: 1px solid #b1b1b1;

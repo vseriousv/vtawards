@@ -1,6 +1,6 @@
 <template>
-  <section class="steps mxw1200" id="steps">
-    <div class="">
+  <section class="steps" id="steps">
+    <div class="mxw1200">
       <h2>Выборы победителей</h2>
       <ul class="steps-list">
         <li class="steps-list-item active-step">
@@ -94,11 +94,15 @@ export default {
 @import "../../../assets/styles/index";
 @import "../../../assets/styles/StartVotingOther";
 .steps {
+  padding-top: 60px;
   margin-bottom: 170px;
+  background-image: none;
 
-  background-image: url(/img/imgComponents/StartVoting/steps.svg);
-  background-repeat: no-repeat;
-  background-position: 100% -195%;
+  @include respond-to(large-screens) {
+    background-image: url(/img/imgComponents/StartVoting/steps.svg);
+    background-repeat: no-repeat;
+    background-position: 80% 60%;
+  }
 }
 
 .steps h2 {

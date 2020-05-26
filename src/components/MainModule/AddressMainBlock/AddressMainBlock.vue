@@ -6,39 +6,17 @@
         <div class="address-container">
           <div class="address-photo mx-3">
             <img
-              src="/img/imgComponents/StartVoting/Gevin.png"
-              alt="Гэвин Найт"
+              src="/img/imgComponents/StartVoting/Gerhard.jpg"
+              alt="Герхард Ворстер"
               width="248"
               height="248"
             />
-            <p class="address-photo-name">Гэвин Найт</p>
+            <p class="address-photo-name">Герхард Ворстер</p>
             <p class="address-photo-post">
-              Генеральный директор ООО «Восточная Техника»
+              {{$t('addressMainBlock.whoIsCEO')}}
             </p>
           </div>
-          <div class="address-text mx-5">
-            <p>
-              <span class="initial">Н</span>ашу команду вполне можно сравнить с
-              Олимпийской сборной. В нее входят лучшие атлеты, чемпионы,
-              спортсмены и тренеры, которые много и упорно работают над сборной
-              для достижения победы. Для нас всех важен только общекомандный
-              результат. Но в разные периоды те или иные сотрудники получают
-              шанс проявить личные способности. И делают они это с огромным
-              успехом.
-            </p>
-            <p>
-              Наши «Лидеры перемен» − это Звезды команд, умеющие проявить свои
-              компетенции в эпоху перемен. Изменились бизнес-ландшафт и
-              политическая ситуация, приходят новые технологии и цифровые
-              инновации, конкуренция стала жестче, а потребности клиентов
-              сложнее, но и в этих изменившихся условиях наши сотрудники
-              достойно «держат мяч» и демонстрируют нестандартные подходы! Что
-              им помогает? Во-первых, профессиональные компетенции. Во-вторых,
-              активное развитие навыков. И, конечно, дружеское плечо товарищей
-              по команде: всех нас, кто работает в «Восточной Технике».
-            </p>
-            <p><b>Правила меняются. Движение к успеху продолжается!</b></p>
-          </div>
+          <div class="address-text mx-5" v-html="$t('addressMainBlock.sayCEO')"/>
         </div>
       </section>
     </v-row>
@@ -82,6 +60,9 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  img {
+    border-radius: 50%;
+  }
 }
 
 .address-photo-name {
@@ -105,8 +86,8 @@ export default {
 
 .address-text {
   position: relative;
-
   max-width: 710px;
+  @include respond-to(medium-screens) { padding-left: 80px }
 }
 
 .address-text::after {
@@ -116,8 +97,30 @@ export default {
   height: 58px;
 
   font-family: "Roboto", sans-serif;
-  font-size: 170px;
   color: #ffb900;
+  @include respond-to(medium-screens) {   font-size: 170px;}
+}
+
+.address-text::before {
+  position: absolute;
+
+  width: 58px;
+  height: 58px;
+
+  font-family: "Roboto", sans-serif;
+  color: #ffb900;
+  @include respond-to(medium-screens) {   font-size: 170px;}
+}
+
+.address-text::before {
+  content: ",,";
+  transform: rotate(180deg);
+  top: 80px;
+  left: 0;
+  display: none;
+  @include respond-to(medium-screens) {
+    display: block;
+  }
 }
 
 .address-text::after {
@@ -125,6 +128,10 @@ export default {
 
   bottom: 95px;
   right: 15px;
+  display: none;
+  @include respond-to(medium-screens) {
+    display: block;
+  }
 }
 
 .address-text p {

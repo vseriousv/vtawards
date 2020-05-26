@@ -50,6 +50,25 @@ input:focus {outline: none;}
   @include respond-to(large-screens) { font-size: 32px; }
 }
 
+.address-text {
+  p {
+    margin: 0;
+    margin-bottom: 20px;
+
+    color: #5b5b5b;
+  }
+  .initial {
+    font-size: 50px;
+    font-weight: 700;
+  }
+}
+
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .someText {
   font-size: 20px;
 }

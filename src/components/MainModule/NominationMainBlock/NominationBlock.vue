@@ -1,8 +1,6 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <section class="nomination mxw1200" id="nomination">
-        <div class="nomination-container">
+      <section class="nomination" id="nomination">
+        <div class="mxw1200 nomination-container">
           <div class="nomination-text">
             <h2>Номинации - 2019</h2>
             <p>
@@ -86,8 +84,6 @@
           </div>
         </div>
       </section>
-    </v-row>
-  </v-container>
 </template>
 
 <script>
@@ -107,7 +103,7 @@ export default {
   padding-right: 10px;
   border-top: 250px transparent;
   /*margin-top: -50px;*/
-  background-image: url(/img/imgcomponents/StartVoting/award.svg);
+  background-image: url(/img/imgComponents/StartVoting/award.svg);
   background-repeat: no-repeat;
   background-position: -10% center;
   background-size: contain;
