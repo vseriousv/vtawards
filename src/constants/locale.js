@@ -57,7 +57,10 @@ export default {
       }
     },
     participantID: {
-      buttonVoting: "Голосовать"
+      buttonVoting: "Голосовать",
+			comments: "Комментарии",
+			commentPost: "Написать комментарий",
+			send: "Опубликовать"
     },
     winnerBlock: {
       head: "Победитель голосования",
@@ -218,7 +221,10 @@ export default {
       }
     },
     participantID: {
-      buttonVoting: "Vote"
+      buttonVoting: "Vote",
+			comments: "Comments",
+			commentPost: "Write a comment",
+			send: "Public"
     },
     addressMainBlock: {
       head: "Обращение директора",
