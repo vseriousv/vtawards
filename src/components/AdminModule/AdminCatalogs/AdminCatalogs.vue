@@ -1,78 +1,3 @@
-<template>
-  <div class="containerAdmin">
-    <!-- Card   MODAL      -->
-    <div>
-      <v-dialog v-model="dialog" width="500">
-        <positions-modal
-          v-if="dialogTable === 'positions'"
-          @handleReversModal="handleReversModal"
-          @addFieldTable="addFieldTable"
-          @updateFieldTableID="updateFieldTableID"
-          :idField="idField"
-        />
-        <sections-modal
-          v-if="dialogTable === 'sections'"
-          @handleReversModal="handleReversModal"
-          @addFieldTable="addFieldTable"
-          @updateFieldTableID="updateFieldTableID"
-          :idField="idField"
-        />
-        <states-modal
-          v-if="dialogTable === 'states'"
-          @handleReversModal="handleReversModal"
-          @addFieldTable="addFieldTable"
-          @updateFieldTableID="updateFieldTableID"
-          :idField="idField"
-        />
-        <cities-modal
-          v-if="dialogTable === 'cities'"
-          @handleReversModal="handleReversModal"
-          @addFieldTable="addFieldTable"
-          @updateFieldTableID="updateFieldTableID"
-          :idField="idField"
-        />
-        <nominations-modal
-          v-if="dialogTable === 'nominations'"
-          @handleReversModal="handleReversModal"
-          @addFieldTable="addFieldTable"
-          @updateFieldTableID="updateFieldTableID"
-          :idField="idField"
-        />
-      </v-dialog>
-    </div>
-    <!-- !Card   MODAL      -->
-    <!-- Table   LIST       -->
-    <v-card style="height: 100%">
-      <v-tabs
-        background-color="white"
-        color="deep-purple accent-4"
-        class="contTabs"
-      >
-        <v-tab v-for="tabOne in tabs" :key="`items${tabOne.id}`">{{
-          tabOne.name
-        }}</v-tab>
-
-        <v-tab-item>
-          <positions-catalog @handleModal="handleModal" />
-        </v-tab-item>
-        <v-tab-item>
-          <sections-catalog @handleModal="handleModal" />
-        </v-tab-item>
-        <v-tab-item>
-          <states-catalog @handleModal="handleModal" />
-        </v-tab-item>
-        <v-tab-item>
-          <cities-catalog @handleModal="handleModal" />
-        </v-tab-item>
-        <v-tab-item>
-          <nominations-catalog @handleModal="handleModal" />
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
-    <!-- !Table   LIST       -->
-  </div>
-</template>
-
 <script>
 import PositionsCatalog from "./Positions/PositionsCatalog";
 import PositionsModal from "./Positions/PositionsModal";
@@ -166,11 +91,57 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.containerAdmin {
-  height: 100%;
-  .titleCatalog {
-    padding: 20px;
-  }
-}
-</style>
+<template lang="pug">
+.containerAdmin
+	v-dialog(v-model="dialog" width="500")
+		positions-modal(
+			v-if="dialogTable === 'positions'"
+			@handleReversModal="handleReversModal"
+			@addFieldTable="addFieldTable"
+			@updateFieldTableID="updateFieldTableID"
+			:idField="idField"
+		)
+		sections-modal(
+			v-if="dialogTable === 'sections'"
+			@handleReversModal="handleReversModal"
+			@addFieldTable="addFieldTable"
+			@updateFieldTableID="updateFieldTableID"
+			:idField="idField"
+		)
+		states-modal(
+			v-if="dialogTable === 'states'"
+			@handleReversModal="handleReversModal"
+			@addFieldTable="addFieldTable"
+			@updateFieldTableID="updateFieldTableID"
+			:idField="idField"
+		)
+		cities-modal(
+			v-if="dialogTable === 'cities'"
+			@handleReversModal="handleReversModal"
+			@addFieldTable="addFieldTable"
+			@updateFieldTableID="updateFieldTableID"
+			:idField="idField"
+		)
+		nominations-modal(
+			v-if="dialogTable === 'nominations'"
+			@handleReversModal="handleReversModal"
+			@addFieldTable="addFieldTable"
+			@updateFieldTableID="updateFieldTableID"
+			:idField="idField"
+		)
+	v-card(style="height: 100%")
+		v-tabs.contTabs( background-color="white" color="#FEBA13" )
+			v-tab( v-for="tabOne in tabs" :key="`items${tabOne.id}`" ) {{tabOne.name}}
+
+			v-tab-item.pt-2
+				positions-catalog(@handleModal="handleModal")
+			v-tab-item.pt-2
+				sections-catalog(@handleModal="handleModal")
+			v-tab-item.pt-2
+				states-catalog(@handleModal="handleModal")
+			v-tab-item.pt-2
+				cities-catalog(@handleModal="handleModal")
+			v-tab-item.pt-2
+				nominations-catalog(@handleModal="handleModal")
+</template>
+
