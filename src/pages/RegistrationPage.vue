@@ -1,6 +1,6 @@
 <template>
   <div>
-    <registration-block/>
+    <registration-block />
   </div>
 </template>
 

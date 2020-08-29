@@ -4,6 +4,24 @@ $medium: 960px;
 $large: 1264px;
 $extraLarge: 1904px;
 
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $small -1) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $small){ @content; }
+  }
+  @else if $media == large-screens {
+    @media only screen and (min-width: $medium){ @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $large) { @content; }
+  }
+  @else if $media == specialMobile {
+    @media (max-width: $medium) { @content; }
+  }
+}
+
 //Variables for text
 $headSection: 24px;
 $headHeightLineSection: 29px;
@@ -22,24 +40,6 @@ $thirdColor: #FF5300;
 
 //Fonts
 
-
-@mixin respond-to($media) {
-    @if $media == handhelds {
-      @media only screen and (max-width: $small -1) { @content; }
-    }
-    @else if $media == medium-screens {
-      @media only screen and (min-width: $small){ @content; }
-    }
-    @else if $media == large-screens {
-      @media only screen and (min-width: $medium){ @content; }
-    }
-    @else if $media == wide-screens {
-      @media only screen and (min-width: $large) { @content; }
-    }
-    @else if $media == specialMobile {
-      @media (max-width: $medium) { @content; }
-    }
-}
 body{
   overflow: hidden;
 }
@@ -48,6 +48,25 @@ input:focus {outline: none;}
   font-size: 20px;
   text-align: center;
   @include respond-to(large-screens) { font-size: 32px; }
+}
+
+.address-text {
+  p {
+    margin: 0;
+    margin-bottom: 20px;
+
+    color: #5b5b5b;
+  }
+  .initial {
+    font-size: 50px;
+    font-weight: 700;
+  }
+}
+
+
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .someText {

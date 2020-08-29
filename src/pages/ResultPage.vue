@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import ResultsVoting from "../components/ResultsVoting/ResultsVoting";
+import ResultsVoting from "../components/ResultsVoting/ResultsVoting";
 export default {
   name: "ResultPage",
 

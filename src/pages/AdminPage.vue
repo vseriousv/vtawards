@@ -21,8 +21,7 @@ export default {
     Navbar,
     Drawer
   },
-  created() {
-  },
+  created() {},
   data() {
     return {
       miniVariant: true

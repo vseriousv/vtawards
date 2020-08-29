@@ -4,9 +4,7 @@
     <v-container class="mxw1200 height100pr">
       <v-row class="logoAndLang">
         <v-col cols="12" class="logoAndLang__col">
-          <div class="title-head_col">
-
-          </div>
+          <div class="title-head_col"></div>
           <div :class="`d-flex align-center lang ${$t('lang')}`">
             <input
               class="langButton ruInput"
@@ -30,10 +28,9 @@
 <script>
 export default {
   name: "HeaderBlock",
-  props: ['headName_en', 'headName_ru'],
+  props: ["headName_en", "headName_ru"],
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>

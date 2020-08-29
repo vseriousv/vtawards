@@ -7,9 +7,7 @@
         :to="menuItem.link"
         class="hidden-sm-and-down"
       >
-        <span
-          v-html="menuItem.text"
-        />
+        <span v-html="menuItem.text" />
       </router-link>
 
       <v-app-bar-nav-icon
@@ -23,25 +21,25 @@
 </template>
 
 <script>
-  import JwtHelper from "../../helpers/JwtHelper";
+import JwtHelper from "../../helpers/JwtHelper";
 export default {
   name: "AppHeader",
   props: ["fixedTopMenu", "adminTrue"],
   data() {
     return {
-      AdminPanel: ''
-    }
+      AdminPanel: ""
+    };
   },
   created() {
     this.checkAdmin();
   },
   methods: {
-    checkAdmin: function () {
+    checkAdmin: function() {
       const jwtHelper = new JwtHelper();
       if (jwtHelper.isAdmin()) {
-        this.AdminPanel = 'adminTrueNavbar';
+        this.AdminPanel = "adminTrueNavbar";
       } else {
-        this.AdminPanel = 'adminFalse';
+        this.AdminPanel = "adminFalse";
       }
     }
   }
@@ -69,21 +67,21 @@ export default {
       text-decoration: none;
       height: 100%;
       padding: 0 20px;
-      transition: .2s;
+      transition: 0.2s;
       &:hover {
-        transition: .2s;
+        transition: 0.2s;
         color: $primaryTextColor;
       }
     }
   }
 }
-.noFixedTop{
-  transition: .2s;
+.noFixedTop {
+  transition: 0.2s;
   top: 0 !important;
   position: relative;
 }
 .fixedTop {
-  transition: .2s;
+  transition: 0.2s;
   position: fixed;
   left: 0;
   right: 0;
