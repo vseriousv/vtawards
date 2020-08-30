@@ -1,26 +1,19 @@
-<template>
-  <v-container fluid>
-    <v-row>
-      <section class="address mxw1200">
-        <h2 class="visually-hidden ma-5">Обращение директора</h2>
-        <div class="address-container">
-          <div class="address-photo mx-3">
-            <img
+<template lang="pug">
+  v-container.fluid
+    v-row
+      section.address.mxw1200
+        h2.visually-hidden.ma-5 Обращение директора
+        div.address-container
+          div.address-photo.mx-3
+            img(
               src="/img/imgComponents/StartVoting/Gerhard.jpg"
               alt="Герхард Ворстер"
               width="248"
               height="248"
-            />
-            <p class="address-photo-name">Герхард Ворстер</p>
-            <p class="address-photo-post">
-              {{$t('addressMainBlock.whoIsCEO')}}
-            </p>
-          </div>
-          <div class="address-text mx-5" v-html="$t('addressMainBlock.sayCEO')"/>
-        </div>
-      </section>
-    </v-row>
-  </v-container>
+              )
+            p.address-photo-name {{$t('addressMainBlock.nameCEO')}}
+            p.address-photo-post {{$t('addressMainBlock.whoIsCEO')}}
+          div.address-text.mx-5(v-html="$t('addressMainBlock.sayCEO')")
 </template>
 
 <script>
@@ -134,12 +127,13 @@ export default {
   }
 }
 
-.address-text p {
-  margin: 0;
-  margin-bottom: 20px;
+//стили есть в index.scss
+// .address-text p {
+//   margin: 0;
+//   margin-bottom: 20px;
 
-  color: #5b5b5b;
-}
+//   color: #5b5b5b;
+// }
 
 .address-text .initial {
   font-size: 50px;

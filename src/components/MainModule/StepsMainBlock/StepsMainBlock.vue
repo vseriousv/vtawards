@@ -8,7 +8,7 @@
             <div class="step-number">I</div>
             <div>
               <p class="step-date">
-                <!--                                        <?php echo $vt_options['text-step-1-date']; ?>-->
+                <!-- <?php echo $vt_options['text-step-1-date']; ?>-->
                 Дата проведения
               </p>
             </div>
@@ -19,12 +19,13 @@
             />
           </div>
           <h3>
-            <!--                                <?php echo $vt_options['text-step-1-title-' . $my_lang ]; ?>-->
+            <!--  <?php echo $vt_options['text-step-1-title-' . $my_lang ]; ?>-->
             Региональный этап
+            <p>«Звезды команд»</p>
           </h3>
           <div class="steps-list-item-text">
             <p>
-              <!--                                    <?php echo $vt_options['text-step-1-desc-' . $my_lang ]; ?>-->
+              <!-- <?php echo $vt_options['text-step-1-desc-' . $my_lang ]; ?>-->
               Описание этапа
             </p>
           </div>
@@ -34,7 +35,7 @@
             <div class="step-number">II</div>
             <div>
               <p class="step-date">
-                <!--                                        <?php echo $vt_options['text-step-2-date']; ?>-->
+                <!--  <?php echo $vt_options['text-step-2-date']; ?>-->
                 Дата проведения
               </p>
             </div>
@@ -45,12 +46,12 @@
             />
           </div>
           <h3>
-            <!--                                <?php echo $vt_options['text-step-2-title-' . $my_lang ]; ?>-->
-            Региональный этап
+            <!--   <?php echo $vt_options['text-step-2-title-' . $my_lang ]; ?>-->
+            Полуфинал
           </h3>
           <div class="steps-list-item-text">
             <p>
-              <!--                                    <?php echo $vt_options['text-step-2-desc-' . $my_lang ]; ?>-->
+              <!-- <?php echo $vt_options['text-step-2-desc-' . $my_lang ]; ?>-->
               Описание этапа
             </p>
           </div>
@@ -60,7 +61,7 @@
             <div class="step-number">III</div>
             <div>
               <p class="step-date">
-                <!--                                        <?php echo $vt_options['text-step-3-date' ]; ?>-->
+                <!-- <?php echo $vt_options['text-step-3-date' ]; ?>-->
                 Дата проведения
               </p>
             </div>
@@ -71,11 +72,11 @@
             />
           </div>
           <h3>
-            <!--                                <?php echo $vt_options['text-step-3-title-' . $my_lang ]; ?>-->
-            Региональный этап
+            <!--   <?php echo $vt_options['text-step-3-title-' . $my_lang ]; ?>-->
+            Финал
           </h3>
           <div class="steps-list-item-text">
-            <!--                                <p><?php echo $vt_options['text-step-3-desc-' . $my_lang ]; ?></p>-->
+            <!--  <p><?php echo $vt_options['text-step-3-desc-' . $my_lang ]; ?></p>-->
             Описание этапа
           </div>
         </li>

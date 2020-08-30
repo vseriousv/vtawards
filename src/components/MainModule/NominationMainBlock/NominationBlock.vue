@@ -1,89 +1,77 @@
-<template>
-      <section class="nomination" id="nomination">
-        <div class="mxw1200 nomination-container">
-          <div class="nomination-text">
-            <h2>Номинации - 2019</h2>
-            <p>
-              Выдвинуть номинанта в любую из шести номинаций «Звезда команды»
-              может каждый сотрудник «ВТ», и количество заявок от одного
-              человека не ограничено.
-            </p>
+<template lang="pug">
+      section.nomination#nomination
+        div.mxw1200.nomination-container
+          div.nomination-text
+            h2 {{$t('NominationBlock.head')}}
+            p {{$t('NominationBlock.headText')}}
+            
             <!--<a class="btn btn-yellow" href="">Подать заявку</a>-->
-          </div>
-          <div class="nomination-icons">
-            <ul class="nomination-list">
-              <li class="nomination-list-item">
-                <a href="#nomination-leader">
-                  <img
+          div.nomination-icons
+            ul.nomination-list
+              li.nomination-list-item
+                a(href="#nomination-leader")
+                  img(
                     src="/img/imgComponents/StartVoting/networking.svg"
-                    alt="Лидер"
+                    alt="Достижения и лидерство"
                     width="58"
                     height="58"
-                  />
-                  <p>Лидер</p>
-                </a>
-              </li>
-              <li class="nomination-list-item">
-                <a href="#nomination-achievement">
-                  <img
-                    src="/img/imgComponents/StartVoting/flag.svg"
-                    alt="Лидер"
-                    width="58"
-                    height="58"
-                  />
-                  <p>Достижение</p>
-                </a>
-              </li>
-              <li class="nomination-list-item">
-                <a href="#nomination-professional">
-                  <img
-                    src="/img/imgComponents/StartVoting/thumb-up.svg"
-                    alt="Лидер"
-                    width="58"
-                    height="58"
-                  />
-                  <p>Профессионал</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nomination-list">
-              <li class="nomination-list-item">
-                <a href="#nomination-innovator">
-                  <img
+                  )
+                  p(v-html="$t('NominationBlock.liderNom')")
+              li.nomination-list-item
+                a(href="#nomination-professional")
+                  img(
                     src="/img/imgComponents/StartVoting/creative.svg"
                     alt="Лидер"
                     width="58"
                     height="58"
-                  />
-                  <p>Новатор</p>
-                </a>
-              </li>
-              <li class="nomination-list-item">
-                <a href="#nomination-client">
-                  <img
-                    src="/img/imgComponents/StartVoting/conversation.svg"
-                    alt="Лидер"
-                    width="58"
-                    height="58"
-                  />
-                  <p>Клиент - наше всё</p>
-                </a>
-              </li>
-              <li class="nomination-list-item">
-                <a href="#smart-partner">
-                  <img
+                  )
+                  p(v-html="$t('NominationBlock.professionalNom')")
+              li.nomination-list-item
+                a(href="#smart-partner")
+                  img(
                     src="/img/imgComponents/StartVoting/goal.svg"
                     alt="Лидер"
                     width="58"
                     height="58"
-                  />
-                  <p>Золотой человек</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+                  )
+                  p(v-html="$t('NominationBlock.goldManNom')")
+                  //-   <li class="nomination-list-item">
+                  //-     <a href="#nomination-achievement">
+                  //-       <img
+                  //-         src="/img/imgComponents/StartVoting/flag.svg"
+                  //-         alt="Лидер"
+                  //-         width="58"
+                  //-         height="58"
+                  //-       />
+                  //-       <p>Достижение</p>
+                  //-     </a>
+                  //-   </li>
+                  //- </ul>
+                  //- <ul class="nomination-list">
+                  //-   <li class="nomination-list-item">
+                  //-     <a href="#nomination-innovator">
+                  //-       <img
+                  //-         src="/img/imgComponents/StartVoting/thumb-up.svg"
+                  //-         alt="Лидер"
+                  //-         width="58"
+                  //-         height="58"
+                  //-       />
+                  //-       <p>Новатор</p>
+                  //-     </a>
+                  //-   </li>
+                  //-   <li class="nomination-list-item">
+                  //-     <a href="#nomination-client">
+                  //-       <img
+                  //-         src="/img/imgComponents/StartVoting/conversation.svg"
+                  //-         alt="Лидер"
+                  //-         width="58"
+                  //-         height="58"
+                  //-       />
+                  //-       <p>Клиент - наше всё</p>
+                  //-     </a>
+                  //-   </li>
+                  //-   
+                  //- </ul>
 </template>
 
 <script>
@@ -118,7 +106,7 @@ export default {
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .nomination-text p {
@@ -221,10 +209,11 @@ export default {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    align-items: center;
   }
-  .nomination-text {
-    margin-right: auto;
-  }
+  // .nomination-text {
+  //   margin-right: auto;
+  // }
   .nomination-text .btn {
     display: none;
   }
@@ -278,20 +267,17 @@ export default {
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
   }
   .nomination-list {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    width: 100%;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-left: 30px;
+    margin-right: 30px;
   }
   .nomination-list:nth-child(2) {
     margin-left: 50px;
@@ -313,15 +299,19 @@ export default {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
   }
-  .nomination-list-item::before {
-    width: 250px;
+  .nomination-list {
+    justify-content: flex-start;
+    
+    margin: 0;
   }
-  .nomination-list:nth-child(2) {
-    margin-left: 30px;
-  }
+  // .nomination-list-item::before {
+  //   width: 250px;
+  // }
+  // .nomination-list:nth-child(2) {
+  //   margin-left: 30px;
+  // }
 }
 </style>
