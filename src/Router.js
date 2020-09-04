@@ -9,6 +9,7 @@ import HeaderBlockLoginPage from "./components/HeaderBlock/HeaderBlockLoginPage"
 import AppHeader from "./components/AppHeader/AppHeader";
 import FooterBlock from "./components/FooterBlock/FooterBlock";
 
+
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -18,6 +19,8 @@ import CommitteePage from "./pages/CommitteePage";
 import ArchivePage from "./pages/ArchivePage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
+import ApplicationPage from "./pages/ApplicationPage";
+
 
 //ADMINKA
 import AdminPanel from "./components/AdminModule/AdminPanel";
@@ -91,6 +94,24 @@ const routes = [
       header: {
         headName_en: "Voting results",
         headName_ru: "Результаты голосования"
+      }
+    },
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/application",
+    name: "application",
+    components: {
+      adminPanel: AdminPanel,
+      header: HeaderBlockOtherPage,
+      body: ApplicationPage,
+      nav: AppHeader,
+      footer: FooterBlock
+    },
+    props: {
+      header: {
+        headName_en: "Filing an application",
+        headName_ru: "Подача заявки"
       }
     },
     meta: { requiresAuth: true }

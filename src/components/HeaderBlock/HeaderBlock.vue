@@ -31,7 +31,11 @@
         </v-col>
       </v-row>
       <v-row class="title-head">
-        <v-col cols="12" class="title-head_col">
+        <div class="title-head_col">
+          <div class="title-head_col__text">
+            <h1 v-html="$t('header.head')"></h1>
+            <p class="header-tagline">{{ $t("header.subHeadText") }}</p>
+          </div>
           <img
             class="title-head_col__image"
             width="58"
@@ -39,11 +43,7 @@
             :src="`/img/imgComponents/HeaderBlock/star_of_team.png`"
             alt="star_of_team"
           />
-          <div class="title-head_col__text">
-            <h1 v-html="$t('header.head')"></h1>
-            <p class="header-tagline">{{ $t("header.subHeadText") }}</p>
-          </div>
-        </v-col>
+        </div>
       </v-row>
       <v-row class="body-head">
         <v-col class="body-head_col">
@@ -52,13 +52,23 @@
       </v-row>
       <v-row class="body-button">
         <v-col class="body-button_col">
-          <a :href="`/files/${$t('header.btnHeader.link')}`" target="_blank">
+          <p v-html='$t("header.btnHeader.beforeText")'></p>
+          <!-- <a :href="`/files/${$t('header.btnHeader.link')}`" target="_blank">
             <input
               type="button"
+              id="headerBtn"
               class="body-button_col__button"
               :value="$t('header.btnHeader.text')"
             />
-          </a>
+          </a> -->
+          <router-link to="/application">
+             <input
+              type="button"
+              id="headerBtn"
+              class="body-button_col__button"
+              :value="$t('header.btnHeader.text')"
+            />
+          </router-link>
         </v-col>
       </v-row>
       <v-row class="body-voteStatus">
@@ -122,47 +132,47 @@ export default {
     }
   }
   .title-head {
-    margin-top: 100px;
+    padding: 12px;
+    // margin-top: 100px;
     .title-head_col {
       display: flex;
-      justify-content: flex-end;
+      // justify-content: flex-start;
       align-items: center;
-      flex-direction: column;
-      @include respond-to(large-screens) {
-        flex-direction: row-reverse;
-      }
+      flex-direction: row;
+      // @include respond-to(large-screens) {
+      //   flex-direction: row-reverse;
+      // }
       .title-head_col__text {
-        height: 174px;
-        @include respond-to(large-screens) {
-          margin-right: 30px;
-        }
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        // height: 174px;
+        // @include respond-to(large-screens) {
+        //   margin-right: 30px;
+        // }
         h1 {
           font-size: 56px;
-          text-align: center;
+          text-align: left;
           font-weight: 700;
           color: white;
           clear: both;
+          line-height: 110px;
           @include respond-to(medium-screens) {
             font-size: 76px;
           }
           @include respond-to(large-screens) {
-            font-size: 96px;
+            font-size: 86px;
           }
         }
         p.header-tagline {
           color: white;
-          text-align: center;
+          text-align: left;
           font-size: 18px;
-          @include respond-to(medium-screens) {
-          }
-          @include respond-to(large-screens) {
-            text-align: right;
-            margin-top: -20px;
-          }
+          margin-top: 10px;
         }
       }
       .title-head_col__image {
-        margin-top: -30px;
+        margin-left: 50px;
       }
     }
   }
@@ -193,9 +203,17 @@ export default {
   .body-button {
     .body-button_col {
       display: flex;
+      flex-direction: row;
       justify-content: center;
+      p {
+        margin-right: 50px;
+      }
       @include respond-to(large-screens) {
         justify-content: flex-start;
+        p {
+          color: white;
+          max-width: 280px;
+        }
       }
       .body-button_col__button {
         color: white;

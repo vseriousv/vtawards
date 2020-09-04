@@ -2,18 +2,18 @@
   v-container.fluid
     v-row
       section.address.mxw1200
-        h2.visually-hidden.ma-5 Обращение директора
-        div.address-container
-          div.address-photo.mx-3
-            img(
-              src="/img/imgComponents/StartVoting/Gerhard.jpg"
-              alt="Герхард Ворстер"
-              width="248"
-              height="248"
-              )
-            p.address-photo-name {{$t('addressMainBlock.nameCEO')}}
-            p.address-photo-post {{$t('addressMainBlock.whoIsCEO')}}
-          div.address-text.mx-5(v-html="$t('addressMainBlock.sayCEO')")
+        //- h2.visually-hidden.ma-5 Обращение директора
+        //- div.address-container
+        //-   div.address-photo.mx-3
+        //-     img(
+        //-       src="/img/imgComponents/StartVoting/Gerhard.jpg"
+        //-       alt="Герхард Ворстер"
+        //-       width="248"
+        //-       height="248"
+        //-       )
+        //-     p.address-photo-name {{$t('addressMainBlock.nameCEO')}}
+        //-     p.address-photo-post {{$t('addressMainBlock.whoIsCEO')}}
+        div.address-text.mx-5(v-html="$t('addressMainBlock.sayCEO')")
 </template>
 
 <script>
@@ -79,7 +79,7 @@ export default {
 
 .address-text {
   position: relative;
-  max-width: 710px;
+  max-width: 100%;
   @include respond-to(medium-screens) { padding-left: 80px }
 }
 
@@ -105,27 +105,27 @@ export default {
   @include respond-to(medium-screens) {   font-size: 170px;}
 }
 
-.address-text::before {
-  content: ",,";
-  transform: rotate(180deg);
-  top: 80px;
-  left: 0;
-  display: none;
-  @include respond-to(medium-screens) {
-    display: block;
-  }
-}
+// .address-text::before {
+//   content: ",,";
+//   transform: rotate(180deg);
+//   top: 80px;
+//   left: 0;
+//   display: none;
+//   @include respond-to(medium-screens) {
+//     display: block;
+//   }
+// }
 
-.address-text::after {
-  content: ",,";
+// .address-text::after {
+//   content: ",,";
 
-  bottom: 95px;
-  right: 15px;
-  display: none;
-  @include respond-to(medium-screens) {
-    display: block;
-  }
-}
+//   bottom: 95px;
+//   right: 15px;
+//   display: none;
+//   @include respond-to(medium-screens) {
+//     display: block;
+//   }
+// }
 
 //стили есть в index.scss
 // .address-text p {

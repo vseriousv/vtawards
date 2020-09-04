@@ -4,12 +4,13 @@ export default {
     drawer: {},
     header: {
       logotype: "VT_Logo",
-      head: "Лидер перемен",
+      head: "Лидер перемен 2020",
       subHeadText: `Зажги свою звезду!`,
       bodyText:
         "Главная премия «Восточной Техники», с 2005 года она вручается сотрудникам за выдающиеся достижения и новаторские инициативы.",
       btnHeader: {
-        text: "положение о конкурсе",
+        beforeText: `<p>Заполнить форму подачи заявки</br>для участия в конкурсе</p>`,
+        text: "Заполнить форму",
         link: "POLOZHENIE-o-konkurse-Lider-peremen-VT-2019-0204.pdf"
       },
       statusVote: {
@@ -38,6 +39,13 @@ export default {
         submit: "Отправить",
         errorPassRepeat: "Пароли должны совпадать"
       }
+    },
+    ApplicationForm: {
+      argumentationTitle: "Аргументация",
+      commentPost: "Написать аргументацию",
+      fileArgumentation: "Прикрепить к завке документы для аргументации своей кандидатуры",
+      labelArgumentation: "Прикрепить файл",
+      btnArgumentation: "Отправить заявку",
     },
     infoBlock: {
       head: "Открытие ежегодного голосования",
@@ -165,12 +173,13 @@ export default {
     drawer: {},
     header: {
       logotype: "VT_Logo_eng",
-      head: "Change Maker",
+      head: "Change Maker</br>Award 2020",
       subHeadText: `Ignite your star!`,
       bodyText:
         "The main award of Vostochnaya Technica, presented to employees for outstanding achievements and innovative initiatives since 2005.",
       btnHeader: {
-        text: "competition regulations",
+        beforeText: `<p>Fill out the application form</br>for participation in the competition</p>`,
+        text: "Competition regulations",
         link: "Konkurs-Lider-Peremen-VT-Polozhenie_2019-0204-eng.pdf"
       },
       statusVote: {
@@ -199,6 +208,13 @@ export default {
         submit: "Send",
         errorPassRepeat: "Passwords must match"
       }
+    },
+    ApplicationForm: {
+      argumentationTitle: "Argumentation",
+      commentPost: "Write a argumentation",
+      fileArgumentation: "Attach documents to the application to substantiate your candidacy",
+      labelArgumentation: "Attach file",
+      btnArgumentation: "Send a request",
     },
     infoBlock: {
       head: "Opening of annual voting",

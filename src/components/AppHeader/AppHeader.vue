@@ -13,7 +13,7 @@
       <v-app-bar-nav-icon
         icon
         class="hidden-md-and-up"
-        @click.stop="$emit('changeDrawerReverse')"
+        @click.stop="$emit('change-drawer-reverse')"
       >
       </v-app-bar-nav-icon>
     </div>
