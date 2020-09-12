@@ -29,6 +29,20 @@ class RestHelper {
 				);
 		}
 
+		async postFormData(urn: string, dataSend: object, authorization: boolean):Promise<object>  {
+			const uri = config.API_URL + urn;
+
+			return await axios.post(
+					uri,
+					dataSend,
+					{ headers: authorization? { 
+						Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+						ContentType: 'multipart/form-data',
+						}: {ContentType: 'multipart/form-data'}
+					}
+			);
+		}
+		
 		async putEntity (urn: string, dataSend: object, authorization: boolean):Promise<object>  {
 				const uri = config.API_URL + urn
 

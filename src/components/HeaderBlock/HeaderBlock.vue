@@ -1,16 +1,14 @@
 <template>
   <header class="header-block">
-    <div id="home" class="target-class" />
-    <v-container class="mxw1200">
+    <!-- <div id="home" class="target-class" /> -->
+    <v-container class="mxw1200 px-0 py-0">
       <v-row class="logoAndLang">
         <v-col cols="12" class="logoAndLang__col">
           <router-link to="/">
             <img
               class="logotype"
               width="150"
-              :src="
-                `/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`
-              "
+              :src="`/img/imgComponents/HeaderBlock/${$t('header.logotype')}.png`"
               alt="vtaward"
             />
           </router-link>
@@ -30,12 +28,19 @@
           </div>
         </v-col>
       </v-row>
+    </v-container>
+    <v-container class="mxw1200 header__content px-0 py-0">
       <v-row class="title-head">
         <div class="title-head_col">
           <div class="title-head_col__text">
             <h1 v-html="$t('header.head')"></h1>
             <p class="header-tagline">{{ $t("header.subHeadText") }}</p>
           </div>
+        </div>
+      </v-row>
+      <v-row class="body-head">
+        <v-col class="body-head_col">
+          <p class="body-head_col__text">{{ $t("header.bodyText") }}</p>
           <img
             class="title-head_col__image"
             width="58"
@@ -43,11 +48,6 @@
             :src="`/img/imgComponents/HeaderBlock/star_of_team.png`"
             alt="star_of_team"
           />
-        </div>
-      </v-row>
-      <v-row class="body-head">
-        <v-col class="body-head_col">
-          <p class="body-head_col__text">{{ $t("header.bodyText") }}</p>
         </v-col>
       </v-row>
       <v-row class="body-button">
@@ -62,7 +62,7 @@
             />
           </a> -->
           <router-link to="/application">
-             <input
+            <input
               type="button"
               id="headerBtn"
               class="body-button_col__button"
@@ -99,7 +99,11 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  height: 700px;
+  height: 100vh;
+  padding: 50px 16px 30px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
   .logoAndLang {
     .logoAndLang__col {
       display: flex;
@@ -131,129 +135,146 @@ export default {
       }
     }
   }
-  .title-head {
-    padding: 12px;
-    // margin-top: 100px;
-    .title-head_col {
-      display: flex;
-      // justify-content: flex-start;
-      align-items: center;
-      flex-direction: row;
-      // @include respond-to(large-screens) {
-      //   flex-direction: row-reverse;
-      // }
-      .title-head_col__text {
+  .header__content {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100%;
+    .title-head {
+      padding: 12px;
+      // margin-top: 100px;
+      .title-head_col {
         display: flex;
-        flex-direction: column;
-        justify-content: start;
-        // height: 174px;
+        // justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
         // @include respond-to(large-screens) {
-        //   margin-right: 30px;
+        //   flex-direction: row-reverse;
         // }
-        h1 {
-          font-size: 56px;
-          text-align: left;
-          font-weight: 700;
-          color: white;
-          clear: both;
-          line-height: 110px;
-          @include respond-to(medium-screens) {
-            font-size: 76px;
+        .title-head_col__text {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          // height: 174px;
+          // @include respond-to(large-screens) {
+          //   margin-right: 30px;
+          // }
+          h1 {
+            font-size: 30px;
+            text-align: left;
+            font-weight: 700;
+            color: white;
+            clear: both;
+            line-height: 40px;
+            @include respond-to(medium-screens) {
+              font-size: 56px;
+              line-height: 85px;
+            }
+            @include respond-to(large-screens) {
+              font-size: 86px;
+              line-height: 100px;
+            }
+          }
+          p.header-tagline {
+            color: white;
+            text-align: left;
+            font-size: 18px;
+            margin: 10px 0 0;
+          }
+        }
+      }
+    }
+    .body-head {
+      .body-head_col {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        @include respond-to(large-screens) {
+          justify-content: flex-start;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        img {
+          margin-bottom: 20px;
+          margin-left: auto;
+          margin-right: auto;
+          
+          @include respond-to(apple5) {
+            display: none;
           }
           @include respond-to(large-screens) {
-            font-size: 86px;
+            margin: 0;
           }
         }
-        p.header-tagline {
+        .body-head_col__text {
           color: white;
-          text-align: left;
-          font-size: 18px;
-          margin-top: 10px;
-        }
-      }
-      .title-head_col__image {
-        margin-left: 50px;
-      }
-    }
-  }
-  .body-head {
-    .body-head_col {
-      display: flex;
-      justify-content: center;
-      @include respond-to(large-screens) {
-        justify-content: flex-start;
-      }
-      .body-head_col__text {
-        color: white;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.04em;
-        max-width: 605px;
-        text-align: center;
-        @include respond-to(medium-screens) {
-          font-size: 16px;
-          line-height: 26px;
-        }
-        @include respond-to(large-screens) {
-          text-align: left;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0.04em;
+          max-width: 605px;
+          margin-bottom: 0;
+          // text-align: center;
+          @include respond-to(medium-screens) {
+            font-size: 16px;
+            line-height: 26px;
+          }
+          @include respond-to(large-screens) {
+            text-align: left;
+          }
         }
       }
     }
-  }
-  .body-button {
-    .body-button_col {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      p {
-        margin-right: 50px;
-      }
-      @include respond-to(large-screens) {
-        justify-content: flex-start;
+    .body-button {
+      .body-button_col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         p {
           color: white;
-          max-width: 280px;
         }
-      }
-      .body-button_col__button {
-        color: white;
-        width: 220px;
-        height: 56px;
-        border: 1px solid white;
-        border-radius: 5px;
-        transition: 0.2s;
-        &:hover {
+        
+        .body-button_col__button {
+          color: white;
+          width: 220px;
+          height: 56px;
+          border: 1px solid white;
+          border-radius: 5px;
           transition: 0.2s;
-          color: black;
-          background-color: white;
+          &:hover {
+            transition: 0.2s;
+            color: black;
+            background-color: white;
+          }
         }
       }
     }
-  }
-  .body-voteStatus {
-    margin-top: 20px;
-    @include respond-to(large-screens) {
-      margin-top: 40px;
-    }
-    .body-voteStatus_col {
-      display: flex;
-      justify-content: center;
-      @include respond-to(large-screens) {
-        justify-content: flex-start;
-      }
-      .body-voteStatus_col__text {
-        color: white;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.04em;
-        max-width: 605px;
-        text-align: center;
-        @include respond-to(medium-screens) {
-          font-size: 16px;
-          line-height: 26px;
-        }
+    .body-voteStatus {
+      // margin-top: 20px;
+      // @include respond-to(large-screens) {
+      //   margin-top: 40px;
+      // }
+      .body-voteStatus_col {
+        display: flex;
+        justify-content: center;
         @include respond-to(large-screens) {
-          text-align: left;
+          justify-content: flex-start;
+        }
+        .body-voteStatus_col__text {
+          color: white;
+          font-size: 14px;
+          // line-height: 20px;
+          // letter-spacing: 0.04em;
+          max-width: 605px;
+          text-align: center;
+          margin: 0;
+          @include respond-to(medium-screens) {
+            font-size: 16px;
+            line-height: 26px;
+          }
+          @include respond-to(large-screens) {
+            text-align: left;
+          }
         }
       }
     }

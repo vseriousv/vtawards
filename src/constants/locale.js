@@ -9,7 +9,7 @@ export default {
       bodyText:
         "Главная премия «Восточной Техники», с 2005 года она вручается сотрудникам за выдающиеся достижения и новаторские инициативы.",
       btnHeader: {
-        beforeText: `<p>Заполнить форму подачи заявки</br>для участия в конкурсе</p>`,
+        beforeText: `Заполнить форму подачи заявки</br>для участия в конкурсе`,
         text: "Заполнить форму",
         link: "POLOZHENIE-o-konkurse-Lider-peremen-VT-2019-0204.pdf"
       },
@@ -42,10 +42,14 @@ export default {
     },
     ApplicationForm: {
       argumentationTitle: "Аргументация",
+      nominationTitle: "Номинация",
+      nominationLabel: "Выбрать номинацию",
       commentPost: "Написать аргументацию",
       fileArgumentation: "Прикрепить к завке документы для аргументации своей кандидатуры",
       labelArgumentation: "Прикрепить файл",
       btnArgumentation: "Отправить заявку",
+      autocomplete: "Введите данные для поиска *",
+      argumentationBtnTitle: `<p>* – поля обязательны</br>для заполнения</p>`
     },
     infoBlock: {
       head: "Открытие ежегодного голосования",
@@ -173,12 +177,12 @@ export default {
     drawer: {},
     header: {
       logotype: "VT_Logo_eng",
-      head: "Change Maker</br>Award 2020",
+      head: "Change Maker Award 2020",
       subHeadText: `Ignite your star!`,
       bodyText:
         "The main award of Vostochnaya Technica, presented to employees for outstanding achievements and innovative initiatives since 2005.",
       btnHeader: {
-        beforeText: `<p>Fill out the application form</br>for participation in the competition</p>`,
+        beforeText: `Fill out the application form</br>for participation in the competition`,
         text: "Competition regulations",
         link: "Konkurs-Lider-Peremen-VT-Polozhenie_2019-0204-eng.pdf"
       },
@@ -211,10 +215,14 @@ export default {
     },
     ApplicationForm: {
       argumentationTitle: "Argumentation",
+      nominationTitle: "Nomination",
+      nominationLabel: "Choose a nomination",
       commentPost: "Write a argumentation",
       fileArgumentation: "Attach documents to the application to substantiate your candidacy",
       labelArgumentation: "Attach file",
       btnArgumentation: "Send a request",
+      autocomplete: "Enter your search data *",
+      argumentationBtnTitle: `<p>* – fields are required</p>`,
     },
     infoBlock: {
       head: "Opening of annual voting",
