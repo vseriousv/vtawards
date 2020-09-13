@@ -4,4 +4,5 @@ const config = {
   URL_AVATARS: "https://files.vtaward.ru/avatars/"
 };
 
+
 export default config;

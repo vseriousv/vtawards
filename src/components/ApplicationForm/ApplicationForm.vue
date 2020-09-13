@@ -2,6 +2,7 @@
 	import JwtHelper from "../../helpers/JwtHelper";
 	import RestHelper from "../../helpers/RestHelper";
 	import config from "../../constants/config";
+	import axios from "axios";
 	// import axios from "axios";
 
 
@@ -19,7 +20,7 @@
 				usersCompleteRu: [],
 				usersCompleteEng: [],
 				usersAll: [],
-				
+
 				formsArr: [],
 				argumentationText: "",
 				argumentationFile: "",
@@ -28,6 +29,7 @@
 				nominationItemsRu: [],
 				nominationItemsEng: [],
 				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id,
+				file: "",
 			};
 		},
 
@@ -126,7 +128,7 @@
 					this.usersCompleteEng.push(userPropEng);
 				})
 			},
-			
+
 			setNomination: function(nominations) {
 				this.nominationSelect = "",
 				this.nominationItemsRu = [];
@@ -148,35 +150,44 @@
 			argumentationClearFile: function() {
 				this.argumentationFile = []
 			},
-			
+
 			postDataForm: function() {
 				let formData = new FormData();
 				formData.append("userId",this.userValue);
 				formData.append("nominationId",this.nominationSelect);
 				formData.append("textRu",this.argumentationText);
 				formData.append("textEn",'engVersion');
-				formData.append("files", this.formsArr);
-				console.log(this.formsArr)
+				for (const fileItem of this.file) {
+					formData.append('files', fileItem);
+				}
+				console.log(this.file)
 				this.PostFormNomination(formData);
-				this.userValue = '';
-				this.nominationSelect = '';
-				this.argumentationText = '';
-				this.argumentationFile = [];
 			},
+
 			PostFormNomination: async function(data) {
 				const url = "/nomination-order";
 				try {
-					const PostFormNomination = await restHelper.postFormData(url, data, true);
+					// const PostFormNomination = await restHelper.postFormData(url, data, true);
+					const PostFormNomination = await axios.post(
+						config.API_URL + url,
+						data,
+						{ headers: {
+								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+								'content-type': 'multipart/form-data; boundary=<calculated when request is sent>',
+							}
+						}
+					);
 					console.log(PostFormNomination)
 				} catch(e) {
 					console.error("ERROR ApplicationForm/PostFormNomination:", e);
 				}
 			},
+
 			getFormData (files) {
 				this.formsArr = []
 				for (const file of files) {
 				const form = new FormData()
-				form.append('data', file, file.name)
+				form.append("files", file, file.name)
 				this.formsArr.push(form)
 				}
 				return this.formsArr
@@ -191,16 +202,20 @@
 				const form = this.getFormData(files)
 				if (files) {
 				if (files.length > 0) {
-					this.filename = [...files].map(file => file.name).join(', ')
+					this.argumentationFile = [...files].map(file => file.name).join(', ')
 				} else {
-					this.filename = null
+					this.argumentationFile = null
 				}
 				} else {
-				this.filename = $event.target.value.split('\\').pop()
+				this.argumentationFile = $event.target.value.split('\\').pop()
 				}
-				this.$emit('input', this.filename)
+				this.$emit('input', this.argumentationFile)
 				this.$emit('formData', form)
-			}
+			},
+
+			handleFileUpload() {
+				this.file = this.$refs.file.files;
+			},
 		}
 	};
 </script>
@@ -287,6 +302,9 @@ section
 						dense
 						outlined
 					)
+
+
+
 					.UserArgumentation.d-flex.flex-column
 						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}*
 						v-textarea.UserArgumentation__writeText(
@@ -298,20 +316,30 @@ section
 
 						.argumentationBody
 							p {{$t("ApplicationForm.fileArgumentation")}}*
-							v-text-field.ArgumentationBody__input(
-								prepend-icon=false 
-								single-line
-								v-model="argumentationFile" 
-								:label=`$t("ApplicationForm.labelArgumentation")`
-								@click.native="onFocus"
-								ref="fileTextField"
-							)
-							input(type="file" 
-								accept=".txt, .jpg, .pdf, .doc, .png"
-								multiple=true
-								ref="fileInput" 
-								@change="onFileChange"
-							)
+							label
+								input(type="file"
+									id="file"
+									ref="file"
+									multiple
+									v-on:change="handleFileUpload()"
+									)
+							//- v-text-field.ArgumentationBody__input(
+							//-	prepend-icon=false
+							//-	single-line
+							//-	v-model="argumentationFile"
+							//-	:label=`$t("ApplicationForm.labelArgumentation")`
+							//-	@click.native="onFocus"
+							//-	ref="fileTextField"
+							//- )
+							//-input(
+							//-	type="file"
+							//-	accept=".txt, .jpg, .pdf, .doc, .png"
+							//-	multiple=true
+							//-	ref="fileInput"
+							//-	@change="onFileChange"
+							//- )
+
+
 							//- file-input.ArgumentationBody__input(
 							//- 	v-model="argumentationFile"
 							//- 	:label=`$t("ApplicationForm.labelArgumentation")`
@@ -341,7 +369,7 @@ section
 
 <style lang="sass">
 .UserArgumentation
-	textarea 
+	textarea
 		min-height: 250px
 </style>
 
@@ -402,24 +430,24 @@ section
 	.argumentationBody
 		display: flex
 		flex-direction: column
-		@include respond-to(large-screens) 
+		@include respond-to(large-screens)
 			flex-direction: row
-		p 
+		p
 			max-width: 300px
-	.argumentationBody__btn	
+	.argumentationBody__btn
 		display: flex
 		flex-direction: row
 		align-items: center
 		justify-content: space-between
 		margin: 20px 0
-		p 
+		p
 			margin: 0
 	.btnArgumentation
 		max-width: 250px
 		width: 100%
 		margin-left: auto
-		
-		
-	
+
+
+
 </style>
 
