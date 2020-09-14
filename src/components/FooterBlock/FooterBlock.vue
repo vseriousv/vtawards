@@ -70,21 +70,22 @@ export default {
         .langButton {
           width: 56px;
           height: 32px;
-          border: 1px solid black;
+          border: 1px solid white;
           font-size: 18px;
           line-height: 18px;
           font-weight: 700;
+          color:  white;
           &:hover {
             color: $primaryTextColor;
           }
         }
         &.ru .ruInput {
-          background: black;
-          color: $primaryTextColor;
+          background: white;
+          color: black;
         }
         &.en .enInput {
-          background: black;
-          color: $primaryTextColor;
+          background: white;
+          color: black;
         }
       }
     }

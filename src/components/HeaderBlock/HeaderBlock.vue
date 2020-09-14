@@ -127,11 +127,11 @@ export default {
         }
         &.ru .ruInput {
           background: white;
-          color: $primaryTextColor;
+          color: black;
         }
         &.en .enInput {
           background: white;
-          color: $primaryTextColor;
+          color: black;
         }
       }
     }

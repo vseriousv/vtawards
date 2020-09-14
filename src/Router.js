@@ -32,6 +32,7 @@ import AdminShowUserID from "./components/AdminModule/AdminUsers/AdminShowUserID
 import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
 import AdminWinners from "./components/AdminModule/AdminWinners/AdminWinners";
+import ApplicationAll from "./components/AdminModule/AdminApplication/ApplicationAll";
 
 Vue.use(VueRouter);
 
@@ -210,6 +211,12 @@ const routes = [
         name: "usersAdmin",
         path: "users",
         component: AdminUsers,
+        meta: { isAdmin: true }
+      },
+      {
+        name: "applicationAllAdmin",
+        path: "applications",
+        component: ApplicationAll,
         meta: { isAdmin: true }
       },
       {

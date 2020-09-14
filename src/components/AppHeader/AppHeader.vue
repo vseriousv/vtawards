@@ -89,7 +89,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 100%;
+    // height: 100%;
     a {
       color: black;
       text-decoration: none;

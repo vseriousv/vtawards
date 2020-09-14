@@ -11,8 +11,8 @@
 			return {
 				items: [
 					{ title: "General", icon: "mdi-view-dashboard",link: "/admin/general" },
-					{ title: "Applications", icon: "mdi-account-card-details", link: "/admin/applications" },
 					{ title: "Users", icon: "mdi-account-group", link: "/admin/users" },
+					{ title: "Applications", icon: "mdi-account-card-details", link: "/admin/applications" },
 					{ title: "Voting", icon: "mdi-ballot-outline", link: "/admin/voting" },
 					{ title: "Members", icon: "mdi-account-multiple-check", link: "/admin/members" },
 					{ title: "Winners", icon: "mdi-account-star", link: "/admin/winners" },

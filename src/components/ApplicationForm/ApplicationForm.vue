@@ -160,8 +160,11 @@
 				for (const fileItem of this.file) {
 					formData.append('files', fileItem);
 				}
-				console.log(this.file)
 				this.PostFormNomination(formData);
+				this.userValue = "";
+				this.nominationSelect = "";
+				this.argumentationText = "";
+				this.file = [];
 			},
 
 			PostFormNomination: async function(data) {
