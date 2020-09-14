@@ -70,6 +70,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000000;
   .contentPanel {
     padding: 0 15px;
     display: flex;

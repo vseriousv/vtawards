@@ -9,25 +9,52 @@
       >
         <span v-html="menuItem.text" />
       </router-link>
-
-      <v-app-bar-nav-icon
-        icon
+      
+      <v-app-bar-nav-icon 
+        @click="drawer = true"
         class="hidden-md-and-up"
-        @click.stop="$emit('change-drawer-reverse')"
-      >
+        >
       </v-app-bar-nav-icon>
+      <v-navigation-drawer
+        v-model="drawer"
+        absolute
+        temporary
+        height="100vh"
+      >
+        <v-list
+          nav
+          dense
+          class="listAppBar d-flex flex-column"
+        >
+          <v-list-item 
+            v-for="menuItem in $t('menuItems')"
+            :key="menuItem.id"
+            :to="menuItem.link"
+            class="AppBar__item">
+              {{menuItem.text}}
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
     </div>
+        <!-- <v-app-bar-nav-icon
+          icon
+          class="hidden-md-and-up"
+          @click.stop="$emit('change-drawer-reverse')"
+        >
+        </v-app-bar-nav-icon> -->
   </nav>
 </template>
 
 <script>
 import JwtHelper from "../../helpers/JwtHelper";
+// import DrawerVue from '../AdminModule/Drawer.vue';
 export default {
   name: "AppHeader",
   props: ["fixedTopMenu", "adminTrue"],
   data() {
     return {
-      AdminPanel: ""
+      AdminPanel: "",
+      drawer: false
     };
   },
   created() {
@@ -62,6 +89,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    height: 100%;
     a {
       color: black;
       text-decoration: none;
@@ -85,6 +113,6 @@ export default {
   position: fixed;
   left: 0;
   right: 0;
-  z-index: 999999;
+  z-index: 100000;
 }
 </style>

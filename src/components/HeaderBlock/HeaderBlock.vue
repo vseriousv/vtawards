@@ -116,20 +116,21 @@ export default {
         .langButton {
           width: 56px;
           height: 32px;
-          border: 1px solid black;
+          border: 1px solid white;
           font-size: 18px;
           line-height: 18px;
           font-weight: 700;
+          color:  white;
           &:hover {
             color: $primaryTextColor;
           }
         }
         &.ru .ruInput {
-          background: black;
+          background: white;
           color: $primaryTextColor;
         }
         &.en .enInput {
-          background: black;
+          background: white;
           color: $primaryTextColor;
         }
       }
@@ -138,7 +139,6 @@ export default {
   .header__content {
     display: flex;
     flex-direction: column;
-    align-content: space-between;
     height: 100%;
     .title-head {
       padding: 12px;

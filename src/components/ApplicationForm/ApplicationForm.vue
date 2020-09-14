@@ -323,39 +323,6 @@ section
 									multiple
 									v-on:change="handleFileUpload()"
 									)
-							//- v-text-field.ArgumentationBody__input(
-							//-	prepend-icon=false
-							//-	single-line
-							//-	v-model="argumentationFile"
-							//-	:label=`$t("ApplicationForm.labelArgumentation")`
-							//-	@click.native="onFocus"
-							//-	ref="fileTextField"
-							//- )
-							//-input(
-							//-	type="file"
-							//-	accept=".txt, .jpg, .pdf, .doc, .png"
-							//-	multiple=true
-							//-	ref="fileInput"
-							//-	@change="onFileChange"
-							//- )
-
-
-							//- file-input.ArgumentationBody__input(
-							//- 	v-model="argumentationFile"
-							//- 	:label=`$t("ApplicationForm.labelArgumentation")`
-							//- 	accept=".txt, .jpg, .pdf, .doc, .png"
-							//- 	multiple = true
-							//- )
-							//- v-file-input.ArgumentationBody__input(
-							//- 	accept=".txt, .jpg, .pdf, .doc, png"
-							//- 	v-model="argumentationFile"
-							//- 	chips = true
-							//- 	multiple = true
-							//- 	counter
-							//- 	:label=`$t("ApplicationForm.labelArgumentation")`
-							//- 	outlined
-							//- 	@click:clear="argumentationClearFile"
-							//- )
 
 						.argumentationBody__btn
 							p(v-html="$t('ApplicationForm.argumentationBtnTitle')")
@@ -446,8 +413,5 @@ section
 		max-width: 250px
 		width: 100%
 		margin-left: auto
-
-
-
 </style>
 
