@@ -39,7 +39,7 @@
         </div>
       </v-row>
       <v-row class="body-head">
-        <v-col class="body-head_col">
+        <!-- <div class="body-head_col">
           <p class="body-head_col__text">{{ $t("header.bodyText") }}</p>
           <img
             class="title-head_col__image"
@@ -48,10 +48,8 @@
             :src="`/img/imgComponents/HeaderBlock/star_of_team.png`"
             alt="star_of_team"
           />
-        </v-col>
-      </v-row>
-      <v-row class="body-button">
-        <v-col class="body-button_col">
+        </div> -->
+        <div class="body-button ">
           <p v-html='$t("header.btnHeader.beforeText")'></p>
           <!-- <a :href="`/files/${$t('header.btnHeader.link')}`" target="_blank">
             <input
@@ -69,8 +67,11 @@
               :value="$t('header.btnHeader.text')"
             />
           </router-link>
-        </v-col>
+        </div>
       </v-row>
+      <!-- <v-row class="body-button">
+        
+      </v-row> -->
       <v-row class="body-voteStatus">
         <v-col class="body-voteStatus_col">
           <p class="body-voteStatus_col__text">
@@ -103,7 +104,7 @@ export default {
   padding: 50px 16px 30px;
   display: flex;
   flex-direction: column;
-  align-content: space-between;
+  // justify-content: space-between;
   .logoAndLang {
     .logoAndLang__col {
       display: flex;
@@ -139,6 +140,7 @@ export default {
   .header__content {
     display: flex;
     flex-direction: column;
+    // justify-content: space-between;
     height: 100%;
     .title-head {
       padding: 12px;
@@ -160,12 +162,12 @@ export default {
           //   margin-right: 30px;
           // }
           h1 {
-            font-size: 30px;
+            font-size: 40px;
             text-align: left;
             font-weight: 700;
             color: white;
             clear: both;
-            line-height: 40px;
+            line-height: 60px;
             @include respond-to(medium-screens) {
               font-size: 56px;
               line-height: 85px;
@@ -185,10 +187,16 @@ export default {
       }
     }
     .body-head {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 20px;
       .body-head_col {
         display: flex;
         flex-direction: column-reverse;
         align-items: flex-start;
+        padding: 0 12px;
+        margin-bottom: 20px;
         @include respond-to(large-screens) {
           justify-content: flex-start;
           flex-direction: row;
@@ -224,12 +232,11 @@ export default {
           }
         }
       }
-    }
-    .body-button {
-      .body-button_col {
+      .body-button {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding: 0 12px;
         p {
           color: white;
         }
@@ -249,6 +256,7 @@ export default {
         }
       }
     }
+    
     .body-voteStatus {
       // margin-top: 20px;
       // @include respond-to(large-screens) {
@@ -257,6 +265,7 @@ export default {
       .body-voteStatus_col {
         display: flex;
         justify-content: center;
+        align-items: center;
         @include respond-to(large-screens) {
           justify-content: flex-start;
         }

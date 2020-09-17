@@ -4,6 +4,7 @@
       <span class="adminText_logo">AbraCode</span>
       <div class="contentPanel d-none d-md-flex">
         <router-link to="/admin/general">Админка</router-link>
+        <router-link to="/admin/applications">Управление заявками</router-link>
         <router-link to="/admin/users">Управление пользователями</router-link>
         <router-link to="/admin/members">Управление участниками</router-link>
         <router-link to="/admin/voting">Управление голосованием</router-link>
@@ -25,6 +26,7 @@
           </template>
           <v-list class="listCog d-flex flex-column">
             <router-link class="listCog__item" to="/admin/general">Админка</router-link>
+            <router-link class="listCog__item" to="/admin/applications">Управление заявками</router-link>
             <router-link class="listCog__item" to="/admin/users">Управление пользователями</router-link>
             <router-link class="listCog__item" to="/admin/members">Управление участниками</router-link>
             <router-link class="listCog__item" to="/admin/voting">Управление голосованием</router-link>

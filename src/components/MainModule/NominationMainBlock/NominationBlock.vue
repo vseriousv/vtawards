@@ -17,11 +17,12 @@
                     height="58"
                   )
                   p(v-html="$t('NominationBlock.liderNom')")
+                  
               li.nomination-list-item
                 a(href="#nomination-professional")
                   img(
                     src="/img/imgComponents/StartVoting/creative.svg"
-                    alt="Лидер"
+                    alt="Профессионализм и новации"
                     width="58"
                     height="58"
                   )
@@ -30,7 +31,7 @@
                 a(href="#smart-partner")
                   img(
                     src="/img/imgComponents/StartVoting/goal.svg"
-                    alt="Лидер"
+                    alt="Золотой человек"
                     width="58"
                     height="58"
                   )

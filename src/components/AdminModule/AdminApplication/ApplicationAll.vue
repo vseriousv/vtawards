@@ -47,5 +47,5 @@ export default {
 
 			v-tab-item
 				application-catalog
-           
+				
 </template>

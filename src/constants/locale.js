@@ -95,35 +95,35 @@ export default {
       head: "Обращение директора",
       nameCEO: "Герхард Ворстер",
       whoIsCEO: "Генеральный директор ООО «Восточная Техника»",
-      sayCEO: `<p>
-                <span class="initial">Г</span>лавная премия группы компаний  
-                «Восточная Техника» для выдающихся сотрудников и лидеров.
-                Вручается сотрудникам – за профессиональные успехи и достижения 
-                во всех сферах деятельности компании.
+      sayCEO: `<p class="address-text__header">
+                <span class="initial">Г</span>лавная премия группы 
+                компаний «Восточная Техника» для выдающихся сотрудников и лидеров. 
               </p>
+              <p class="address-text__item-1"><strong>Вручается сотрудникам</strong> – за профессиональные успехи и 
+                достижения во всех сферах деятельности компании.</p>
               <p><strong>Кого можно номинировать?</strong></p>
               <p>
-                На соискание премии в номинациях могут быть предложены:
-                -  сотрудники любого подразделения группы компаний «Восточная Техника»;
-                Главное, кандидат не может быть победителем прошлых лет. Полный список 
-                можно посмотреть <a href="">здесь</a>.
+                На соискание премии «Лидер перемен ВТ»  в номинациях могут быть 
+                предложены сотрудники любого подразделения группы компаний «Восточная Техника». 
+                Главное, кандидат не должен быть победителем прошлых лет. 
+                Полный список победителей можно посмотреть <a href="">здесь</a>.
               </p>
               <p><strong>Кто может предложить кандидатуру?</strong></p>
               <p>
-                Правом на выдвижение претендентов на соискание премии группы компаний  
-                «Восточная Техника» обладают:
-                <ul>
-                  <li>– структурные подразделения группы компаний «Восточная Техника»;</li>
-                  <li>– сотрудники группы компаний «Восточная Техника»;</li>
-                  <li>– предусмотрено самовыдвижение  кандидатов.</li>
+                Правом на выдвижение претендентов на соискание премии «Лидер перемен ВТ» 
+                группы компаний «Восточная Техника» обладают:
+                <ul class="ulAddress">
+                  <li>структурные подразделения группы компаний «Восточная Техника»;</li>
+                  <li>сотрудники группы компаний «Восточная Техника»;</li>
+                  <li>предусмотрено самовыдвижение  кандидатов.</li>
                 </ul>
               </p>`
     },
     NominationBlock: {
       head: "Номинации 2020",
       headText: "Выдвинуть номинанта в любую из трех номинаций конкурса «Лидер перемен ВТ» может каждый сотрудник или структурное подразделение группы компаний «Восточная Техника», количество заявок от одного человека не ограничено.",
-      liderNom: `<p>Достижение</br>и лидерство</p>`,
-      professionalNom: `<p>Профессионализм</br>и новаторство</p>`,
+      liderNom: `Достижение</br>и лидерство`,
+      professionalNom: `Профессионализм</br>и новации`,
       goldManNom: `<p>Золотой человек</p>`,
     },
     StepsMainBlock: {
@@ -269,28 +269,28 @@ export default {
       nameCEO: "Gerhard Worster",
       whoIsCEO: "General Director of Vostochnaya Tekhnika LLC",
       sayCEO: `<p>
-                <span class="initial">T</span>he main award of the "Vostochnaya 
-                Tekhnika" group of companies for outstanding employees and leaders. 
-                Awarded to employees for professional success and achievements in all 
-                areas of the company.
+                <span class="initial">T</span>he main award of the Vostochnaya 
+                Tekhnika group of companies for outstanding employees and leaders.
               </p>
-              <p><strong>Who can be nominated?</strong></p>
+              <p> <strong> Awarded to employees </strong> - for professional success and
+                achievements in all areas of the company. </p>
+              <p> <strong> Who can be nominated? </strong> </p>
               <p>
-              For the competition for the award in the nominations, the following may be proposed:
-              - employees of any division of the "Vostochnaya Tekhnika" group of companies;
-              The main thing is that the candidate cannot be the winner of the past years. 
-              The full list can be viewed <a href="">here</a>.
+                For the award "Leader of changes in VT" in the nominations can be
+                employees of any division of the Vostochnaya Tekhnika group of companies were proposed.
+                The main thing is that the candidate cannot be the winner of the past years.
+                The full list of winners can be viewed <a href=""> here </a>.
               </p>
-              <p><strong>Who can propose a candidate?</strong></p>
+              <p> <strong> Who can nominate? </strong> </p>
               <p>
-              The following persons have the right to nominate candidates for the prize 
-              of the "Vostochnaya Tekhnika" group of companies:
-                <ul>
-                  <li>– structural divisions of the group of companies "Vostochnaya Tekhnika"; </li>
-                  <li>– employees of the group of companies "Vostochnaya Tekhnika"; </li>
-                  <li>– self-nomination of candidates is provided. </li>
+                The right to nominate candidates for the "Leader of VT Change" award
+                group of companies "Vostochnaya Tekhnika" possess:
+                <ul class = "ulAddress">
+                  <li> structural divisions of the Vostochnaya Tekhnika group of companies; </li>
+                  <li> employees of the group of companies "Vostochnaya Tekhnika"; </li>
+                  <li> self-nomination of candidates is provided. </li>
                 </ul>
-              </p>`
+              </p> `
     },
     NominationBlock: {
       head: "Nominations 2020",

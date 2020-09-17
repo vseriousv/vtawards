@@ -12,48 +12,6 @@
 			return {
 				isActive: true,
 				nomination: [],
-				// arr: [
-				// 				{
-				// 					id: 1,
-				// 					userId: 1,
-				// 					nominationId: 3,
-				// 					textRu: "dvc fdfxvc ",
-				// 					textEn: "string",
-				// 				arr: [
-				// 				{
-				// 					id: 1,
-				// 					userId: 1,
-				// 					nominationId: 3,
-				// 					textRu: "dvc fdfxvc ",
-				// 					textEn: "string",
-				// 					user: {
-				// 						email: "frfgfhgfvdcfg",
-				// 						tab_number: "vfgbhg",
-				// 						firstname_ru: "ghbgh ",
-				// 						firstname_en: "fg hn",
-				// 						lastname_ru: "fgbhn",
-				// 						lastname_en: "bfgnh",
-				// 						patronymic_ru: "fbgnh",
-				// 						patronymic_en: "dfbgnh",
-				// 						nomination_id: 1,
-				// 						img: "string",
-				// 						}
-				// 					}
-				// 				],	user: {
-				// 						email: "frfgfhgfvdcfg",
-				// 						tab_number: "vfgbhg",
-				// 						firstname_ru: "ghbgh ",
-				// 						firstname_en: "fg hn",
-				// 						lastname_ru: "fgbhn",
-				// 						lastname_en: "bfgnh",
-				// 						patronymic_ru: "fbgnh",
-				// 						patronymic_en: "dfbgnh",
-				// 						nomination_id: 1,
-				// 						img: "string",
-				// 						}
-				// 					}
-				// 				],
-				nominationsArr: [],
 				headers_nomination: [
 					{
 						text: "Таб номер",
@@ -61,11 +19,12 @@
 						sortable: false,
 						value: "tab_number"
 					},
-					{ text: "Аватар", value: "img" },
-					{ text: "ФИО", value: "name_ru" },
+					{ text: "Заявитель", value: "curse" },
+					{ text: "Аватар", value: "img", sortable: false, },
+					{ text: "Номинант", value: "name_ru" },
 					{ text: "Full name", value: "name_en" },
 					{ text: "Email", value: "email" },
-					{ text: "Номинация", value: "nomination" },
+					{ text: "Номинация", value: "nomination", sortable: false,},
 				],
 				userItem: "",
 				URL_AVATARS: config.URL_AVATARS,
@@ -75,55 +34,34 @@
 
 		created() {
 			this.getUsers();
-			this.getNomination();
 		},
 
 		methods: {
 			
 			showUser: function(id) {
-				this.$router.push({ path: "/admin/users/id/" + id });
+				this.$router.push({ path: "/admin/applications/id/" + id });
 			},
 
 			getUsers: async function() {
 				const url = "/nomination-order";
 				try {
 					const userData = await restHelper.getEntity(url, true);
-					console.log(userData.data.rows);
 					this.setUsersArray(userData.data.rows);
-					// this.setUsersArray(this.arr);
 				} catch(e) {
 					console.error("ERROR ApplicationCatalog/getUser:", e);
 				}
 			},
-			getNomination: async function() {
-				const url = "/nominations";
-				try {
-					const nominationData = await restHelper.getEntity(url, true);
-					this.setNominationArray(nominationData.data);
-				} catch(e) {
-					console.error("ERROR ApplicationCatalog/getNomination:", e);
-				}
-			},
-
-			setNominationArray: function(data) {
-				for (let i = 0; i < data.length; i++) {
-					const NominationObject = {
-						nominationId: data[i].id,
-						value_ru: data[i].value_ru,
-						value_en: data[i].value_en,
-					}
-					this.nominationsArr.push(NominationObject)
-				}
-			},
 
 			setUsersArray: function(data) {
+				console.log( data )
 				for (let i = 0; i < data.length; i++) {
 					const userObject = {
+						idFrom: data[i].userFromId,
 						id: data[i].id,
 						userId: data[i].userId,
 						nominationId: data[i].nominationId,
-						// nominationRu: data[i].nominationRu,
-						// nominationEn: data[i].nominationEn,
+						nominationRu: data[i].nomination.value_ru,
+						nominationEn: data[i].nomination.value_en,
 						argumentRu: data[i].textRu,
 						document: data[i].textRu,
 						img: data[i].user.img ? data[i].user.img : "null.png",
@@ -136,14 +74,6 @@
 							" " +
 							data[i].user.lastname_ru,
 						name_en: data[i].user.firstname_en + " " + data[i].user.lastname_en
-					};
-					for (let element of this.nominationsArr) {
-						console.log(data[i].nominationId)
-						if (element.nominationId === data[i].nominationId) {
-							userObject.nominationRu = element.value_ru;
-							userObject.nominationEn = element.value_en;
-							console.log(userObject.nominationRu)
-						}
 					};
 					this.nomination.push(userObject);
 				}
@@ -178,6 +108,7 @@ v-container.applicationCatalog(fluid)
 			template(v-slot:item="{ item }")
 				tr.applicationCatalog__row(@click.stop="showUser(item.id)")
 					td.text-left {{ item.tab_number }}
+					td.text-left {{ item.idFrom }}
 					td.text-left
 						.applicationCatalog__avatar
 							img(:src="`${URL_AVATARS}${item.img}`")
