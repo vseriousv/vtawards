@@ -12,18 +12,18 @@
 
 <script>
 export default {
-    props: {
-        stageTitle: {
-          type: String,
-          default: null
-        },
-        stageText: {
-          type: String,
-          default: null
-        }
-    },
-    
-    name: "StepsMainBlockModal",
+  props: {
+      stageTitle: {
+        type: String,
+        default: null
+      },
+      stageText: {
+        type: String,
+        default: null
+      }
+  },
+  
+  name: "StepsMainBlockModal",
 };
 </script>
 
@@ -31,19 +31,6 @@ export default {
 @import "../../../assets/styles/index";
 
 .v-dialog {
-  margin-top: 70px;
-  ul{
-    list-style: none;
-    padding: 0 0 0 25px;
-    li{
-      margin: 8px 0;
-      &:before {
-        content: "\●";
-        padding-right: 10px;
-        color: #ffb900;
-      }
-    }
-  }
   .stageDialog {
     .stageDialog__title {
       font-size: 16px;

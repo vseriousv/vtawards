@@ -403,26 +403,25 @@ export default {
       nameCEO: "Gerhard Worster",
       whoIsCEO: "General Director of Vostochnaya Tekhnika LLC",
       sayCEO: `<p>
-                <span class="initial">T</span>he main award of the Vostochnaya 
-                Tekhnika group of companies for outstanding employees and leaders.
+                <span class="initial">T</span>he Main Awards of Vostochnaya 
+                Technica Group for Outstanding Employees and Leaders.
               </p>
-              <p> <strong> Awarded to employees </strong> - for professional success and
-                achievements in all areas of the company. </p>
+              <p><strong>Awarding employees</strong> for professional achievements 
+              and progress in all areas of the company’s work.</p>
               <p> <strong> Who can be nominated? </strong> </p>
               <p>
-                For the award "Leader of changes in VT" in the nominations can be
-                employees of any division of the Vostochnaya Tekhnika group of companies were proposed.
-                The main thing is that the candidate cannot be the winner of the past years.
-                The full list of winners can be viewed <a href=""> here </a>.
+                Employees from all departments of Vostochnaya Technica Group are 
+                eligible to be nominated in the categories of the VT Change Makers Awards.
+                Former winners cannot participate again. The full list 
+                of winners is available <a href=""> here </a>.
               </p>
-              <p> <strong> Who can nominate? </strong> </p>
+              <p> <strong> Who can nominate a candidate? </strong> </p>
               <p>
-                The right to nominate candidates for the "Leader of VT Change" award
-                group of companies "Vostochnaya Tekhnika" possess:
+                Candidates for the VT Change Makers Awards can be proposed by:
                 <ul class = "ulAddress">
-                  <li> structural divisions of the Vostochnaya Tekhnika group of companies; </li>
-                  <li> employees of the group of companies "Vostochnaya Tekhnika"; </li>
-                  <li> self-nomination of candidates is provided. </li>
+                  <li>structural subdivisions of Vostochnaya Technica Group,</li>
+                  <li>employees of Vostochnaya Technica Group,</li>
+                  <li>by candidates themselves.</li>
                 </ul>
               </p> `
     },

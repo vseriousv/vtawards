@@ -28,20 +28,23 @@ export default {
 
 <style lang="scss">
 @import "../../../assets/styles/index";
+
 .v-dialog {
-  margin-top: 70px;
-    ul {
-      list-style: none;
-      padding: 0 0 0 25px;
-      li{
-        margin: 8px 0;
-        &:before {
-          content: "\●";
-          padding-right: 10px;
-          color: #ffb900;
-      }
-    }
-  }
+    // ul {
+    //   list-style: none;
+    //   padding: 0 0 0 14px;
+    //   @include respond-to(medium-screens) {
+    //     padding: 0 0 0 25px;
+    //   }
+    //   li{
+    //     margin: 8px 0;
+    //     &:before {
+    //       content: "\●";
+    //       padding-right: 10px;
+    //       color: #ffb900;
+    //   }
+    // }
+  // }
   .nomDialog {
     .nomDialog__title {
       margin-bottom: 10px;
