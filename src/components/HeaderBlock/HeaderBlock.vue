@@ -108,8 +108,6 @@ export default {
   .logoAndLang {
     .logoAndLang__col {
       display: flex;
-      .logotype {
-      }
       .lang {
         display: flex;
         justify-content: flex-end;

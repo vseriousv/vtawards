@@ -1,92 +1,93 @@
-<template>
-  <section class="steps" id="steps">
-    <div class="mxw1200">
-      <h2>Выборы победителей</h2>
-      <ul class="steps-list">
-        <li class="steps-list-item active-step">
-          <div class="steps-list-item-title">
-            <div class="step-number">I</div>
-            <div>
-              <p class="step-date">
-                <!-- <?php echo $vt_options['text-step-1-date']; ?>-->
-                Дата проведения
-              </p>
-            </div>
-            <img
-              class="step-img"
-              src="/img/imgComponents/StartVoting/starofteam_ball_transparent.png"
-              width="50"
-            />
-          </div>
-          <h3>
-            <!--  <?php echo $vt_options['text-step-1-title-' . $my_lang ]; ?>-->
-            Региональный этап
-            <p>«Звезды команд»</p>
-          </h3>
-          <div class="steps-list-item-text">
-            <p>
-              <!-- <?php echo $vt_options['text-step-1-desc-' . $my_lang ]; ?>-->
-              Описание этапа
-            </p>
-          </div>
-        </li>
-        <li class="steps-list-item">
-          <div class="steps-list-item-title">
-            <div class="step-number">II</div>
-            <div>
-              <p class="step-date">
-                <!--  <?php echo $vt_options['text-step-2-date']; ?>-->
-                Дата проведения
-              </p>
-            </div>
-            <img
-              class="step-img"
-              src="/img/imgComponents/StartVoting/leader_ball.png"
-              width="50"
-            />
-          </div>
-          <h3>
-            <!--   <?php echo $vt_options['text-step-2-title-' . $my_lang ]; ?>-->
-            Полуфинал
-          </h3>
-          <div class="steps-list-item-text">
-            <p>
-              <!-- <?php echo $vt_options['text-step-2-desc-' . $my_lang ]; ?>-->
-              Описание этапа
-            </p>
-          </div>
-        </li>
-        <li class="steps-list-item">
-          <div class="steps-list-item-title">
-            <div class="step-number">III</div>
-            <div>
-              <p class="step-date">
-                <!-- <?php echo $vt_options['text-step-3-date' ]; ?>-->
-                Дата проведения
-              </p>
-            </div>
-            <img
-              class="step-img"
-              src="/img/imgComponents/StartVoting/leader_ball.png"
-              width="50"
-            />
-          </div>
-          <h3>
-            <!--   <?php echo $vt_options['text-step-3-title-' . $my_lang ]; ?>-->
-            Финал
-          </h3>
-          <div class="steps-list-item-text">
-            <!--  <p><?php echo $vt_options['text-step-3-desc-' . $my_lang ]; ?></p>-->
-            Описание этапа
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
+<template lang="pug">
+
+section.steps#steps
+  v-dialog(
+      v-model="dialog" 
+      max-width="1400"
+    )
+    StepsMainBlockModal(
+      :stage-title="stageTitle" 
+      :stage-text="stageText" 
+      @dialogShow="dialogShow"
+    )
+
+  div.mxw1200
+    h2.mx-3(v-html="$t('StepsMainBlock.blockTitle')") 
+    ul.steps-list
+      li.steps-list-item.active-step(@click.stop="dialogShow(true, 'regionalStage')")
+        .steps-list-item-title
+          .step-number I
+          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          img.step-img(
+            src="/img/imgComponents/StartVoting/starofteam_ball_transparent.png"
+            width="50"
+          )
+        h3(v-html="$t('StepsMainBlock.regionalStage')")
+          //- p «Звезды команд»
+        .steps-list-item-text
+          p(v-html="$t('StepsMainBlock.descriptionCard')")
+      li.steps-list-item(@click.stop="dialogShow(true, 'semifinal')")
+        .steps-list-item-title
+          .step-number II
+          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          img.step-img(
+            src="/img/imgComponents/StartVoting/leader_ball.png"
+            width="50"
+          )
+        h3(v-html="$t('StepsMainBlock.semiStage')")
+        .steps-list-item-text
+          p(v-html="$t('StepsMainBlock.descriptionCard')")
+      li.steps-list-item(@click.stop="dialogShow(true, 'final')")
+        .steps-list-item-title
+          .step-number III
+          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          img.step-img(
+            src="/img/imgComponents/StartVoting/leader_ball.png"
+            width="50"
+          )
+        h3(v-html="$t('StepsMainBlock.finalStage')")
+        .steps-list-item-text
+          p(v-html="$t('StepsMainBlock.descriptionCard')")
 </template>
 
 <script>
+import StepsMainBlockModal from "./StepsMainBlockModal";
+
 export default {
+  data(){
+    return {
+      dialog: false,
+      stageTitle: "",
+      stageText: "",
+    }
+  },
+
+  components: {
+		StepsMainBlockModal
+  },
+
+  methods: {
+    dialogShow: function (isTrue, name) {
+      this.dialog = isTrue
+      switch (name) {
+        case "regionalStage": 
+          this.stageTitle= this.$t('StepsMainBlock.regionalStageTitle');
+          this.stageText= this.$t('StepsMainBlock.regionalStageText');
+          break;
+        case "semifinal": 
+          this.stageTitle= this.$t('StepsMainBlock.semiFinalStageTitle');
+          this.stageText= this.$t('StepsMainBlock.semiFinalStageText');
+          break;
+        case "final":
+          this.stageTitle= this.$t('StepsMainBlock.finalStageTitle');
+          this.stageText= this.$t('StepsMainBlock.finalStageText'); 
+          break;
+        default: 
+          break;
+      }
+    }
+  },
+
   name: "StepsMainBlock"
 };
 </script>
@@ -112,7 +113,7 @@ export default {
 }
 
 .steps-list {
-  margin: 0;
+  margin: 0 12px;
   padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -131,7 +132,9 @@ export default {
   padding-left: 34px;
   padding-right: 34px;
   padding-bottom: 10px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #fff;
   border-radius: 10px;
   -webkit-box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2),
@@ -151,7 +154,13 @@ export default {
   align-items: center;
   margin-bottom: 40px;
 }
-
+.steps-list-item-text p{
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    color: #ffb900;
+  }
+}
 .step-number {
   width: 74px;
   height: 74px;
@@ -171,11 +180,6 @@ export default {
   border: 4px solid #000;
   border-radius: 50%;
 }
-
-.step-img {
-  /*margin-left: auto;*/
-}
-
 .step-date {
   margin: 0 !important;
 

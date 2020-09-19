@@ -1,85 +1,99 @@
 <template lang="pug">
-      section.nomination#nomination
-        div.mxw1200.nomination-container
-          div.nomination-text
-            h2 {{$t('NominationBlock.head')}}
-            p {{$t('NominationBlock.headText')}}
+
+section.nomination#nomination
+  v-dialog(
+    v-model="dialog"
+    max-width="900"
+    )
+    NominationModal(
+      :nomtitle="nomtitle"
+      :nomtext="nomtext"
+      @dialogShow="dialogShow"
+    )
+  div.mxw1200.nomination-container
+    div.nomination-text
+      h2 {{$t('NominationBlock.head')}}
+      p {{$t('NominationBlock.headText')}}
+      
+      <!--<a class="btn btn-yellow" href="">Подать заявку</a>-->
+    div.nomination-icons
+      ul.nomination-list
+        li.nomination-list-item
+          a(@click.stop="dialogShow(true, 'attrLeader')")
+            img(
+              src="/img/imgComponents/StartVoting/networking.svg"
+              alt="Достижения и лидерство"
+              width="58"
+              height="58"
+            )
+            p(v-html="$t('NominationBlock.liderNom')")
+
+        li.nomination-list-item
+          a(@click.stop="dialogShow(true, 'attrProfi')")
+            img(
+              src="/img/imgComponents/StartVoting/creative.svg"
+              alt="Профессионализм и новации"
+              width="58"
+              height="58"
+            )
+            p(v-html="$t('NominationBlock.professionalNom')")
             
-            <!--<a class="btn btn-yellow" href="">Подать заявку</a>-->
-          div.nomination-icons
-            ul.nomination-list
-              li.nomination-list-item
-                a(href="#nomination-leader")
-                  img(
-                    src="/img/imgComponents/StartVoting/networking.svg"
-                    alt="Достижения и лидерство"
-                    width="58"
-                    height="58"
-                  )
-                  p(v-html="$t('NominationBlock.liderNom')")
-                  
-              li.nomination-list-item
-                a(href="#nomination-professional")
-                  img(
-                    src="/img/imgComponents/StartVoting/creative.svg"
-                    alt="Профессионализм и новации"
-                    width="58"
-                    height="58"
-                  )
-                  p(v-html="$t('NominationBlock.professionalNom')")
-              li.nomination-list-item
-                a(href="#smart-partner")
-                  img(
-                    src="/img/imgComponents/StartVoting/goal.svg"
-                    alt="Золотой человек"
-                    width="58"
-                    height="58"
-                  )
-                  p(v-html="$t('NominationBlock.goldManNom')")
-                  //-   <li class="nomination-list-item">
-                  //-     <a href="#nomination-achievement">
-                  //-       <img
-                  //-         src="/img/imgComponents/StartVoting/flag.svg"
-                  //-         alt="Лидер"
-                  //-         width="58"
-                  //-         height="58"
-                  //-       />
-                  //-       <p>Достижение</p>
-                  //-     </a>
-                  //-   </li>
-                  //- </ul>
-                  //- <ul class="nomination-list">
-                  //-   <li class="nomination-list-item">
-                  //-     <a href="#nomination-innovator">
-                  //-       <img
-                  //-         src="/img/imgComponents/StartVoting/thumb-up.svg"
-                  //-         alt="Лидер"
-                  //-         width="58"
-                  //-         height="58"
-                  //-       />
-                  //-       <p>Новатор</p>
-                  //-     </a>
-                  //-   </li>
-                  //-   <li class="nomination-list-item">
-                  //-     <a href="#nomination-client">
-                  //-       <img
-                  //-         src="/img/imgComponents/StartVoting/conversation.svg"
-                  //-         alt="Лидер"
-                  //-         width="58"
-                  //-         height="58"
-                  //-       />
-                  //-       <p>Клиент - наше всё</p>
-                  //-     </a>
-                  //-   </li>
-                  //-   
-                  //- </ul>
+            //- +vmodal("$t('NominationBlock.professionalNomTitle')", "$t('NominationBlock.professionalNomText')", "dialog1")
+        
+        li.nomination-list-item
+          a(@click.stop="dialogShow(true, 'attrGoldman')")
+            img(
+              src="/img/imgComponents/StartVoting/goal.svg"
+              alt="Золотой человек"
+              width="58"
+              height="58"
+            )
+            p(v-html="$t('NominationBlock.goldManNom')")
+            //- +vmodal("$t('NominationBlock.goldManNomTitle')", "$t('NominationBlock.goldManNomText')", "dialog2")
 </template>
 
 <script>
+import NominationModal from "./NominationModal";
+
 export default {
-  name: "NominationMainBlock"
-};
+  name: "NominationMainBlock",
+
+  data () {
+    return {
+      dialog: false,
+      nomtitle: "",
+      nomtext: "",
+    }
+  },
+
+  methods: {     
+    dialogShow: function (isTrue, name) {
+      this.dialog = isTrue
+      switch (name) {
+        case "attrLeader": 
+          this.nomtitle= this.$t('NominationBlock.liderNomTitle');
+          this.nomtext= this.$t('NominationBlock.liderNomText');
+          break;
+        case "attrProfi": 
+          this.nomtitle= this.$t('NominationBlock.professionalNomTitle');
+          this.nomtext= this.$t('NominationBlock.professionalNomText');
+          break;
+        case "attrGoldman":
+          this.nomtitle= this.$t('NominationBlock.goldManNomTitle');
+          this.nomtext= this.$t('NominationBlock.goldManNomText'); 
+          break;
+        default: 
+          break;
+      }
+    }
+  },
+  
+  components: {
+		NominationModal
+  },
+}
 </script>
+
 
 <style lang="scss" scoped>
 @import "../../../assets/styles/index";

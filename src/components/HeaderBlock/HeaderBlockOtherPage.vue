@@ -5,13 +5,13 @@
       <v-row class="logoAndLang">
         <v-col cols="12" class="logoAndLang__col">
           <div class="title-head_col">
-            <img
+            <!-- <img
               class="title-head_col__image"
               width="58"
               height="68"
               :src="`/img/imgComponents/HeaderBlock/star_of_team.png`"
               alt="star_of_team"
-            />
+            /> -->
             <div class="title-head_col__text">
               <h1>
                 {{ this.$t("lang") === "en" ? headName_en : headName_ru }}
@@ -115,21 +115,22 @@ export default {
         .langButton {
           width: 56px;
           height: 32px;
-          border: 1px solid black;
+          border: 1px solid white;
           font-size: 18px;
           line-height: 18px;
           font-weight: 700;
+          color: white;
           &:hover {
             color: $primaryTextColor;
           }
         }
         &.ru .ruInput {
-          background: black;
-          color: $primaryTextColor;
+          background: white;
+          color: black;
         }
         &.en .enInput {
-          background: black;
-          color: $primaryTextColor;
+          background: white;
+          color: black;
         }
       }
     }

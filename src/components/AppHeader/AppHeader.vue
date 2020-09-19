@@ -73,8 +73,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
 @import "../../assets/styles/index";
+
 .AppHeader {
   height: 48px;
   width: 100%;
@@ -83,12 +84,14 @@ export default {
   align-items: center;
   box-shadow: 0 4px 50px -5px black;
   background-color: white;
+  
   .appBar {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    
     // height: 100%;
     a {
       color: black;
@@ -113,6 +116,6 @@ export default {
   position: fixed;
   left: 0;
   right: 0;
-  z-index: 100000;
+  z-index: 100;
 }
 </style>

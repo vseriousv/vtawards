@@ -167,7 +167,7 @@ export default {
 @import "../../../assets/styles/index";
 @import "../../../assets/styles/StartVotingOther";
 .member {
-  margin-bottom: 95px;
+  margin: 0 12px 95px;
 }
 
 .member h2 {
