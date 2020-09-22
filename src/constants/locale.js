@@ -292,12 +292,12 @@ export default {
         link: "/participants",
         target: "_self"
       },
-      // {
-      //   id: 5,
-      //   text: "Архив",
-      //   link: "/archive",
-      //   target: "_self"
-      // },
+      {
+        id: 5,
+        text: "Уже звезды",
+        link: "/archive",
+        target: "_self"
+      },
       {
         id: 6,
         text: "Выход",
@@ -580,12 +580,12 @@ export default {
         link: "/participants",
         target: "_self"
       },
-      // {
-      //   id: 5,
-      //   text: "Archive",
-      //   link: "#archive",
-      //   target: "_self"
-      // },
+      {
+        id: 5,
+        text: "Already the stars",
+        link: "/archive",
+        target: "_self"
+      },
       {
         id: 6,
         text: "Logout",

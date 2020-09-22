@@ -16,7 +16,7 @@ import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
 import ResultPage from "./pages/ResultPage";
 import CommitteePage from "./pages/CommitteePage";
-import ArchivePage from "./pages/ArchivePage";
+import ArchiveWinnerPage from "./pages/ArchiveWinnerPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
 import ApplicationPage from "./pages/ApplicationPage";
@@ -178,14 +178,14 @@ const routes = [
     components: {
       adminPanel: AdminPanel,
       header: HeaderBlockOtherPage,
-      body: ArchivePage,
+      body: ArchiveWinnerPage,
       nav: AppHeader,
       footer: FooterBlock
     },
     props: {
       header: {
-        headName_en: "Archive",
-        headName_ru: "Архив"
+        headName_en: "Already the stars",
+        headName_ru: "Уже звезды"
       }
     },
     meta: { requiresAuth: true }
