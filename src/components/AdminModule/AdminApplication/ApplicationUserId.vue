@@ -9,14 +9,16 @@ const restHelper = new RestHelper();
 
 export default {
   name: "ApplicationUserID",
-  
+
   data() {
     return {
 			URL_AVATARS: config.URL_AVATARS,
 			userID: this.$route.params.id,
+
 			user: {},
 			userOrder: {},
 			usersAll: [],
+
 			usersCompleteRu: [],
 			usersCompleteEng: [],
 			userValue: 0,
@@ -26,7 +28,12 @@ export default {
 			argumentationFile: "",
 			nominationSelect: "",
 			file: "",
-			formsArr: [],
+			autocompleteFix: true,
+			autocompleteFixBtn: true,
+			nominationFix: true,
+			nominationFixBtn: true,
+			argumentationFix: true,
+			argumentationFixBtn: true,
     	};
 	},
 
@@ -62,9 +69,9 @@ export default {
                 console.error("ERROR ApplicationUserId/getUserId:", e);
             }
 		},
-		
+
         parseDataUser: function(item) {
-			
+
             this.userOrder = {
 				userId: item.userId,
 				argumentationRu: item.textRu,
@@ -72,7 +79,7 @@ export default {
 				files: item.files ? item.files : "",
 				nominationId: item.nomination.id
 			}
-			
+
 		},
 
         getUser: async function() {
@@ -91,34 +98,32 @@ export default {
 				this.usersAll = [];
 				users.forEach(item => {
 					let userPropRu = {
-						text: item.lastname_ru + " " + item.firstname_ru,
+						text: item.lastnameRu + " " + item.firstnameRu,
 						value: item.id,
 					};
 					let userPropEng = {
-						text: item.firstname_en + " " + item.lastname_en,
+						text: item.firstnameEn + " " + item.lastnameEn,
 						value: item.id,
 					};
 					let userAll = {
 						id: item.id,
 						img: item.img || "null.png",
 						name_ru:
-							item.lastname_ru + " " + item.firstname_ru,
-						name_en: item.firstname_en + " " + item.lastname_en,
-						position_ru: item.position ? item.position.value_ru : "",
-						position_en: item.position ? item.position.value_en : "",
-						section_ru: item.section ? item.section.value_ru : "",
-						section_en: item.section ? item.section.value_en : "",
+							item.lastnameRu + " " + item.firstnameRu,
+						name_en: item.firstnameEn + " " + item.lastnameEn,
+						position_ru: item.positionName ? item.positionName : "",
+						position_en: item.positionNameEng ? item.positionNameEng : "",
+						section_ru: item.sectionName ? item.sectionName : "",
+						section_en: item.sectionNameEng ? item.sectionNameEng : "",
 						state_ru: item.state ? item.state.value_ru : "",
 						state_en: item.state ? item.state.value_en : "",
-						city_ru: item.city ? item.city.value_ru : "",
-						city_en: item.city ? item.city.value_en : "",
-						description_ru: item.description_ru,
-						description_en: item.description_en,
+						city_ru: item.cityName ? item.cityName : "",
+						city_en: item.cityNameEng ? item.cityNameEng : "",
 						state_id: item.state_id
 					}
 					this.usersAll.push(userAll);
 					this.usersCompleteRu.push(userPropRu);
-					this.usersCompleteEng.push(userPropEng); 
+					this.usersCompleteEng.push(userPropEng);
 				})
 				this.userValue = this.userOrder.userId
 				this.nominationSelect = this.userOrder.nominationId
@@ -140,11 +145,11 @@ export default {
 			this.nominationItemsEng = [];
 			nominations.data.forEach(nomin => {
 				let nominationRu = {
-					text: nomin.value_ru,
+					text: nomin.valueRu,
 					value: nomin.id
 				};
 				let nominationEng = {
-					text: nomin.value_en,
+					text: nomin.valueEn,
 					value: nomin.id
 				}
 				this.nominationItemsRu.push(nominationRu);
@@ -152,9 +157,40 @@ export default {
 			})
 		},
 
-        
-		
 
+
+			FixsetData: function (data) {
+				switch (data) {
+					case "autocomplete":
+						this.autocompleteFix = false
+						this.autocompleteFixBtn = false
+						break
+					case "nomination":
+						this.nominationFix = false
+						this.nominationFixBtn = false
+						break
+					case "nominationText":
+						this.argumentationFix = false
+						this.argumentationFixBtn = false
+						break
+				}
+			},
+			saveData: function (data) {
+				switch (data) {
+					case "autocomplete":
+						this.autocompleteFix = true
+						this.autocompleteFixBtn = true
+						break
+					case "nomination":
+						this.nominationFix = true
+						this.nominationFixBtn = true
+						break
+					case "nominationText":
+						this.argumentationFix = true
+						this.argumentationFixBtn = true
+						break
+				}
+			}
     }
 };
 </script>
@@ -172,9 +208,24 @@ section
 						dense
 						filled
 						outlined
+						:disabled="this.autocompleteFix"
 						background-color= "white"
 						:label=`$t("ApplicationForm.autocomplete")`
 					)
+					.autocomplete__btn
+						v-btn.mx-1(
+							x-small
+							color="secondary"
+							@click.stop="FixsetData('autocomplete')"
+						) Редактировать
+
+						v-btn.mx-1(
+							x-small
+							:disabled="this.autocompleteFixBtn"
+							color="primary"
+							@click.stop="saveData('autocomplete')"
+						) Сохранить
+
 				v-card.UserCard.d-flex.flex-column.mb-5
 					.UserCard__generalInfo.d-flex
 						.UserCard__body
@@ -235,24 +286,56 @@ section
 												) &ensp; {{ user.city_en }}
 				v-card.UserCard
 					h3.mb-3 {{$t("ApplicationForm.nominationTitle")}}*
-					v-select(
-						v-model="nominationSelect"
-						:items="$t('lang') === 'ru'? nominationItemsRu: nominationItemsEng"
-						:label=`$t("ApplicationForm.nominationLabel")`
-						dense
-						outlined
-					)
+					.nomination
+						v-select(
+							v-model="nominationSelect"
+							:items="$t('lang') === 'ru'? nominationItemsRu: nominationItemsEng"
+							:label=`$t("ApplicationForm.nominationLabel")`
+							dense
+							style="max-width: 500px;"
+							:disabled="this.nominationFix"
+							outlined
+						)
+						.nomination__btn
+							v-btn.mx-1(
+								x-small
+								color="secondary"
+								@click.stop="FixsetData('nomination')"
+							) Редактировать
+
+							v-btn.mx-1(
+								x-small
+								:disabled="this.nominationFixBtn"
+								color="primary"
+								@click.stop="saveData('nomination')"
+							) Сохранить
 
 					.UserArgumentation.d-flex.flex-column
 						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}*
-						v-textarea.UserArgumentation__writeText(
-							v-model="argumentationText"
-							name="argumentationText"
-							:label=`$t("ApplicationForm.commentPost")`
-							outlined
-						)
+						.nominationText
+							v-textarea.UserArgumentation__writeText(
+								v-model="argumentationText"
+								name="argumentationText"
+								style="max-width: 500px;"
+								:disabled="this.argumentationFix"
+								:label=`$t("ApplicationForm.commentPost")`
+								outlined
+							)
+							.nominationText__btn
+								v-btn.mx-1(
+									x-small
+									color="secondary"
+									@click.stop="FixsetData('nominationText')"
+								) Редактировать
 
-						
+								v-btn.mx-1(
+									x-small
+									:disabled="this.argumentationFixBtn"
+									color="primary"
+									@click.stop="saveData('nominationText')"
+								) Сохранить
+
+
 
 
 </template>
@@ -265,6 +348,24 @@ section
 
 <style lang="sass" scoped>
 @import './src/assets/styles/index.scss'
+.autocomplete
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
+.nomination
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
+.nominationText
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
 
 .UserCard
 	max-width: 800px

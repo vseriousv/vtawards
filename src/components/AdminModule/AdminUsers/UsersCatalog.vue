@@ -14,7 +14,7 @@
 						text: "Таб номер",
 						align: "start",
 						sortable: false,
-						value: "tab_number"
+						value: "tabNumber"
 					},
 					{ text: "Аватар", value: "img" },
 					{ text: "ФИО", value: "name_ru" },
@@ -57,17 +57,17 @@
 				for (let i = 0; i < data.length; i++) {
 					const userObject = {
 						id: data[i].id,
-						tab_number: data[i].tab_number,
+						tabNumber: data[i].tabNumber,
 						img: data[i].img ? data[i].img : "null.png",
 						email: data[i].email,
 						role: data[i].role,
 						name_ru:
-							data[i].firstname_ru +
+							data[i].lastnameRu +
 							" " +
-							data[i].patronymic_ru +
+							data[i].firstnameRu +
 							" " +
-							data[i].lastname_ru,
-						name_en: data[i].firstname_en + " " + data[i].lastname_en
+							data[i].patronymicRu,
+						name_en: data[i].firstnameEn + " " + data[i].lastnameEn
 					};
 					this.users.push(userObject);
 				}

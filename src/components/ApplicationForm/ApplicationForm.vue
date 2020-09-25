@@ -96,31 +96,27 @@
 				this.usersAll = [];
 				users.forEach(item => {
 					let userPropRu = {
-						text: item.lastname_ru + " " + item.firstname_ru,
+						text: item.lastnameRu + " " + item.firstnameRu,
 						value: item.id,
 					};
 					let userPropEng = {
-						text: item.firstname_en + " " + item.lastname_en,
+						text: item.firstnameEn + " " + item.lastnameEn,
 						value: item.id,
 					};
 					let userAll = {
 						id: item.id,
 						img: item.img || "null.png",
 						name_ru:
-							item.lastname_ru + " " + item.firstname_ru,
-						name_en: item.firstname_en + " " + item.lastname_en,
-						position_ru: item.position ? item.position.value_ru : "",
-						position_en: item.position ? item.position.value_en : "",
-						section_ru: item.section ? item.section.value_ru : "",
-						section_en: item.section ? item.section.value_en : "",
+							item.lastnameRu + " " + item.firstnameRu,
+						name_en: item.firstnameEn + " " + item.lastnameEn,
+						position_ru: item.positionName ? item.positionName : "",
+						position_en: item.positionNameEng ? item.positionNameEng : "",
+						section_ru: item.sectionName ? item.sectionName : "",
+						section_en: item.sectionNameEng ? item.sectionNameEng : "",
 						state_ru: item.state ? item.state.value_ru : "",
 						state_en: item.state ? item.state.value_en : "",
-						city_ru: item.city ? item.city.value_ru : "",
-						city_en: item.city ? item.city.value_en : "",
-						nomination_ru: item.nomination ? item.nomination.value_ru : "",
-						nomination_en: item.nomination ? item.nomination.value_en : "",
-						description_ru: item.description_ru,
-						description_en: item.description_en,
+						city_ru: item.cityName ? item.cityName : "",
+						city_en: item.cityNameEng ? item.cityNameEng : "",
 						state_id: item.state_id
 					}
 					this.usersAll.push(userAll);
@@ -135,11 +131,11 @@
 				this.nominationItemsEng = [];
 				nominations.data.forEach(nomin => {
 					let nominationRu = {
-						text: nomin.value_ru,
+						text: nomin.valueRu,
 						value: nomin.id
 					};
 					let nominationEng = {
-						text: nomin.value_en,
+						text: nomin.valueEn,
 						value: nomin.id
 					}
 					this.nominationItemsRu.push(nominationRu);

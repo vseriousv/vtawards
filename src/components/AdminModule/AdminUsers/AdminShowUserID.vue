@@ -28,7 +28,7 @@
       <v-card class="head-card">
         <div>
           <span style="font-size: 18px; font-weight: 500;"
-            >{{ userID.email }}: {{ userID.tab_number }} -
+            >{{ userID.email }}: {{ userID.tabNumber }} -
             {{ userID.lastname_ru }} {{ userID.firstname_ru }}
             {{ userID.patronymic_ru }}</span
           >
@@ -100,32 +100,8 @@
                   userID.city_en
                 }})</v-list-item
               >
-              <v-list-item
-                >Номинация (En): {{ userID.nomination_ru }} ({{
-                  userID.nomination_en
-                }})</v-list-item
-              >
-              <v-list-item
-                >Количество заявок: {{ userID.count_z }}
-              </v-list-item>
             </v-list>
           </div>
-        </div>
-        <div class="description-user">
-          <div class="head-content">
-            <h4>Русский текст:</h4>
-            <v-btn
-              x-small
-              color="primary"
-              @click.stop="handleModal('user-description')"
-            >
-              Редактировать
-            </v-btn>
-          </div>
-          <p>{{ userID.description_ru }}</p>
-
-          <h4>Английский текст:</h4>
-          <p>{{ userID.description_en }}</p>
         </div>
       </v-card>
     </v-row>
@@ -208,50 +184,40 @@ export default {
     },
     parseDataUser: function(data) {
       const newObjectData = {
-        tab_number: data.tab_number,
+        tabNumber: data.tabNumber,
         img: data.img ? data.img : "null.png",
         email: data.email,
-        firstname_ru: data.firstname_ru,
-        lastname_ru: data.lastname_ru,
-        patronymic_ru: data.patronymic_ru,
-        firstname_en: data.firstname_en,
-        lastname_en: data.lastname_en,
-        patronymic_en: data.patronymic_en || "-----",
-        position_ru: data.position ? data.position.value_ru : "-----",
-        section_ru: data.section ? data.section.value_ru : "-----",
+        firstname_ru: data.firstnameRu,
+        lastname_ru: data.lastnameRu,
+        patronymic_ru: data.patronymicRu,
+        firstname_en: data.firstnameRn,
+        lastname_en: data.lastnameRn,
+        patronymic_en: data.patronymicEn || "-----",
+        position_ru: data.positionName ? data.positionName : "-----",
+        section_ru: data.sectionName ? data.sectionName : "-----",
         state_ru: data.state ? data.state.value_ru : "-----",
-        city_ru: data.city ? data.city.value_ru : "-----",
+        city_ru: data.cityName ? data.cityName : "-----",
         nomination_ru: data.nomination ? data.nomination.value_ru : "-----",
-        position_en: data.position ? data.position.value_en : "-----",
-        section_en: data.section ? data.section.value_en : "-----",
+        position_en: data.positionNameEng ? data.positionNameEng : "-----",
+        section_en: data.sectionNameEng ? data.sectionNameEng : "-----",
         state_en: data.state ? data.state.value_en : "-----",
-        city_en: data.city ? data.city.value_en : "-----",
+        city_en: data.cityNameEng ? data.cityNameEng : "-----",
         nomination_en: data.nomination ? data.nomination.value_en : "-----",
-        count_z: data.count_z,
-        description_ru: data.description_ru || "-----",
-        description_en: data.description_en || "-----",
         role: data.role || "-----"
       };
       this.userID = newObjectData;
 
       this.$store.commit("setAdminUser_email", data.email);
-      this.$store.commit("setAdminUser_tab_number", data.tab_number);
-      this.$store.commit("setAdminUser_firstname_ru", data.firstname_ru);
-      this.$store.commit("setAdminUser_firstname_en", data.firstname_en);
-      this.$store.commit("setAdminUser_lastname_ru", data.lastname_ru);
-      this.$store.commit("setAdminUser_lastname_en", data.lastname_en);
-      this.$store.commit("setAdminUser_patronymic_ru", data.patronymic_ru);
-      this.$store.commit("setAdminUser_patronymic_en", data.patronymic_en);
-      this.$store.commit("setAdminUser_description_ru", data.description_ru);
-      this.$store.commit("setAdminUser_description_en", data.description_en);
-
+      this.$store.commit("setAdminUser_tab_number", data.tabNumber);
+      this.$store.commit("setAdminUser_firstname_ru", data.firstnameRu);
+      this.$store.commit("setAdminUser_firstname_en", data.firstnameEn);
+      this.$store.commit("setAdminUser_lastname_ru", data.lastnameRu);
+      this.$store.commit("setAdminUser_lastname_en", data.lastnameEn);
+      this.$store.commit("setAdminUser_patronymic_ru", data.patronymicRu);
+      this.$store.commit("setAdminUser_patronymic_en", data.patronymicEn);
       this.$store.commit("setAdminUser_role", data.role);
-      this.$store.commit("setAdminUser_position_id", data.position_id);
-      this.$store.commit("setAdminUser_section_id", data.section_id);
       this.$store.commit("setAdminUser_state_id", data.state_id);
-      this.$store.commit("setAdminUser_city_id", data.city_id);
       this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
-      this.$store.commit("setAdminUser_count_z", data.count_z);
     }
   }
 };
