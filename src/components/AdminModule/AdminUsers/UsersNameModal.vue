@@ -16,7 +16,7 @@
           class="form-create__field"
           label="Таб номер"
           outlined
-          v-model="adminUser_tab_number"
+          v-model="adminUser_tabNumber"
         ></v-text-field>
         <v-text-field
           class="form-create__field"
@@ -89,7 +89,7 @@ export default {
     sendData: function() {
       const dataValue = {
         email: this.$store.state.adminUser_email,
-        tab_number: this.$store.state.adminUser_tab_number,
+        tabNumber: this.$store.state.adminUser_tabNumber,
         firstname_ru: this.$store.state.adminUser_firstname_ru,
         firstname_en: this.$store.state.adminUser_firstname_en,
         lastname_ru: this.$store.state.adminUser_lastname_ru,
@@ -99,7 +99,7 @@ export default {
       };
       if (
         this.$store.state.adminUser_email === "" ||
-        this.$store.state.adminUser_tab_number === "" ||
+        this.$store.state.adminUser_tabNumber === "" ||
         this.$store.state.adminUser_firstname_ru === "" ||
         this.$store.state.adminUser_firstname_en === "" ||
         this.$store.state.adminUser_lastname_ru === "" ||
@@ -120,7 +120,7 @@ export default {
     resetForm: function() {
       this.errForm = "";
       this.$store.commit("setAdminUser_email", "");
-      this.$store.commit("setAdminUser_tab_number", "");
+      this.$store.commit("setAdminUser_tabNumber", "");
       this.$store.commit("setAdminUser_firstname_ru", "");
       this.$store.commit("setAdminUser_firstname_en", "");
       this.$store.commit("setAdminUser_lastname_ru", "");
@@ -138,12 +138,12 @@ export default {
         this.$store.commit("setAdminUser_email", id);
       }
     },
-    adminUser_tab_number: {
+    adminUser_tabNumber: {
       get() {
-        return this.$store.state.adminUser_tab_number;
+        return this.$store.state.adminUser_tabNumber;
       },
       set(id) {
-        this.$store.commit("setAdminUser_tab_number", id);
+        this.$store.commit("setAdminUser_tabNumber", id);
       }
     },
     adminUser_firstname_ru: {

@@ -2,7 +2,7 @@ const usersState = {
   state: {
     adminUser_email: "",
     adminUser_password: "",
-    adminUser_tab_number: "",
+    adminUser_tabNumber: "",
     adminUser_firstname_ru: "",
     adminUser_firstname_en: "",
     adminUser_lastname_ru: "",
@@ -27,8 +27,8 @@ const usersState = {
     setAdminUser_email(state, value) {
       state.adminUser_email = value;
     },
-    setAdminUser_tab_number(state, value) {
-      state.adminUser_tab_number = value;
+    setAdminUser_tabNumber(state, value) {
+      state.adminUser_tabNumber = value;
     },
     setAdminUser_firstname_ru(state, value) {
       state.adminUser_firstname_ru = value;

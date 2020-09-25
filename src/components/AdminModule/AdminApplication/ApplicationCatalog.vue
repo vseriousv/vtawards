@@ -17,7 +17,7 @@
 						text: "Таб номер",
 						align: "start",
 						sortable: false,
-						value: "tab_number"
+						value: "tabNumber"
 					},
 					{ text: "Заявитель", value: "curse" },
 					{ text: "Аватар", value: "img", sortable: false, },
@@ -60,20 +60,20 @@
 						id: data[i].id,
 						userId: data[i].userId,
 						nominationId: data[i].nominationId,
-						nominationRu: data[i].nomination.value_ru,
-						nominationEn: data[i].nomination.value_en,
+						nominationRu: data[i].nomination.valueRu,
+						nominationEn: data[i].nomination.valueEn,
 						argumentRu: data[i].textRu,
 						document: data[i].textRu,
 						img: data[i].user.img ? data[i].user.img : "null.png",
 						email: data[i].user.email,
-						tab_number: data[i].user.tab_number,
+						tabNumber: data[i].user.tabNumber,
 						name_ru:
-							data[i].user.firstname_ru +
+							data[i].user.firstnameRu +
 							" " +
-							data[i].user.patronymic_ru +
+							data[i].user.patronymicRu +
 							" " +
-							data[i].user.lastname_ru,
-						name_en: data[i].user.firstname_en + " " + data[i].user.lastname_en
+							data[i].user.lastnameRu,
+						name_en: data[i].user.firstnameEn + " " + data[i].user.lastnameEn
 					};
 					this.nomination.push(userObject);
 				}
@@ -107,7 +107,7 @@ v-container.applicationCatalog(fluid)
 		)
 			template(v-slot:item="{ item }")
 				tr.applicationCatalog__row(@click.stop="showUser(item.id)")
-					td.text-left {{ item.tab_number }}
+					td.text-left {{ item.tabNumber }}
 					td.text-left {{ item.idFrom }}
 					td.text-left
 						.applicationCatalog__avatar

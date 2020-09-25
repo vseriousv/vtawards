@@ -11,7 +11,7 @@ export default {
 				{
 					text: "Таб номер",
 					align: "start",
-					value: "tab_number"
+					value: "tabNumber"
 				},
 				{ text: "Аватар", value: "img" },
 				{ text: "ФИО", value: "name_ru" },
@@ -70,7 +70,7 @@ export default {
 			for (let i = 0; i < data.length; i++) {
 				const userObject = {
 					id: data[i].user.id,
-					tab_number: data[i].user.tab_number,
+					tabNumber: data[i].user.tabNumber,
 					img: data[i].user.img ? data[i].user.img : "null.png",
 					name_ru:
 						data[i].user.firstname_ru +
@@ -148,7 +148,7 @@ export default {
 			)
 				template(v-slot:item="{ item }")
 					tr.WinnersTable__row(@click.stop="showUser(item.id)")
-						td.text-left {{ item.tab_number }}
+						td.text-left {{ item.tabNumber }}
 						td.text-left
 							.WinnersTable__avatar
 								img(:src="`${URL_AVATARS}${item.img}`")

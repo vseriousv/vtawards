@@ -102,7 +102,7 @@ export default {
       for (let i = 0; i < data.length; i++) {
         const userObject = {
           id: data[i].user.id,
-          tab_number: data[i].user.tab_number,
+          tabNumber: data[i].user.tabNumber,
           img: data[i].user.img ? data[i].user.img : "null.png",
           name_ru:
             data[i].user.lastname_ru +

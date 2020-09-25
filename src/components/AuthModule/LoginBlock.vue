@@ -16,9 +16,9 @@
           >
             <v-text-field
               class="field"
-              v-model="tab_number"
-              name="tab_number"
-              :label="`${$t('loginBlock.form.tab_number')}`"
+              v-model="tabNumber"
+              name="tabNumber"
+              :label="`${$t('loginBlock.form.tabNumber')}`"
               required
               outlined
             ></v-text-field>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       valid: false,
-      tab_number: "",
+      tabNumber: "",
       password: "",
       passwordRules: {
         required: value => !!value || "required"
@@ -74,10 +74,10 @@ export default {
       this.errorStr = "";
       const url = config.API_URL + "/users/login";
       const dataSend = {
-        tab_number: this.tab_number,
+        tabNumber: this.tabNumber,
         password: this.password
       };
-      if (this.tab_number === "" || this.password === "") {
+      if (this.tabNumber === "" || this.password === "") {
         this.errorStr = "Все поля обязательны для заполнения";
       } else {
         axios

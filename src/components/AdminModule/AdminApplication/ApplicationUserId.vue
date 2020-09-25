@@ -14,9 +14,11 @@ export default {
     return {
 			URL_AVATARS: config.URL_AVATARS,
 			userID: this.$route.params.id,
+
 			user: {},
 			userOrder: {},
 			usersAll: [],
+
 			usersCompleteRu: [],
 			usersCompleteEng: [],
 			userValue: 0,
@@ -26,7 +28,14 @@ export default {
 			argumentationFile: "",
 			nominationSelect: "",
 			file: "",
-			formsArr: [],
+
+			autocompleteFix: true,
+			autocompleteFixBtn: true,
+			nominationFix: true,
+			nominationFixBtn: true,
+			argumentationFix: true,
+			argumentationFixBtn: true,
+			
     	};
 	},
 
@@ -152,6 +161,40 @@ export default {
 			})
 		},
 
+		FixsetData: function (data) {
+			switch (data) {
+				case "autocomplete": 
+					this.autocompleteFix = false
+					this.autocompleteFixBtn = false
+					break
+				case "nomination": 
+					this.nominationFix = false
+					this.nominationFixBtn = false
+					break
+				case "nominationText": 
+					this.argumentationFix = false
+					this.argumentationFixBtn = false
+					break
+			}
+		},
+
+		saveData: function (data) {
+			switch (data) {
+				case "autocomplete":
+					this.autocompleteFix = true
+					this.autocompleteFixBtn = true
+					break
+				case "nomination":
+					this.nominationFix = true
+					this.nominationFixBtn = true
+					break
+				case "nominationText":
+					this.argumentationFix = true
+					this.argumentationFixBtn = true
+					break
+			}	
+		}
+
         
 		
 
@@ -172,9 +215,24 @@ section
 						dense
 						filled
 						outlined
+						:disabled="this.autocompleteFix"
 						background-color= "white"
 						:label=`$t("ApplicationForm.autocomplete")`
 					)
+					.autocomplete__btn
+						v-btn.mx-1(
+						x-small
+						color="secondary"
+						@click.stop="FixsetData('autocomplete')"
+						) Редактировать
+
+						v-btn.mx-1(
+						x-small
+						:disabled="this.autocompleteFixBtn"
+						color="primary"
+						@click.stop="saveData('autocomplete')"
+						) Сохранить
+					
 				v-card.UserCard.d-flex.flex-column.mb-5
 					.UserCard__generalInfo.d-flex
 						.UserCard__body
@@ -235,22 +293,55 @@ section
 												) &ensp; {{ user.city_en }}
 				v-card.UserCard
 					h3.mb-3 {{$t("ApplicationForm.nominationTitle")}}*
-					v-select(
-						v-model="nominationSelect"
-						:items="$t('lang') === 'ru'? nominationItemsRu: nominationItemsEng"
-						:label=`$t("ApplicationForm.nominationLabel")`
-						dense
-						outlined
-					)
+					.nomination
+						v-select(
+							v-model="nominationSelect"
+							:items="$t('lang') === 'ru'? nominationItemsRu: nominationItemsEng"
+							:label=`$t("ApplicationForm.nominationLabel")`
+							dense
+							style="max-width: 500px;"
+							:disabled="this.nominationFix"
+							outlined
+						)
+						.nomination__btn
+							v-btn.mx-1(
+							x-small
+							color="secondary"
+							@click.stop="FixsetData('nomination')"
+							) Редактировать
+
+							v-btn.mx-1(
+							x-small
+							:disabled="this.nominationFixBtn"
+							color="primary"
+							@click.stop="saveData('nomination')"
+							) Сохранить
 
 					.UserArgumentation.d-flex.flex-column
 						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}*
-						v-textarea.UserArgumentation__writeText(
-							v-model="argumentationText"
-							name="argumentationText"
-							:label=`$t("ApplicationForm.commentPost")`
-							outlined
-						)
+						.nominationText
+							v-textarea.UserArgumentation__writeText(
+								v-model="argumentationText"
+								name="argumentationText"
+								style="max-width: 500px;"
+								:disabled="this.argumentationFix"
+								:label=`$t("ApplicationForm.commentPost")`
+								outlined
+							)
+							.nominationText__btn
+								v-btn.mx-1(
+								x-small
+								color="secondary"
+								@click.stop="FixsetData('nominationText')"
+								) Редактировать
+
+								v-btn.mx-1(
+								x-small
+								:disabled="this.argumentationFixBtn"
+								color="primary"
+								@click.stop="saveData('nominationText')"
+								) Сохранить
+						
 
 						
 
@@ -266,6 +357,24 @@ section
 <style lang="sass" scoped>
 @import './src/assets/styles/index.scss'
 
+.autocomplete 
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
+.nomination
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
+.nominationText
+	display: flex
+	flex-direction: row
+	&__btn
+		margin-left: 20px
+		margin-top: 8px
 .UserCard
 	max-width: 800px
 	margin: 0 auto

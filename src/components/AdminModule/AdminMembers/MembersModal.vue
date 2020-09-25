@@ -116,7 +116,7 @@ export default {
       // let resultDataEn = [];
       for (let i = 0; i < data.length; i++) {
         const text_ru =
-          data[i].tab_number +
+          data[i].tabNumber +
           ": " +
           data[i].firstname_ru +
           " " +

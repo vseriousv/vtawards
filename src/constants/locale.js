@@ -25,7 +25,7 @@ export default {
       headForget: "Забыли пароль",
       form: {
         email: "Email",
-        tab_number: "Таб номер",
+        tabNumber: "Таб номер",
         password: "Пароль",
         password_repeat: "Повторите пароль",
         name: "ФИО",
@@ -332,7 +332,7 @@ export default {
       headForget: "Forget password",
       form: {
         email: "Email",
-        tab_number: "Tab number",
+        tabNumber: "Tab number",
         password: "Password",
         password_repeat: "Password repeat",
         name: "Name and Last name",
