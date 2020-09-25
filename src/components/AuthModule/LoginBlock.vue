@@ -74,7 +74,7 @@ export default {
       this.errorStr = "";
       const url = config.API_URL + "/users/login";
       const dataSend = {
-        tab_number: this.tab_number,
+        tabNumber: this.tab_number,
         password: this.password
       };
       if (this.tab_number === "" || this.password === "") {
