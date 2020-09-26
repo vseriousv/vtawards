@@ -23,6 +23,9 @@ export default {
       headAuth: "Авторизация",
       headReg: "Регистрация",
       headForget: "Забыли пароль",
+      restorePassword: "Введите логин",
+      restorePasswordTrue: "Запрос отправлен. Проверьте свою электронную почту и попробуйте войти снова.",
+      restorePasswordFalse: "Неправильный таб.номер",
       form: {
         email: "Email",
         tabNumber: "Таб номер",
@@ -41,15 +44,18 @@ export default {
       }
     },
     ApplicationForm: {
+      applicant: "Заявитель",
       argumentationTitle: "Аргументация",
       nominationTitle: "Номинация",
       nominationLabel: "Выбрать номинацию",
       commentPost: "Написать аргументацию",
-      fileArgumentation: "Прикрепить к завке документы для аргументации своей кандидатуры",
+      fileArgumentation: `Прикрепить к завке файлы для аргументации своей кандидатуры.<br>
+        Разрешенный формат файлов - PNG, JPG`,
       labelArgumentation: "Прикрепить файл",
       btnArgumentation: "Отправить заявку",
       autocomplete: "Введите данные для поиска *",
-      argumentationBtnTitle: `<p>* – поля обязательны</br>для заполнения</p>`
+      argumentationBtnTitle: `<p>* – поля обязательны</br>для заполнения</p>`,
+      publishForm: `Опубликовать карточку номинанта для участия в голосовании.`
     },
     infoBlock: {
       head: "Открытие ежегодного голосования",
@@ -330,6 +336,9 @@ export default {
       headAuth: "Sing in",
       headReg: "Registration",
       headForget: "Forget password",
+      restorePassword: "Enter your login",
+      restorePasswordTrue: "The request has been sent. Check your email and try signing in again.",
+      restorePasswordFalse: "Wrong tab.number",
       form: {
         email: "Email",
         tabNumber: "Tab number",
@@ -348,15 +357,18 @@ export default {
       }
     },
     ApplicationForm: {
+      applicant: "Applicant",
       argumentationTitle: "Argumentation",
       nominationTitle: "Nomination",
       nominationLabel: "Choose a nomination",
       commentPost: "Write a argumentation",
-      fileArgumentation: "Attach documents to the application to substantiate your candidacy",
+      fileArgumentation: `Attach files to the application to justify your candidacy. <br>
+        Allowed file format - PNG, JPG,`,
       labelArgumentation: "Attach file",
       btnArgumentation: "Send a request",
       autocomplete: "Enter your search data *",
       argumentationBtnTitle: `<p>* – fields are required</p>`,
+      publishForm: `Publish a nominee's card for voting.`
     },
     infoBlock: {
       head: "Opening of annual voting",

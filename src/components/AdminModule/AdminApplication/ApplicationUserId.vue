@@ -1,6 +1,6 @@
 <script>
 import config from "../../../constants/config";
-// import axios from "axios";
+import axios from "axios";
 import RestHelper from "../../../helpers/RestHelper";
 
 
@@ -18,6 +18,8 @@ export default {
 			user: {},
 			userOrder: {},
 			usersAll: [],
+			userFromRu: "",
+			userFromEn: "",
 
 			usersCompleteRu: [],
 			usersCompleteEng: [],
@@ -25,9 +27,9 @@ export default {
 			nominationItemsRu: [],
 			nominationItemsEng: [],
 			argumentationText: "",
-			argumentationFile: "",
+			// argumentationFile: "",
 			nominationSelect: "",
-			file: "",
+			// file: "",
 
 			autocompleteFix: true,
 			autocompleteFixBtn: true,
@@ -38,16 +40,14 @@ export default {
     	};
 	},
 
-	mounted() {
-		this.getUserId(this.userID);
-		this.getUser();
-		this.getNomination();
+	async mounted() {
+		await this.getUserId(this.userID);
+		await this.getUser();
+		await this.getNomination();
 	  },
 
 	watch: {
 		userValue: function(newVal, oldVal) {
-			console.log(newVal, oldVal)
-			console.log(this.usersAll[1])
 			if (oldVal!==null || oldVal>0 && newVal>0 ) {
 				this.user = this.usersAll.find((element) =>
 					{
@@ -72,15 +72,22 @@ export default {
 		},
 
         parseDataUser: function(item) {
-
             this.userOrder = {
 				userId: item.userId,
+				userFrom: item.userFrom,
 				argumentationRu: item.textRu,
 				argumentationEn: item.textEn,
 				files: item.files ? item.files : "",
 				nominationId: item.nomination.id
 			}
+		},
 
+		setUserFrom: function(data) {
+			const userFrom = this.usersAll.find(item => {
+				if (item.id === data) return item;
+			})
+			this.userFromRu = userFrom.name_ru
+			this.userFromEn = userFrom.name_en
 		},
 
         getUser: async function() {
@@ -110,7 +117,7 @@ export default {
 						id: item.id,
 						img: item.img || "null.png",
 						name_ru:
-							item.lastnameRu + " " + item.firstnameRu,
+							item.lastnameRu + " " + item.firstnameRu + " " + item.patronymicRu,
 						name_en: item.firstnameEn + " " + item.lastnameEn,
 						position_ru: item.positionName ? item.positionName : "",
 						position_en: item.positionNameEng ? item.positionNameEng : "",
@@ -129,6 +136,7 @@ export default {
 				this.userValue = this.userOrder.userId
 				this.nominationSelect = this.userOrder.nominationId
 				this.argumentationText = this.userOrder.argumentationRu
+				this.setUserFrom(this.userOrder.userFrom)
 			},
 
 		getNomination: async function() {
@@ -157,7 +165,7 @@ export default {
 				this.nominationItemsEng.push(nominationEng);
 			})
 		},
-		FixsetData: function (data) {
+		fixsetData: function (data) {
 			switch (data) {
 				case "autocomplete":
 					this.autocompleteFix = false
@@ -178,16 +186,41 @@ export default {
 				case "autocomplete":
 					this.autocompleteFix = true
 					this.autocompleteFixBtn = true
+					this.postNewData({"userId": this.userValue})
 					break
 				case "nomination":
 					this.nominationFix = true
 					this.nominationFixBtn = true
+					this.postNewData({"nominationId": this.nominationSelect})
 					break
 				case "nominationText":
 					this.argumentationFix = true
 					this.argumentationFixBtn = true
+					this.postNewData({"textRu": this.argumentationText})
 					break
 			}
+		},
+
+		postNewData: async function(data) {
+			const url = "/nomination-order/" + this.userID;
+				try {
+					const PostFormNomination = await axios.patch(
+						config.API_URL + url,
+						data,
+						
+						{ headers: {
+								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+							}
+						},
+					);
+					console.log(PostFormNomination)
+				} catch(e) {
+					console.error("ERROR ApplicationUserId/postNewData:", e);
+				}
+		},
+		postCardNomination: function() {
+			this.postNewData({"public": true}), 
+			alert("Карточка номинанта опубликована")
 		}
     }
 };
@@ -214,7 +247,7 @@ section
 						v-btn.mx-1(
 						x-small
 						color="secondary"
-						@click.stop="FixsetData('autocomplete')"
+						@click.stop="fixsetData('autocomplete')"
 						) Редактировать
 
 						v-btn.mx-1(
@@ -282,8 +315,12 @@ section
 												span.c-font-16(
 													v-if="$t('lang') === 'en'"
 												) &ensp; {{ user.city_en }}
-				v-card.UserCard
-					h3.mb-3 {{$t("ApplicationForm.nominationTitle")}}*
+				v-card.UserCard.mb-5
+					h3.mb-3 {{$t("ApplicationForm.applicant")}}
+					h4(v-if="$t('lang') === 'ru'") {{this.userFromRu}}
+					h4(v-if="$t('lang') === 'en'") {{this.userFromEn}}
+				v-card.UserCard.mb-5
+					h3.mb-3 {{$t("ApplicationForm.nominationTitle")}}
 					.nomination
 						v-select(
 							v-model="nominationSelect"
@@ -298,9 +335,8 @@ section
 							v-btn.mx-1(
 							x-small
 							color="secondary"
-							@click.stop="FixsetData('nomination')"
+							@click.stop="fixsetData('nomination')"
 							) Редактировать
-
 							v-btn.mx-1(
 							x-small
 							:disabled="this.nominationFixBtn"
@@ -309,7 +345,7 @@ section
 							) Сохранить
 
 					.UserArgumentation.d-flex.flex-column
-						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}*
+						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}
 						.nominationText
 							v-textarea.UserArgumentation__writeText(
 								v-model="argumentationText"
@@ -323,7 +359,7 @@ section
 								v-btn.mx-1(
 								x-small
 								color="secondary"
-								@click.stop="FixsetData('nominationText')"
+								@click.stop="fixsetData('nominationText')"
 								) Редактировать
 
 								v-btn.mx-1(
@@ -332,8 +368,23 @@ section
 								color="primary"
 								@click.stop="saveData('nominationText')"
 								) Сохранить
-						
-
+					.UserFilesArgumentation
+						a(
+							v-for="file in this.userOrder.files" 
+							:key="`file${file.id}`"
+							target="_blank"
+							:href='"https://files.vtaward.ru/" + file.filePath'
+						)
+							img.UserFilesArgumentation__img(
+							:src='"https://files.vtaward.ru/" + file.filePath'
+							)
+				v-card.UserCard.footerApplication
+					p.footerApplication__text(v-html='$t("ApplicationForm.publishForm")')
+					v-btn(
+						x-small
+						color="secondary"
+						@click.stop='postCardNomination'
+						) Опубликовать
 </template>
 
 <style lang="sass">
@@ -399,14 +450,16 @@ section
 		width: 100%
 		max-height: 300px
 		height: 100%
-		padding: 10px
+		overflow: hidden
 		img
-			width: 100%
-			// height: 100%
-			border: 1px double #ffb900
+			border: 1px solid #ffb900
 			border-radius: 5px
+			max-width: 300px
+			width: 100%
+			max-height: 300px
+			height: 100%
 			object-fit: cover
-
+			
 	&__content
 		width: 100%
 		margin: 10px
@@ -451,4 +504,23 @@ section
 		max-width: 250px
 		width: 100%
 		margin-left: auto
+.UserFilesArgumentation
+	margin-top: -10px
+	max-width: 500px
+	.UserFilesArgumentation__img
+		max-width: 150px
+		width: 100%
+		max-height: 100px
+		height: 100%
+		margin: 10px 15px 10px 0
+		object-fit: cover
+		object-position: center center
+.footerApplication
+	display: flex
+	justify-content: space-between
+	align-items: center
+	&__text 
+		max-width: 280px
+		padding: 0
+		margin: 0
 </style>

@@ -243,8 +243,10 @@ export default {
     display: flex;
     flex-direction: row;
     .img-avatar {
-      width: 200px;
-      height: 250px;
+      max-width: 200px;
+      max-height: 250px;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       margin-top: 10px;
       margin-right: 10px;
@@ -252,8 +254,11 @@ export default {
       flex-direction: column;
       justify-content: center;
       img {
-        width: 200px;
-        height: 200px;
+        max-width: 200px;
+        max-height: 250px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

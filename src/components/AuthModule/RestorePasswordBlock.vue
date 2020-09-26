@@ -3,7 +3,7 @@
     <v-container class="mxw1200">
       <v-row>
         <v-col class="head">
-          <h1>{{ $t("loginBlock.headAuth") }}</h1>
+          <h1>{{ $t("loginBlock.restorePassword") }}</h1>
         </v-col>
       </v-row>
       <v-row>
@@ -11,7 +11,6 @@
           <v-form
             class="loginForm__form"
             ref="form"
-            v-model="valid"
             lazy-validation
           >
             <v-text-field
@@ -20,16 +19,6 @@
               name="tabNumber"
               :label="`${$t('loginBlock.form.tabNumber')}`"
               required
-              outlined
-            ></v-text-field>
-            <v-text-field
-              class="field"
-              v-model="password"
-              :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="showPass ? 'text' : 'password'"
-              name="password"
-              :label="`${$t('loginBlock.form.password')}`"
-              @click:append="showPass = !showPass"
               outlined
             ></v-text-field>
             <div class="btn-field">
@@ -41,13 +30,6 @@
           </v-form>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col class="loginForm">
-          <router-link to="/restore-password">
-            <span>{{ $t("loginBlock.headForget") }}</span>
-          </router-link>
-        </v-col>
-      </v-row>
     </v-container>
   </section>
 </template>
@@ -56,41 +38,33 @@
 import axios from "axios";
 import config from "../../constants/config";
 export default {
-  name: "LoginBlock",
+  name: "RestorePasswordBlock",
   data() {
     return {
-      valid: false,
       tabNumber: "",
-      password: "",
-      passwordRules: {
-        required: value => !!value || "required"
-      },
-      showPass: false,
       errorStr: ""
     };
   },
   methods: {
     sendHandler: function() {
       this.errorStr = "";
-      const url = config.API_URL + "/users/login";
+      const url = config.API_URL + "/users/pass-email";
       const dataSend = {
         tabNumber: this.tabNumber,
-        password: this.password
       };
-      if (this.tabNumber === "" || this.password === "") {
-        this.errorStr = "Все поля обязательны для заполнения";
+      if (this.tabNumber === "") {
+        this.errorStr = "Поле обязательно для заполнения";
       } else {
         axios
           .post(url, dataSend)
           .then(result => {
-            localStorage.setItem("jwt", result.data.token);
-            this.$router.push({ name: "main" });
-            this.email = "";
-            this.password = "";
+            console.log(result)
+            this.tabNumber = "";
+            alert(this.$t("loginBlock.restorePasswordTrue"))
           })
           .catch(error => {
             if (error.response.status === 400) {
-              this.errorStr = "Неправильные Email или пароль";
+              this.errorStr = this.$t("loginBlock.restorePasswordFalse");
             } else {
               this.errorStr = error.response.status + "";
             }
@@ -107,7 +81,7 @@ export default {
   background-color: #edeef0;
   width: 100%;
   height: calc(100vh - 102px);
-  // min-height: 700px;
+//   min-height: 700px;
   .head {
     text-align: center;
   }

@@ -146,7 +146,7 @@
 				this.userValue = "";
 				this.nominationSelect = "";
 				this.argumentationText = "";
-				this.file = [];
+				this.file = "";
 			},
 
 			PostFormNomination: async function(data) {
@@ -301,7 +301,7 @@ section
 						)
 
 						.argumentationBody
-							p {{$t("ApplicationForm.fileArgumentation")}}*
+							p(v-html='$t("ApplicationForm.fileArgumentation")')
 							label
 								input(type="file"
 									id="file"
@@ -382,11 +382,12 @@ section
 			font-style: italic
 	.argumentationBody
 		display: flex
-		flex-direction: column
+		flex-direction: row
+		justify-content: space-between
 		@include respond-to(large-screens)
 			flex-direction: row
 		p
-			max-width: 300px
+			max-width: 350px
 	.argumentationBody__btn
 		display: flex
 		flex-direction: row

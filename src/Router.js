@@ -20,7 +20,7 @@ import ArchiveWinnerPage from "./pages/ArchiveWinnerPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
 import ApplicationPage from "./pages/ApplicationPage";
-
+import RestorePasswordPage from "./pages/RestorePasswordPage";
 
 //ADMINKA
 import AdminPanel from "./components/AdminModule/AdminPanel";
@@ -44,6 +44,15 @@ const routes = [
     components: {
       header: HeaderBlockLoginPage,
       body: LoginPage
+    },
+    meta: { guest: true }
+  },
+  {
+    path: "/restore-password",
+    name: "restorePassword",
+    components: {
+      header: HeaderBlockLoginPage,
+      body: RestorePasswordPage
     },
     meta: { guest: true }
   },
