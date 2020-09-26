@@ -100,32 +100,8 @@
                   userID.city_en
                 }})</v-list-item
               >
-              <!-- <v-list-item
-                >Номинация (En): {{ userID.nomination_ru }} ({{
-                  userID.nomination_en
-                }})</v-list-item
-              > -->
-              <!-- <v-list-item
-                >Количество заявок: {{ userID.count_z }}
-              </v-list-item> -->
             </v-list>
           </div>
-        </div>
-        <div class="description-user">
-          <div class="head-content">
-            <h4>Русский текст:</h4>
-            <v-btn
-              x-small
-              color="primary"
-              @click.stop="handleModal('user-description')"
-            >
-              Редактировать
-            </v-btn>
-          </div>
-          <p>{{ userID.description_ru }}</p>
-
-          <h4>Английский текст:</h4>
-          <p>{{ userID.description_en }}</p>
         </div>
       </v-card>
     </v-row>
@@ -214,44 +190,33 @@ export default {
         firstname_ru: data.firstnameRu,
         lastname_ru: data.lastnameRu,
         patronymic_ru: data.patronymicRu,
-        firstname_en: data.firstnameEn,
-        lastname_en: data.lastnameEn,
-        patronymic_en: data.patronymicEn,
-        position_ru:data.positionName,
-        section_ru: data.sectionName,
+        firstname_en: data.firstnameRn,
+        lastname_en: data.lastnameRn,
+        patronymic_en: data.patronymicEn || "-----",
+        position_ru: data.positionName ? data.positionName : "-----",
+        section_ru: data.sectionName ? data.sectionName : "-----",
         state_ru: data.state ? data.state.value_ru : "-----",
-        city_ru: data.cityName,
-        // nomination_ru: data.nomination ? data.nomination.value_ru : "-----",
-        position_en: data.positionNameEng,
-        section_en:  data.sectionNameEng,
+        city_ru: data.cityName ? data.cityName : "-----",
+        nomination_ru: data.nomination ? data.nomination.value_ru : "-----",
+        position_en: data.positionNameEng ? data.positionNameEng : "-----",
+        section_en: data.sectionNameEng ? data.sectionNameEng : "-----",
         state_en: data.state ? data.state.value_en : "-----",
-        city_en: data.cityNameEng,
-        // nomination_en: data.nomination ? data.nomination.value_en : "-----",
-        count_z: data.count_z,
-        // description_ru: data.description_ru || "-----",
-        // description_en: data.description_en || "-----",
-        role: data.role
+        city_en: data.cityNameEng ? data.cityNameEng : "-----",
+        nomination_en: data.nomination ? data.nomination.value_en : "-----",
+        role: data.role || "-----"
       };
       this.userID = newObjectData;
-
       this.$store.commit("setAdminUser_email", data.email);
-      this.$store.commit("setAdminUser_tabNumber", data.tabNumber);
+      this.$store.commit("setAdminUser_tab_number", data.tabNumber);
       this.$store.commit("setAdminUser_firstname_ru", data.firstnameRu);
       this.$store.commit("setAdminUser_firstname_en", data.firstnameEn);
       this.$store.commit("setAdminUser_lastname_ru", data.lastnameRu);
       this.$store.commit("setAdminUser_lastname_en", data.lastnameEn);
       this.$store.commit("setAdminUser_patronymic_ru", data.patronymicRu);
       this.$store.commit("setAdminUser_patronymic_en", data.patronymicEn);
-      // this.$store.commit("setAdminUser_description_ru", data.description_ru);
-      // this.$store.commit("setAdminUser_description_en", data.description_en);
-
       this.$store.commit("setAdminUser_role", data.role);
-      // this.$store.commit("setAdminUser_position_id", data.position_id);
-      // this.$store.commit("setAdminUser_section_id", data.section_id);
-      // this.$store.commit("setAdminUser_state_id", data.state_id);
-      // this.$store.commit("setAdminUser_city_id", data.city_id);
-      // this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
-      // this.$store.commit("setAdminUser_count_z", data.count_z);
+      this.$store.commit("setAdminUser_state_id", data.state_id);
+      this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
     }
   }
 };

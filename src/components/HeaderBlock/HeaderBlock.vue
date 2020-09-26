@@ -70,12 +70,12 @@
         </div>
       </v-row>
       <!-- <v-row class="body-button">
-        
+
       </v-row> -->
       <v-row class="body-voteStatus">
         <v-col class="body-voteStatus_col">
           <p class="body-voteStatus_col__text">
-            {{ $t("header.statusVote.statusEnd") }}
+            {{ $t("header.statusVote.statusProc") }}
           </p>
         </v-col>
       </v-row>
@@ -205,7 +205,7 @@ export default {
           margin-bottom: 20px;
           margin-left: auto;
           margin-right: auto;
-          
+
           @include respond-to(apple5) {
             display: none;
           }
@@ -238,7 +238,7 @@ export default {
         p {
           color: white;
         }
-        
+
         .body-button_col__button {
           color: white;
           width: 220px;
@@ -254,7 +254,7 @@ export default {
         }
       }
     }
-    
+
     .body-voteStatus {
       // margin-top: 20px;
       // @include respond-to(large-screens) {

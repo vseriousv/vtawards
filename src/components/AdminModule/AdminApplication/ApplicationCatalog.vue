@@ -37,7 +37,7 @@
 		},
 
 		methods: {
-			
+
 			showUser: function(id) {
 				this.$router.push({ path: "/admin/applications/id/" + id });
 			},
@@ -66,7 +66,7 @@
 						document: data[i].textRu,
 						img: data[i].user.img ? data[i].user.img : "null.png",
 						email: data[i].user.email,
-						tabNumber: data[i].user.tabNumber,
+						tab_number: data[i].user.tabNumber,
 						name_ru:
 							data[i].user.firstnameRu +
 							" " +
@@ -78,7 +78,7 @@
 					this.nomination.push(userObject);
 				}
 			},
-			
+
 		}
 	};
 </script>

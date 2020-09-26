@@ -94,19 +94,15 @@
 						name_ru:
 							item.lastnameRu + " " + item.firstnameRu,
 						name_en: item.firstnameEn + " " + item.lastnameEn,
-						position_ru: item.positionName,
-						position_en: item.positionNameEng,
-						section_ru: item.sectionName,
-						section_en: item.sectionNameEng,
+						position_ru: item.positionName ? item.positionName : "",
+						position_en: item.positionNameEng ? item.positionNameEng : "",
+						section_ru: item.sectionName ? item.sectionName : "",
+						section_en: item.sectionNameEng ? item.sectionNameEng : "",
 						state_ru: item.state ? item.state.value_ru : "",
 						state_en: item.state ? item.state.value_en : "",
-						city_ru: item.cityName,
-						city_en: item.cityNameEng,
-						// nomination_ru: item.nomination ? item.nomination.valueRu : "",
-						// nomination_en: item.nomination ? item.nomination.valueEn : "",
-						// descriptionRu: item.descriptionRu,
-						// descriptionEn: item.descriptionEn,
-						stateId: item.stateId
+						city_ru: item.cityName ? item.cityName : "",
+						city_en: item.cityNameEng ? item.cityNameEng : "",
+						state_id: item.state_id
 					}
 					this.usersAll.push(userAll);
 					this.usersCompleteRu.push(userPropRu);

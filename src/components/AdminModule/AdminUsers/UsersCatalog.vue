@@ -62,11 +62,11 @@
 						email: data[i].email,
 						role: data[i].role,
 						name_ru:
+							data[i].lastnameRu +
+							" " +
 							data[i].firstnameRu +
 							" " +
-							data[i].patronymicRu +
-							" " +
-							data[i].lastnameRu,
+							data[i].patronymicRu,
 						name_en: data[i].firstnameEn + " " + data[i].lastnameEn
 					};
 					this.users.push(userObject);
