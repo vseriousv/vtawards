@@ -73,10 +73,18 @@
 
       </v-row> -->
       <v-row class="body-voteStatus">
-        <v-col class="body-voteStatus_col">
-          <p class="body-voteStatus_col__text">
-            {{ $t("header.statusVote.statusProc") }}
-          </p>
+        <v-col class="body-voteStatus_col d-flex flex-column align-start">
+					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>
+					<div class="Timer-view d-flex">
+						<span class="Timer-view__card days">{{timer.days}}</span>
+						<span class="Timer-view__card hours">{{timer.hours}}</span>
+						<span class="Timer-view__card minutes">{{timer.minutes}}</span>
+						<span class="Timer-view__card seconds">{{timer.seconds}}</span>
+					</div>
+<!--          <p class="body-voteStatus_col__text">-->
+<!--&lt;!&ndash;            {{ $t("header.statusVote.statusProc") }}&ndash;&gt;-->
+<!--						-->
+<!--          </p>-->
         </v-col>
       </v-row>
     </v-container>
@@ -84,16 +92,61 @@
 </template>
 
 <script>
+// import moment from 'moment';
+
 export default {
   name: "HeaderBlock",
   data() {
-    return {};
-  }
+    return {
+			nowLast: '',
+			timer: {
+				seconds: '',
+				minutes: '',
+				hours: '',
+				days: '',
+			}
+		};
+  },
+
+	created() {
+		setInterval(() => {this.getLastTime()}, 1000)
+	},
+
+	methods: {
+  	getLastTime: function(){
+			let nowDate = new Date();
+			let achiveDate = new Date(2020,9,18,23,59,59);
+			let result = (achiveDate - nowDate)+1000;
+			if (result < 0) {
+				this.timer.seconds = '--';
+				this.timer.minutes = '--';
+				this.timer.hours = '--';
+				this.timer.days = '--';
+			} else {
+				this.timer.seconds = Math.floor((result/1000)%60);
+				this.timer.minutes = Math.floor((result/1000/60)%60);
+				this.timer.hours = Math.floor((result/1000/60/60)%24);
+				this.timer.days = Math.floor(result/1000/60/60/24);
+
+				if (this.timer.seconds < 10) this.timer.seconds = '0' + this.timer.seconds;
+				if (this.timer.minutes < 10) this.timer.minutes = '0' + this.timer.minutes;
+				if (this.timer.hours < 10) this.timer.hours = '0' + this.timer.hours;
+			}
+  	}
+	}
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/styles/index";
+.Timer-view {
+	font-size: 54px;
+	color: white;
+	.Timer-view__card {
+		padding: 7px 7px 7px 0;
+		margin: 7px 7px 7px 0;
+	}
+}
 
 .header-block {
   background-image: url(/img/imgComponents/HeaderBlock/Header_BG.jpg);

@@ -193,8 +193,8 @@ const routes = [
     },
     props: {
       header: {
-        headName_en: "Already the stars",
-        headName_ru: "Уже звезды"
+        headName_en: "Archive",
+        headName_ru: "Архив"
       }
     },
     meta: { requiresAuth: true }

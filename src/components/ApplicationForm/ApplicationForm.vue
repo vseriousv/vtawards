@@ -81,7 +81,7 @@
 				this.usersAll = [];
 				users.forEach(item => {
 					let userPropRu = {
-						text: item.lastnameRu + " " + item.firstnameRu,
+						text: item.lastnameRu + " " + item.firstnameRu + " " + item.patronymicRu,
 						value: item.id,
 					};
 					let userPropEng = {
@@ -92,7 +92,7 @@
 						id: item.id,
 						img: item.img || "null.png",
 						name_ru:
-							item.lastnameRu + " " + item.firstnameRu,
+							item.lastnameRu + " " + item.firstnameRu + " " + item.patronymicRu,
 						name_en: item.firstnameEn + " " + item.lastnameEn,
 						position_ru: item.positionName ? item.positionName : "",
 						position_en: item.positionNameEng ? item.positionNameEng : "",
@@ -158,7 +158,7 @@
 					const PostFormNomination = await axios.post(
 						config.API_URL + url,
 						data,
-						
+
 						{ headers: {
 								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 								'content-type': 'multipart/form-data; boundary=<calculated when request is sent>',
@@ -173,7 +173,7 @@
 					// } else {
 						console.log(e.message)
 						console.error("ERROR ApplicationForm/PostFormNomination:", e);
-					
+
 				}
 			},
 

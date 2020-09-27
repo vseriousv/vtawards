@@ -16,7 +16,8 @@ export default {
       statusVote: {
         statusEnd: "Голосование на сайте завершено",
         statusProc: "Голосование скоро начнется",
-        statusStart: "Идет голосовнаие"
+        statusStart: "Идет голосовнаие",
+				statusCancel: "До конца голосования осталось"
       }
     },
     loginBlock: {
@@ -50,7 +51,7 @@ export default {
       nominationLabel: "Выбрать номинацию",
       commentPost: "Написать аргументацию",
       fileArgumentation: `Прикрепить к завке файлы для аргументации своей кандидатуры.<br>
-        Разрешенный формат файлов - PNG, JPG`,
+        Разрешенный формат файлов - PNG, JPG, PDF, DOC, PPT`,
       labelArgumentation: "Прикрепить файл",
       btnArgumentation: "Отправить заявку",
       autocomplete: "Введите данные для поиска *",
@@ -112,7 +113,7 @@ export default {
                 На соискание премии «Лидер перемен ВТ»  в номинациях могут быть
                 предложены сотрудники любого подразделения группы компаний «Восточная Техника».
                 Главное, кандидат не должен быть победителем прошлых лет.
-                Полный список победителей можно посмотреть <a href="">здесь</a>.
+                Полный список победителей можно посмотреть <a href="/archive">здесь</a>.
               </p>
               <p><strong>Кто может предложить кандидатуру?</strong></p>
               <p>
@@ -279,6 +280,7 @@ export default {
       name:`ФИО`,
       question: `Текст вопроса`,
       send: `отправить`,
+			resp: 'Форма отправлена'
     },
     archiveBlock: {
       archiveBlockTitle: `Победители конкурса «Лидер перемен ВТ» прошлых лет`,
@@ -304,15 +306,15 @@ export default {
       //   link: "/committee",
       //   target: "_self"
       // },
-      {
-        id: 4,
-        text: "Участники",
-        link: "/participants",
-        target: "_self"
-      },
+      // {
+      //   id: 4,
+      //   text: "Участники",
+      //   link: "/participants",
+      //   target: "_self"
+      // },
       {
         id: 5,
-        text: "Уже победители",
+        text: "Архив",
         link: "/archive",
         target: "_self"
       },
@@ -341,7 +343,8 @@ export default {
       statusVote: {
         statusEnd: "Voting is closed",
         statusProc: "The on-line voting is over",
-        statusStart: "There is a vote"
+        statusStart: "There is a vote",
+				statusCancel: "Until the end of the vote left"
       }
     },
     loginBlock: {
@@ -375,7 +378,7 @@ export default {
       nominationLabel: "Choose a nomination",
       commentPost: "Write a argumentation",
       fileArgumentation: `Attach files to the application to justify your candidacy. <br>
-        Allowed file format - PNG, JPG,`,
+        Allowed file format - PNG, JPG, PDF, DOC, PPT`,
       labelArgumentation: "Attach file",
       btnArgumentation: "Send a request",
       autocomplete: "Enter your search data *",
@@ -437,7 +440,7 @@ export default {
               <p>
                 Employees from all Vostochnaya Technica Group departments can be nominated in the
                 categories of the VT Change Makers Awards.
-                However, former winners cannot participate. The full list of winners is available here.
+                However, former winners cannot participate. The full list of winners is available <a href="/archive">here</a>.
               </p>
               <p> <strong> Who can nominate a candidate? </strong> </p>
               <p>
@@ -610,15 +613,15 @@ export default {
       //   link: "/committee",
       //   target: "_self"
       // },
-      {
-        id: 4,
-        text: "Participants",
-        link: "/participants",
-        target: "_self"
-      },
+      // {
+      //   id: 4,
+      //   text: "Participants",
+      //   link: "/participants",
+      //   target: "_self"
+      // },
       {
         id: 5,
-        text: "Already the winners",
+        text: "Archive",
         link: "/archive",
         target: "_self"
       },
