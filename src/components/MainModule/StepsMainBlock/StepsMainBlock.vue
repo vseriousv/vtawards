@@ -2,22 +2,22 @@
 
 section.steps#steps
   v-dialog(
-      v-model="dialog" 
+      v-model="dialog"
       max-width="1400"
     )
     StepsMainBlockModal(
-      :stage-title="stageTitle" 
-      :stage-text="stageText" 
+      :stage-title="stageTitle"
+      :stage-text="stageText"
       @dialogShow="dialogShow"
     )
 
   div.mxw1200
-    h2.mx-3(v-html="$t('StepsMainBlock.blockTitle')") 
+    h2.mx-3(v-html="$t('StepsMainBlock.blockTitle')")
     ul.steps-list
       li.steps-list-item.active-step(@click.stop="dialogShow(true, 'regionalStage')")
         .steps-list-item-title
           .step-number I
-          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          p.step-date 28.09 - 18.10.2020
           img.step-img(
             src="/img/imgComponents/StartVoting/starofteam_ball_transparent.png"
             width="50"
@@ -29,7 +29,7 @@ section.steps#steps
       li.steps-list-item(@click.stop="dialogShow(true, 'semifinal')")
         .steps-list-item-title
           .step-number II
-          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          p.step-date
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
@@ -40,7 +40,7 @@ section.steps#steps
       li.steps-list-item(@click.stop="dialogShow(true, 'final')")
         .steps-list-item-title
           .step-number III
-          p.step-date(v-html="$t('StepsMainBlock.dataCard')") 
+          p.step-date
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
@@ -70,19 +70,19 @@ export default {
     dialogShow: function (isTrue, name) {
       this.dialog = isTrue
       switch (name) {
-        case "regionalStage": 
+        case "regionalStage":
           this.stageTitle= this.$t('StepsMainBlock.regionalStageTitle');
           this.stageText= this.$t('StepsMainBlock.regionalStageText');
           break;
-        case "semifinal": 
+        case "semifinal":
           this.stageTitle= this.$t('StepsMainBlock.semiFinalStageTitle');
           this.stageText= this.$t('StepsMainBlock.semiFinalStageText');
           break;
         case "final":
           this.stageTitle= this.$t('StepsMainBlock.finalStageTitle');
-          this.stageText= this.$t('StepsMainBlock.finalStageText'); 
+          this.stageText= this.$t('StepsMainBlock.finalStageText');
           break;
-        default: 
+        default:
           break;
       }
     }

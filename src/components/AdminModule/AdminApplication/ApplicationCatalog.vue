@@ -45,8 +45,9 @@
 			getUsers: async function() {
 				const url = "/nomination-order";
 				try {
-					const userData = await restHelper.getEntity(url, true);
-					this.setUsersArray(userData.data.rows);
+					const { data } = await restHelper.getEntity(url, true);
+					console.log(data.rows)
+					this.setUsersArray(data.rows);
 				} catch(e) {
 					console.error("ERROR ApplicationCatalog/getUser:", e);
 				}
@@ -64,6 +65,7 @@
 						argumentRu: data[i].textRu,
 						document: data[i].textRu,
 						img: data[i].user.img ? data[i].user.img : "null.png",
+						isNew: data[i].isNew,
 						email: data[i].user.email,
 						tabNumber: data[i].user.tabNumber,
 						name_ru:
@@ -105,7 +107,7 @@ v-container.applicationCatalog(fluid)
 			:search="search_user"
 		)
 			template(v-slot:item="{ item }")
-				tr.applicationCatalog__row(@click.stop="showUser(item.id)")
+				tr.applicationCatalog__row(@click.stop="showUser(item.id)" :class="item.isNew ? 'orderRead' : 'orderNotRead'")
 					td.text-left {{ item.tabNumber }}
 					//- td.text-left {{ item.idFrom }}
 					td.text-left
@@ -121,4 +123,6 @@ v-container.applicationCatalog(fluid)
 
 <style lang="sass" scoped>
 @import "ApplicationCatalog"
+.orderRead
+	background-color: #F2F2F2
 </style>

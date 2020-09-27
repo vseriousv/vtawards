@@ -44,11 +44,16 @@ export default {
 	},
 
 	async mounted() {
+		try {
+			await restHelper.getEntity('/nomination-order/read/' + this.userID, true);
+		}	catch (e) {
+			throw new Error(e);
+		}
 		await this.getUserId(this.userID);
 		await this.getUser();
 		await this.getNomination();
 
-	  },
+	},
 
 	watch: {
 		userValue: function(newVal, oldVal) {
@@ -221,7 +226,7 @@ export default {
 					const PostFormNomination = await axios.patch(
 						config.API_URL + url,
 						data,
-						
+
 						{ headers: {
 								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 							}
@@ -417,7 +422,7 @@ section
 								) Сохранить
 					.UserFilesArgumentation
 						a(
-							v-for="file in this.userOrder.files" 
+							v-for="file in this.userOrder.files"
 							:key="`file${file.id}`"
 							target="_blank"
 							:href='"https://files.vtaward.ru/" + file.filePath'
@@ -468,7 +473,7 @@ section
 		margin-left: 20px
 		margin-top: 8px
 
-.autocomplete 
+.autocomplete
 	display: flex
 	flex-direction: row
 	&__btn
@@ -513,7 +518,7 @@ section
 			max-height: 300px
 			height: 100%
 			object-fit: cover
-			
+
 	&__content
 		width: 100%
 		margin: 10px
@@ -571,11 +576,11 @@ section
 	display: flex
 	justify-content: space-between
 	align-items: center
-	&__text 
+	&__text
 		max-width: 280px
 		padding: 0
 		margin: 0
-.userFrom 
+.userFrom
 	cursor: pointer
 	&:hover
 		color: #ffb900

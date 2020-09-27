@@ -102,21 +102,21 @@ export default {
       nameCEO: "Герхард Ворстер",
       whoIsCEO: "Генеральный директор ООО «Восточная Техника»",
       sayCEO: `<p class="address-text__header">
-                <span class="initial">Г</span>лавная премия группы 
-                компаний «Восточная Техника» для выдающихся сотрудников и лидеров. 
+                <span class="initial">Г</span>лавная премия группы
+                компаний «Восточная Техника» для выдающихся сотрудников и лидеров.
               </p>
-              <p class="address-text__item-1"><strong>Вручается сотрудникам</strong> – за профессиональные успехи и 
+              <p class="address-text__item-1"><strong>Вручается сотрудникам</strong> – за профессиональные успехи и
                 достижения во всех сферах деятельности компании.</p>
               <p><strong>Кого можно номинировать?</strong></p>
               <p>
-                На соискание премии «Лидер перемен ВТ»  в номинациях могут быть 
-                предложены сотрудники любого подразделения группы компаний «Восточная Техника». 
-                Главное, кандидат не должен быть победителем прошлых лет. 
+                На соискание премии «Лидер перемен ВТ»  в номинациях могут быть
+                предложены сотрудники любого подразделения группы компаний «Восточная Техника».
+                Главное, кандидат не должен быть победителем прошлых лет.
                 Полный список победителей можно посмотреть <a href="">здесь</a>.
               </p>
               <p><strong>Кто может предложить кандидатуру?</strong></p>
               <p>
-                Правом на выдвижение претендентов на соискание премии «Лидер перемен ВТ» 
+                Правом на выдвижение претендентов на соискание премии «Лидер перемен ВТ»
                 группы компаний «Восточная Техника» обладают:
                 <ul class="ulAddress">
                   <li>структурные подразделения группы компаний «Восточная Техника»;</li>
@@ -130,47 +130,47 @@ export default {
       headText: "Выдвинуть номинанта в любую из трех номинаций конкурса «Лидер перемен ВТ» может каждый сотрудник или структурное подразделение группы компаний «Восточная Техника», количество заявок от одного человека не ограничено.",
       liderNom: `Достижение</br>и лидерство`,
       liderNomTitle: `Номинация <br/>«ДОСТИЖЕНИЕ и ЛИДЕРСТВО» <br/> присуждается если:`,
-      liderNomText: 
+      liderNomText:
       `<ul>
-        <li>Номинант и его коллеги могут назвать хотя бы один серьезный проект, 
+        <li>Номинант и его коллеги могут назвать хотя бы один серьезный проект,
         который состоялся благодаря личному участию и поддержке со стороны номинанта.</li>
-        <li>Названный проект должен быть ярким, вносить заметный вклад в решение стоящих перед 
+        <li>Названный проект должен быть ярким, вносить заметный вклад в решение стоящих перед
         отделом, регионом и/или компанией сложных задач.</li>
-        <li>Правильное изменение внутренних процессов приносит заметный и ощущаемый эффект. 
+        <li>Правильное изменение внутренних процессов приносит заметный и ощущаемый эффект.
         Мы приветствуем авторов таких изменений в этой номинации!</li>
         <li>Стабильно  высокие результаты – дает высокие шансы на победу в данной номинации</li>
-        <li>Ищем выдающихся лидеров, которые проявили организаторский талант и привели к 
-        успеху свою команду.</li> 
+        <li>Ищем выдающихся лидеров, которые проявили организаторский талант и привели к
+        успеху свою команду.</li>
       </ul>`,
       professionalNom: `Профессионализм</br>и новации`,
       professionalNomTitle: `Номинация <br/>«ПРОФЕССИОНАЛИЗМ и НОВАЦИИ»<br/>присуждается тем, кто:`,
-      professionalNomText: 
+      professionalNomText:
       `<ul>
-        <li>«Лидер без титула», который каждый день качественно, эффективно и 
+        <li>«Лидер без титула», который каждый день качественно, эффективно и
         безупречно  выполняет  свои профессиональные обязанности;</li>
-        <li>Не боится  управленческих и/или производственных трудных задач, 
+        <li>Не боится  управленческих и/или производственных трудных задач,
         способен сконцентрироваться на них и добиться высокопрофессионального решения;</li>
-        <li>Способен организовать команду для достижения результата и принять 
-        ответственность за решения на себя.</li> 
-        <li>Инновационность  не на словах, а измеряемая числом  и качеством 
+        <li>Способен организовать команду для достижения результата и принять
+        ответственность за решения на себя.</li>
+        <li>Инновационность  не на словах, а измеряемая числом  и качеством
         инициативных предложений; умение создавать свежие идеи и реализовывать их;</li>
-        <li>Талант построения надежных и долгосрочных отношений с партнерами.  
+        <li>Талант построения надежных и долгосрочных отношений с партнерами.
         В том числе умение предвосхищать желания клиентов.</li>
-        <li>Безупречное выполнение высоких стандартов обслуживания, предоставление 
+        <li>Безупречное выполнение высоких стандартов обслуживания, предоставление
         достоверной информации, необходимой клиентам;</li>
-        <li>Такая организация работы с клиентом, чтобы он  чувствовал свою ценность 
-        для нас, уверенность в нас, легкость в процессе взаимодействия с компанией 
-        «Восточная Техника».</li>   
+        <li>Такая организация работы с клиентом, чтобы он  чувствовал свою ценность
+        для нас, уверенность в нас, легкость в процессе взаимодействия с компанией
+        «Восточная Техника».</li>
       </ul>`,
       goldManNom: `<p>Золотой человек</p>`,
       goldManNomTitle: `Номинация<br/>«ЗОЛОТОЙ ЧЕЛОВЕК» <br/>присуждается тем, кто:`,
-      goldManNomText: 
+      goldManNomText:
       `<ul>
-        <li>Ответственно относится к работе, доброжелателен и внимателен 
+        <li>Ответственно относится к работе, доброжелателен и внимателен
         к коллегам, активно передает опыт и делится своими знаниями.</li>
         <li>Тот самый человек, на которого можно положиться в любой ситуации.</li>
-        <li>Честно трудится на своем месте, понимая,  каков  его личный вклад 
-        в повышение эффективности деятельности компании.</li> 
+        <li>Честно трудится на своем месте, понимая,  каков  его личный вклад
+        в повышение эффективности деятельности компании.</li>
       </ul>`,
       buttonNomText: "Закрыть",
     },
@@ -182,91 +182,91 @@ export default {
       semiStage: "Полуфинал",
       finalStage: "Финал",
       regionalStageTitle: `I этап – Региональный <br/> «Звезды команд»`,
-      regionalStageText: `<p class="mt-3 mb-3">Конкурс проводится в трех номинациях: 
-        «Достижение и лидерство», 
-        «Профессионализм и новации», 
+      regionalStageText: `<p class="mt-3 mb-3">Конкурс проводится в трех номинациях:
+        «Достижение и лидерство»,
+        «Профессионализм и новации»,
         «Золотой человек».</p>
         <ul>
-          <li>Выдвижение кандидатов осуществляется на сайте путем подачи 
+          <li>Выдвижение кандидатов осуществляется на сайте путем подачи
           заявок на выдвижение кандидатов. </li>
-          <li>На региональном этапе в каждом регионе проводится сбор заявок на участие в конкурсе в 3х номинациях. 
+          <li>На региональном этапе в каждом регионе проводится сбор заявок на участие в конкурсе в 3х номинациях.
           Информация о конкурсантах размещается в их карточках.</li>
-          <li>По завершении сбора заявок открывается период регионального голосования – в каждой номинации выбирают 
+          <li>По завершении сбора заявок открывается период регионального голосования – в каждой номинации выбирают
           победителя путем открытого общего голосования на сайте.</li>
-          <li>Онлайн-голосование проводится по региональному принципу в восьми бизнес-подразделениях «ВТ»: 
-          EMPR (Расширенная номенклатура горнопромышленного оборудования), Восточная Сибирь, 
-          Головной офис (включая «Сайтек» и «ВТ Солюшнс»), Красноярский край, Кузбасс, 
+          <li>Онлайн-голосование проводится по региональному принципу в восьми бизнес-подразделениях «ВТ»:
+          EMPR (Расширенная номенклатура горнопромышленного оборудования), Восточная Сибирь,
+          Головной офис (включая «Сайтек» и «ВТ Солюшнс»), Красноярский край, Кузбасс,
           Дальневосточный регион, Центральная и Западная Сибирь, Якутия.<br/>
-          Сотрудники подразделения Силовых установок подают заявки в том регионе, где они работают. 
+          Сотрудники подразделения Силовых установок подают заявки в том регионе, где они работают.
           </li>
         </ul>
         <p class="mt-5 mb-3"><b>Правила голосования на региональном этапе:</b></p>
         <ul>
           <li>Голосование возможно только за кандидатов своего региона. </li>
-          <li>Каждый сотрудник «ВТ» может отдать свой голос только за трех 
-          кандидатов (ранжированием от 1 до 3-х баллов). Если число кандидатов меньше трех, то сотрудник «ВТ» может отдать свой 
+          <li>Каждый сотрудник «ВТ» может отдать свой голос только за трех
+          кандидатов (ранжированием от 1 до 3-х баллов). Если число кандидатов меньше трех, то сотрудник «ВТ» может отдать свой
           голос только за одного кандидата. </li>
-          <li>Победителями общего голосования регионального этапа 
-          (в каждом из 8-ми регионов),   становятся 3 кандидата, набравшие 
-          наибольшее количество баллов в каждой из трех номинаций (по одному 
+          <li>Победителями общего голосования регионального этапа
+          (в каждом из 8-ми регионов),   становятся 3 кандидата, набравшие
+          наибольшее количество баллов в каждой из трех номинаций (по одному
           победителю в номинации от каждого из регионов).</li>
           <li>Победители регионального этапа получают статус «Звезда команды».</li>
         </ul>
-        <p class="mt-5">По итогам голосования в каждом регионе 
-        определяются 3 победителя регионального этапа (по одному в каждой из номинаций). 
+        <p class="mt-5">По итогам голосования в каждом регионе
+        определяются 3 победителя регионального этапа (по одному в каждой из номинаций).
         Всего в регионах 24 «Звезды команды» или 8 победителей в каждой из трех номинации.
-        Список «Звезд команд» - победителей регионального этапа,  размещается на странице 
+        Список «Звезд команд» - победителей регионального этапа,  размещается на странице
         Конкурса.</br>
-        Победители регионального этапа допускаются к участию во втором этапе 
+        Победители регионального этапа допускаются к участию во втором этапе
         конкурса - полуфиналу.
         </p>`,
         semiFinalStageTitle: "II этап – Полуфинал",
-        semiFinalStageText: `<p class="mt-3 mb-2">Участвуют «Звезды команд» - 
+        semiFinalStageText: `<p class="mt-3 mb-2">Участвуют «Звезды команд» -
         победители регионального этапа конкурса.</p>
-        <p class="mt-2 mb-2">Проводится онлайн-голосование региональной 
-        экспертной комиссией, которая состоит из представителей 8 регионов. 
-        В работу региональной экспертной комиссии могут приглашаться победители 
+        <p class="mt-2 mb-2">Проводится онлайн-голосование региональной
+        экспертной комиссией, которая состоит из представителей 8 регионов.
+        В работу региональной экспертной комиссии могут приглашаться победители
         конкурса «Лидер перемен ВТ» прошлых лет.</p>
         <p class="mt-5 mb-2"><b>Правила голосования:</b></p>
         <ul>
           <li>Голосование закрытое, проводится на сайте Конкурса.</li>
           <li>Голосование проводится по 3-м номинациям (путем ранжирования кандидатов,
-          присваивая от 1 до 3-х баллов), в ходе которого из 8 региональных победителей 
-          в каждой из номинаций  определяются по 3 победителя в каждой из номинаций из 
+          присваивая от 1 до 3-х баллов), в ходе которого из 8 региональных победителей
+          в каждой из номинаций  определяются по 3 победителя в каждой из номинаций из
           числа набравших при голосовании самое больше число баллов.</li>
         </ul>
-        <p class="mt-4">По итогам полуфинального голосования определяются по 3 
+        <p class="mt-4">По итогам полуфинального голосования определяются по 3
         победителя полуфинала в каждой из 3-х номинаций. Всего 9 человек.</p>
         <p>Список победителей полуфинального этапа размещается на странице Конкурса.
-        Победители полуфинала допускаются к участию в третьем (финальном) этапе конкурса.</p> 
+        Победители полуфинала допускаются к участию в третьем (финальном) этапе конкурса.</p>
         `,
         finalStageTitle: "III этап – Финал",
-        finalStageText: `<p class="mt-3 mb-2">Участвуют победители полуфинального 
+        finalStageText: `<p class="mt-3 mb-2">Участвуют победители полуфинального
         этапа конкурса.</p>
-        <p class="mt-2 mb-2">Выборы победителей финального этапа проводятся 
+        <p class="mt-2 mb-2">Выборы победителей финального этапа проводятся
         путем онлайн-голосования членами Экспертной комиссии.<br/>
-        В состав Экспертной комиссии полуфинального этапа входят исполнительные 
-        директора ООО «Восточная Техника»: генеральный директор, исполнительный директор, 
-        территория I, исполнительный директор, территория II, технический директор, 
-        финансовый директор, директор по персоналу, директор по расширенной номенклатуре 
-        горнопромышленного оборудования и силовым установкам,  директор по наземному 
-        горнопромышленному оборудованию, директор по маркетингу и сегменту строительной 
+        В состав Экспертной комиссии полуфинального этапа входят исполнительные
+        директора ООО «Восточная Техника»: генеральный директор, исполнительный директор,
+        территория I, исполнительный директор, территория II, технический директор,
+        финансовый директор, директор по персоналу, директор по расширенной номенклатуре
+        горнопромышленного оборудования и силовым установкам,  директор по наземному
+        горнопромышленному оборудованию, директор по маркетингу и сегменту строительной
         техники, директор по информационным технологиям.</p>
         <p class="mt-5 mb-2"><b>Правила голосования:</b></p>
         <ul>
           <li>Голосование закрытое, проводится на сайте Конкурса.</li>
           <li>Голосование проводится по 3-м номинациям (путем ранжирования кандидатов,
-          присваивая от 1 до 3-х баллов), в ходе которого из 9 финалистов  в каждой из 
+          присваивая от 1 до 3-х баллов), в ходе которого из 9 финалистов  в каждой из
           номинаций  определяются по 1 победителю из числа набравших при голосовании
           самое больше число баллов.</li>
         </ul>
-        <p class="mt-4">По итогам финального голосования определяются три 
+        <p class="mt-4">По итогам финального голосования определяются три
         победителя Конкурса «Лидер перемен «ВТ» - по одному в каждой из трех
         номинаций: «Достижение и лидерство», «Профессионализм и новации», «Золотой человек».</p>
         <p>Информация о трех победителях Конкурса не разглашаются до официальной
         церемонии награждения или официального объявления победителей.</p>
-        <p>Список победителей Конкурса «Лидер перемен ВТ» размещается на странице 
-        Конкурса после официального объявления победителей.</p>  
+        <p>Список победителей Конкурса «Лидер перемен ВТ» размещается на странице
+        Конкурса после официального объявления победителей.</p>
         `
     },
     memberMainBlock: {
@@ -292,18 +292,18 @@ export default {
         link: "/",
         target: "_self"
       },
-      {
-        id: 2,
-        text: "Результаты голосования",
-        link: "/result",
-        target: "_self"
-      },
-      {
-        id: 3,
-        text: "Комиссия",
-        link: "/committee",
-        target: "_self"
-      },
+      // {
+      //   id: 2,
+      //   text: "Результаты голосования",
+      //   link: "/result",
+      //   target: "_self"
+      // },
+      // {
+      //   id: 3,
+      //   text: "Комиссия",
+      //   link: "/committee",
+      //   target: "_self"
+      // },
       {
         id: 4,
         text: "Участники",
@@ -335,7 +335,7 @@ export default {
         "The main award of Vostochnaya Technica, presented to employees for outstanding achievements and innovative initiatives since 2005.",
       btnHeader: {
         beforeText: `Submit an application<br/>to participate in the contest`,
-        text: "Submit",
+        text: "Fill in the form",
         link: "Konkurs-Lider-Peremen-VT-Polozhenie_2019-0204-eng.pdf"
       },
       statusVote: {
@@ -427,7 +427,7 @@ export default {
       nameCEO: "Gerhard Worster",
       whoIsCEO: "General Director of Vostochnaya Tekhnika LLC",
       sayCEO: `<p class="address-text__header">
-                <span class="initial">T</span>he Main Awards from Vostochnaya 
+                <span class="initial">T</span>he Main Awards from Vostochnaya
                 Technica Group for Outstanding Employees
                 and Leaders.
               </p>
@@ -456,40 +456,40 @@ export default {
       professionalNom: `<p>Professionalism</br>and Innovations</p>`,
       goldManNom: `<p>Pillar of the Team</p>`,
       liderNomTitle: `An employee can be nominated<br/> in the ACHIEVEMENTS and LEADERSHIP<br/> category if:`,
-      liderNomText: 
+      liderNomText:
       `<ul>
         <li>The nominee or their colleagues can name at least one major project which was
         implemented thanks to the personal participation of, or support from, the nominee.</li>
-        <li>The said project must be exciting, contribute significantly to the handling of complex 
+        <li>The said project must be exciting, contribute significantly to the handling of complex
         tasks facing the department, the region and/or the company./li>
-        <li>Appropriate changes to the internal processes produce notable meaningful effect. 
+        <li>Appropriate changes to the internal processes produce notable meaningful effect.
         Authors of such changes are welcome in this category!</li>
         <li>Consistently high results boost the nominee’s chances to win in this category.</li>
-        <li>We are looking for outstanding leaders who displayed their managerial talents 
-        and led their team to success.</li> 
+        <li>We are looking for outstanding leaders who displayed their managerial talents
+        and led their team to success.</li>
       </ul>`,
       professionalNomTitle: `An employee can be nominated<br> in the PROFESSIONALISM<br> and INNOVATIONS category if they are:`,
-      professionalNomText: 
+      professionalNomText:
       `<ul>
         <li>A ‘Hidden Leader’—someone who does their job competently, efficiently and impeccably every day.</li>
         <li>Not afraid to face managerial and professional challenges, able to concentrate on solving them and
         produce top-notch solutions.</li>
-        <li>Capable of gearing the team towards achieving the results and assuming responsibility for the decisions.</li> 
+        <li>Capable of gearing the team towards achieving the results and assuming responsibility for the decisions.</li>
         <li>Innovative, which can be proven with the number and quality of proposed initiatives; capable of thinking
         outside the box and bringing ideas to fruition,</li>
         <li>Talented in building lasting, solid relations with partners and anticipating the customers’ wishes.</li>
         <li>Known for high standards of service, provision of reliable information requested by customers.</li>
         <li>Able to engage with customers in such a way that makes them feel appreciated, at ease and confident in
-        our company.</li>   
+        our company.</li>
       </ul>`,
       goldManNomTitle: "An employee can be nominated<br/> in the PILLAR OF THE TEAM<br/> category if they are:",
-      goldManNomText: 
+      goldManNomText:
       `<ul>
         <li>Serious about their work, nice and considerate towards their colleagues, actively sharing their experience
         and knowledge.</li>
         <li>That one person who can always be counted on in any situation.</li>
         <li>Doing their work diligently, knowing that their contribution to the betterment of the company’s efficiency
-        is essential.</li> 
+        is essential.</li>
       </ul>`,
       buttonNomText: "Close",
     },
@@ -533,10 +533,10 @@ export default {
       contest—the semi-finals.
       </p>`,
       semiFinalStageTitle: "Stage 2<br/>Semi-Finals",
-      semiFinalStageText: `<p class="mt-3 mb-2">Team Leaders, winners of the regional stage, 
+      semiFinalStageText: `<p class="mt-3 mb-2">Team Leaders, winners of the regional stage,
       compete in the semi-finals.</p>
-      <p class="mt-2 mb-2">The Regional Expert Committee, which comprises representatives 
-      from all eight regions, votes online. VT Change Makers of the previous years may be 
+      <p class="mt-2 mb-2">The Regional Expert Committee, which comprises representatives
+      from all eight regions, votes online. VT Change Makers of the previous years may be
       invited to join the Regional Expert Committee.</p>
       <p class="mt-5 mb-2"><b>Voting Rules:</b></p>
       <ul>
@@ -545,15 +545,15 @@ export default {
         eight regional winners in each category, the voters determine three semi-final winners per
         category based on the number of points they get.</li>
       </ul>
-      <p class="mt-4">Based on the voting results, three winners in each of 
+      <p class="mt-4">Based on the voting results, three winners in each of
       the three categories are chosen—9 winners overall.</p>
       <p>The list of winners of the semi-final stage shall be posted on the Contest web page.
       The winners of the semi-finals are then allowed to compete in the third stage of the contest—the
-      finals.</p> 
+      finals.</p>
       `,
       finalStageTitle: "Stage 3<br/>Finals",
       finalStageText: `<p class="mt-3 mb-2">The winners of the semi-finals compete at Stage 3.</p>
-      <p class="mt-2 mb-2">The winners of the finals shall be selected through on-line 
+      <p class="mt-2 mb-2">The winners of the finals shall be selected through on-line
       voting by members of the Expert Committee.<br/>
       The Expert Committee of the final stage shall include Vostochnaya Technica Executive Directors:
       General Director, Executive Director of VT Territory-1, Executive Director of VT Territory-2,
@@ -569,10 +569,10 @@ export default {
       <p class="mt-4">Based on the voting, three winners of the VT Change Maker contest are
       determined—one in each of the three categories: Achievements and Leadership, Professionalism and Innovations, Pillar of the
       Team.</p>
-      <p>Information on the three winners shall not be disclosed until the awards ceremony 
+      <p>Information on the three winners shall not be disclosed until the awards ceremony
       and the official winners announcement.</p>
-      <p>The list of the VT Change Maker winners is posted on the contest web-page 
-      after the winners announcement.</p>  
+      <p>The list of the VT Change Maker winners is posted on the contest web-page
+      after the winners announcement.</p>
       `
     },
     memberMainBlock: {
@@ -598,18 +598,18 @@ export default {
         link: "/",
         target: "_self"
       },
-      {
-        id: 2,
-        text: "Voting Results",
-        link: "/result",
-        target: "_self"
-      },
-      {
-        id: 3,
-        text: "The Committee",
-        link: "/committee",
-        target: "_self"
-      },
+      // {
+      //   id: 2,
+      //   text: "Voting Results",
+      //   link: "/result",
+      //   target: "_self"
+      // },
+      // {
+      //   id: 3,
+      //   text: "The Committee",
+      //   link: "/committee",
+      //   target: "_self"
+      // },
       {
         id: 4,
         text: "Participants",

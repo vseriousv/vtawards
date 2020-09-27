@@ -6,12 +6,12 @@
         <router-link to="/admin/general">Админка</router-link>
         <router-link to="/admin/applications">Управление заявками</router-link>
         <router-link to="/admin/users">Управление пользователями</router-link>
-        <router-link to="/admin/members">Управление участниками</router-link>
-        <router-link to="/admin/voting">Управление голосованием</router-link>
-        <router-link to="/admin/catalogs">Управление справочниками</router-link>
+<!--        <router-link to="/admin/members">Управление участниками</router-link>-->
+<!--        <router-link to="/admin/voting">Управление голосованием</router-link>-->
+<!--        <router-link to="/admin/catalogs">Управление справочниками</router-link>-->
       </div>
       <div class="contentPanel d-md-none">
-        <v-menu 
+        <v-menu
           transition="slide-x-transition"
           bottom
           right
@@ -28,9 +28,9 @@
             <router-link class="listCog__item" to="/admin/general">Админка</router-link>
             <router-link class="listCog__item" to="/admin/applications">Управление заявками</router-link>
             <router-link class="listCog__item" to="/admin/users">Управление пользователями</router-link>
-            <router-link class="listCog__item" to="/admin/members">Управление участниками</router-link>
-            <router-link class="listCog__item" to="/admin/voting">Управление голосованием</router-link>
-            <router-link class="listCog__item" to="/admin/catalogs">Управление справочниками</router-link>
+<!--            <router-link class="listCog__item" to="/admin/members">Управление участниками</router-link>-->
+<!--            <router-link class="listCog__item" to="/admin/voting">Управление голосованием</router-link>-->
+<!--            <router-link class="listCog__item" to="/admin/catalogs">Управление справочниками</router-link>-->
           </v-list>
         </v-menu>
       </div>
@@ -48,7 +48,7 @@ export default {
   }
 };
 </script>
-  
+
 
 <style lang="scss">
 .listCog {
