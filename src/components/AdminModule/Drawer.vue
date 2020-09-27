@@ -10,9 +10,10 @@
 		data() {
 			return {
 				items: [
-					{ title: "General", icon: "mdi-view-dashboard",link: "/admin/general" },
-					{ title: "Users", icon: "mdi-account-group", link: "/admin/users" },
-					{ title: "Applications", icon: "mdi-account-card-details", link: "/admin/applications" },
+					{ title: "Админ панель", icon: "mdi-view-dashboard",link: "/admin/general" },
+					{ title: "Пользователи", icon: "mdi-account-group", link: "/admin/users" },
+					{ title: "Заявки", icon: "mdi-account-card-details", link: "/admin/applications" },
+					{ title: "Выбранные заявки", icon: "mdi-account-card-details", link: "/admin/selected" },
 					// { title: "Voting", icon: "mdi-ballot-outline", link: "/admin/voting" },
 					// { title: "Members", icon: "mdi-account-multiple-check", link: "/admin/members" },
 					// { title: "Winners", icon: "mdi-account-star", link: "/admin/winners" },

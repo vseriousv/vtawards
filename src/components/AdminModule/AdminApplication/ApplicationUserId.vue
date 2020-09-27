@@ -40,6 +40,7 @@ export default {
 			argumentationFixBtnEn: true,
 
 			public: false,
+			isSelectedCard: false,
     	};
 	},
 
@@ -87,8 +88,10 @@ export default {
 				files: item.files ? item.files : "",
 				nominationId: item.nomination.id,
 				public: item.public,
+				isSelected: item.isSelected,
 			}
 			this.public = item.public;
+			this.isSelectedCard = item.isSelected;
 		},
 
 		setUserFrom: function(data) {
@@ -245,6 +248,16 @@ export default {
 			} else {
 				alert("Карточка номинанта снята с публикации")
 				this.public = false
+			}
+		},
+		selectNomination: function(data) {
+			this.postNewData({"isSelected": data})
+			if (data===true) {
+				alert("Карточка выбрана для публикации")
+				this.isSelectedCard = true
+			} else {
+				alert("Карточка удалина из избранных")
+				this.isSelectedCard = false
 			}
 		},
 		showUser: function() {
@@ -430,6 +443,21 @@ section
 							img.UserFilesArgumentation__img(
 							:src='"https://files.vtaward.ru/" + file.filePath'
 							)
+				v-card.UserCard.footerApplication.mb-5
+					p.footerApplication__text Выбрать карточку для публикации, нажимая на кнопку, карточка не будет опубликована, а добавится в избранное
+					v-btn(
+						v-if="(this.isSelectedCard === false)"
+						x-small
+						color="secondary"
+						@click.stop='selectNomination(true)'
+						) Добавить в избранное
+					v-btn(
+						v-else
+						x-small
+						color="error"
+						@click.stop='selectNomination(false)'
+						) Убрать из избранных
+
 				v-card.UserCard.footerApplication
 					p.footerApplication__text(v-html='$t("ApplicationForm.publishForm")')
 					v-btn(
@@ -439,7 +467,7 @@ section
 						@click.stop='postCardNomination(true)'
 						) Опубликовать
 					v-btn(
-						v-else="(this.public === true)"
+						v-else
 						x-small
 						color="error"
 						@click.stop='postCardNomination(false)'

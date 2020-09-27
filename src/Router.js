@@ -33,6 +33,7 @@ import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
 import AdminWinners from "./components/AdminModule/AdminWinners/AdminWinners";
 import ApplicationAll from "./components/AdminModule/AdminApplication/ApplicationAll";
+import ApplicationAllSelected from "./components/AdminModule/AdminApplicationSelected/ApplicationAll";
 import ApplicationUserId from "./components/AdminModule/AdminApplication/ApplicationUserId";
 
 Vue.use(VueRouter);
@@ -227,6 +228,12 @@ const routes = [
         name: "applicationAllAdmin",
         path: "applications",
         component: ApplicationAll,
+        meta: { isAdmin: true }
+      },
+      {
+        name: "applicationSelectedAdmin",
+        path: "selected",
+        component: ApplicationAllSelected,
         meta: { isAdmin: true }
       },
       {

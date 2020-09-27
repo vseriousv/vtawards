@@ -359,7 +359,7 @@ export default {
         tabNumber: "Tab number",
         password: "Password",
         password_repeat: "Password repeat",
-        name: "Name and Last name",
+        name: "Full name",
         position: "Position",
         section: "Section",
         state: "State",

@@ -18,7 +18,7 @@ export default {
 			// dialogTable: "",
 			tab: null,
 			// idField: null,
-            tabs: [{ id: 0, name: "Заявки", value: "orders" },]
+            tabs: [{ id: 0, name: "Номинанты", value: "nominees" },]
 		};
 	},
 
@@ -47,5 +47,5 @@ export default {
 
 			v-tab-item
 				application-catalog
-
+				
 </template>
