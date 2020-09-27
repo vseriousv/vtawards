@@ -272,6 +272,10 @@ export default {
     memberMainBlock: {
       button: 'Все номинанты'
     },
+    archiveBlock: {
+      archiveBlockTitle: `Победители конкурса «Лидер перемен ВТ» прошлых лет`,
+      archiveBlockSubTitle: `Должности лауреатов указаны на момент вручения премии`,
+    },
     footerBlock: {},
     menuItems: [
       {
@@ -300,7 +304,7 @@ export default {
       },
       {
         id: 5,
-        text: "Уже звезды",
+        text: "Уже победители",
         link: "/archive",
         target: "_self"
       },
@@ -566,6 +570,10 @@ export default {
     memberMainBlock: {
       button: 'Все номинанты'
     },
+    archiveBlock: {
+      archiveBlockTitle: `VT Change Makers from previous years`,
+      archiveBlockSubTitle: `The positions of the winners are indicated at the time of the award`,
+    },
     footerBlock: {},
     menuItems: [
       {
@@ -594,7 +602,7 @@ export default {
       },
       {
         id: 5,
-        text: "Already the stars",
+        text: "Already the winners",
         link: "/archive",
         target: "_self"
       },

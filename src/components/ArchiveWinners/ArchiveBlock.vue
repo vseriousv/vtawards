@@ -1,5 +1,7 @@
 <template lang="pug"> 
     v-container.containerWinner
+        h2.mb-4(v-html='$t("archiveBlock.archiveBlockTitle")')
+        p.containerWinner__subTitle(v-html='$t("archiveBlock.archiveBlockSubTitle")')
         v-row
             v-col.boxWinner(
                 v-if="$t('lang') === 'ru'"
@@ -9,7 +11,7 @@
                 :md="4"
                 :sm="6"
                 )
-                img.boxWinner__imgWinner(:src=`item.imgWinner`)
+                img.boxWinner__imgWinner(:src=`item.imgWinner` :class=`"boxWinner__imgWinner__" + item.id`)
                 p.boxWinner__yearWinner {{item.year}}
                 p.boxWinner__nameWinner {{item.name}}
                 p.boxWinner__positionWinner {{item.position}}
@@ -62,7 +64,10 @@ export default {
 .containerWinner {
     margin-top: 50px;
     margin-bottom: 50px;
-    
+    &__subTitle {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
 }
 .boxWinner {
     display: flex;
@@ -71,11 +76,16 @@ export default {
     &__imgWinner {
         height: 150px;
         width: 150px;
-        overflow:hidden;
         object-fit: cover;
-        object-position: center center;
         border-radius: 100%;
         margin-bottom: 20px;
+        &__2 {
+            object-position: center -20px;
+        }
+        &__6,&__12,&__13 {
+            object-position: center -10px;
+        }
+        
     }
     &__yearWinner {
         font-size: 18px;
@@ -96,5 +106,4 @@ export default {
         font-style: italic;
     }
 }
-
 </style>
