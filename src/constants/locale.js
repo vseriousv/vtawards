@@ -273,6 +273,13 @@ export default {
       memberMainBlockTitle: "Номинанты",
       memberMainBlockBtn: 'Все номинанты',
     },
+    CallbackMainBlock: {
+      title: `Остались вопросы?`,
+      subTitle: `Задайте их через форму, и мы обязательно ответим`,
+      name:`ФИО`,
+      question: `Текст вопроса`,
+      send: `отправить`,
+    },
     archiveBlock: {
       archiveBlockTitle: `Победители конкурса «Лидер перемен ВТ» прошлых лет`,
       archiveBlockSubTitle: `Должности лауреатов указаны на момент вручения премии`,
@@ -402,10 +409,10 @@ export default {
       table: {
         head: "Table of results",
         member: "Participant",
-        count_committee_votes: "Commission points",
-        committee_rating: "Voices of the commission",
-        sr_rating: "Average commission score",
-        count_votes: "Employee Voices",
+        count_committee_votes: "Committee points",
+        committee_rating: "Committee votes",
+        sr_rating: "Average Committee score",
+        count_votes: "Staff votes",
         result_rating: "Total rating"
       }
     },
@@ -419,22 +426,22 @@ export default {
       head: "Обращение директора",
       nameCEO: "Gerhard Worster",
       whoIsCEO: "General Director of Vostochnaya Tekhnika LLC",
-      sayCEO: `<p>
-                <span class="initial">T</span>he Main Awards of Vostochnaya 
-                Technica Group for Outstanding Employees and Leaders.
+      sayCEO: `<p class="address-text__header">
+                <span class="initial">T</span>he Main Awards from Vostochnaya 
+                Technica Group for Outstanding Employees
+                and Leaders.
               </p>
-              <p><strong>Awarding employees</strong> for professional achievements 
-              and progress in all areas of the company’s work.</p>
+              <p><strong>Employees are awarded</strong>for professional achievements and progress in all areas of the
+              company’s work.</p>
               <p> <strong> Who can be nominated? </strong> </p>
               <p>
-                Employees from all departments of Vostochnaya Technica Group are 
-                eligible to be nominated in the categories of the VT Change Makers Awards.
-                Former winners cannot participate again. The full list 
-                of winners is available <a href=""> here </a>.
+                Employees from all Vostochnaya Technica Group departments can be nominated in the
+                categories of the VT Change Makers Awards.
+                However, former winners cannot participate. The full list of winners is available here.
               </p>
               <p> <strong> Who can nominate a candidate? </strong> </p>
               <p>
-                Candidates for the VT Change Makers Awards can be proposed by:
+              Candidates for the VT Change Makers Awards can be nominated by:
                 <ul class = "ulAddress">
                   <li>structural subdivisions of Vostochnaya Technica Group,</li>
                   <li>employees of Vostochnaya Technica Group,</li>
@@ -571,7 +578,13 @@ export default {
     memberMainBlock: {
       memberMainBlockTitle: "Nominees",
       memberMainBlockBtn: 'ALL NOMINEES',
-      
+    },
+    CallbackMainBlock: {
+      title: `Any questions?`,
+      subTitle: `Submit your question by filling in this form, and we will reply as soon as possible`,
+      name:`Full name`,
+      question: `Question`,
+      send: `SEND`,
     },
     archiveBlock: {
       archiveBlockTitle: `VT Change Makers from previous years`,

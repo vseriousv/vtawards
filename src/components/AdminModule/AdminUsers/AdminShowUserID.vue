@@ -57,13 +57,13 @@
       <v-card class="container-card">
         <div class="head-content">
           <h4>Редактируемые данные</h4>
-          <v-btn
+          <!-- <v-btn
             x-small
             color="primary"
             @click.stop="handleModal('user-static')"
           >
             Редактировать
-          </v-btn>
+          </v-btn> -->
         </div>
         <v-divider />
         <div class="form-update">
@@ -77,30 +77,203 @@
               Изменить
             </v-btn>
           </div>
-          <div>
-            <v-list>
-              <v-list-item>Роль: {{ userID.role }}</v-list-item>
-              <v-list-item
-                >Должность (En): {{ userID.position_ru }} ({{
-                  userID.position_en
-                }})</v-list-item
-              >
-              <v-list-item
-                >Отдел (En): {{ userID.section_ru }} ({{
-                  userID.section_en
-                }})</v-list-item
-              >
-              <v-list-item
-                >Регион (En): {{ userID.state_ru }} ({{
-                  userID.state_en
-                }})</v-list-item
-              >
-              <v-list-item
-                >Город (En): {{ userID.city_ru }} ({{
-                  userID.city_en
-                }})</v-list-item
-              >
-            </v-list>
+          <div class="userData">
+            <div class="userData__box">
+              <h3>Данные</h3> 
+              <v-list>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Роль: {{ userID.role }} </p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Пароль пользователя: {{ userID.userPassword }}</p>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Должность: {{ userID.position_ru }}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Отдел: {{ userID.section_ru }} </p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Регион: {{ userID.state_ru }}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Город: {{ userID.city_ru }}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+              </v-list>
+            </div>
+            <div>
+              <h3>Data</h3>
+              <v-list>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Role: {{ userID.role }}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">User Password: {{ userID.userPassword }}</p>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Position: {{userID.position_en }}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Section: {{userID.section_en}}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">State: {{userID.state_en}}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">City: {{userID.city_en}}</p>
+                  <div class="userData__btn">
+                    <v-btn class="mx-1"
+                      x-small
+                      color="secondary"
+                      @click.stop=""> 
+                      Редактировать
+                    </v-btn>
+                    <v-btn class="mx-1" 
+                      x-small
+                      :disabled="this.argumentationFixBtnEn"
+                      color="primary"
+                      @click.stop=""> 
+                      Сохранить
+                    </v-btn>
+                  </div>
+                </v-list-item>
+              </v-list>
+            </div>
           </div>
         </div>
       </v-card>
@@ -185,6 +358,7 @@ export default {
     parseDataUser: function(data) {
       const newObjectData = {
         tabNumber: data.tabNumber,
+        userPassword: data.passwordText,
         img: data.img ? data.img : "null.png",
         email: data.email,
         firstname_ru: data.firstnameRu,
@@ -259,6 +433,27 @@ export default {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+    }
+    .userData {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      width: 100%;
+      &__item {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+          width: 70%;
+        }
+      }
+      &__btn {
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
       }
     }
   }

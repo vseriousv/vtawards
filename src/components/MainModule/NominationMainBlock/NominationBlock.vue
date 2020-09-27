@@ -14,8 +14,13 @@ section.nomination#nomination
     div.nomination-text
       h2 {{$t('NominationBlock.head')}}
       p {{$t('NominationBlock.headText')}}
-      
-      <!--<a class="btn btn-yellow" href="">Подать заявку</a>-->
+      router-link(to="/application")
+        input(
+          type="button"
+          id="headerBtn"
+          class="body-button_col__button"
+          :value="$t('header.btnHeader.text')"
+        )
     div.nomination-icons
       ul.nomination-list
         li.nomination-list-item
@@ -37,9 +42,7 @@ section.nomination#nomination
               height="58"
             )
             p(v-html="$t('NominationBlock.professionalNom')")
-            
-            //- +vmodal("$t('NominationBlock.professionalNomTitle')", "$t('NominationBlock.professionalNomText')", "dialog1")
-        
+                    
         li.nomination-list-item
           a(@click.stop="dialogShow(true, 'attrGoldman')")
             img(
@@ -49,7 +52,6 @@ section.nomination#nomination
               height="58"
             )
             p(v-html="$t('NominationBlock.goldManNom')")
-            //- +vmodal("$t('NominationBlock.goldManNomTitle')", "$t('NominationBlock.goldManNomText')", "dialog2")
 </template>
 
 <script>
@@ -153,7 +155,6 @@ export default {
 
 .nomination-list-item {
   position: relative;
-
   margin-bottom: 50px;
   min-width: 190px;
 }
@@ -301,6 +302,19 @@ export default {
     display: none;
   }
 }
+.body-button_col__button {
+  color: black;
+  width: 220px;
+  height: 56px;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: 0.2s;
+  &:hover {
+    transition: 0.2s;
+    color: black;
+    background-color:  #ffb900;
+  }
+}
 
 @media screen and (max-width: 540px) {
   .nomination-list-item {
@@ -322,11 +336,5 @@ export default {
     
     margin: 0;
   }
-  // .nomination-list-item::before {
-  //   width: 250px;
-  // }
-  // .nomination-list:nth-child(2) {
-  //   margin-left: 30px;
-  // }
 }
 </style>

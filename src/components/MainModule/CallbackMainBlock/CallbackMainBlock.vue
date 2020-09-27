@@ -1,11 +1,11 @@
 <template>
   <section class="callback">
-    <h2>Остались вопросы?</h2>
-    <p>Задайте их через форму, и мы обязательно ответим</p>
+    <h2>{{ $t("CallbackMainBlock.title") }}</h2>
+    <p>{{ $t("CallbackMainBlock.subTitle") }}</p>
     <form class="callback-form">
       <v-text-field
         outlined
-        label="ФИО"
+        :label='$t("CallbackMainBlock.name")'
         name="cb-name"
         class="callback-form__field"
       />
@@ -13,9 +13,9 @@
         outlined
         class="callback-form__field"
         name="cb-text"
-        label="Текст вопроса"
+        :label='$t("CallbackMainBlock.question")'
       />
-      <button type="submit" class="btn btn-yellow">Отправить</button>
+      <button type="submit" class="btn btn-yellow"> {{$t("CallbackMainBlock.send")}} </button>
     </form>
   </section>
 </template>

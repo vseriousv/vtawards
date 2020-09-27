@@ -296,9 +296,6 @@ section
 						dense
 						outlined
 					)
-
-
-
 					.UserArgumentation.d-flex.flex-column
 						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}*
 						v-textarea.UserArgumentation__writeText(

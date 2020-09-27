@@ -26,17 +26,20 @@ export default {
 			userValue: 0,
 			nominationItemsRu: [],
 			nominationItemsEng: [],
-			argumentationText: "",
-			// argumentationFile: "",
+			argumentationTextRu: "",
+			argumentationTextEn: "",
 			nominationSelect: "",
-			// file: "",
 
 			autocompleteFix: true,
 			autocompleteFixBtn: true,
 			nominationFix: true,
 			nominationFixBtn: true,
-			argumentationFix: true,
-			argumentationFixBtn: true,
+			argumentationFixRu: true,
+			argumentationFixBtnRu: true,
+			argumentationFixEn: true,
+			argumentationFixBtnEn: true,
+
+			public: false,
     	};
 	},
 
@@ -44,6 +47,7 @@ export default {
 		await this.getUserId(this.userID);
 		await this.getUser();
 		await this.getNomination();
+
 	  },
 
 	watch: {
@@ -58,9 +62,7 @@ export default {
 			}
 		},
 	},
-
   	methods: {
-
 		getUserId: async function(id) {
             const url = "/nomination-order/"+id;
             try {
@@ -78,8 +80,10 @@ export default {
 				argumentationRu: item.textRu,
 				argumentationEn: item.textEn,
 				files: item.files ? item.files : "",
-				nominationId: item.nomination.id
+				nominationId: item.nomination.id,
+				public: item.public,
 			}
+			this.public = item.public;
 		},
 
 		setUserFrom: function(data) {
@@ -135,7 +139,8 @@ export default {
 				})
 				this.userValue = this.userOrder.userId
 				this.nominationSelect = this.userOrder.nominationId
-				this.argumentationText = this.userOrder.argumentationRu
+				this.argumentationTextRu = this.userOrder.argumentationRu
+				this.argumentationTextEn = this.userOrder.argumentationEn
 				this.setUserFrom(this.userOrder.userFrom)
 			},
 
@@ -175,9 +180,13 @@ export default {
 					this.nominationFix = false
 					this.nominationFixBtn = false
 					break
-				case "nominationText":
-					this.argumentationFix = false
-					this.argumentationFixBtn = false
+				case "argumentationTextRu":
+					this.argumentationFixRu = false
+					this.argumentationFixBtnRu = false
+					break
+				case "argumentationTextEn":
+					this.argumentationFixEn = false
+					this.argumentationFixBtnEn = false
 					break
 			}
 		},
@@ -193,10 +202,15 @@ export default {
 					this.nominationFixBtn = true
 					this.postNewData({"nominationId": this.nominationSelect})
 					break
-				case "nominationText":
-					this.argumentationFix = true
-					this.argumentationFixBtn = true
-					this.postNewData({"textRu": this.argumentationText})
+				case "argumentationTextRu":
+					this.argumentationFixRu = true
+					this.argumentationFixBtnRu = true
+					this.postNewData({"textRu": this.argumentationTextRu})
+					break
+				case "argumentationTextEn":
+					this.argumentationFixEn = true
+					this.argumentationFixBtnEn = true
+					this.postNewData({"textEn": this.argumentationTextEn})
 					break
 			}
 		},
@@ -218,9 +232,18 @@ export default {
 					console.error("ERROR ApplicationUserId/postNewData:", e);
 				}
 		},
-		postCardNomination: function() {
-			this.postNewData({"public": true}), 
-			alert("Карточка номинанта опубликована")
+		postCardNomination: function(data) {
+			this.postNewData({"public": data})
+			if (data===true) {
+				alert("Карточка номинанта опубликована")
+				this.public = true
+			} else {
+				alert("Карточка номинанта снята с публикации")
+				this.public = false
+			}
+		},
+		showUser: function() {
+			this.$router.push({ path:"/admin/users/id/" + this.userOrder.userFrom});
 		}
     }
 };
@@ -317,8 +340,10 @@ section
 												) &ensp; {{ user.city_en }}
 				v-card.UserCard.mb-5
 					h3.mb-3 {{$t("ApplicationForm.applicant")}}
-					h4(v-if="$t('lang') === 'ru'") {{this.userFromRu}}
-					h4(v-if="$t('lang') === 'en'") {{this.userFromEn}}
+					h4.userFrom( @click.stop="showUser"
+						v-if="$t('lang') === 'ru'") {{this.userFromRu}}
+					h4.userFrom( @click.stop="showUser"
+						v-if="$t('lang') === 'en'") {{this.userFromEn}}
 				v-card.UserCard.mb-5
 					h3.mb-3 {{$t("ApplicationForm.nominationTitle")}}
 					.nomination
@@ -348,10 +373,10 @@ section
 						h3.mb-3 {{$t("ApplicationForm.argumentationTitle")}}
 						.nominationText
 							v-textarea.UserArgumentation__writeText(
-								v-model="argumentationText"
-								name="argumentationText"
+								v-model="argumentationTextRu"
+								name="argumentationTextRu"
 								style="max-width: 500px;"
-								:disabled="this.argumentationFix"
+								:disabled="this.argumentationFixRu"
 								:label=`$t("ApplicationForm.commentPost")`
 								outlined
 							)
@@ -359,14 +384,36 @@ section
 								v-btn.mx-1(
 								x-small
 								color="secondary"
-								@click.stop="fixsetData('nominationText')"
+								@click.stop="fixsetData('argumentationTextRu')"
 								) Редактировать
 
 								v-btn.mx-1(
 								x-small
-								:disabled="this.argumentationFixBtn"
+								:disabled="this.argumentationFixBtnRu"
 								color="primary"
-								@click.stop="saveData('nominationText')"
+								@click.stop="saveData('argumentationTextRu')"
+								) Сохранить
+						.nominationText
+							v-textarea.UserArgumentation__writeText(
+								v-model="argumentationTextEn"
+								name="argumentationTextEn"
+								style="max-width: 500px;"
+								:disabled="this.argumentationFixEn"
+								:label=`$t("ApplicationForm.commentPost")`
+								outlined
+							)
+							.nominationText__btn
+								v-btn.mx-1(
+								x-small
+								color="secondary"
+								@click.stop="fixsetData('argumentationTextEn')"
+								) Редактировать
+
+								v-btn.mx-1(
+								x-small
+								:disabled="this.argumentationFixBtnEn"
+								color="primary"
+								@click.stop="saveData('argumentationTextEn')"
 								) Сохранить
 					.UserFilesArgumentation
 						a(
@@ -381,10 +428,17 @@ section
 				v-card.UserCard.footerApplication
 					p.footerApplication__text(v-html='$t("ApplicationForm.publishForm")')
 					v-btn(
+						v-if="(this.public === false)"
 						x-small
 						color="secondary"
-						@click.stop='postCardNomination'
+						@click.stop='postCardNomination(true)'
 						) Опубликовать
+					v-btn(
+						v-else="(this.public === true)"
+						x-small
+						color="error"
+						@click.stop='postCardNomination(false)'
+						) Снять с публикации
 </template>
 
 <style lang="sass">
@@ -464,12 +518,10 @@ section
 		width: 100%
 		margin: 10px
 
-
 	&__description
 		padding: 10px
 		p
 			font-size: 14px
-
 
 	&__votingSelection
 		width: 100%
@@ -523,4 +575,8 @@ section
 		max-width: 280px
 		padding: 0
 		margin: 0
+.userFrom 
+	cursor: pointer
+	&:hover
+		color: #ffb900
 </style>
