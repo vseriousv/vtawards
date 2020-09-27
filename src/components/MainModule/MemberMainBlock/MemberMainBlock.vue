@@ -1,7 +1,7 @@
 <template>
   <section class="member" id="member">
     <div class="mxw1200">
-      <h2>Номинанты</h2>
+      <h2> {{$t('memberMainBlock.memberMainBlockTitle')}} </h2>
       <div class="member-content">
         <span class="member-card-btn"></span>
 
@@ -37,7 +37,7 @@
               color="primary"
               to="/participants"
             >
-              {{$t('memberMainBlock.button')}}
+              {{$t('memberMainBlock.memberMainBlockBtn')}}
             </v-btn>
           </div>
         </div>

@@ -270,7 +270,8 @@ export default {
         `
     },
     memberMainBlock: {
-      button: 'Все номинанты'
+      memberMainBlockTitle: "Номинанты",
+      memberMainBlockBtn: 'Все номинанты',
     },
     archiveBlock: {
       archiveBlockTitle: `Победители конкурса «Лидер перемен ВТ» прошлых лет`,
@@ -321,18 +322,18 @@ export default {
     drawer: {},
     header: {
       logotype: "VT_Logo_eng",
-      head: "Change Maker Award 2020",
-      subHeadText: `Ignite your star!`,
+      head: "Change Maker 2020",
+      subHeadText: `Shine a light on your talents!`,
       bodyText:
         "The main award of Vostochnaya Technica, presented to employees for outstanding achievements and innovative initiatives since 2005.",
       btnHeader: {
-        beforeText: `Fill out the application form</br>for participation in the competition`,
-        text: "Competition regulations",
+        beforeText: `Submit an application<br/>to participate in the contest`,
+        text: "Submit",
         link: "Konkurs-Lider-Peremen-VT-Polozhenie_2019-0204-eng.pdf"
       },
       statusVote: {
         statusEnd: "Voting is closed",
-        statusProc: "Voting will begin soon",
+        statusProc: "The on-line voting is over",
         statusStart: "There is a vote"
       }
     },
@@ -442,11 +443,11 @@ export default {
               </p> `
     },
     NominationBlock: {
-      head: "Nominations 2020",
-      headText: "Each employee or structural subdivision of the Vostochnaya Tekhnika group of companies can nominate a nominee for any of the three nominations of th' VT Leader of Change 'competition, the number of applications from one person is not limited.",
-      liderNom: `<p>Achievement</br>and leadership</p>`,
-      professionalNom: `<p>Professionalism</br>and innovation</p>`,
-      goldManNom: `<p>Golden man</p>`,
+      head: "Categories 2020",
+      headText: "Any employee or structural subdivision of Vostochnaya Technica Group can nominate a candidate in any of the three categories. There is no limit as to the number of applications one person may submit.",
+      liderNom: `<p>Achievements</br>and Leadership</p>`,
+      professionalNom: `<p>Professionalism</br>and Innovations</p>`,
+      goldManNom: `<p>Pillar of the Team</p>`,
       liderNomTitle: `An employee can be nominated<br/> in the ACHIEVEMENTS and LEADERSHIP<br/> category if:`,
       liderNomText: 
       `<ul>
@@ -486,12 +487,12 @@ export default {
       buttonNomText: "Close",
     },
     StepsMainBlock: {
-      blockTitle: "Election of the winners",
-      dataCard: "The date of the",
-      descriptionCard: "Description stage",
-      regionalStage: "Regional Stage",
+      blockTitle: "Voting",
+      dataCard: "Time frame",
+      descriptionCard: "About the stage",
+      regionalStage: "Regional stage",
       semiStage: "Semi-Finals",
-      finalStage: "Final",
+      finalStage: "Finals",
       regionalStageTitle: "Stage 1 — Regional<br/>Team Leaders",
       regionalStageText: `<p class="mt-3 mb-2">The contest features three categories:
       Achievements and Leadership,Professionalism and Innovations, Pillar of the Team.</p>
@@ -568,7 +569,9 @@ export default {
       `
     },
     memberMainBlock: {
-      button: 'Все номинанты'
+      memberMainBlockTitle: "Nominees",
+      memberMainBlockBtn: 'ALL NOMINEES',
+      
     },
     archiveBlock: {
       archiveBlockTitle: `VT Change Makers from previous years`,
@@ -584,13 +587,13 @@ export default {
       },
       {
         id: 2,
-        text: "Voting results",
+        text: "Voting Results",
         link: "/result",
         target: "_self"
       },
       {
         id: 3,
-        text: "Committee",
+        text: "The Committee",
         link: "/committee",
         target: "_self"
       },
@@ -608,7 +611,7 @@ export default {
       },
       {
         id: 6,
-        text: "Logout",
+        text: "Log Out",
         link: "/logout",
         target: "_self"
       }

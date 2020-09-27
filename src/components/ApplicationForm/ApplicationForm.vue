@@ -146,7 +146,9 @@
 				this.userValue = "";
 				this.nominationSelect = "";
 				this.argumentationText = "";
-				this.file = "";
+				this.argumentationFile = [],
+				this.file = [];
+				this.formsArr = [];
 			},
 
 			PostFormNomination: async function(data) {
@@ -164,8 +166,14 @@
 						},
 					);
 					console.log(PostFormNomination)
+					alert("Ваша заявка успешно сформирована и отправлена. Она будет опубликована после модерации администратором.");
 				} catch(e) {
-					console.error("ERROR ApplicationForm/PostFormNomination:", e);
+					// if (e.response.message=== 401) {
+					// 	alert("Ошибка данных: проверьте максимальный размер отправляемых документов");
+					// } else {
+						console.log(e.message)
+						console.error("ERROR ApplicationForm/PostFormNomination:", e);
+					
 				}
 			},
 
@@ -302,13 +310,12 @@ section
 
 						.argumentationBody
 							p(v-html='$t("ApplicationForm.fileArgumentation")')
-							label
-								input(type="file"
-									id="file"
-									ref="file"
-									multiple
-									v-on:change="handleFileUpload()"
-									)
+							input(type="file"
+								id="file"
+								ref="file"
+								multiple
+								v-on:change="handleFileUpload()"
+								)
 
 						.argumentationBody__btn
 							p(v-html="$t('ApplicationForm.argumentationBtnTitle')")
