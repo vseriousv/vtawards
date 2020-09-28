@@ -18,7 +18,13 @@ export default {
         statusProc: "Голосование скоро начнется",
         statusStart: "Идет голосовнаие",
 				statusCancel: "До конца голосования осталось"
-      }
+      },
+      time:{
+        d:"Д",
+        hr:"Ч",
+        min:"Мин",
+        sec:"Сек",
+      },
     },
     loginBlock: {
       headAuth: "Авторизация",
@@ -314,7 +320,7 @@ export default {
       // },
       {
         id: 5,
-        text: "Архив",
+        text: "Архив победителей",
         link: "/archive",
         target: "_self"
       },
@@ -345,7 +351,13 @@ export default {
         statusProc: "The on-line voting is over",
         statusStart: "There is a vote",
 				statusCancel: "Until the end of the vote left"
-      }
+      },
+      time:{
+        d:"d",
+        hr:"hr",
+        min:"min",
+        sec:"sec",
+      },
     },
     loginBlock: {
       headAuth: "Sing in",
@@ -621,7 +633,7 @@ export default {
       // },
       {
         id: 5,
-        text: "Archive",
+        text: "Archive of Winners",
         link: "/archive",
         target: "_self"
       },

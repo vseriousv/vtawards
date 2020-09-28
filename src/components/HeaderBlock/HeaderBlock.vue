@@ -76,10 +76,22 @@
         <v-col class="body-voteStatus_col d-flex flex-column align-start">
 					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>
 					<div class="Timer-view d-flex">
-						<span class="Timer-view__card days">{{timer.days}}</span>
-						<span class="Timer-view__card hours">{{timer.hours}}</span>
-						<span class="Timer-view__card minutes">{{timer.minutes}}</span>
-						<span class="Timer-view__card seconds">{{timer.seconds}}</span>
+            <div class="boxTime">
+              <p class="boxTime__title">{{$t("header.time.d")}}</p>
+              <span class="Timer-view__card days">{{timer.days}}</span>
+            </div>
+            <div class="boxTime">
+              <p class="boxTime__title">{{$t("header.time.hr")}}</p>
+              <span class="Timer-view__card hours">{{timer.hours}}</span>
+            </div>
+            <div class="boxTime">
+              <p class="boxTime__title">{{$t("header.time.min")}}</p>
+              <span class="Timer-view__card minutes">{{timer.minutes}}</span>
+            </div>
+            <div class="boxTime">
+              <p class="boxTime__title">{{$t("header.time.sec")}}</p>
+              <span class="Timer-view__card seconds">{{timer.seconds}}</span>
+            </div>
 					</div>
 <!--          <p class="body-voteStatus_col__text">-->
 <!--&lt;!&ndash;            {{ $t("header.statusVote.statusProc") }}&ndash;&gt;-->
@@ -140,12 +152,14 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/styles/index";
 .Timer-view {
-	font-size: 54px;
+	font-size: 45px;
+  line-height: 80%;
 	color: white;
-	.Timer-view__card {
-		padding: 7px 7px 7px 0;
-		margin: 7px 7px 7px 0;
-	}
+  margin-top: 8px;
+	// .Timer-view__card {
+	// 	padding: 7px 7px 7px 0;
+	// 	margin: 7px 7px 7px 0;
+	// }
 }
 
 .header-block {
@@ -267,7 +281,7 @@ export default {
           }
         }
         .body-head_col__text {
-          color: white;
+          color: #FEBA13;
           font-size: 14px;
           line-height: 20px;
           letter-spacing: 0.04em;
@@ -335,6 +349,16 @@ export default {
           @include respond-to(large-screens) {
             text-align: left;
           }
+        }
+      }
+      .boxTime {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 20px;
+        .boxTime__title {
+          font-size: 18px;
+          margin-bottom: 8px;
         }
       }
     }

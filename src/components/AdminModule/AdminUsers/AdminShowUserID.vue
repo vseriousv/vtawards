@@ -82,17 +82,22 @@
               <h3>Данные</h3> 
               <v-list>
                 <v-list-item class="userData__item">
-                  <p class="mb-0">Роль: {{ userID.role }} </p>
+                  <p class="mb-0" 
+                    :disabled="this.btnDisabled[0].fixsetData">
+                    Роль: {{ userID.role }} 
+                  </p>
                   <div class="userData__btn">
                     <v-btn class="mx-1"
+                      ref="1"
                       x-small
                       color="secondary"
-                      @click.stop=""> 
+                      @click.stop="disabledBtnNone(0)"> 
                       Редактировать
                     </v-btn>
-                    <v-btn class="mx-1" 
+                    <v-btn class="mx-1"
+                      ref="11"
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="this.btnDisabled[0].saveData"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -108,12 +113,12 @@
                     <v-btn class="mx-1"
                       x-small
                       color="secondary"
-                      @click.stop=""> 
+                      @click.stop="disabledBtnNone(false)"> 
                       Редактировать
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="this.btnDisabled[1].saveData"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -131,7 +136,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -149,7 +154,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -167,7 +172,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -190,7 +195,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -211,7 +216,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -229,7 +234,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -247,7 +252,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -265,7 +270,7 @@
                     </v-btn>
                     <v-btn class="mx-1" 
                       x-small
-                      :disabled="this.argumentationFixBtnEn"
+                      :disabled="true"
                       color="primary"
                       @click.stop=""> 
                       Сохранить
@@ -303,13 +308,32 @@ export default {
       dialog: false,
       userID: "",
       URL_AVATARS: config.URL_AVATARS,
-      user__ID: this.$route.params.id
+      user__ID: this.$route.params.id,
+
+      btnDisabled: [
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+      ]
     };
   },
+  
   created() {
     this.getUserID(this.$route.params.id);
   },
   methods: {
+    disabledBtnNone: function (index) {
+      this.btnDisabled[index].saveData = false
+      this.btnDisabled[index].fixsetData = true
+    },
+    
     handleModal: function(dialog_name) {
       this.getUserID(this.$route.params.id);
       this.dialog_name = dialog_name;
@@ -380,18 +404,18 @@ export default {
         role: data.role || "-----"
       };
       this.userID = newObjectData;
-      this.$store.commit("setAdminUser_email", data.email);
-      this.$store.commit("setAdminUser_tab_number", data.tabNumber);
-      this.$store.commit("setAdminUser_firstname_ru", data.firstnameRu);
-      this.$store.commit("setAdminUser_firstname_en", data.firstnameEn);
-      this.$store.commit("setAdminUser_lastname_ru", data.lastnameRu);
-      this.$store.commit("setAdminUser_lastname_en", data.lastnameEn);
-      this.$store.commit("setAdminUser_patronymic_ru", data.patronymicRu);
-      this.$store.commit("setAdminUser_patronymic_en", data.patronymicEn);
-      this.$store.commit("setAdminUser_role", data.role);
-      this.$store.commit("setAdminUser_state_id", data.state_id);
-      this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
-    }
+      // this.$store.commit("setAdminUser_email", data.email);
+      // this.$store.commit("setAdminUser_tab_number", data.tabNumber);
+      // this.$store.commit("setAdminUser_firstname_ru", data.firstnameRu);
+      // this.$store.commit("setAdminUser_firstname_en", data.firstnameEn);
+      // this.$store.commit("setAdminUser_lastname_ru", data.lastnameRu);
+      // this.$store.commit("setAdminUser_lastname_en", data.lastnameEn);
+      // this.$store.commit("setAdminUser_patronymic_ru", data.patronymicRu);
+      // this.$store.commit("setAdminUser_patronymic_en", data.patronymicEn);
+      // this.$store.commit("setAdminUser_role", data.role);
+      // this.$store.commit("setAdminUser_state_id", data.state_id);
+      // this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
+    },
   }
 };
 </script>
