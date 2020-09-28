@@ -152,10 +152,13 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/styles/index";
 .Timer-view {
-	font-size: 45px;
+	font-size: 35px;
   line-height: 80%;
 	color: white;
   margin-top: 8px;
+  @include respond-to(medium-screens) {
+    font-size: 45px;
+  }
 	// .Timer-view__card {
 	// 	padding: 7px 7px 7px 0;
 	// 	margin: 7px 7px 7px 0;
