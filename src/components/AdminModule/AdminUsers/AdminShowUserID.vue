@@ -26,69 +26,72 @@
     <!--        !MODAL WINDOW       -->
     <v-row>
       <v-card class="head-card">
-        <div>
-          <v-text-field
-            class="mx-3 userData__input"
-            :disabled="this.btnDisabled[10].saveData"
-            v-model="userID.email"
-            outlined>
-          </v-text-field>
-          <span style="font-size: 18px; font-weight: 500;">
-            
-            <!-- {{ userID.email }}:  -->
-            {{ userID.tabNumber }} -
-            {{ userID.lastname_ru }} {{ userID.firstname_ru }}
-            {{ userID.patronymic_ru }}</span>
+        <h2 class="my-3">{{ userID.tabNumber }} - 
+          {{ userID.lastname_ru }} 
+          {{ userID.firstname_ru }} 
+          {{ userID.patronymic_ru }}<br/>
+          {{ userID.email }}
+        </h2>
+        
+        <BtnHeadCardUserId
+            :model="userID.tabNumber"
+            tableLine="tabNumber"
+            @saveDataInput="savesDataInput"
+          />
+        <div class="head-card__box">
+
+          <BtnHeadCardUserId
+            :model="userID.lastname_ru"
+            tableLine="lastnameRu"
+            @saveDataInput="savesDataInput"
+          />
+          
+          <BtnHeadCardUserId
+            :model="userID.lastname_en"
+            tableLine="lastnameEn"
+            @saveDataInput="savesDataInput"
+          />
+          
+          <BtnHeadCardUserId
+            :model="userID.firstname_ru"
+            tableLine="firstnameRu"
+            @saveDataInput="savesDataInput"
+          />
+          
+          <BtnHeadCardUserId
+            :model="userID.firstname_en"
+            tableLine="firstnameEn"
+            @saveDataInput="savesDataInput"
+          />
+          
+          <BtnHeadCardUserId
+            :model="userID.patronymic_ru"
+            tableLine="patronymicRu"
+            @saveDataInput="savesDataInput"
+          />
+          
+          <BtnHeadCardUserId
+            :model="userID.email"
+            tableLine="email"
+            @saveDataInput="savesDataInput"
+          />
+
         </div>
-        <div class="userData__btn">
-          <v-btn class="mx-1"
-            x-small
-            color="secondary"
-            @click.stop="disabledBtnNone(10)"> 
-            Редактировать
-          </v-btn>
-          <v-btn class="mx-1" 
-            x-small
-            :disabled="this.btnDisabled[10].saveData"
-            color="primary"
-            @click.stop="saveDataInput(10, {'email': userID.email})"> 
-            Сохранить
-          </v-btn>
-        </div>
-        <!-- <div>
-          <v-btn
-            class="mx-1"
-            x-small
-            color="secondary"
-            @click.stop="getUserID(user__ID)"
-          >
-            Обновить
-          </v-btn>
-          <v-btn
-            class="mx-1"
-            x-small
-            color="primary"
-            @click.stop="handleModal('user-name')"
-          >
-            Редактировать
-          </v-btn>
-        </div> -->
       </v-card>
     </v-row>
     <v-row>
       <v-card class="container-card">
         <div class="head-content">
-          <h4>Редактируемые данные</h4>
+          <h3>Редактируемые данные</h3>
         </div>
         <v-divider />
         <div class="form-update">
           <div class="img-avatar">
-            <img :src="`${URL_AVATARS}${userID.img}`" />
+            <img :src="`${URL_AVATARS}${userID.img}`"/>
             <v-btn
               x-small
               color="primary"
-              @click.stop="handleModal('user-images')"
-            >
+              @click.stop="handleModal('user-images')">
               Изменить
             </v-btn>
           </div>
@@ -101,12 +104,9 @@
                 </v-list-item>
 
                 <v-list-item class="userData__item">
-                  <p class="mb-0" 
-                    :disabled="this.btnDisabled[0].fixsetData">
-                    Роль: 
-                  </p>
+                  <p class="mb-0">Роль:</p>
                   <v-autocomplete
-                      class="mx-3 userData__input"
+                      class="mx-3 userData__input userData__input_autocomplete"
                       v-model="userID.role"
                       :items="roleEn"
                       dense
@@ -135,17 +135,33 @@
                 </v-list-item>
                 
                 <v-list-item class="userData__item">
-                  <p 
-                    class="mb-0"
-                    :disabled="this.btnDisabled[1].fixsetData">
-                    Должность:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[1].saveData"
-                    v-model="userID.position_ru"
-                    outlined>
-                  </v-text-field>
+                  <p class="mb-0">Должность:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.position_ru"
+                    tableLine="positionName"
+                    @saveDataInput="savesDataInput"/>
+                </v-list-item>
+
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Отдел:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.section_ru"
+                    tableLine="sectionName"
+                    @saveDataInput="savesDataInput"/>
+                </v-list-item>
+
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Регион:</p>
+                  <v-autocomplete
+                      class="mx-3 userData__input userData__input_autocomplete"
+                      v-model="userID.stateId"
+                      :items="statesRu"
+                      dense
+                      filled
+                      outlined
+                      :disabled="this.btnDisabled[1].saveData"
+                      background-color= "white">
+                  </v-autocomplete>
                   <div class="userData__btn">
                     <v-btn class="mx-1"
                       x-small
@@ -157,23 +173,40 @@
                       x-small
                       :disabled="this.btnDisabled[1].saveData"
                       color="primary"
-                      @click.stop="saveDataInput(1, {'positionName': userID.position_ru})"> 
+                      @click.stop="saveDataInput(1, {'stateId': userID.stateId})"> 
                       Сохранить
                     </v-btn>
                   </div>
                 </v-list-item>
 
                 <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[2].fixsetData">
-                    Отдел:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[2].saveData"
-                    v-model="userID.section_ru"
-                    outlined>
-                  </v-text-field>
+                  <p class="mb-0">Город:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.city_ru"
+                    tableLine="cityName"
+                    @saveDataInput="savesDataInput"/>
+                </v-list-item>
+              </v-list>
+            </div>
+            <div>
+              <h3>Data</h3>
+              <v-list>
+                <v-list-item class="userData__item">
+                  <p class="mb-0">User Password: {{ userID.userPassword }}</p>
+                </v-list-item>
+
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Role:</p>
+                  <v-autocomplete
+                      class="mx-3 userData__input userData__input_autocomplete"
+                      v-model="userID.role"
+                      :items="roleEn"
+                      dense
+                      filled
+                      outlined
+                      :disabled="this.btnDisabled[2].saveData"
+                      background-color= "white">
+                  </v-autocomplete>
                   <div class="userData__btn">
                     <v-btn class="mx-1"
                       x-small
@@ -185,26 +218,39 @@
                       x-small
                       :disabled="this.btnDisabled[2].saveData"
                       color="primary"
-                      @click.stop="saveDataInput(2, {'sectionName': userID.section_ru})"> 
+                      @click.stop="saveDataInput(2, {'role': userID.role})"> 
                       Сохранить
                     </v-btn>
                   </div>
                 </v-list-item>
+                
+                <v-list-item class="userData__item">
+                  <p class="mb-0">Position:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.position_en"
+                    tableLine="positionNameEng"
+                    @saveDataInput="savesDataInput"/>
+                </v-list-item>
 
                 <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[3].fixsetData">
-                    Регион:
-                  </p>
+                  <p class="mb-0">Section:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.section_en"
+                    tableLine="sectionNameEng"
+                    @saveDataInput="savesDataInput"/>
+                </v-list-item>
+
+                <v-list-item class="userData__item">
+                  <p class="mb-0">State:</p>
                   <v-autocomplete
-                      class="mx-3 userData__input"
-                      v-model="userID.stateId"
-                      :items="statesRu"
-                      dense
-                      filled
-                      outlined
-                      :disabled="this.btnDisabled[3].saveData"
-                      background-color= "white">
+                    class="mx-3 userData__input userData__input_autocomplete"
+                    v-model="userID.stateId"
+                    :items="statesEn"
+                    dense
+                    filled
+                    outlined
+                    :disabled="this.btnDisabled[3].saveData"
+                    background-color= "white">
                   </v-autocomplete>
                   <div class="userData__btn">
                     <v-btn class="mx-1"
@@ -224,187 +270,11 @@
                 </v-list-item>
 
                 <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[4].fixsetData">
-                    Город:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[4].saveData"
-                    v-model="userID.city_ru"
-                    outlined>
-                  </v-text-field>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(4)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[4].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(4, {'cityName': userID.city_ru})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
-                </v-list-item>
-              </v-list>
-            </div>
-            <div>
-              <h3>Data</h3>
-              <v-list>
-                <v-list-item class="userData__item">
-                  <p class="mb-0">User Password: {{ userID.userPassword }}</p>
-                </v-list-item>
-
-                <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[9].fixsetData">
-                    Role:
-                  </p>
-                  <v-autocomplete
-                      class="mx-3 userData__input"
-                      v-model="userID.role"
-                      :items="roleEn"
-                      dense
-                      filled
-                      outlined
-                      :disabled="this.btnDisabled[9].saveData"
-                      background-color= "white">
-                  </v-autocomplete>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(9)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[9].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(9, {'role': userID.role})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
-                </v-list-item>
-                
-                <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[5].fixsetData">
-                    Position:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[5].saveData"
-                    v-model="userID.position_en"
-                    outlined>
-                  </v-text-field>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(5)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[5].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(5, {'positionNameEng': userID.position_en})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
-                </v-list-item>
-
-                <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[6].fixsetData">
-                    Section:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[6].saveData"
-                    v-model="userID.section_en"
-                    outlined>
-                  </v-text-field>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(6)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[6].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(6, {'sectionNameEng': userID.section_en})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
-                </v-list-item>
-
-                <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[7].fixsetData">
-                    State:
-                  </p>
-                  <v-autocomplete
-                    class="mx-3 userData__input"
-                    v-model="userID.stateId"
-                    :items="statesEn"
-                    dense
-                    filled
-                    outlined
-                    :disabled="this.btnDisabled[7].saveData"
-                    background-color= "white">
-                  </v-autocomplete>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(7)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[7].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(7, {'stateId': userID.stateId})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
-                </v-list-item>
-
-                <v-list-item class="userData__item">
-                  <p class="mb-0"
-                    :disabled="this.btnDisabled[8].fixsetData">
-                    City:
-                  </p>
-                  <v-text-field
-                    class="mx-3 userData__input"
-                    :disabled="this.btnDisabled[8].saveData"
-                    v-model="userID.city_en"
-                    outlined>
-                  </v-text-field>
-                  <div class="userData__btn">
-                    <v-btn class="mx-1"
-                      x-small
-                      color="secondary"
-                      @click.stop="disabledBtnNone(8)"> 
-                      Редактировать
-                    </v-btn>
-                    <v-btn class="mx-1" 
-                      x-small
-                      :disabled="this.btnDisabled[8].saveData"
-                      color="primary"
-                      @click.stop="saveDataInput(8, {'cityNameEng': userID.city_en})"> 
-                      Сохранить
-                    </v-btn>
-                  </div>
+                  <p class="mb-0">City:</p>
+                  <BtnContainerCardUserId
+                    :model="userID.city_en"
+                    tableLine="cityNameEng"
+                    @saveDataInput="savesDataInput"/>
                 </v-list-item>
               </v-list>
             </div>
@@ -422,6 +292,8 @@ import UsersModal from "./UsersModal";
 import UsersDescriptionModal from "./UsersDescriptionModal";
 import UsersNameModal from "./UsersNameModal";
 import UsersImagesModal from "./UsersImagesModal";
+import BtnHeadCardUserId from "./BtnHeadCardUserId";
+import BtnContainerCardUserId from "./BtnContainerCardUserId";
 
 export default {
   name: "AdminShowUserID",
@@ -429,7 +301,9 @@ export default {
     UsersNameModal,
     UsersImagesModal,
     UsersModal,
-    UsersDescriptionModal
+    UsersDescriptionModal,
+    BtnHeadCardUserId,
+    BtnContainerCardUserId
   },
   data() {
     return {
@@ -451,7 +325,18 @@ export default {
         value: "commiti"},
       ],
 
+      dataModelInput: function(data) {
+        const dataModelInput = data
+        return dataModelInput
+      },
+
       btnDisabled: [
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
+        {fixsetData: true, saveData: true},
         {fixsetData: true, saveData: true},
         {fixsetData: true, saveData: true},
         {fixsetData: true, saveData: true},
@@ -557,8 +442,8 @@ export default {
         firstname_ru: data.firstnameRu,
         lastname_ru: data.lastnameRu,
         patronymic_ru: data.patronymicRu,
-        firstname_en: data.firstnameRn,
-        lastname_en: data.lastnameRn,
+        firstname_en: data.firstnameEn,
+        lastname_en: data.lastnameEn,
         patronymic_en: data.patronymicEn || "-----",
         position_ru: data.positionName ? data.positionName : "-----",
         section_ru: data.sectionName ? data.sectionName : "-----",
@@ -599,6 +484,11 @@ export default {
       this.btnDisabled[index].fixsetData = true
     },
 
+    savesDataInput: function(tableLine, data) {
+      const dataSave = {[tableLine]: this.dataModelInput(data)}
+      this.postNewDataInput(dataSave)
+    },
+
     postNewDataInput: async function(data) {
       console.log(data)
       const url = "/users/" + this.userID.id;
@@ -624,12 +514,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/styles/index";
+
 .head-card {
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 20px 30px;
   margin: 10px 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  &__box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include respond-to(large-screens) {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    > * {
+      margin-bottom: -20px;
+    }
+  }
 }
 .container-card {
   width: 100%;
@@ -638,19 +545,24 @@ export default {
   .head-content {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   .form-update {
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    @include respond-to(large-screens) {
+      flex-direction: row;
+    }
+
     .img-avatar {
       max-width: 200px;
       max-height: 250px;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      margin-top: 10px;
-      margin-right: 10px;
+      margin: 10px 30px 20px 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -672,19 +584,22 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
-        // p {
-        //   width: 70%;
-        // }
+        align-items: flex-start;
+        > p {
+          padding-top: 17px;
+        }
+      }
+      &__input {
+        &_autocomplete {
+          padding-top: 9px;
+        }
       }
       &__btn {
+        padding-top: 17px;
         width: auto;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-      }
-      &__input {
-        padding-top: 20px;
       }
     }
   }
