@@ -31,6 +31,7 @@ import AdminUsers from "./components/AdminModule/AdminUsers/AdminUsers";
 import AdminShowUserID from "./components/AdminModule/AdminUsers/AdminShowUserID";
 import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
+import AdminAddNewUser from "./components/AdminModule/AdminUsers/AdminAddNewUser";
 import AdminWinners from "./components/AdminModule/AdminWinners/AdminWinners";
 import ApplicationAll from "./components/AdminModule/AdminApplication/ApplicationAll";
 import ApplicationAllSelected from "./components/AdminModule/AdminApplicationSelected/ApplicationAll";
@@ -165,8 +166,8 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: "/participants/id/:id",
-    name: "participantsID",
+    path: "/nomination-order/id/:id",
+    name: "nomination-order-id",
     components: {
       adminPanel: AdminPanel,
       header: HeaderBlockOtherPage,
@@ -222,6 +223,12 @@ const routes = [
         name: "usersAdmin",
         path: "users",
         component: AdminUsers,
+        meta: { isAdmin: true }
+      },
+      {
+        name: "newUserAdmin",
+        path: "creat-user",
+        component: AdminAddNewUser,
         meta: { isAdmin: true }
       },
       {

@@ -34,7 +34,7 @@
 
 		methods: {
 			createField: function() {
-				console.log("CREATE USER");
+				this.$router.push({ path: "/admin/creat-user"});
 			},
 
 			showUser: function(id) {

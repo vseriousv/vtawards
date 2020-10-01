@@ -335,19 +335,6 @@ export default {
         {fixsetData: true, saveData: true},
         {fixsetData: true, saveData: true},
         {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
-        {fixsetData: true, saveData: true},
       ]
     };
   },
@@ -459,17 +446,6 @@ export default {
         stateId: data.stateId,
       };
       this.userID = newObjectData;
-      // this.$store.commit("setAdminUser_email", data.email);
-      // this.$store.commit("setAdminUser_tab_number", data.tabNumber);
-      // this.$store.commit("setAdminUser_firstname_ru", data.firstnameRu);
-      // this.$store.commit("setAdminUser_firstname_en", data.firstnameEn);
-      // this.$store.commit("setAdminUser_lastname_ru", data.lastnameRu);
-      // this.$store.commit("setAdminUser_lastname_en", data.lastnameEn);
-      // this.$store.commit("setAdminUser_patronymic_ru", data.patronymicRu);
-      // this.$store.commit("setAdminUser_patronymic_en", data.patronymicEn);
-      // this.$store.commit("setAdminUser_role", data.role);
-      // this.$store.commit("setAdminUser_state_id", data.state_id);
-      // this.$store.commit("setAdminUser_nomination_id", data.nomination_id);
     },
 
     disabledBtnNone: function (index) {

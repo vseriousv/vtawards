@@ -35,7 +35,7 @@
             <v-btn
               outlined
               color="primary"
-              to="#"
+              to=""
             >
               {{$t('memberMainBlock.memberMainBlockBtn')}}
             </v-btn>

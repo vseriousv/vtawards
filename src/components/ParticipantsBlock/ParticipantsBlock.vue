@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container.ParticipansCatalog()
+  v-container.ParticipansCatalog
     v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
       .ParticipansCatalog__search.d-flex.px-3
         v-text-field(
@@ -128,7 +128,7 @@ export default {
 
 
     showParticipant: function(id) {
-      this.$router.push({ path: "/nomination-order/" + id });
+      this.$router.push({ path: "/nomination-order/id/" + id });
     },
 
     getParticipants: async function() {
@@ -145,7 +145,7 @@ export default {
       this.participants= []
       for (let i = 0; i < data.length; i++) {
         const userObject = {
-          id: data[i].user.id,
+          id: data[i].id,
           tabNumber: data[i].user.tabNumber,
           img: data[i].user.img ? data[i].user.img : "null.png",
           name_ru:

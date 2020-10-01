@@ -51,13 +51,13 @@
 			},
 
 			getUser: function() {
-				const url = config.API_URL + "/users/" + this.$route.params.id;
+				const url = config.API_URL + "/nomination-order/" + this.$route.params.id;
 				axios
 					.get(url, {
 						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
 					})
 					.then(result => {
-						// console.log(result.data)
+						console.log(result.data)
 						this.parseUserData(result.data);
 					})
 					.catch(e => console.error("participants-error:", e));
@@ -65,23 +65,21 @@
 
 			parseUserData: function(data) {
 				this.user = {
-					img: data.img || "null.png",
+					img: data.user.img || "null.png",
 					name_ru:
-						data.lastname_ru + " " + data.firstname_ru + " " + data.patronymic_ru,
-					name_en: data.firstname_en + " " + data.lastname_en,
-					position_ru: data.position ? data.position.value_ru : "",
-					position_en: data.position ? data.position.value_en : "",
-					section_ru: data.section ? data.section.value_ru : "",
-					section_en: data.section ? data.section.value_en : "",
-					state_ru: data.state ? data.state.value_ru : "",
-					state_en: data.state ? data.state.value_en : "",
-					city_ru: data.city ? data.city.value_ru : "",
-					city_en: data.city ? data.city.value_en : "",
-					nomination_ru: data.nomination ? data.nomination.value_ru : "",
-					nomination_en: data.nomination ? data.nomination.value_en : "",
-					description_ru: data.description_ru,
-					description_en: data.description_en,
-					state_id: data.state_id
+						data.user.lastnameRu + " " + data.user.firstnameRu + " " + data.user.patronymicRu,
+					name_en: data.user.firstnameEn + " " + data.user.lastnameEn,
+					position_ru: data.user.positionName ? data.user.positionName : "",
+					position_en: data.user.positionNameEng ? data.user.positionNameEng : "",
+					section_ru: data.user.sectionName ? data.user.sectionName : "",
+					section_en: data.user.sectionNameEng ? data.user.sectionNameEng : "",
+					state_ru: data.user.state ? data.user.state.value_ru : "",
+					state_en: data.user.state ? data.user.state.value_en : "",
+					city_ru: data.user.cityName ? data.user.cityName : "",
+					city_en: data.user.cityNameEng ? data.user.cityNameEng : "",
+					nomination_ru: data.nomination ? data.nomination.valueRu : "",
+					nomination_en: data.nomination ? data.nomination.valueEn : "",
+					state_id: data.user.state_id
 				};
 			},
 
@@ -284,6 +282,7 @@ section.ParticipiantBlockId
 								tbody.UserInfo
 									tr.UserInfo__name
 										td
+											span.c-font-16 {{ $t("loginBlock.form.name") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.name_ru }}
@@ -293,7 +292,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__position
 										td
-											span.c-font-16 {{ $t("loginBlock.form.position") }}:
+											span.c-font-16 {{ $t("loginBlock.form.position") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) &ensp; {{ user.position_ru }}
@@ -303,7 +302,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__section
 										td
-											span.c-font-16 {{ $t("loginBlock.form.section") }}:
+											span.c-font-16 {{ $t("loginBlock.form.section") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.section_ru }}
@@ -313,7 +312,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__state
 										td
-											span.c-font-16 {{ $t("loginBlock.form.state") }}:
+											span.c-font-16 {{ $t("loginBlock.form.state") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.state_ru }}
@@ -323,7 +322,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__city
 										td
-											span.c-font-16 {{ $t("loginBlock.form.city") }}:
+											span.c-font-16 {{ $t("loginBlock.form.city") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.city_ru }}
@@ -333,7 +332,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__nomination
 										td
-											span.c-font-16 {{ $t("loginBlock.form.nomination") }}:
+											span.c-font-16 {{ $t("loginBlock.form.nomination") }}: 
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.nomination_ru }}
