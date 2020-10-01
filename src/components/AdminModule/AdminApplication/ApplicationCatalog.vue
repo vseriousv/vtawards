@@ -43,7 +43,7 @@
 			},
 
 			getUsers: async function() {
-				const url = "/nomination-order";
+				const url = "/nomination-order?noSelected=true";
 				try {
 					const { data } = await restHelper.getEntity(url, true);
 					console.log(data.rows)
