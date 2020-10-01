@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container.ParticipansCatalog(fluid)
+  v-container.ParticipansCatalog()
     v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
       .ParticipansCatalog__search.d-flex.px-3
         v-text-field(
@@ -11,7 +11,7 @@
           single-line
           hide-details
         )
-      
+
       .ParticipansCatalog__select
         v-select.selectNomination(
           v-model="nominationSelect"
@@ -51,8 +51,8 @@
             td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.nomination_en }}
             td.td_block.text-left(v-if="$t('lang') === 'ru'") {{ item.state_ru }}
             td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.state_en }}
-            
-          
+
+
 </template>
 
 <script>
@@ -100,15 +100,23 @@ export default {
         this.participants = this.users
       }
       if (newVal>0 && oldVal!==null && newVal!==oldVal) {
-        this.getParticipantsFromIdNomination(newVal)
+        this.getParticipantsFromIdNomination(newVal, this.statesSelect);
+      }
+    },
+		statesSelect: function(newVal, oldVal) {
+      if (newVal==0) {
+        this.participants = this.users
+      }
+      if (newVal>0 && oldVal!==null && newVal!==oldVal) {
+				this.getParticipantsFromIdNomination(this.nominationSelect, newVal);
       }
     },
   } ,
 
   methods: {
 
-    getParticipantsFromIdNomination: async function(id) {
-      const url = `/nomination-order/public?filter={"nominationId":${id}}`;
+    getParticipantsFromIdNomination: async function(nominationId, stateId) {
+      const url = `/nomination-order/public?filter={"nominationId":${nominationId},"stateId":${stateId}}`;
       try {
           const data = await restHelper.getEntity(url, true);
           this.setParticipantsArray(data.data.rows, false);
@@ -124,7 +132,7 @@ export default {
     },
 
     getParticipants: async function() {
-      const url = "/nomination-order";
+      const url = "/nomination-order/public?filter={}";
       try {
           const data = await restHelper.getEntity(url, true);
           this.setParticipantsArray(data.data.rows, true);
@@ -132,7 +140,7 @@ export default {
           console.error("ERROR ParticipantsBlock/getParticipants:", e);
       }
     },
-    
+
     setParticipantsArray: async function(data, props) {
       this.participants= []
       for (let i = 0; i < data.length; i++) {
@@ -184,7 +192,7 @@ export default {
           value: 0})
       this.nominationEn.push({
           text: "ALL NOMINATION",
-          value: 0}) 
+          value: 0})
       data.forEach(nomin => {
         let nominationRu = {
           text: nomin.valueRu,
@@ -217,7 +225,7 @@ export default {
           value: 0})
       this.statesEn.push({
           text: "ALL STATES",
-          value: 0}) 
+          value: 0})
       data.forEach(states => {
         let statesRu = {
           text: states.value_ru,
@@ -236,18 +244,18 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-// .participants-block 
+// .participants-block
 //   width: 100%
 //   min-height: 600px
 //   margin-top: 50px
-//   .tableAll 
+//   .tableAll
 //     width: 100%
 //     height: 100%
-//     .manageDelete 
+//     .manageDelete
 //       display: flex
 //       justify-content: flex-end
 //       align-items: center
-//       .manageBTN 
+//       .manageBTN
 //         margin: 0 10px
 
     // .tr_row
@@ -257,14 +265,14 @@ export default {
     //     border-radius: 50%
     //     overflow: hidden
     //     margin: 5px
-    //     img 
+    //     img
     //       width: 44px
     //       height: 44px
-        
-      
-    //   .td_block 
+
+
+    //   .td_block
     //     min-height: 63px
-.selectNomination,.selectStates 
+.selectNomination,.selectStates
   max-width: 300px
   margin-right: 20px
 .ParticipansCatalog
@@ -281,10 +289,10 @@ export default {
   &__table
     width: 100%
     height: 100%
-  
+
   &__row
     width: 100%
-  
+
   &__avatar
     width: 44px
     height: 44px
