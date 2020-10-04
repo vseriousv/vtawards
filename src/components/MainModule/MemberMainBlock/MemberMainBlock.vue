@@ -11,7 +11,7 @@
           <h3 v-if="$t('lang') === 'en'">{{itemRegionHeader_en}}</h3>
           <v-list class="member-card-list">
 
-            <template
+            <!-- <template
               v-for="(item, id) in participants"
             >
               <v-list-item
@@ -28,7 +28,7 @@
                   <v-list-item-title v-text="item.name_ru"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </template>
+            </template> -->
 
           </v-list>
           <div class="d-flex justify-center mb-6">
@@ -58,6 +58,9 @@
 <script>
 import config from "../../../constants/config";
 import axios from "axios";
+import RestHelper from "../../../helpers/RestHelper";
+
+const restHelper = new RestHelper();
 
 export default {
   name: "MemberMainBlock",
@@ -103,6 +106,7 @@ export default {
     setItemActive: function (id) {
       this.active = id;
     },
+
     getRegions: function () {
       const url = config.API_URL + "/states";
       axios.get(url, {
@@ -111,8 +115,9 @@ export default {
       .then(result => {
         this.getRegionsArray(result.data);
       })
-      .catch(e => console.error("participants-error:", e));
+      .catch(e => console.error("MemberMainBlock/getRegions Error:", e));
     },
+
     getRegionsArray: async function(data) {
       for (let i = 0; i < data.length; i++) {
 
@@ -135,26 +140,27 @@ export default {
         this.itemRegion.push(stateObject);
       }
     },
-    getParticipants: function () {
-      const url = config.API_URL + "/participants";
-      axios.get(url, {
-          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-        })
-        .then(result => {
-          this.setUsersArray(result.data);
-        })
-        .catch(e => console.error("participants-error:", e));
+
+    getParticipants: async function() {
+      const url = `/nomination-order/public?filter={"nominationId":0,"stateId":0}`;
+      try {
+          const data = await restHelper.getEntity(url, true);
+          this.setUsersArray(data.data.rows);
+      } catch(e) {
+          console.error("ERROR MemberMainBlock/getParticipants:", e);
+      }
     },
+
+
     setUsersArray: async function(data) {
       for (let i = 0; i < data.length; i++) {
         const userObject = {
-          id: data[i].user.id,
+          id: data[i].userId,
           tabNumber: data[i].user.tabNumber,
           img: data[i].user.img ? data[i].user.img : "null.png",
-          name_ru: data[i].user.firstname_ru + " " + data[i].user.patronymic_ru + " " + data[i].user.lastname_ru,
-          name_en: data[i].user.firstname_en + " " + data[i].user.patronymic_en + " " + data[i].user.lastname_en,
-          region: data[i].user.state_id,
-          voting: data[i].voting
+          name_ru: data[i].user.firstnameRu + " " + data[i].user.patronymicRu + " " + data[i].user.lastnameRu,
+          name_en: data[i].user.firstnameEn + " " + data[i].user.patronymicEn + " " + data[i].user.lastnameEn,
+          region: data[i].user.stateId,
         };
         this.participants.push(userObject);
       }

@@ -57,7 +57,6 @@
 
 <script>
 import config from "../../constants/config";
-// import axios from "axios";
 import RestHelper from "../../helpers/RestHelper";
 
 const restHelper = new RestHelper();
@@ -244,34 +243,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-// .participants-block
-//   width: 100%
-//   min-height: 600px
-//   margin-top: 50px
-//   .tableAll
-//     width: 100%
-//     height: 100%
-//     .manageDelete
-//       display: flex
-//       justify-content: flex-end
-//       align-items: center
-//       .manageBTN
-//         margin: 0 10px
-
-    // .tr_row
-    //   .avatar
-    //     width: 44px
-    //     height: 44px
-    //     border-radius: 50%
-    //     overflow: hidden
-    //     margin: 5px
-    //     img
-    //       width: 44px
-    //       height: 44px
-
-
-    //   .td_block
-    //     min-height: 63px
 .selectNomination,.selectStates
   max-width: 300px
   margin-right: 20px

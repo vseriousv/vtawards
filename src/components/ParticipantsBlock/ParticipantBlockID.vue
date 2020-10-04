@@ -345,9 +345,11 @@ section.ParticipiantBlockId
 									tr.UserInfo__numberVotes
 										td
 											span.c-font-16 {{ $t("loginBlock.form.numberVotes") }}: 
-											span.c-font-16 Null
+											span.c-font-16 
 											
-
+					.UserCard__description
+						p.text-center.mt-3(v-if="$t('lang') === 'ru'") Голосование скоро начнется
+						p.text-center.mt-3(v-if="$t('lang') === 'en'") Voting will start soon
 					//- .UserCard__description
 					//- 	p(v-if="$t('lang') === 'ru'" v-html="user.description_ru")
 					//- 	p(v-if="$t('lang') === 'en'" v-html="user.description_en")
@@ -386,20 +388,23 @@ section.ParticipiantBlockId
 					//- 	p.mt-3(v-if="$t('lang') === 'ru'") {{ count_voting_ru }}
 					//- 	p.mt-3(v-if="$t('lang') === 'en'") {{ count_voting_en }}
 				v-card.UserCard.d-flex.flex-column.mt-5
-					v-textarea.UserCard__argumentation(
+					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'ru'"
-						v-model="this.user.argumentationRu"
-						name="argumentationTextRu"
+					) Аргументация
+					p.UserCard__argumentation(
+						v-if="$t('lang') === 'ru'"
+						id="argumentationTextRu"
 						label='Аргументация'
-						outlined
-					)
-					v-textarea.UserCard__argumentation(
+					) {{this.user.argumentationRu}}
+					
+					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'en'"
-						v-model="this.user.argumentationEn"
-						name="argumentationTextEn"
+					) Argumentation
+					p.UserCard__argumentation(
+						v-if="$t('lang') === 'en'"
+						id="argumentationTextEn"
 						label='Argumentation'
-						outlined
-					)
+					) {{this.user.argumentationEn}}
 				//- .UserComment.d-flex.flex-column.py-10
 				//- 	h3 {{$t("participantID.comments")}}
 				//- 	v-card.UserComment__item.pa-3.my-2(
