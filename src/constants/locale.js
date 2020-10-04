@@ -17,7 +17,8 @@ export default {
         statusEnd: "Голосование на сайте завершено",
         statusProc: "Голосование скоро начнется",
         statusStart: "Идет голосовнаие",
-				statusCancel: "До конца голосования осталось"
+				statusCancel: "До конца голосования осталось",
+				statusCancelOrders: "До конца сбора заявок осталось"
       },
       time:{
         d:"Д",
@@ -48,7 +49,8 @@ export default {
         role: "Роль",
         submit: "Отправить",
         errorPassRepeat: "Пароли должны совпадать",
-        numberVotes: "Количество голосов"
+        numberVotes: "Количество голосов",
+				numberOrders: "Количество заявок"
       }
     },
     ApplicationForm: {
@@ -86,7 +88,7 @@ export default {
       buttonVoting: "Голосовать",
 			comments: "Комментарии",
 			commentPost: "Написать комментарий",
-			send: "Опубликовать"
+			send: "Отправить"
     },
     winnerBlock: {
       head: "Победитель голосования",
@@ -313,12 +315,12 @@ export default {
       //   link: "/committee",
       //   target: "_self"
       // },
-      // {
-      //   id: 4,
-      //   text: "Участники",
-      //   link: "/participants",
-      //   target: "_self"
-      // },
+      {
+        id: 4,
+        text: "Участники",
+        link: "/participants",
+        target: "_self"
+      },
       {
         id: 5,
         text: "Архив победителей",
@@ -351,7 +353,8 @@ export default {
         statusEnd: "Voting is closed",
         statusProc: "The on-line voting is over",
         statusStart: "There is a vote",
-				statusCancel: "Until the end of the vote left"
+				statusCancel: "Until the end of the vote left",
+				statusCancelOrders: "Until the end of the collection of applications left"
       },
       time:{
         d:"d",
@@ -382,7 +385,8 @@ export default {
         role: "Role",
         submit: "Send",
         errorPassRepeat: "Passwords must match",
-        numberVotes: "Number of Votes"
+        numberVotes: "Number of Votes",
+        numberOrders: "Number of Applications"
       }
     },
     ApplicationForm: {
@@ -437,7 +441,7 @@ export default {
       buttonVoting: "Vote",
 			comments: "Comments",
 			commentPost: "Write a comment",
-			send: "Public"
+			send: "Send"
     },
     addressMainBlock: {
       head: "Обращение директора",
@@ -627,12 +631,12 @@ export default {
       //   link: "/committee",
       //   target: "_self"
       // },
-      // {
-      //   id: 4,
-      //   text: "Participants",
-      //   link: "/participants",
-      //   target: "_self"
-      // },
+      {
+        id: 4,
+        text: "Participants",
+        link: "/participants",
+        target: "_self"
+      },
       {
         id: 5,
         text: "Archive of Winners",

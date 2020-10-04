@@ -11,7 +11,7 @@
           <h3 v-if="$t('lang') === 'en'">{{itemRegionHeader_en}}</h3>
           <v-list class="member-card-list">
 
-            <!-- <template
+            <template
               v-for="(item, id) in participants"
             >
               <v-list-item
@@ -28,14 +28,14 @@
                   <v-list-item-title v-text="item.name_ru"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </template> -->
+            </template>
 
           </v-list>
           <div class="d-flex justify-center mb-6">
             <v-btn
               outlined
               color="primary"
-              to=""
+              to="/participants"
             >
               {{$t('memberMainBlock.memberMainBlockBtn')}}
             </v-btn>
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     goParticipantCard: function (id) {
-      this.$router.push("/participants/id/"+id)
+      this.$router.push("/nomination-order/id/"+id)
     },
     setItemActive: function (id) {
       this.active = id;
@@ -144,8 +144,9 @@ export default {
     getParticipants: async function() {
       const url = `/nomination-order/public?filter={"nominationId":0,"stateId":0}`;
       try {
-          const data = await restHelper.getEntity(url, true);
-          this.setUsersArray(data.data.rows);
+          const {data} = await restHelper.getEntity(url, true);
+          console.log("dssd",data.rows)
+          this.setUsersArray(data.rows);
       } catch(e) {
           console.error("ERROR MemberMainBlock/getParticipants:", e);
       }
@@ -155,7 +156,8 @@ export default {
     setUsersArray: async function(data) {
       for (let i = 0; i < data.length; i++) {
         const userObject = {
-          id: data[i].userId,
+          id: data[i].id,
+          userId: data[i].userId,
           tabNumber: data[i].user.tabNumber,
           img: data[i].user.img ? data[i].user.img : "null.png",
           name_ru: data[i].user.firstnameRu + " " + data[i].user.patronymicRu + " " + data[i].user.lastnameRu,

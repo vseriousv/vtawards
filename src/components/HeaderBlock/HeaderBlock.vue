@@ -74,7 +74,7 @@
       </v-row> -->
       <v-row class="body-voteStatus">
         <v-col class="body-voteStatus_col d-flex flex-column align-start">
-					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>
+					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>
 					<div class="Timer-view d-flex">
             <div class="boxTime">
               <p class="boxTime__title">{{$t("header.time.d")}}</p>

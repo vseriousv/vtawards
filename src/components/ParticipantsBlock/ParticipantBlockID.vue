@@ -82,7 +82,7 @@
 					state_id: data.user.state_id,
 					argumentationRu: data.textRu ? data.textRu : "---",
 					argumentationEn: data.textEn ? data.textEn : "---",
-				};	
+				};
 			},
 
 			getVotes: function(voting_id) {
@@ -284,7 +284,7 @@ section.ParticipiantBlockId
 								tbody.UserInfo
 									tr.UserInfo__name
 										td
-											span.c-font-16 {{ $t("loginBlock.form.name") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.name") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.name_ru }}
@@ -294,7 +294,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__position
 										td
-											span.c-font-16 {{ $t("loginBlock.form.position") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.position") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) &ensp; {{ user.position_ru }}
@@ -304,7 +304,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__section
 										td
-											span.c-font-16 {{ $t("loginBlock.form.section") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.section") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.section_ru }}
@@ -314,7 +314,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__state
 										td
-											span.c-font-16 {{ $t("loginBlock.form.state") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.state") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.state_ru }}
@@ -324,7 +324,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__city
 										td
-											span.c-font-16 {{ $t("loginBlock.form.city") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.city") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.city_ru }}
@@ -334,7 +334,7 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__nomination
 										td
-											span.c-font-16 {{ $t("loginBlock.form.nomination") }}: 
+											span.c-font-16 {{ $t("loginBlock.form.nomination") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) {{ user.nomination_ru }}
@@ -344,9 +344,9 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__numberVotes
 										td
-											span.c-font-16 {{ $t("loginBlock.form.numberVotes") }}: 
-											span.c-font-16 
-											
+											span.c-font-16 {{ $t("loginBlock.form.numberOrders") }}:
+											span.c-font-16
+
 					.UserCard__description
 						p.text-center.mt-3(v-if="$t('lang') === 'ru'") Голосование скоро начнется
 						p.text-center.mt-3(v-if="$t('lang') === 'en'") Voting will start soon
@@ -396,7 +396,7 @@ section.ParticipiantBlockId
 						id="argumentationTextRu"
 						label='Аргументация'
 					) {{this.user.argumentationRu}}
-					
+
 					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'en'"
 					) Argumentation
@@ -405,39 +405,40 @@ section.ParticipiantBlockId
 						id="argumentationTextEn"
 						label='Argumentation'
 					) {{this.user.argumentationEn}}
-				//- .UserComment.d-flex.flex-column.py-10
-				//- 	h3 {{$t("participantID.comments")}}
-				//- 	v-card.UserComment__item.pa-3.my-2(
-				//- 		v-for="(comment, id) in comments"
-				//- 		:key="`comment_${id}`"
-				//- 		elevation="1"
-				//- 	)
-				//- 		.UserComment__title.d-flex.justify-space-between.align-center
-				//- 			span( v-if="$t('lang') === 'ru'" ) Автор: {{comment.name_ru}}
-				//- 			span( v-if="$t('lang') === 'en'" ) Author: {{comment.name_en}}
-				//- 			v-btn(
-				//- 				v-if="comment.isMy"
-				//- 				@click.stop="deleteComment(comment.id)"
-				//- 				icon
-				//- 			)
-				//- 				v-icon mdi-delete
-				//- 		.UserComment__text.pa-2 {{comment.comment}}
 
 
-				//- 	v-textarea.UserComment__writeText.mt-10(
-				//- 		v-if="!isMyCard"
-				//- 		name="commentText"
-				//- 		:label=`$t("participantID.commentPost")`
-				//- 		v-model="commentText"
-				//- 		outlined
-				//- 	)
-				//- 	.d-flex.justify-center
-				//- 		v-btn(
-				//- 			v-if="!isMyCard"
-				//- 			@click.stop="publicComment"
-				//- 			:disabled="this.commentText === ''"
-				//- 			color="primary"
-				//- 		) {{$t("participantID.send")}}
+				//.UserComment.d-flex.flex-column.py-10
+					h3 {{$t("participantID.comments")}}
+					v-card.UserComment__item.pa-3.my-2(
+						v-for="(comment, id) in comments"
+						:key="`comment_${id}`"
+						elevation="1"
+					)
+						.UserComment__title.d-flex.justify-space-between.align-center
+							span( v-if="$t('lang') === 'ru'" ) Автор: {{comment.name_ru}}
+							span( v-if="$t('lang') === 'en'" ) Author: {{comment.name_en}}
+							v-btn(
+								v-if="comment.isMy"
+								@click.stop="deleteComment(comment.id)"
+								icon
+							)
+								v-icon mdi-delete
+						.UserComment__text.pa-2 {{comment.comment}}
+
+					v-textarea.UserComment__writeText.mt-10(
+						v-if="!isMyCard"
+						name="commentText"
+						:label=`$t("participantID.commentPost")`
+						v-model="commentText"
+						outlined
+					)
+					.d-flex.justify-center
+						v-btn(
+							v-if="!isMyCard"
+							@click.stop="publicComment"
+							:disabled="this.commentText === ''"
+							color="primary"
+						) {{$t("participantID.send")}}
 
 </template>
 
