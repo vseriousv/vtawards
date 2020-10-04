@@ -34,6 +34,7 @@
         </h2>
         
         <BtnHeadCardUserId
+            placeholder="Таб.номер"
             :model="userID.tabNumber"
             tableLine="tabNumber"
             @saveDataInput="savesDataInput"
@@ -41,36 +42,42 @@
         <div class="head-card__box">
 
           <BtnHeadCardUserId
+            placeholder="Фамилия"
             :model="userID.lastname_ru"
             tableLine="lastnameRu"
             @saveDataInput="savesDataInput"
           />
           
           <BtnHeadCardUserId
+            placeholder="Lastname"
             :model="userID.lastname_en"
             tableLine="lastnameEn"
             @saveDataInput="savesDataInput"
           />
           
           <BtnHeadCardUserId
+            placeholder="Имя"
             :model="userID.firstname_ru"
             tableLine="firstnameRu"
             @saveDataInput="savesDataInput"
           />
           
           <BtnHeadCardUserId
+            placeholder="Firstname"
             :model="userID.firstname_en"
             tableLine="firstnameEn"
             @saveDataInput="savesDataInput"
           />
           
           <BtnHeadCardUserId
+            placeholder="Отчество"
             :model="userID.patronymic_ru"
             tableLine="patronymicRu"
             @saveDataInput="savesDataInput"
           />
           
           <BtnHeadCardUserId
+            placeholder="E-mail"
             :model="userID.email"
             tableLine="email"
             @saveDataInput="savesDataInput"
@@ -84,7 +91,7 @@
         <div class="head-content">
           <h3>Редактируемые данные</h3>
         </div>
-        <v-divider />
+        <!-- <v-divider /> -->
         <div class="form-update">
           <div class="img-avatar">
             <img :src="`${URL_AVATARS}${userID.img}`"/>
@@ -99,11 +106,11 @@
             <div class="userData__box">
               <h3>Данные</h3> 
               <v-list>
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-2">
                   <p class="mb-0">Пароль пользователя: {{ userID.userPassword }}</p>
                 </v-list-item>
 
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-1">
                   <p class="mb-0">Роль:</p>
                   <v-autocomplete
                       class="mx-3 userData__input userData__input_autocomplete"
@@ -150,7 +157,7 @@
                     @saveDataInput="savesDataInput"/>
                 </v-list-item>
 
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-1">
                   <p class="mb-0">Регион:</p>
                   <v-autocomplete
                       class="mx-3 userData__input userData__input_autocomplete"
@@ -191,11 +198,11 @@
             <div>
               <h3>Data</h3>
               <v-list>
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-2">
                   <p class="mb-0">User Password: {{ userID.userPassword }}</p>
                 </v-list-item>
 
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-2">
                   <p class="mb-0">Role:</p>
                   <v-autocomplete
                       class="mx-3 userData__input userData__input_autocomplete"
@@ -240,7 +247,7 @@
                     @saveDataInput="savesDataInput"/>
                 </v-list-item>
 
-                <v-list-item class="userData__item">
+                <v-list-item class="userData__item mb-2">
                   <p class="mb-0">State:</p>
                   <v-autocomplete
                     class="mx-3 userData__input userData__input_autocomplete"
@@ -561,6 +568,7 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+        margin-bottom: -10px;
         > p {
           padding-top: 17px;
         }

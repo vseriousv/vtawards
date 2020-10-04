@@ -47,7 +47,8 @@ export default {
         description: "Описание",
         role: "Роль",
         submit: "Отправить",
-        errorPassRepeat: "Пароли должны совпадать"
+        errorPassRepeat: "Пароли должны совпадать",
+        numberVotes: "Количество голосов"
       }
     },
     ApplicationForm: {
@@ -380,7 +381,8 @@ export default {
         description: "Description",
         role: "Role",
         submit: "Send",
-        errorPassRepeat: "Passwords must match"
+        errorPassRepeat: "Passwords must match",
+        numberVotes: "Number of Votes"
       }
     },
     ApplicationForm: {

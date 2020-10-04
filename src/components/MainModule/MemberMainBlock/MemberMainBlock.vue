@@ -121,7 +121,7 @@ export default {
         if (data[i].id === 3) {
           regionText_ru = data[i].value_en;
         } else if (data[i].id === 2) {
-          regionText_ru = 'Дальний восток';
+          regionText_ru = 'Дальний Восток';
         } else {
           regionText_ru = data[i].value_ru;
         }

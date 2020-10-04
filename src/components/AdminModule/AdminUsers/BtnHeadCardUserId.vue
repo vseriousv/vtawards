@@ -16,7 +16,12 @@ export default {
         tableLine: {
             type: String,
             default: null
+        },
+        placeholder: {
+            type: String,
+            default: null
         }
+
     },
 	methods: {
         disabledBtnNone: function () {
@@ -40,6 +45,7 @@ export default {
             class="mr-3 head-card__input"
             :disabled="this.btnDisabled.saveData"
             v-model="model"
+            :placeholder="placeholder"
             outlined>
         </v-text-field>
         <div class="head-card__btn">

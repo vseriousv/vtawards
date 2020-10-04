@@ -79,8 +79,10 @@
 					city_en: data.user.cityNameEng ? data.user.cityNameEng : "",
 					nomination_ru: data.nomination ? data.nomination.valueRu : "",
 					nomination_en: data.nomination ? data.nomination.valueEn : "",
-					state_id: data.user.state_id
-				};
+					state_id: data.user.state_id,
+					argumentationRu: data.textRu ? data.textRu : "---",
+					argumentationEn: data.textEn ? data.textEn : "---",
+				};	
 			},
 
 			getVotes: function(voting_id) {
@@ -340,83 +342,107 @@ section.ParticipiantBlockId
 												v-if="$t('lang') === 'en'"
 											) {{ user.nomination_en }}
 
-					.UserCard__description
-						p(v-if="$t('lang') === 'ru'" v-html="user.description_ru")
-						p(v-if="$t('lang') === 'en'" v-html="user.description_en")
+									tr.UserInfo__numberVotes
+										td
+											span.c-font-16 {{ $t("loginBlock.form.numberVotes") }}: 
+											span.c-font-16 Null
+											
 
-					.UserCard__votingSelection.d-flex.flex-column.align-center.justify-center
-						v-btn(
-							v-if="!isCommittee"
-							@click.stop="setVote('user')"
-							:disabled="disabledVoting"
-							color="primary"
-						) {{ $t("participantID.buttonVoting") }}
+					//- .UserCard__description
+					//- 	p(v-if="$t('lang') === 'ru'" v-html="user.description_ru")
+					//- 	p(v-if="$t('lang') === 'en'" v-html="user.description_en")
 
-						v-select(
-							v-if="isCommittee && $t('lang') === 'ru'"
-							v-model="setRating"
-							:items="itemRating_ru"
-							:disabled="disabledVoting"
-							outlined
-							dense
-						)
-						v-select(
-							v-if="isCommittee && $t('lang') === 'en'"
-							v-model="setRating"
-							:items="itemRating_en"
-							:disabled="disabledVoting"
-							outlined
-							dense
-						)
-						v-btn(
-							v-if="isCommittee"
-							@click.stop="setVote('comittee')"
-							:disabled="disabledVoting"
-							color="primary"
-						) {{ $t("participantID.buttonVoting") }}
+					//- .UserCard__votingSelection.d-flex.flex-column.align-center.justify-center
+					//- 	v-btn(
+					//- 		v-if="!isCommittee"
+					//- 		@click.stop="setVote('user')"
+					//- 		:disabled="disabledVoting"
+					//- 		color="primary"
+					//- 	) {{ $t("participantID.buttonVoting") }}
 
-						p.mt-3(v-if="$t('lang') === 'ru'") {{ count_voting_ru }}
-						p.mt-3(v-if="$t('lang') === 'en'") {{ count_voting_en }}
+					//- 	v-select(
+					//- 		v-if="isCommittee && $t('lang') === 'ru'"
+					//- 		v-model="setRating"
+					//- 		:items="itemRating_ru"
+					//- 		:disabled="disabledVoting"
+					//- 		outlined
+					//- 		dense
+					//- 	)
+					//- 	v-select(
+					//- 		v-if="isCommittee && $t('lang') === 'en'"
+					//- 		v-model="setRating"
+					//- 		:items="itemRating_en"
+					//- 		:disabled="disabledVoting"
+					//- 		outlined
+					//- 		dense
+					//- 	)
+					//- 	v-btn(
+					//- 		v-if="isCommittee"
+					//- 		@click.stop="setVote('comittee')"
+					//- 		:disabled="disabledVoting"
+					//- 		color="primary"
+					//- 	) {{ $t("participantID.buttonVoting") }}
 
-				.UserComment.d-flex.flex-column.py-10
-					h3 {{$t("participantID.comments")}}
-					v-card.UserComment__item.pa-3.my-2(
-						v-for="(comment, id) in comments"
-						:key="`comment_${id}`"
-						elevation="1"
-					)
-						.UserComment__title.d-flex.justify-space-between.align-center
-							span( v-if="$t('lang') === 'ru'" ) Автор: {{comment.name_ru}}
-							span( v-if="$t('lang') === 'en'" ) Author: {{comment.name_en}}
-							v-btn(
-								v-if="comment.isMy"
-								@click.stop="deleteComment(comment.id)"
-								icon
-							)
-								v-icon mdi-delete
-						.UserComment__text.pa-2 {{comment.comment}}
-
-
-					v-textarea.UserComment__writeText.mt-10(
-						v-if="!isMyCard"
-						name="commentText"
-						:label=`$t("participantID.commentPost")`
-						v-model="commentText"
+					//- 	p.mt-3(v-if="$t('lang') === 'ru'") {{ count_voting_ru }}
+					//- 	p.mt-3(v-if="$t('lang') === 'en'") {{ count_voting_en }}
+				v-card.UserCard.d-flex.flex-column.mt-5
+					v-textarea.UserCard__argumentation(
+						v-if="$t('lang') === 'ru'"
+						v-model="this.user.argumentationRu"
+						name="argumentationTextRu"
+						label='Аргументация'
 						outlined
 					)
-					.d-flex.justify-center
-						v-btn(
-							v-if="!isMyCard"
-							@click.stop="publicComment"
-							:disabled="this.commentText === ''"
-							color="primary"
-						) {{$t("participantID.send")}}
+					v-textarea.UserCard__argumentation(
+						v-if="$t('lang') === 'en'"
+						v-model="this.user.argumentationEn"
+						name="argumentationTextEn"
+						label='Argumentation'
+						outlined
+					)
+				//- .UserComment.d-flex.flex-column.py-10
+				//- 	h3 {{$t("participantID.comments")}}
+				//- 	v-card.UserComment__item.pa-3.my-2(
+				//- 		v-for="(comment, id) in comments"
+				//- 		:key="`comment_${id}`"
+				//- 		elevation="1"
+				//- 	)
+				//- 		.UserComment__title.d-flex.justify-space-between.align-center
+				//- 			span( v-if="$t('lang') === 'ru'" ) Автор: {{comment.name_ru}}
+				//- 			span( v-if="$t('lang') === 'en'" ) Author: {{comment.name_en}}
+				//- 			v-btn(
+				//- 				v-if="comment.isMy"
+				//- 				@click.stop="deleteComment(comment.id)"
+				//- 				icon
+				//- 			)
+				//- 				v-icon mdi-delete
+				//- 		.UserComment__text.pa-2 {{comment.comment}}
+
+
+				//- 	v-textarea.UserComment__writeText.mt-10(
+				//- 		v-if="!isMyCard"
+				//- 		name="commentText"
+				//- 		:label=`$t("participantID.commentPost")`
+				//- 		v-model="commentText"
+				//- 		outlined
+				//- 	)
+				//- 	.d-flex.justify-center
+				//- 		v-btn(
+				//- 			v-if="!isMyCard"
+				//- 			@click.stop="publicComment"
+				//- 			:disabled="this.commentText === ''"
+				//- 			color="primary"
+				//- 		) {{$t("participantID.send")}}
 
 </template>
 
 
 
-
+<style lang="sass">
+.UserCard__argumentation
+	textarea
+		min-height: 250px
+</style>
 <style lang="sass" scoped>
 @import "ParticipantsBlock"
 </style>
