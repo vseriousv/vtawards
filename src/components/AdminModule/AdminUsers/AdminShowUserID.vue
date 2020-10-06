@@ -473,21 +473,18 @@ export default {
     },
 
     postNewDataInput: async function(data) {
-      console.log(data)
       const url = "/users/" + this.userID.id;
-      console.log(url)
 				try {
 					const postNewDataInput = await axios.patch(
 						config.API_URL + url,
 						data,
-
 						{ headers: {
 								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 							}
 						},
           );
+          console.log(postNewDataInput)
           alert("Данные пользователя обновлены")
-					console.log(postNewDataInput)
 				} catch(e) {
 					console.error("ERROR AdminShowUserId/postNewDataInput:", e);
 				}

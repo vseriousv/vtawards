@@ -4,7 +4,6 @@ v-card(style="height: 100%")
         v-tab( v-for="tabOne in tabs" :key="`items${tabOne.id}`" ) {{tabOne.name}}
         v-tab-item
             v-container.ParticipansCatalog
-                //- h2 Комментарии
                 v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
                     .ParticipansCatalog__search.d-flex.px-3
                         v-text-field(
@@ -24,7 +23,7 @@ v-card(style="height: 100%")
                     )
                         template(v-slot:item="{ item }")
                             tr.ParticipansCatalog__row(
-                                @click.stop=""
+                                @click.stop="showComments(item.id)"
                                 )
                                 td.td_block.text-center
                                     .ParticipansCatalog__avatar
@@ -33,9 +32,8 @@ v-card(style="height: 100%")
                                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.name_en }}
                                 td.td_block.text-left(v-if="$t('lang') === 'ru'") {{ item.toNameRu }}
                                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.toNameEn }}
-                                td.td_block.text-left(
-                                    v-if="$t('lang') === 'ru'"
-                                    style="max-width: 300px;overflow: hidden;") {{ item.comment }}
+                                td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'ru'") {{ item.comment }}
+                                td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{ item.comment }}
 
 
 </template>
@@ -55,27 +53,9 @@ export default {
 
         tabs: [{ id: 0, name: "Комментарии", value: "commits" },],
 
-        participants: [],
-        commits:[{
-            id: 168,
-            idTo: 4549,
-            comment: "dfvdbghndcsfdvscdvfbevscsdfbfnhgnfewdfghnfrefgbfrefg ngfredfg bgfedf gfefbg bgfg bnfg nbfg bnfvb svfbgeddfbrgtnyhnbgvfdcsfvbrytsdvdfxvfxvsdbv sfxbc sfxb fdrbvfdsc",
-            img: "null.png",
-            name_ru: "fdvdfxdfx fvfdxcv fdfb vdfxv",
-            name_en: "cvdbf",
-            toNameRu: '',
-            toNameEn: '',
-        },
-        {
-            id: 168,
-            idTo: 4545,
-            comment: "dfvdbghn",
-            img: "null.png",
-            name_ru: "fdvdfxdfx fvfdxcv fdfb vdfxv",
-            name_en: "cvdbf",
-            toNameRu: '',
-            toNameEn: '',
-        }],
+        allUser: [],
+
+        commits:[],
 
         headers_user: [
             { text: "Аватар", sortable: false, value: "" },
@@ -84,13 +64,13 @@ export default {
             { text: "Комментарий", sortable: false, value: "" },
         ],
         search_user: "",
-
         };
     },
 
     async created() {
+        await this.getAllUser();
+        await this.getCommits();
         await this.getUserPublic();
-        this.getCommits();
     },
 
     methods: {
@@ -98,57 +78,64 @@ export default {
             const url = "/comments";
             try {
                 const data = await restHelper.getEntity(url, true);
-                this.parseCommitsArray(data.data);
-                // console.log(data.data)
+                this.parseCommitsArray(data.data.rows);
+                // console.log(data.data.rows)
             } catch(e) {
                 console.error("ERROR ParticipantsBlock/getNomination:", e);
             }
         },
 
         getUserPublic: async function() {
-            const url = "/users";
+            const url = "/nomination-order/public?filter={}";
             try {
                 const data = await restHelper.getEntity(url, true);
-                this.parseUserArray(data.data);
-                // console.log(data.data)
+                this.parseUserArray(data.data.rows);
+                console.log(data.data.rows)
             } catch(e) {
                 console.error("ERROR ParticipantsBlock/getParticipants:", e);
             }
         },
 
+        getAllUser: async function() {
+            const url = "/users";
+            try {
+                const data = await restHelper.getEntity(url, true);
+                this.parseAllUser(data.data);
+                // console.log(data.data)
+            } catch(e) {
+                console.error("ERROR ParticipantsBlock/getAllUser:", e);
+            }
+        },
+
         showComments: function(id) {
-            this.$router.push({ path: "/comments/id/" + id });
+            this.$router.push({ path: "/admin/comment/id/" + id });
         },
 
         parseCommitsArray: async function(data) {
-            // this.commits= []
+            this.commits= []
             for (let i = 0; i < data.length; i++) {
                 const commitObject = {
                     id: data[i].id,
-                    idTo: data[i].user_to_id,
+                    idTo: data[i].nominationOrderId,
+                    idFrom: data[i].userFromId,
                     toNameRu: '',
                     toNameEn: '',
                     comment: data[i].comment,
-                    img: data[i].userFrom.img ? data[i].userFrom.img : "null.png",
-                    name_ru:
-                        data[i].userFrom.firstnameRu +
-                        " " +
-                        data[i].userFrom.patronymicRu +
-                        " " +
-                        data[i].userFrom.lastnameRu,
-                    name_en: data[i].userFrom.firstnameEn + " " + data[i].userFrom.lastnameEn,
+                    img: '',
+                    name_ru: '',
+                    name_en: '',
                 };
+                this.addDataFromUser(commitObject)
                 this.commits.push(commitObject);
             }
         },
 
         parseUserArray: function (data) {
-            this.participants = [];
             data.forEach(item => {
                 let nameUserTo = {
                     id: item.id,
-                    nameRu: item.firstnameRu + " " + item.lastnameRu,
-                    nameEn: item.firstnameEn + " " + item.lastnameEn,
+                    nameRu: item.user.firstnameRu + " " + item.user.lastnameRu,
+                    nameEn: item.user.firstnameEn + " " + item.user.lastnameEn,
                 };
                 this.UserNameTo(nameUserTo);
             })
@@ -159,11 +146,34 @@ export default {
                 if (item.idTo === data.id) {
                     item.toNameRu = data.nameRu
                     item.toNameEn = data.nameEn
-                    console.log(item)
                 }
-                
+                // console.log(this.commits)
             })
-            
+        },
+
+        parseAllUser: function(data){
+            this.allUser = []
+            data.forEach(item => {
+                let dataUser = {
+                    id: item.id,
+                    img: item.img,
+                    name_ru: item.firstnameRu + " " + item.lastnameRu,
+                    name_en: item.firstnameEn + " " + item.lastnameEn,
+                }
+                this.allUser.push(dataUser)
+            })
+            // console.log(this.allUser)
+        },
+
+        addDataFromUser: function(data) {
+            this.allUser.forEach(item => {
+                if (item.id === data.idFrom) {
+                    data.img = item.img
+                    data.name_ru = item.name_ru
+                    data.name_en = item.name_en
+                }
+                // console.log(data)
+            })
         }
     }
 }
@@ -193,13 +203,20 @@ export default {
         width: 100%
 
     &__avatar
+        display: flex
         width: 44px
         height: 44px
-        border-radius: 50%
         overflow: hidden
         margin: 5px
         img
-        width: 44px
-        height: 44px
+            border-radius: 50%
+            max-width: 100%
+            max-height: 100%
+            object-fit: cover
 
+    &__commit
+        overflow: hidden
+        white-space: nowrap
+        max-width: 300px
+        text-overflow: ellipsis
 </style>

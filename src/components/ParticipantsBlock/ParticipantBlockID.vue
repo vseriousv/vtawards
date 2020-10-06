@@ -395,7 +395,8 @@ section.ParticipiantBlockId
 						v-if="$t('lang') === 'ru'"
 						id="argumentationTextRu"
 						label='Аргументация'
-					) {{this.user.argumentationRu}}
+						v-html="this.user.argumentationRu"
+					) 
 
 					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'en'"
@@ -404,7 +405,8 @@ section.ParticipiantBlockId
 						v-if="$t('lang') === 'en'"
 						id="argumentationTextEn"
 						label='Argumentation'
-					) {{this.user.argumentationEn}}
+						v-html="this.user.argumentationEn"
+					)
 
 
 				//.UserComment.d-flex.flex-column.py-10
