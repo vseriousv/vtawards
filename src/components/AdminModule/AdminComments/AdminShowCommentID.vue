@@ -50,7 +50,6 @@
                     p.commentsFooter__text Опубликовать комментарий под карточкой участника голосования 
                     v-btn.mx-1(
                     x-small
-                    
                     color="secondary"
                     @click.stop="saveNewData('public')"
                     ) Опубликовать комментарий
@@ -59,7 +58,6 @@
                     p.commentsFooter__text Снять с публикации комментарий 
                     v-btn.mx-1(
                     x-small
-                    
                     color="error"
                     @click.stop="saveNewData('notPublic')"
                     ) Снять с публикации
@@ -86,25 +84,16 @@ export default {
             propsDisabled: {
                 textareaDisabled: true,
                 saveBtnDisabled: true,
-                publicBtnDisabled: false,
-                notPublicBtnDisabled: false,
             }
         }
     },
 
-    // computed: { 
-    //     btnDisabled: function() {
-    //         return
-    //             this.propsDisabled.publicBtnDisabled != this.commitsId.public
-    //             this.propsDisabled.notPublicBtnDisabled != this.commitsId.public
-    //     }
-        
-    // },
     created() {
         this.getCommitsId();
     },
 
     methods: {
+
         getCommitsId: async function() {
             const url = "/comments/" + this.commentId;
             try {
