@@ -31,6 +31,7 @@
 				count_voting_ru: "",
 				count_voting_en: "",
 
+				userFrom: {},
 				comments: [],
 				commentText: '',
 				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
@@ -211,11 +212,11 @@
 			},
 
 			getComments: async function() {
-				const urn = `/comments/${this.$route.params.id}`;
+				const urn = `/comments/nomination-order/${this.$route.params.id}/public`;
 				try {
 					const comments = await restHelper.getEntity(urn, true);
-					console.log("comments", comments.data);
-					this.parseComments(comments.data);
+					// console.log("comments", comments.data.rows);
+					this.parseComments(comments.data.rows);
 				} catch (e) {
 					console.error(e);
 				}
@@ -225,24 +226,45 @@
 				data.forEach(item => {
 					const newObject = {
 						id: item.id,
-						name_ru:
-							item.userFrom.lastname_ru +
-							" " + item.userFrom.firstname_ru +
-							" " + item.userFrom.patronymic_ru || '',
-						name_en: item.userFrom.firstname_en + " " + item.userFrom.lastname_en || '',
-						isMy: item.userFrom.id === jwtHelper.jwtParse().id || false,
+						name_ru: '',
+						name_en: '',
+						isMy: item.userFromId === jwtHelper.jwtParse().id || false,
+						userFromId: item.userFromId,
 						comment: item.comment || ''
 					}
 					this.comments.push(newObject);
+					this.getUserFrom(item.userFromId, newObject.id)
+					// console.log(this.comments)
 				});
+			},
+			
+			getUserFrom: async function(data, id) {
+				const urn = `/users/` + data;
+				try {
+					const userFrom = await restHelper.getEntity(urn, true);
+					// console.log("userFrom", userFrom.data);
+					this.parseUserFrom(userFrom.data, id);
+				} catch (e) {
+					console.error(e);
+				}
+			},
+			parseUserFrom: function(data, id) {
+				this.comments.forEach(item => {
+					if (item.id == id) {
+						item.name_ru = data.lastnameRu + " " + 
+							data.firstnameRu + " " + 
+							data.patronymicRu || ''
+						item.name_en = data.firstnameEn + " " + data.lastnameEn || ''
+					}
+				})
+				console.log(this.comments)
 			},
 
 			async publicComment(){
-
-				const urn = '/comments/create';
+				const urn = '/comments';
 				const dataSend = {
-					user_from_id: +jwtHelper.jwtParse().id,
-					user_to_id: +this.$route.params.id,
+					userFromId: +jwtHelper.jwtParse().id,
+					nominationOrderId: +this.$route.params.id,
 					comment: this.commentText
 				}
 				// console.log(dataSend, urn);
@@ -250,6 +272,12 @@
 					await restHelper.postEntity(urn, dataSend, true);
 					await this.getComments();
 					this.commentText = '';
+					if (this.$t('lang') === 'ru') {
+						alert("Комментарий успешно создан. Он будет опубликован после модерации администратором.")
+					}
+					if (this.$t('lang') === 'en') {
+						alert("The comment was successfully created. It will be published after admin moderation.")
+					}
 				} catch (e) {
 					console.error(e);
 				}
@@ -408,10 +436,9 @@ section.ParticipiantBlockId
 						v-html="this.user.argumentationEn"
 					)
 
-
-				//.UserComment.d-flex.flex-column.py-10
+				.UserComment.d-flex.flex-column.py-10
 					h3 {{$t("participantID.comments")}}
-					v-card.UserComment__item.pa-3.my-2(
+					v-card.UserComment__item.px-3.my-2(
 						v-for="(comment, id) in comments"
 						:key="`comment_${id}`"
 						elevation="1"
@@ -423,6 +450,7 @@ section.ParticipiantBlockId
 								v-if="comment.isMy"
 								@click.stop="deleteComment(comment.id)"
 								icon
+								color="error"
 							)
 								v-icon mdi-delete
 						.UserComment__text.pa-2 {{comment.comment}}

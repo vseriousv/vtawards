@@ -361,8 +361,11 @@ export default {
           },
         );
         console.log(postDataNewUser)
+        const messageTrue = "Пользователь" + " " +  this.userId.lastnameRu + " " + this.userId.firstnameRu + " " + "создан"
+        alert(messageTrue)
       } catch(e) {
         console.error("ERROR AdminAddNewUser/postDataNewUser:", e);
+        alert("Ошибка создания нового пользователя. Проверьте обязательные поля для заполнения, а также правильность заполнения поля E-mail")
       }
 		},
   }

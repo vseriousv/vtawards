@@ -50,6 +50,7 @@
                     p.commentsFooter__text Опубликовать комментарий под карточкой участника голосования 
                     v-btn.mx-1(
                     x-small
+                    :disabled="propsDisabled.publicBtn"
                     color="secondary"
                     @click.stop="saveNewData('public')"
                     ) Опубликовать комментарий
@@ -58,6 +59,7 @@
                     p.commentsFooter__text Снять с публикации комментарий 
                     v-btn.mx-1(
                     x-small
+                    :disabled="propsDisabled.notPublicBtn"
                     color="error"
                     @click.stop="saveNewData('notPublic')"
                     ) Снять с публикации
@@ -84,6 +86,8 @@ export default {
             propsDisabled: {
                 textareaDisabled: true,
                 saveBtnDisabled: true,
+                publicBtn: "",
+                notPublicBtn: "",
             }
         }
     },
@@ -120,6 +124,13 @@ export default {
                 nameFromEn: '',
                 public: data.public,
             };
+            if (this.commitsId.public == false) {
+                this.propsDisabled.notPublicBtn = true
+                this.propsDisabled.publicBtn = false
+            } else {
+                this.propsDisabled.notPublicBtn = false
+                this.propsDisabled.publicBtn = true
+            }
             this.getFromUser(this.commitsId.idFrom)
             this.getNominationOrderId(this.commitsId.idTo)
         },
@@ -192,9 +203,13 @@ export default {
                         alert("Комментарий успешно сохранен")
                     }
                     if (props == "public") {
+                        this.propsDisabled.notPublicBtn = false
+                        this.propsDisabled.publicBtn = true
                         alert("Комментарий успешно опубликован")
                     }
                     if (props == "notPublic") {
+                        this.propsDisabled.notPublicBtn = true
+                        this.propsDisabled.publicBtn = false
                         alert("Комментарий успешно снят с публикации")
                     }  
                     console.log(postNewData)
