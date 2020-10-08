@@ -34,7 +34,8 @@ v-card(style="height: 100%")
                                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.toNameEn }}
                                 td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'ru'") {{ item.comment }}
                                 td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{ item.comment }}
-
+                                td.td_block.text-left(v-if="item.public === true" style="color: green;") Опубликован
+                                td.td_block.text-left(v-if="item.public === false" style="color: red;") Неопубликован
 
 </template>
 
@@ -62,6 +63,7 @@ export default {
             { text: "ФИО",sortable: true, value: "name_ru" },
             { text: "Цель комментария", sortable: false, value: "" },
             { text: "Комментарий", sortable: false, value: "" },
+            { text: "Статус", sortable: false, value: "" },
         ],
         search_user: "",
         };
@@ -124,6 +126,7 @@ export default {
                     img: '',
                     name_ru: '',
                     name_en: '',
+                    public: data[i].public,
                 };
                 this.addDataFromUser(commitObject)
                 this.commits.push(commitObject);
@@ -210,8 +213,10 @@ export default {
         margin: 5px
         img
             border-radius: 50%
-            max-width: 100%
-            max-height: 100%
+            max-width: 44px
+            max-height: 44px
+            width: 100%
+            height: 100%
             object-fit: cover
 
     &__commit
