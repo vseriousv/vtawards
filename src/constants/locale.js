@@ -328,6 +328,12 @@ export default {
         target: "_self"
       },
       {
+        id: 7,
+        text: "Личный кабинет",
+        link: "/my-profile",
+        target: "_self"
+      },
+      {
         id: 6,
         text: "Выход",
         link: "/logout",
@@ -641,6 +647,12 @@ export default {
         id: 5,
         text: "Archive of Winners",
         link: "/archive",
+        target: "_self"
+      },
+      {
+        id: 7,
+        text: "Personal Area",
+        link: "/my-profile",
         target: "_self"
       },
       {

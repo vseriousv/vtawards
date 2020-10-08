@@ -21,6 +21,8 @@ import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
 import ApplicationPage from "./pages/ApplicationPage";
 import RestorePasswordPage from "./pages/RestorePasswordPage";
+import MyProflePage from "./pages/MyProflePage";
+
 
 //ADMINKA
 import AdminPanel from "./components/AdminModule/AdminPanel";
@@ -199,6 +201,24 @@ const routes = [
       header: {
         headName_en: "Archive",
         headName_ru: "Архив"
+      }
+    },
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/my-profile",
+    name: "myProfle",
+    components: {
+      adminPanel: AdminPanel,
+      header: HeaderBlockOtherPage,
+      body: MyProflePage,
+      nav: AppHeader,
+      footer: FooterBlock
+    },
+    props: {
+      header: {
+        headName_en: "My profile",
+        headName_ru: "Мой профиль"
       }
     },
     meta: { requiresAuth: true }

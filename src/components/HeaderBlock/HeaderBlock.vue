@@ -12,19 +12,22 @@
               alt="vtaward"
             />
           </router-link>
-          <div :class="`d-flex align-center lang ${$t('lang')}`">
-            <input
-              class="langButton ruInput"
-              type="button"
-              value="ru"
-              @click="$emit('switchLang', 'ru')"
-            />
-            <input
-              class="langButton enInput"
-              type="button"
-              value="en"
-              @click="$emit('switchLang', 'en')"
-            />
+          <div class="btnBoxHeader">
+            <div :class="`d-flex align-center lang ${$t('lang')}`">
+              <input
+                class="langButton ruInput"
+                type="button"
+                value="ru"
+                @click="$emit('switchLang', 'ru')"
+              />
+              <input
+                class="langButton enInput"
+                type="button"
+                value="en"
+                @click="$emit('switchLang', 'en')"
+              />
+            </div>
+            <div class="mdi mdi-account-edit"></div>
           </div>
         </v-col>
       </v-row>
@@ -178,29 +181,57 @@ export default {
   .logoAndLang {
     .logoAndLang__col {
       display: flex;
-      .lang {
+      justify-content: space-between;
+      .btnBoxHeader {
         display: flex;
-        justify-content: flex-end;
-        flex: 1;
-        .langButton {
-          width: 56px;
-          height: 32px;
-          border: 1px solid white;
-          font-size: 18px;
-          line-height: 18px;
-          font-weight: 700;
-          color:  white;
+        flex-direction: row;
+        align-items: flex-start;
+        @include respond-to(apple5) {
+          flex-direction: column-reverse;
+        }
+        .mdi-account-edit {
+          display: flex;
+          font-size: 40px;
+          line-height: 70%;
+          color: white;
+          margin-left: 15px;
+          cursor: pointer;
           &:hover {
-            color: $primaryTextColor;
+            color:orange;
           }
+          @include respond-to(apple5) {
+            margin-left: 40px;
+            margin-bottom: 20px;
+          }
+          @include respond-to(medium-screens) {
+            margin-left: 60px;
+          }
+          
         }
-        &.ru .ruInput {
-          background: white;
-          color: black;
-        }
-        &.en .enInput {
-          background: white;
-          color: black;
+        .lang {
+          display: flex;
+          justify-content: flex-end;
+          flex: 1;
+          .langButton {
+            width: 56px;
+            height: 32px;
+            border: 1px solid white;
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 700;
+            color:  white;
+            &:hover {
+              color: $primaryTextColor;
+            }
+          }
+          &.ru .ruInput {
+            background: white;
+            color: black;
+          }
+          &.en .enInput {
+            background: white;
+            color: black;
+          }
         }
       }
     }
@@ -209,6 +240,9 @@ export default {
     display: flex;
     flex-direction: column;
     // justify-content: space-between;
+    @include respond-to(apple5) {
+      margin-top: -35px;
+    }
     height: 100%;
     .title-head {
       padding: 12px;
