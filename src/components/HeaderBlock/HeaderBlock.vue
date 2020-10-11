@@ -27,7 +27,9 @@
                 @click="$emit('switchLang', 'en')"
               />
             </div>
-            <div class="mdi mdi-account-edit"></div>
+            <router-link to="/my-profile">
+              <div class="mdi mdi-account-edit"></div>
+            </router-link>
           </div>
         </v-col>
       </v-row>
@@ -162,10 +164,6 @@ export default {
   @include respond-to(medium-screens) {
     font-size: 45px;
   }
-	// .Timer-view__card {
-	// 	padding: 7px 7px 7px 0;
-	// 	margin: 7px 7px 7px 0;
-	// }
 }
 
 .header-block {
@@ -177,7 +175,6 @@ export default {
   padding: 50px 16px 30px;
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
   .logoAndLang {
     .logoAndLang__col {
       display: flex;
@@ -186,6 +183,9 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
+        a {
+          text-decoration: none;
+        }
         @include respond-to(apple5) {
           flex-direction: column-reverse;
         }
@@ -239,30 +239,20 @@ export default {
   .header__content {
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
     @include respond-to(apple5) {
       margin-top: -35px;
     }
     height: 100%;
     .title-head {
       padding: 12px;
-      // margin-top: 100px;
       .title-head_col {
         display: flex;
-        // justify-content: flex-start;
         align-items: center;
         flex-direction: row;
-        // @include respond-to(large-screens) {
-        //   flex-direction: row-reverse;
-        // }
         .title-head_col__text {
           display: flex;
           flex-direction: column;
           justify-content: start;
-          // height: 174px;
-          // @include respond-to(large-screens) {
-          //   margin-right: 30px;
-          // }
           h1 {
             font-size: 40px;
             text-align: left;
@@ -324,7 +314,6 @@ export default {
           letter-spacing: 0.04em;
           max-width: 605px;
           margin-bottom: 0;
-          // text-align: center;
           @include respond-to(medium-screens) {
             font-size: 16px;
             line-height: 26px;
@@ -360,10 +349,6 @@ export default {
     }
 
     .body-voteStatus {
-      // margin-top: 20px;
-      // @include respond-to(large-screens) {
-      //   margin-top: 40px;
-      // }
       .body-voteStatus_col {
         display: flex;
         justify-content: center;
@@ -374,8 +359,6 @@ export default {
         .body-voteStatus_col__text {
           color: white;
           font-size: 14px;
-          // line-height: 20px;
-          // letter-spacing: 0.04em;
           max-width: 605px;
           text-align: center;
           margin: 0;

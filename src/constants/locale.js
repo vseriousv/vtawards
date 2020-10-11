@@ -53,6 +53,11 @@ export default {
 				numberOrders: "Количество заявок"
       }
     },
+    nameButton: {
+      edit: "Редактировать",
+      save: "Сохранить",
+      change: "Изменить",
+    },
     ApplicationForm: {
       applicant: "Заявитель",
       argumentationTitle: "Аргументация",
@@ -394,6 +399,11 @@ export default {
         numberVotes: "Number of Votes",
         numberOrders: "Number of Applications"
       }
+    },
+    nameButton: {
+      edit: "Edit",
+      save: "Save",
+      change: "Change",
     },
     ApplicationForm: {
       applicant: "Applicant",

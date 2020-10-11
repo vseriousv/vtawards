@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-container.mxw1200
+    v-container.mxw1200.my-5
         v-card.profile
             v-tabs(
             v-model="tab"
@@ -10,15 +10,18 @@
             icons-and-text)
                 v-tabs-slider
                 v-tab.profile__headerTabs(href="#tab-1")
-                    p Обо мне
+                    p(v-if="$t('lang') === 'ru'") Обо мне
+                    p(v-if="$t('lang') === 'en'") About My
                     .mdi.mdi-account-circle.icon
 
                 v-tab.profile__headerTabs(href="#tab-2")
-                    p Мои заявки
+                    p(v-if="$t('lang') === 'ru'") Мои заявки
+                    p(v-if="$t('lang') === 'en'") My applications
                     .mdi.mdi-account-switch.icon
 
                 v-tab.profile__headerTabs(href="#tab-3")
-                    p Мои голоса
+                    p(v-if="$t('lang') === 'ru'") Мои голоса
+                    p(v-if="$t('lang') === 'en'") My voices
                     .mdi.mdi-comment-account.icon
 
                 v-tabs-items(v-model="tab")
@@ -26,7 +29,10 @@
                     :key="1"
                     :value="'tab-' + 1")
                         about-my
-                    
+                    v-tab-item(
+                    :key="2"
+                    :value="'tab-' + 2")
+                        my-applications
                 
 
 </template>
@@ -35,12 +41,14 @@
 // import config from "../../constants/config";
 // import RestHelper from "../../helpers/RestHelper";
 import AboutMy from "./AboutMy";
+import MyApplications from "./MyApplications";
 // const restHelper = new RestHelper();
 
 export default {
     name: "ParticipantsBlock",
     components:{
         AboutMy,
+        MyApplications,
     },
 
     data() {

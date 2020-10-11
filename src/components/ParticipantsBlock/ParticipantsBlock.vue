@@ -265,13 +265,17 @@ export default {
     width: 100%
 
   &__avatar
+    display: flex
     width: 44px
     height: 44px
-    border-radius: 50%
     overflow: hidden
     margin: 5px
     img
-      width: 44px
-      height: 44px
+        border-radius: 50%
+        max-width: 44px
+        max-height: 44px
+        width: 100%
+        height: 100%
+        object-fit: cover
 
 </style>

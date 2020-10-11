@@ -3,7 +3,7 @@ v-card(style="height: 100%")
     v-tabs.contTabs( style="background-color:white; color:#FEBA13;")
         v-tab( v-for="tabOne in tabs" :key="`items${tabOne.id}`" ) {{tabOne.name}}
         v-tab-item
-            v-container.ParticipansCatalog
+            .ParticipansCatalog
                 v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
                     .ParticipansCatalog__search.d-flex.px-3
                         v-text-field(
@@ -61,7 +61,7 @@ export default {
         headers_user: [
             { text: "Аватар", sortable: false, value: "" },
             { text: "ФИО",sortable: true, value: "name_ru" },
-            { text: "Цель комментария", sortable: false, value: "" },
+            { text: "Цель комментария", sortable: false, value: "toNameRu" },
             { text: "Комментарий", sortable: false, value: "" },
             { text: "Статус", sortable: false, value: "" },
         ],

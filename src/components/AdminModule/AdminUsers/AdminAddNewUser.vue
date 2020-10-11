@@ -86,20 +86,6 @@
           <h3>Редактируемые данные</h3>
         </div>
         <div class="form-update">
-
-          <!-- <div class="img-avatar">
-            <img :src="`${URL_AVATARS}${userId.img}`"/>
-            <img v-bind:src="imagePreview" v-show="showPreview"/>
-            <label>
-              <input 
-              type="file" 
-              id="file" 
-              ref="file" 
-              accept="image/*" 
-              v-on:change="handleFileUpload()"/>
-            </label>
-          </div> -->
-          
           <div class="userData">
             <div class="userData__box">
               <h3>Данные</h3> 

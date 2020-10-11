@@ -33,7 +33,9 @@
                 @click="$emit('switchLang', 'en')"
               />
             </div>
-            <div class="mdi mdi-account-edit"></div>
+            <router-link to="/my-profile">
+              <div class="mdi mdi-account-edit"></div>
+            </router-link>
           </div>
         </v-col>
       </v-row>
@@ -114,6 +116,9 @@ export default {
         align-items: flex-start;
         @include respond-to(apple5) {
           flex-direction: column-reverse;
+        }
+        a {
+          text-decoration: none;
         }
         .mdi-account-edit {
           display: flex;
