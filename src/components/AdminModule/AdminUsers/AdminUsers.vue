@@ -18,7 +18,7 @@ export default {
 			dialogTable: "",
 			tab: null,
 			idField: null,
-			tabs: [{ id: 0, name: "Победители", value: "winners" }]
+			tabs: [{ id: 0, name: "Все пользователи", value: "" }]
 		};
 	},
 

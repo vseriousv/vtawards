@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card(style="height: 100%")
-    v-container.ParticipansCatalog
+    .ParticipansCatalog
         v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
             .ParticipansCatalog__search.d-flex.px-3
                 v-text-field(
@@ -41,7 +41,10 @@
 
 <script>
 import config from "../../constants/config";
-import axios from "axios";
+import RestHelper from "../../helpers/RestHelper";
+
+const restHelper = new RestHelper();
+
 export default {
   name: "ResultsVoting",
   data() {
@@ -51,20 +54,18 @@ export default {
 
       headersUserRu: [
           { text: "Аватар", sortable: false, value: "" },
-          { text: "",sortable: false, value: "" },
-          { text: "Номинант", sortable: false, value: "" },
-          { text: "ФИО", sortable: true, value: "nameRuTo" },
+          { text: "ФИО", sortable: true, value: "nameRu" },
           { text: "Номинация", sortable: false, value: "" },
-          { text: "Статус", sortable: false, value: "" },
+          { text: "Регион", sortable: false, value: "" },
+          { text: "Голоса", sortable: false, value: "" },
       ],
 
       headersUserEn: [
           { text: "Avatar", sortable: false, value: "" },
-          { text: "",sortable: false, value: "" },
-          { text: "Nominee", sortable: false, value: "" },
-          { text: "Full name", sortable: true, value: "nameEnTo" },
+          { text: "Full name", sortable: true, value: "nameEn" },
           { text: "Nomination", sortable: false, value: "" },
-          { text: "Status", sortable: false, value: "" },
+          { text: "State", sortable: false, value: "" },
+          { text: "Voices", sortable: false, value: "" },
       ],
 
       nominations: [],
@@ -72,91 +73,57 @@ export default {
     };
   },
   created() {
-    this.getCommittee();
+    this.getParticipants();
   },
   methods: {
-    getCommittee: function() {
-      const url = config.API_URL + "/participants/isactive";
-      axios
-        .get(url, {
-          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-        })
-        .then(result => {
-          console.log(result.data);
-          this.setUsersArray(result.data);
-        })
-        .catch(e => console.error("committee-error:", e));
-    },
-    setUsersArray: async function(data) {
-      for (let i = 0; i < data.length; i++) {
-        let committee_avg = 0;
-        if (data[i].result) {
-          committee_avg =
-            data[i].result.committee_votes !== 0
-              ? +data[i].result.committee_votes /
-                +data[i].result.committee_rating
-              : 0;
-        }
-
-        const userObject = {
-          id: data[i].user.id,
-          tabNumber: data[i].user.tabNumber,
-          img: data[i].user.img ? data[i].user.img : "null.png",
-          name_ru:
-            data[i].user.firstname_ru +
-            " " +
-            data[i].user.patronymic_ru +
-            " " +
-            data[i].user.lastname_ru,
-          name_en: data[i].user.firstname_en + " " + data[i].user.lastname_en,
-
-          committee_rating: data[i].result ? data[i].result.committee_votes : 0,
-          count_committee_votes: data[i].result
-            ? data[i].result.committee_rating
-            : 0,
-          sr_rating: committee_avg,
-          count_votes: data[i].result ? data[i].result.votes : 0,
-          result_rating: data[i].result ? data[i].result.summ : 0
-        };
-        this.committee.push(userObject);
+    getParticipants: async function() {
+      const url = "/nomination-order/public?filter={}";
+      try {
+          const data = await restHelper.getEntity(url, true);
+          this.setParticipantsArray(data.data.rows, true);
+      } catch(e) {
+          console.error("ERROR ParticipantsBlock/getParticipants:", e);
       }
-    }
+    },
+    
   }
 };
 </script>
 
-<style lang="scss" scoped>
-.result-voting {
-  width: 100%;
-  min-height: 600px;
-  margin-top: 50px;
-  .tableAll {
-    width: 100%;
-    height: 100%;
-    .manageDelete {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      .manageBTN {
-        margin: 0 10px;
-      }
-    }
-    .tr_row {
-      .avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin: 5px;
-        img {
-          width: 44px;
-          height: 44px;
-        }
-      }
-      .td_block {
-        min-height: 63px;
-      }
-    }
-  }
-}
+<style lang="sass" scoped>
+.selectNomination,.selectStates
+  max-width: 300px
+  margin-right: 20px
+.ParticipansCatalog
+  padding: 30px 20px 20px
+  &__boxBtn
+    align-items: flex-start
+    justify-content: space-between
+  &__select
+    display: flex
+    flex-direction: row
+  &__addUser
+    margin: 0 10px
+
+  &__table
+    width: 100%
+    height: 100%
+
+  &__row
+    width: 100%
+
+  &__avatar
+    display: flex
+    width: 44px
+    height: 44px
+    overflow: hidden
+    margin: 5px
+    img
+        border-radius: 50%
+        max-width: 44px
+        max-height: 44px
+        width: 100%
+        height: 100%
+        object-fit: cover
+
 </style>

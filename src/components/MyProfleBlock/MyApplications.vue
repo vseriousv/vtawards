@@ -19,9 +19,7 @@
                     :search="search_user"
                 )
                     template(v-slot:item="{ item }")
-                        tr.ParticipansCatalog__row(
-                            @click.stop="showParticipant(item.id, item.public)"
-                            )
+                        tr.ParticipansCatalog__row
                             td.td_block.text-center
                                 .ParticipansCatalog__avatar
                                     img(:src="`${URL_AVATARS}${user.img}`")
@@ -33,10 +31,6 @@
                             td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{item.nameEnTo}}
                             td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'ru'") {{item.nominationRu}}
                             td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{item.nominationEn}}
-                            td.td_block.text-left(v-if="item.public === true && $t('lang') === 'ru'" style="color: green;") Опубликован
-                            td.td_block.text-left(v-if="item.public === true && $t('lang') === 'en'" style="color: green;") Public
-                            td.td_block.text-left(v-if="item.public === false && $t('lang') === 'ru'" style="color: red;") Неопубликован
-                            td.td_block.text-left(v-if="item.public === false && $t('lang') === 'en'" style="color: red;") Not Public
 </template>
 
 <script>
@@ -61,7 +55,6 @@ export default {
                 { text: "Номинант", sortable: false, value: "" },
                 { text: "ФИО", sortable: true, value: "nameRuTo" },
                 { text: "Номинация", sortable: false, value: "" },
-                { text: "Статус", sortable: false, value: "" },
             ],
 
             headersUserEn: [
@@ -70,7 +63,6 @@ export default {
                 { text: "Nominee", sortable: false, value: "" },
                 { text: "Full name", sortable: true, value: "nameEnTo" },
                 { text: "Nomination", sortable: false, value: "" },
-                { text: "Status", sortable: false, value: "" },
             ],
 
             user: {},
@@ -134,12 +126,12 @@ export default {
                 }
             })
         },
-        showParticipant: function(id, isPublic) {
-            isPublic? this.showParticipantId(id): alert ("Заявка на участие в конкурсе этого пользователя еще не прошла подтверждения админимтратором.")
-        },
-        showParticipantId: function(id){
-            this.$router.push({ path: "/nomination-order/id/" + id })
-        },
+        // showParticipant: function(id, isPublic) {
+        //     isPublic? this.showParticipantId(id): alert ("Заявка на участие в конкурсе этого пользователя еще не прошла подтверждения админимтратором.")
+        // },
+        // showParticipantId: function(id){
+        //     this.$router.push({ path: "/nomination-order/id/" + id })
+        // },
     }   
 
 

@@ -61,7 +61,7 @@ export default {
         headers_user: [
             { text: "Аватар", sortable: false, value: "" },
             { text: "ФИО",sortable: true, value: "name_ru" },
-            { text: "Цель комментария", sortable: false, value: "toNameRu" },
+            { text: "Цель комментария", sortable: true, value: "toNameRu" },
             { text: "Комментарий", sortable: false, value: "" },
             { text: "Статус", sortable: false, value: "" },
         ],

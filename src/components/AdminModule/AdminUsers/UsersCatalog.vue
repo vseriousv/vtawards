@@ -13,11 +13,11 @@
 					{
 						text: "Таб номер",
 						align: "start",
-						sortable: false,
+						sortable: true,
 						value: "tabNumber"
 					},
 					{ text: "Аватар", value: "img" },
-					{ text: "ФИО", value: "name_ru" },
+					{ text: "ФИО", sortable: true, value: "name_ru" },
 					{ text: "Full name", value: "name_en" },
 					{ text: "Email", value: "email" },
 					{ text: "Роль", value: "role" }
