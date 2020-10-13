@@ -19,10 +19,10 @@
                     p(v-if="$t('lang') === 'en'") My applications
                     .mdi.mdi-account-switch.icon
 
-                v-tab.profile__headerTabs(href="#tab-3")
-                    p(v-if="$t('lang') === 'ru'") Мои голоса
-                    p(v-if="$t('lang') === 'en'") My voices
-                    .mdi.mdi-comment-account.icon
+                //- v-tab.profile__headerTabs(href="#tab-3")
+                //-     p(v-if="$t('lang') === 'ru'") Мои голоса
+                //-     p(v-if="$t('lang') === 'en'") My voices
+                //-     .mdi.mdi-comment-account.icon
 
                 v-tabs-items(v-model="tab")
                     v-tab-item(

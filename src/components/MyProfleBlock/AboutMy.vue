@@ -5,7 +5,7 @@
                     .aboutMy__avatar
                         img(v-if="this.file === ''" :src="`${URL_AVATARS}${user.img}`")
                         img(v-else :src="imagePreview" v-show="showPreview")
-                    .aboutMy__boxInput.addImg
+                    v-form.aboutMy__boxInput.addImg
                         label.addImg__label
                             p {{ $t("nameButton.change") }}
                             input.addImg__btn(type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()")
@@ -16,7 +16,7 @@
                             style="min-width: 115px;"
                             x-small
                             color="primary"
-                            @click.stop="") {{ $t("nameButton.save") }}
+                            @click.stop="saveNewAvatar") {{ $t("nameButton.save") }}
                 
                 .aboutMy__content.contentMy
                     v-simple-table
@@ -89,7 +89,7 @@
                             x-small
                             :disabled='btnDisabled.saveData'
                             color="primary"
-                            @click.stop="") {{ $t("nameButton.save") }}
+                            @click.stop="savePassword") {{ $t("nameButton.save") }}
                         
                         
 </template>
@@ -110,8 +110,10 @@ export default {
             myId: jwtHelper.jwtParse().id,
             URL_AVATARS: config.URL_AVATARS,
             file: '',
+            preview: '',
             showPreview: true,
             imagePreview: '',
+            oldPassword: '',
 
             user: {},
             btnDisabled: {
@@ -134,12 +136,12 @@ export default {
             this.showPreview = true;
             this.imagePreview = reader.result;
             }.bind(this), false);
-            console.log(this.file.name)
             if( this.file ){
                 if ( /\.(jpe?g|png|svg)$/i.test( this.file.name ) ) {
                     reader.readAsDataURL( this.file );
                 }
             }
+            console.log(this.file)
         },
 
         getUser: async function() {
@@ -147,13 +149,14 @@ export default {
 			try {
 				const user = await restHelper.getEntity(url, true);
                 this.parseUser(user.data);
-                console.log(user.data)
+                // console.log(user.data)
 			} catch(e) {
 				console.error("ERROR AboutMy/getUser:", e);
             }
         },
         parseUser: function(data) {
             this.user = {
+                tabNumber: data.tabNumber,
                 img: data.img || "null.png",
                 name_ru:
                     data.lastnameRu + " " + data.firstnameRu + " " + data.patronymicRu,
@@ -169,17 +172,66 @@ export default {
                 pass: data.passwordText
             }
             this.imagePreview = data.img || "null.png"
+            this.oldPassword = data.passwordText
         },
         btnNoneDisabled: function() {
             this.btnDisabled = {
                 fixsetData: false,
                 saveData: false,
             }
+        },
+        saveNewAvatar: function() {
+            if (this.file !== '') {
+                let dataImg = new FormData()
+                dataImg.append("id", this.myId)
+                dataImg.append("file", this.file)
+                this.postNewAvatar(dataImg)
+            } else {
+                console.log("Такая аватарка уже существует и использована")
+                return
+            }
+        },
+        postNewAvatar: async function(data) {
+            const url = "/users/avatar";
+			try {
+                const postAvatar = await restHelper.postEntity(url, data, true);
+                console.log(postAvatar)
+				if (this.$t('lang') === 'ru') {
+                    alert("Ваша аватарка успешно обновлена")
+                }
+                if (this.$t('lang') === 'en') {
+                    alert("Your avatar has been successfully updated")
+                }
+			} catch (e) {
+				alert("Ошибка сервера или запроса" + " " + e)
+			}
+        },
+        savePassword: async function() {
+            const url = "/users/change-password";
+            const data = {
+                "tabNumber": this.user.tabNumber,
+                "passwordOld": this.oldPassword,
+                "passwordNew": this.user.pass,
+            }
+            try {
+                console.log(data)
+                const postPassword = await restHelper.postEntity(url, data, true);
+                console.log(postPassword)
+                this.btnDisabled = {
+                    fixsetData: true,
+                    saveData: true,
+                }
+				if (this.$t('lang') === 'ru') {
+                    alert("Ваш пароль успешно обновлен")
+                }
+                if (this.$t('lang') === 'en') {
+                    alert("Your password has been successfully updated")
+                }
+			} catch (e) {
+				alert("Ошибка сервера или запроса" + " " + e)
+			}
         }
     },
-
-
-
 }
 </script>
 

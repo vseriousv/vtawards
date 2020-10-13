@@ -34,7 +34,7 @@
 
     v-row
       v-data-table.ParticipansCatalog__table(
-        :headers="headers_user"
+        :headers="this.$t('lang') === 'ru'? headers_userRu: headers_userEn"
         :items="participants"
         :search="search_user"
       )
@@ -76,11 +76,17 @@ export default {
 
       URL_AVATARS: config.URL_AVATARS,
 
-      headers_user: [
+      headers_userRu: [
         { text: "Аватар", sortable: false,value: "img" },
         { text: "ФИО", value: "name_ru" },
         { text: "Номинация", sortable: false, value: "nomination" },
         { text: "Регион", sortable: false, value: "state" },
+      ],
+      headers_userEn: [
+        { text: "Avatar", sortable: false,value: "img" },
+        { text: "Full name", value: "name_en" },
+        { text: "Nomination", sortable: false, value: "nomination" },
+        { text: "State", sortable: false, value: "state" },
       ],
       search_user: "",
       users: [],
@@ -190,7 +196,7 @@ export default {
           text: "ВСЕ НОМИНАЦИИ",
           value: 0})
       this.nominationEn.push({
-          text: "ALL NOMINATION",
+          text: "ALL NOMINATIONS",
           value: 0})
       data.forEach(nomin => {
         let nominationRu = {

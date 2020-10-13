@@ -1,57 +1,42 @@
-<template>
-  <section class="result-voting mxw1200">
-    <v-simple-table class="tableAll">
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left"></th>
-            <th class="text-left">{{ $t("membersBlock.table.member") }}</th>
-            <th class="text-center">
-              {{ $t("membersBlock.table.count_committee_votes") }}
-            </th>
-            <th class="text-center">
-              {{ $t("membersBlock.table.committee_rating") }}
-            </th>
-            <th class="text-center">
-              {{ $t("membersBlock.table.sr_rating") }}
-            </th>
-            <th class="text-center">
-              {{ $t("membersBlock.table.count_votes") }}
-            </th>
-            <!--                    <th class="text-center">{{$t("membersBlock.table.result_rating")}}</th>-->
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(itemField, id) in committee"
-            class="tr_row"
-            :key="`committeeItem${id}`"
-          >
-            <td class="td_block text-center">
-              <div class="avatar">
-                <img :src="`${URL_AVATARS}${itemField.img}`" />
-              </div>
-            </td>
-            <td v-if="$t('lang') === 'ru'" class="td_block">
-              {{ itemField.name_ru }}
-            </td>
-            <td v-if="$t('lang') === 'en'" class="td_block">
-              {{ itemField.name_en }}
-            </td>
-            <td class="td_block text-center">
-              {{ itemField.committee_rating }}
-            </td>
-            <td class="td_block text-center">
-              {{ itemField.count_committee_votes }}
-            </td>
-            <td class="td_block text-center">{{ itemField.sr_rating }}</td>
-            <td class="td_block text-center">{{ itemField.count_votes }}</td>
-            <!--                    <td class="td_block text-center">{{ itemField.result_rating}} </td>-->
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-  </section>
+<template lang="pug">
+  v-card(style="height: 100%")
+    v-container.ParticipansCatalog
+        v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
+            .ParticipansCatalog__search.d-flex.px-3
+                v-text-field(
+                v-model="search_user"
+                label="Search"
+                append-icon="mdi-magnify"
+                outlined
+                dense
+                single-line
+                hide-details
+                )
+        v-row
+            v-data-table.ParticipansCatalog__table(
+                :headers="this.$t('lang') === 'ru'? headersUserRu: headersUserEn"
+                :items="nominations"
+                :search="search_user"
+            )
+                template(v-slot:item="{ item }")
+                    tr.ParticipansCatalog__row(
+                        @click.stop="showParticipant(item.id, item.public)"
+                        )
+                        td.td_block.text-center
+                            .ParticipansCatalog__avatar
+                                img(:src="`${URL_AVATARS}${user.img}`")
+                        td.td_block.text-left.mdi.mdi-chevron-double-right(style="color: orange; font-size: 18px;")
+                        td.td_block.text-center
+                            .ParticipansCatalog__avatar
+                                img(:src="`${URL_AVATARS}${item.imgTo}`")
+                        td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'ru'") {{item.nameRuTo}}
+                        td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{item.nameEnTo}}
+                        td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'ru'") {{item.nominationRu}}
+                        td.td_block.text-left.ParticipansCatalog__commit(v-if="$t('lang') === 'en'") {{item.nominationEn}}
+                        td.td_block.text-left(v-if="item.public === true && $t('lang') === 'ru'" style="color: green;") Опубликован
+                        td.td_block.text-left(v-if="item.public === true && $t('lang') === 'en'" style="color: green;") Public
+                        td.td_block.text-left(v-if="item.public === false && $t('lang') === 'ru'" style="color: red;") Неопубликован
+                        td.td_block.text-left(v-if="item.public === false && $t('lang') === 'en'" style="color: red;") Not Public
 </template>
 
 <script>
@@ -62,7 +47,28 @@ export default {
   data() {
     return {
       committee: [],
-      URL_AVATARS: config.URL_AVATARS
+      URL_AVATARS: config.URL_AVATARS,
+
+      headersUserRu: [
+          { text: "Аватар", sortable: false, value: "" },
+          { text: "",sortable: false, value: "" },
+          { text: "Номинант", sortable: false, value: "" },
+          { text: "ФИО", sortable: true, value: "nameRuTo" },
+          { text: "Номинация", sortable: false, value: "" },
+          { text: "Статус", sortable: false, value: "" },
+      ],
+
+      headersUserEn: [
+          { text: "Avatar", sortable: false, value: "" },
+          { text: "",sortable: false, value: "" },
+          { text: "Nominee", sortable: false, value: "" },
+          { text: "Full name", sortable: true, value: "nameEnTo" },
+          { text: "Nomination", sortable: false, value: "" },
+          { text: "Status", sortable: false, value: "" },
+      ],
+
+      nominations: [],
+      search_user: "",
     };
   },
   created() {

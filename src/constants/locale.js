@@ -310,7 +310,7 @@ export default {
       },
       // {
       //   id: 2,
-      //   text: "Результаты голосования",
+      //   text: "Итоги голосования",
       //   link: "/result",
       //   target: "_self"
       // },
