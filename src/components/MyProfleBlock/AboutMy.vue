@@ -9,8 +9,8 @@
                         label.addImg__label
                             p {{ $t("nameButton.change") }}
                             input.addImg__btn(type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()")
-                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'ru'") Имя файла: {{this.file.name}}
-                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'en'") File name: {{this.file.name}}     
+                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'ru'") Имя файла: {{this.fileName}}
+                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'en'") File name: {{this.fileName}}     
                     .aboutMy__saveAll
                         v-btn.mx-1(
                             style="min-width: 115px;"
@@ -110,7 +110,7 @@ export default {
             myId: jwtHelper.jwtParse().id,
             URL_AVATARS: config.URL_AVATARS,
             file: '',
-            preview: '',
+            fileName:'',
             showPreview: true,
             imagePreview: '',
             oldPassword: '',
@@ -139,9 +139,9 @@ export default {
             if( this.file ){
                 if ( /\.(jpe?g|png|svg)$/i.test( this.file.name ) ) {
                     reader.readAsDataURL( this.file );
+                    this.fileName = this.file.name
                 }
             }
-            console.log(this.file)
         },
 
         getUser: async function() {
@@ -196,6 +196,9 @@ export default {
 			try {
                 const postAvatar = await restHelper.postEntity(url, data, true);
                 console.log(postAvatar)
+                this.fileName = ""
+                this.file = ''
+                this.getUser()
 				if (this.$t('lang') === 'ru') {
                     alert("Ваша аватарка успешно обновлена")
                 }
