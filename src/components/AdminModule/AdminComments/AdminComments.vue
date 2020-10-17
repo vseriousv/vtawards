@@ -159,7 +159,7 @@ export default {
             data.forEach(item => {
                 let dataUser = {
                     id: item.id,
-                    img: item.img,
+                    img: item.img || 'null.png',
                     name_ru: item.firstnameRu + " " + item.lastnameRu,
                     name_en: item.firstnameEn + " " + item.lastnameEn,
                 }
@@ -171,7 +171,7 @@ export default {
         addDataFromUser: function(data) {
             this.allUser.forEach(item => {
                 if (item.id === data.idFrom) {
-                    data.img = item.img
+                    data.img = item.img || "null.png"
                     data.name_ru = item.name_ru
                     data.name_en = item.name_en
                 }

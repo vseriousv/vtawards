@@ -11,7 +11,7 @@
                 v-tabs-slider
                 v-tab.profile__headerTabs(href="#tab-1")
                     p(v-if="$t('lang') === 'ru'") Обо мне
-                    p(v-if="$t('lang') === 'en'") About My
+                    p(v-if="$t('lang') === 'en'") About Me
                     .mdi.mdi-account-circle.icon
 
                 v-tab.profile__headerTabs(href="#tab-2")

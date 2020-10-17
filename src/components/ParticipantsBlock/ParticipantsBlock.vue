@@ -86,7 +86,7 @@ export default {
         { text: "Avatar", sortable: false,value: "img" },
         { text: "Full name", value: "name_en" },
         { text: "Nomination", sortable: false, value: "nomination" },
-        { text: "State", sortable: false, value: "state" },
+        { text: "Region", sortable: false, value: "state" },
       ],
       search_user: "",
       users: [],
@@ -229,7 +229,7 @@ export default {
           text: "ВСЕ РЕГИОНЫ",
           value: 0})
       this.statesEn.push({
-          text: "ALL STATES",
+          text: "ALL REGIONS",
           value: 0})
       data.forEach(states => {
         let statesRu = {
