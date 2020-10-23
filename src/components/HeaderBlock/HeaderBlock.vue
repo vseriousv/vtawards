@@ -55,7 +55,7 @@
           />
         </div> -->
         <div class="body-button ">
-          <p v-html='$t("header.btnHeader.beforeText")'></p>
+          <!-- <p v-html='$t("header.btnHeader.beforeText")'></p> -->
           <!-- <a :href="`/files/${$t('header.btnHeader.link')}`" target="_blank">
             <input
               type="button"
