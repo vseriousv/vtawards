@@ -26,10 +26,10 @@
 				],
 				setRating: 0,
 				isCommittee: false,
-				activeVoting: 0,
-				disabledVoting: false,
-				count_voting_ru: "",
-				count_voting_en: "",
+				// activeVoting: 0,
+				// disabledVoting: false,
+				// count_voting_ru: "",
+				// count_voting_en: "",
 
 				userFrom: {},
 				comments: [],
@@ -39,7 +39,7 @@
 		},
 
 		created() {
-			this.getActiveVoting();
+			// this.getActiveVoting();
 			this.getUser();
 			this.getComments();
 			this.checkCommittee();
@@ -58,7 +58,7 @@
 						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
 					})
 					.then(result => {
-						console.log(result.data)
+						// console.log(result.data)
 						this.parseUserData(result.data);
 					})
 					.catch(e => console.error("participants-error:", e));
@@ -86,130 +86,130 @@
 				};
 			},
 
-			getVotes: function(voting_id) {
-				const jwtHelper = new JwtHelper();
-				const url =
-					config.API_URL +
-					"/votes/from/" +
-					jwtHelper.jwtParse().id +
-					"/voting/" +
-					voting_id;
-				axios
-					.get(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => {
-						// console.log("resultVotes", result.data);
-						// Voting conditions:
-						const if_1 = +jwtHelper.jwtParse().id === +this.$route.params.id;
-						const if_2 = +jwtHelper.jwtParse().state_id !== +this.user.state_id;
+			// getVotes: function(voting_id) {
+			// 	const jwtHelper = new JwtHelper();
+			// 	const url =
+			// 		config.API_URL +
+			// 		"/votes/from/" +
+			// 		jwtHelper.jwtParse().id +
+			// 		"/voting/" +
+			// 		voting_id;
+			// 	axios
+			// 		.get(url, {
+			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+			// 		})
+			// 		.then(result => {
+			// 			// console.log("resultVotes", result.data);
+			// 			// Voting conditions:
+			// 			const if_1 = +jwtHelper.jwtParse().id === +this.$route.params.id;
+			// 			const if_2 = +jwtHelper.jwtParse().state_id !== +this.user.state_id;
 
-						if (if_1) {
-							this.count_voting_ru = "Вы не можете голосовать за себя";
-							this.count_voting_en = "You cannot vote for yourself";
-							this.disabledVoting = true;
-						} else if (if_2) {
-							this.count_voting_ru =
-								"Вы можете голосовать только за участника своего региона";
-							this.count_voting_en =
-								"You can only vote for a member of your region";
-							this.disabledVoting = true;
-						} else {
-							const userFind = result.data.find(
-								item => +item.user_to_id === +this.$route.params.id
-							);
-							if (userFind !== undefined) {
-								this.count_voting_ru = "Вы уже голосовали за этого участника";
-								this.count_voting_en = "You have already voted for this member";
-								this.disabledVoting = true;
-							} else {
-								if (jwtHelper.isCommittee()) {
-									//Check committee
-									for (let i = 0; i < result.data.length; i++) {
-										const count_vote = result.data[i].count_vote;
-										for (let j = 0; j < this.itemRating_ru.length; j++) {
-											if (this.itemRating_ru[j].value === count_vote) {
-												this.itemRating_ru.splice(j, 1);
-												this.itemRating_en.splice(j, 1);
-											}
-										}
-									}
-								} else {
-									if (result.data.length === 0) {
-										this.count_voting_ru = "У вас осталось 3 голоса";
-										this.count_voting_en = "You have 3 votes left";
-										this.disabledVoting = false;
-									}
-									if (result.data.length === 1) {
-										this.count_voting_ru = "У вас осталось 2 голоса";
-										this.count_voting_en = "You have 2 votes left";
-										this.disabledVoting = false;
-									}
-									if (result.data.length === 2) {
-										this.count_voting_ru = "У вас осталось 1 голос";
-										this.count_voting_en = "You have 1 vote left";
-										this.disabledVoting = false;
-									}
-									if (result.data.length === 3) {
-										this.count_voting_ru = "У вас не осталось голосов";
-										this.count_voting_en = "You have no more votes";
-										this.disabledVoting = true;
-									}
-								}
-							}
-						}
-					})
-					.catch(err => console.log("err", err));
-			},
+			// 			if (if_1) {
+			// 				this.count_voting_ru = "Вы не можете голосовать за себя";
+			// 				this.count_voting_en = "You cannot vote for yourself";
+			// 				this.disabledVoting = true;
+			// 			} else if (if_2) {
+			// 				this.count_voting_ru =
+			// 					"Вы можете голосовать только за участника своего региона";
+			// 				this.count_voting_en =
+			// 					"You can only vote for a member of your region";
+			// 				this.disabledVoting = true;
+			// 			} else {
+			// 				const userFind = result.data.find(
+			// 					item => +item.user_to_id === +this.$route.params.id
+			// 				);
+			// 				if (userFind !== undefined) {
+			// 					this.count_voting_ru = "Вы уже голосовали за этого участника";
+			// 					this.count_voting_en = "You have already voted for this member";
+			// 					this.disabledVoting = true;
+			// 				} else {
+			// 					if (jwtHelper.isCommittee()) {
+			// 						//Check committee
+			// 						for (let i = 0; i < result.data.length; i++) {
+			// 							const count_vote = result.data[i].count_vote;
+			// 							for (let j = 0; j < this.itemRating_ru.length; j++) {
+			// 								if (this.itemRating_ru[j].value === count_vote) {
+			// 									this.itemRating_ru.splice(j, 1);
+			// 									this.itemRating_en.splice(j, 1);
+			// 								}
+			// 							}
+			// 						}
+			// 					} else {
+			// 						if (result.data.length === 0) {
+			// 							this.count_voting_ru = "У вас осталось 3 голоса";
+			// 							this.count_voting_en = "You have 3 votes left";
+			// 							this.disabledVoting = false;
+			// 						}
+			// 						if (result.data.length === 1) {
+			// 							this.count_voting_ru = "У вас осталось 2 голоса";
+			// 							this.count_voting_en = "You have 2 votes left";
+			// 							this.disabledVoting = false;
+			// 						}
+			// 						if (result.data.length === 2) {
+			// 							this.count_voting_ru = "У вас осталось 1 голос";
+			// 							this.count_voting_en = "You have 1 vote left";
+			// 							this.disabledVoting = false;
+			// 						}
+			// 						if (result.data.length === 3) {
+			// 							this.count_voting_ru = "У вас не осталось голосов";
+			// 							this.count_voting_en = "You have no more votes";
+			// 							this.disabledVoting = true;
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			// 		})
+			// 		.catch(err => console.log("err", err));
+			// },
 
-			setVote: function(type) {
-				if (type === "user") {
-					this.sendVote(type, 1);
-				} else {
-					if (this.setRating === 0) {
-						console.error("Нужно выбрать балл");
-					} else {
-						this.sendVote(type, this.setRating);
-						this.disabledVoting = true;
-					}
-				}
-			},
+			// setVote: function(type) {
+			// 	if (type === "user") {
+			// 		this.sendVote(type, 1);
+			// 	} else {
+			// 		if (this.setRating === 0) {
+			// 			console.error("Нужно выбрать балл");
+			// 		} else {
+			// 			this.sendVote(type, this.setRating);
+			// 			this.disabledVoting = true;
+			// 		}
+			// 	}
+			// },
 
-			sendVote: function(type_vote, count_vote) {
-				const jwtHelper = new JwtHelper();
-				const url = config.API_URL + "/votes/create";
-				const dataSend = {
-					user_from_id: +jwtHelper.jwtParse().id,
-					user_to_id: +this.$route.params.id,
-					type_vote: type_vote,
-					count_vote: +count_vote,
-					voting_id: +this.activeVoting
-				};
-				axios
-					.post(url, dataSend, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => console.log("resultSend", result.data))
-					.catch(err => console.log("err", err));
-			},
+			// sendVote: function(type_vote, count_vote) {
+			// 	const jwtHelper = new JwtHelper();
+			// 	const url = config.API_URL + "/votes/create";
+			// 	const dataSend = {
+			// 		user_from_id: +jwtHelper.jwtParse().id,
+			// 		user_to_id: +this.$route.params.id,
+			// 		type_vote: type_vote,
+			// 		count_vote: +count_vote,
+			// 		voting_id: +this.activeVoting
+			// 	};
+			// 	axios
+			// 		.post(url, dataSend, {
+			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+			// 		})
+			// 		.then(result => console.log("resultSend", result.data))
+			// 		.catch(err => console.log("err", err));
+			// },
 
-			getActiveVoting: async function() {
-				const url = config.API_URL + "/votings/isactive";
-				await axios
-					.get(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => {
-						this.activeVoting = result.data[0].id;
-						return result.data[0].id;
-					})
-					.then(voting_id => {
-						this.getVotes(voting_id);
-					})
-					.catch(err => {
-						console.log("err", err);
-					});
-			},
+			// getActiveVoting: async function() {
+			// 	const url = config.API_URL + "/votings/isactive";
+			// 	await axios
+			// 		.get(url, {
+			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+			// 		})
+			// 		.then(result => {
+			// 			this.activeVoting = result.data[0].id;
+			// 			return result.data[0].id;
+			// 		})
+			// 		.then(voting_id => {
+			// 			this.getVotes(voting_id);
+			// 		})
+			// 		.catch(err => {
+			// 			console.log("err", err);
+			// 		});
+			// },
 
 			getComments: async function() {
 				const urn = `/comments/nomination-order/${this.$route.params.id}/public`;
@@ -257,7 +257,7 @@
 						item.name_en = data.firstnameEn + " " + data.lastnameEn || ''
 					}
 				})
-				console.log(this.comments)
+				// console.log(this.comments)
 			},
 
 			async publicComment(){

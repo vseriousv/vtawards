@@ -125,7 +125,7 @@ export default {
       try {
           const data = await restHelper.getEntity(url, true);
           this.setParticipantsArray(data.data.rows, false);
-          console.log(this.users)
+          // console.log(this.users)
       } catch(e) {
           console.error("ERROR ParticipantsBlock/getParticipantsFromIdNomination:", e);
       }
