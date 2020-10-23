@@ -64,14 +64,14 @@
               :value="$t('header.btnHeader.text')"
             />
           </a> -->
-          <router-link to="/application">
+          <!-- <router-link to="/application">
             <input
               type="button"
               id="headerBtn"
               class="body-button_col__button"
               :value="$t('header.btnHeader.text')"
             />
-          </router-link>
+          </router-link> -->
         </div>
       </v-row>
       <!-- <v-row class="body-button">
@@ -79,7 +79,7 @@
       </v-row> -->
       <v-row class="body-voteStatus">
         <v-col class="body-voteStatus_col d-flex flex-column align-start">
-					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>
+					 <!--<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>
 					<div class="Timer-view d-flex">
             <div class="boxTime">
               <p class="boxTime__title">{{$t("header.time.d")}}</p>
@@ -97,11 +97,9 @@
               <p class="boxTime__title">{{$t("header.time.sec")}}</p>
               <span class="Timer-view__card seconds">{{timer.seconds}}</span>
             </div>
-					</div>
-<!--          <p class="body-voteStatus_col__text">-->
-<!--&lt;!&ndash;            {{ $t("header.statusVote.statusProc") }}&ndash;&gt;-->
-<!--						-->
-<!--          </p>-->
+					</div> -->
+          <!-- <p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p> -->
+          <p class="body-voteStatus_col__text application_end">{{ $t("header.statusVote.statusApplicEnd") }}</p>
         </v-col>
       </v-row>
     </v-container>
@@ -369,6 +367,11 @@ export default {
           @include respond-to(large-screens) {
             text-align: left;
           }
+        }
+        .application_end {
+          padding: 15px;
+          border: 1px solid  #FEBA13;
+          border-radius: 5px;
         }
       }
       .boxTime {

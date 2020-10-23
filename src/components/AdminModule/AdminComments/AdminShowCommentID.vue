@@ -261,8 +261,10 @@ export default {
         margin: 5px 5px 10px 5px
         img
             border-radius: 50%
-            max-width: 100%
-            max-height: 100%
+            max-width: 100px
+            max-height: 100px
+            width: 100%
+            height: 100%
             object-fit: cover 
 .UserArgumentation
     .nominationText

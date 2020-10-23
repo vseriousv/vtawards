@@ -14,13 +14,13 @@ section.nomination#nomination
     div.nomination-text
       h2 {{$t('NominationBlock.head')}}
       p {{$t('NominationBlock.headText')}}
-      router-link(to="/application")
-        input(
-          type="button"
-          id="headerBtn"
-          class="body-button_col__button"
-          :value="$t('header.btnHeader.text')"
-        )
+      //- router-link(to="/application")
+      //-   input(
+      //-     type="button"
+      //-     id="headerBtn"
+      //-     class="body-button_col__button"
+      //-     :value="$t('header.btnHeader.text')"
+      //-   )
     div.nomination-icons
       ul.nomination-list
         li.nomination-list-item

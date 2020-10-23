@@ -18,7 +18,8 @@ export default {
         statusProc: "Голосование скоро начнется",
         statusStart: "Идет голосовнаие",
 				statusCancel: "До конца голосования осталось",
-				statusCancelOrders: "До конца сбора заявок осталось"
+        statusCancelOrders: "До конца сбора заявок осталось",
+        statusApplicEnd: "Прием заявок завершен",
       },
       time:{
         d:"Д",
@@ -365,7 +366,8 @@ export default {
         statusProc: "The on-line voting is over",
         statusStart: "There is a vote",
 				statusCancel: "Until the end of the vote left",
-				statusCancelOrders: "Until the end of the collection of applications left"
+        statusCancelOrders: "Until the end of the collection of applications left",
+        statusApplicEnd: "Application is closed",
       },
       time:{
         d:"d",
