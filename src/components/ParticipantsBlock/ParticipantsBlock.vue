@@ -133,7 +133,9 @@ export default {
 
 
     showParticipant: function(id) {
-      this.$router.push({ path: "/nomination-order/id/" + id });
+      // this.$router.push({ path: "/nomination-order/id/" + id });
+      const data = this.$router.resolve({ path: "/nomination-order/id/" + id });
+      window.open(data.href, '_blank');
     },
 
     getParticipants: async function() {
