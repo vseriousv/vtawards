@@ -94,7 +94,13 @@ export default {
       buttonVoting: "Голосовать",
 			comments: "Комментарии",
 			commentPost: "Написать комментарий",
-			send: "Отправить"
+      send: "Отправить",
+      vote_1: "1 балл",
+      vote_2: "2 балла",
+      vote_3: "3 балла",
+      only_my_region: "Голосовать можно только за участника своего региона",
+      is_have: "Вы уже голосовали за этого номинанта",
+      no_self: "Вы не можете голосовать за себя"
     },
     winnerBlock: {
       head: "Победитель голосования",
@@ -459,7 +465,13 @@ export default {
       buttonVoting: "Vote",
 			comments: "Comments",
 			commentPost: "Write a comment",
-			send: "Send"
+      send: "Send",
+      vote_1: "1 points",
+      vote_2: "2 points",
+      vote_3: "3 points",
+      only_my_region: "You can vote only for a member of your region",
+      is_have: "You have already voted for this nominee",
+      no_self: "You cannot vote for yourself."
     },
     addressMainBlock: {
       head: "Обращение директора",

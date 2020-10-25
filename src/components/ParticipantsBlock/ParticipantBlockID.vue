@@ -26,11 +26,9 @@
 				],
 				setRating: 0,
 				isCommittee: false,
-				// activeVoting: 0,
-				// disabledVoting: false,
-				// count_voting_ru: "",
-				// count_voting_en: "",
-
+				
+				votes: [],
+				errorVote: '',
 				userFrom: {},
 				comments: [],
 				commentText: '',
@@ -58,7 +56,7 @@
 						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
 					})
 					.then(result => {
-						// console.log(result.data)
+						console.log(result.data)
 						this.parseUserData(result.data);
 					})
 					.catch(e => console.error("participants-error:", e));
@@ -83,133 +81,12 @@
 					state_id: data.user.state_id,
 					argumentationRu: data.textRu ? data.textRu : "---",
 					argumentationEn: data.textEn ? data.textEn : "---",
+					votes: data.votes,
+					errorVote: data.errorVotes,
 				};
+				this.errorVotes(this.user.errorVote)
+				this.votes = data.votes
 			},
-
-			// getVotes: function(voting_id) {
-			// 	const jwtHelper = new JwtHelper();
-			// 	const url =
-			// 		config.API_URL +
-			// 		"/votes/from/" +
-			// 		jwtHelper.jwtParse().id +
-			// 		"/voting/" +
-			// 		voting_id;
-			// 	axios
-			// 		.get(url, {
-			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-			// 		})
-			// 		.then(result => {
-			// 			// console.log("resultVotes", result.data);
-			// 			// Voting conditions:
-			// 			const if_1 = +jwtHelper.jwtParse().id === +this.$route.params.id;
-			// 			const if_2 = +jwtHelper.jwtParse().state_id !== +this.user.state_id;
-
-			// 			if (if_1) {
-			// 				this.count_voting_ru = "Вы не можете голосовать за себя";
-			// 				this.count_voting_en = "You cannot vote for yourself";
-			// 				this.disabledVoting = true;
-			// 			} else if (if_2) {
-			// 				this.count_voting_ru =
-			// 					"Вы можете голосовать только за участника своего региона";
-			// 				this.count_voting_en =
-			// 					"You can only vote for a member of your region";
-			// 				this.disabledVoting = true;
-			// 			} else {
-			// 				const userFind = result.data.find(
-			// 					item => +item.user_to_id === +this.$route.params.id
-			// 				);
-			// 				if (userFind !== undefined) {
-			// 					this.count_voting_ru = "Вы уже голосовали за этого участника";
-			// 					this.count_voting_en = "You have already voted for this member";
-			// 					this.disabledVoting = true;
-			// 				} else {
-			// 					if (jwtHelper.isCommittee()) {
-			// 						//Check committee
-			// 						for (let i = 0; i < result.data.length; i++) {
-			// 							const count_vote = result.data[i].count_vote;
-			// 							for (let j = 0; j < this.itemRating_ru.length; j++) {
-			// 								if (this.itemRating_ru[j].value === count_vote) {
-			// 									this.itemRating_ru.splice(j, 1);
-			// 									this.itemRating_en.splice(j, 1);
-			// 								}
-			// 							}
-			// 						}
-			// 					} else {
-			// 						if (result.data.length === 0) {
-			// 							this.count_voting_ru = "У вас осталось 3 голоса";
-			// 							this.count_voting_en = "You have 3 votes left";
-			// 							this.disabledVoting = false;
-			// 						}
-			// 						if (result.data.length === 1) {
-			// 							this.count_voting_ru = "У вас осталось 2 голоса";
-			// 							this.count_voting_en = "You have 2 votes left";
-			// 							this.disabledVoting = false;
-			// 						}
-			// 						if (result.data.length === 2) {
-			// 							this.count_voting_ru = "У вас осталось 1 голос";
-			// 							this.count_voting_en = "You have 1 vote left";
-			// 							this.disabledVoting = false;
-			// 						}
-			// 						if (result.data.length === 3) {
-			// 							this.count_voting_ru = "У вас не осталось голосов";
-			// 							this.count_voting_en = "You have no more votes";
-			// 							this.disabledVoting = true;
-			// 						}
-			// 					}
-			// 				}
-			// 			}
-			// 		})
-			// 		.catch(err => console.log("err", err));
-			// },
-
-			// setVote: function(type) {
-			// 	if (type === "user") {
-			// 		this.sendVote(type, 1);
-			// 	} else {
-			// 		if (this.setRating === 0) {
-			// 			console.error("Нужно выбрать балл");
-			// 		} else {
-			// 			this.sendVote(type, this.setRating);
-			// 			this.disabledVoting = true;
-			// 		}
-			// 	}
-			// },
-
-			// sendVote: function(type_vote, count_vote) {
-			// 	const jwtHelper = new JwtHelper();
-			// 	const url = config.API_URL + "/votes/create";
-			// 	const dataSend = {
-			// 		user_from_id: +jwtHelper.jwtParse().id,
-			// 		user_to_id: +this.$route.params.id,
-			// 		type_vote: type_vote,
-			// 		count_vote: +count_vote,
-			// 		voting_id: +this.activeVoting
-			// 	};
-			// 	axios
-			// 		.post(url, dataSend, {
-			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-			// 		})
-			// 		.then(result => console.log("resultSend", result.data))
-			// 		.catch(err => console.log("err", err));
-			// },
-
-			// getActiveVoting: async function() {
-			// 	const url = config.API_URL + "/votings/isactive";
-			// 	await axios
-			// 		.get(url, {
-			// 			headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-			// 		})
-			// 		.then(result => {
-			// 			this.activeVoting = result.data[0].id;
-			// 			return result.data[0].id;
-			// 		})
-			// 		.then(voting_id => {
-			// 			this.getVotes(voting_id);
-			// 		})
-			// 		.catch(err => {
-			// 			console.log("err", err);
-			// 		});
-			// },
 
 			getComments: async function() {
 				const urn = `/comments/nomination-order/${this.$route.params.id}/public`;
@@ -292,7 +169,49 @@
 				} catch (e) {
 					console.error(e);
 				}
-			}
+			},
+			errorVotes: function(error) {
+				switch (error) {
+					case "only-my-region": 
+						this.errorVote = `${this.$t("participantID.only_my_region")}`
+						break
+					case "is-have": 
+						this.errorVote = `${this.$t("participantID.is_have")}`
+						break
+					case "no-self": 
+						this.errorVote = `${this.$t("participantID.no_self")}`
+						break	
+				}
+			},
+			postVote: async function(point) {
+				if (this.$t('lang') === 'ru') {
+					const promt = confirm("Вы уверены что хотите отдать свой голос за" + " " + this.user.name_ru + "?")
+					if (!promt) return
+				}
+				if (this.$t('lang') === 'en') {
+					const promt = confirm("Are you sure you want to vote for" + " " + this.user.name_en + "?")
+					if (!promt) return
+				}
+				console.log(point)
+				const urn = "/user-voting";
+				const data = {
+					nominationOrderId: this.$route.params.id,
+					range: point,
+					type: "users",
+				}
+				try {
+					await restHelper.postEntity(urn, data, true);
+					if (this.$t('lang') === 'ru') {
+						alert("Ваш голос засчитан")
+					}
+					if (this.$t('lang') === 'en') {
+						alert("Your vote has been counted")
+					}
+					this.getUser()
+				} catch (e) {
+					console.log("Ошибка отправки голоса:", e);
+				}
+			},
 		}
 	};
 </script>
@@ -312,17 +231,17 @@ section.ParticipiantBlockId
 								tbody.UserInfo
 									tr.UserInfo__name
 										td
-											span.c-font-16 {{ $t("loginBlock.form.name") }}:
+											span.c-font-16.label {{ $t("loginBlock.form.name") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
-											) {{ user.name_ru }}
+											) &nbsp;{{ user.name_ru }}
 											span.c-font-16(
 												v-if="$t('lang') === 'en'"
-											) {{ user.name_en }}
+											) &nbsp;{{ user.name_en }}
 
 									tr.UserInfo__position
 										td
-											span.c-font-16 {{ $t("loginBlock.form.position") }}:
+											span.c-font-16.label {{ $t("loginBlock.form.position") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
 											) &ensp; {{ user.position_ru }}
@@ -332,89 +251,77 @@ section.ParticipiantBlockId
 
 									tr.UserInfo__section
 										td
-											span.c-font-16 {{ $t("loginBlock.form.section") }}:
+											span.c-font-16.label  {{ $t("loginBlock.form.section") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
-											) {{ user.section_ru }}
+											) &ensp;{{ user.section_ru }}
 											span.c-font-16(
 												v-if="$t('lang') === 'en'"
-											) {{ user.section_en }}
+											) &ensp;{{ user.section_en }}
 
 									tr.UserInfo__state
 										td
-											span.c-font-16 {{ $t("loginBlock.form.state") }}:
+											span.c-font-16.label  {{ $t("loginBlock.form.state") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
-											) {{ user.state_ru }}
+											) &ensp;{{ user.state_ru }}
 											span.c-font-16(
 												v-if="$t('lang') === 'en'"
-											) {{ user.state_en }}
+											) &ensp;{{ user.state_en }}
 
 									tr.UserInfo__city
 										td
-											span.c-font-16 {{ $t("loginBlock.form.city") }}:
+											span.c-font-16.label  {{ $t("loginBlock.form.city") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
-											) {{ user.city_ru }}
+											) &ensp;{{ user.city_ru }}
 											span.c-font-16(
 												v-if="$t('lang') === 'en'"
-											) {{ user.city_en }}
+											) &ensp;{{ user.city_en }}
 
 									tr.UserInfo__nomination
 										td
-											span.c-font-16 {{ $t("loginBlock.form.nomination") }}:
+											span.c-font-16.label  {{ $t("loginBlock.form.nomination") }}:
 											span.c-font-16(
 												v-if="$t('lang') === 'ru'"
-											) {{ user.nomination_ru }}
+											) &ensp;{{ user.nomination_ru }}
 											span.c-font-16(
 												v-if="$t('lang') === 'en'"
-											) {{ user.nomination_en }}
+											) &ensp;{{ user.nomination_en }}
 
 									tr.UserInfo__numberVotes
 										td
-											span.c-font-16 {{ $t("loginBlock.form.numberOrders") }}:
+											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description
-						p.text-center.mt-3(v-if="$t('lang') === 'ru'") Голосование скоро начнется
-						p.text-center.mt-3(v-if="$t('lang') === 'en'") Voting will start soon
-					//- .UserCard__description
-					//- 	p(v-if="$t('lang') === 'ru'" v-html="user.description_ru")
-					//- 	p(v-if="$t('lang') === 'en'" v-html="user.description_en")
+					.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
+						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					//- .UserCard__votingSelection.d-flex.flex-column.align-center.justify-center
-					//- 	v-btn(
-					//- 		v-if="!isCommittee"
-					//- 		@click.stop="setVote('user')"
-					//- 		:disabled="disabledVoting"
-					//- 		color="primary"
-					//- 	) {{ $t("participantID.buttonVoting") }}
+					.UserCard__description(v-else)
+						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
+						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
+							
+						.UserCard__vote
+							.vote
+								v-btn(
+									@click.stop="postVote(1)"
+									:disabled="!votes.includes(1)"
+									color="secondary"
+								) {{ $t("participantID.vote_1") }}
+							.vote
+								v-btn(
+									@click.stop="postVote(2)"
+									:disabled="!votes.includes(2)"
+									color="secondary"
+								) {{ $t("participantID.vote_2") }}
+							.vote
+								v-btn(
+									@click.stop="postVote(3)"
+									:disabled="!votes.includes(3)"
+									color="secondary"
+								) {{ $t("participantID.vote_3") }}
 
-					//- 	v-select(
-					//- 		v-if="isCommittee && $t('lang') === 'ru'"
-					//- 		v-model="setRating"
-					//- 		:items="itemRating_ru"
-					//- 		:disabled="disabledVoting"
-					//- 		outlined
-					//- 		dense
-					//- 	)
-					//- 	v-select(
-					//- 		v-if="isCommittee && $t('lang') === 'en'"
-					//- 		v-model="setRating"
-					//- 		:items="itemRating_en"
-					//- 		:disabled="disabledVoting"
-					//- 		outlined
-					//- 		dense
-					//- 	)
-					//- 	v-btn(
-					//- 		v-if="isCommittee"
-					//- 		@click.stop="setVote('comittee')"
-					//- 		:disabled="disabledVoting"
-					//- 		color="primary"
-					//- 	) {{ $t("participantID.buttonVoting") }}
-
-					//- 	p.mt-3(v-if="$t('lang') === 'ru'") {{ count_voting_ru }}
-					//- 	p.mt-3(v-if="$t('lang') === 'en'") {{ count_voting_en }}
+					
 				v-card.UserCard.d-flex.flex-column.mt-5
 					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'ru'"
