@@ -49,6 +49,7 @@
 					})
 					.then(result => {
 						this.setUsersArray(result.data);
+						// console.log(result.data)
 					})
 					.catch(e => console.error("users-error:", e));
 			},

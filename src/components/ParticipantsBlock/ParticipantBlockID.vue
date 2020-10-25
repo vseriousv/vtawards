@@ -32,6 +32,7 @@
 				userFrom: {},
 				comments: [],
 				commentText: '',
+				my: jwtHelper.jwtParse().id,
 				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
 			};
 		},
@@ -294,32 +295,33 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
-						p.text-center.mt-3 <b>{{this.errorVote}}</b>
+					div(v-if="my == 1000 || my == 1001 || my == 1002 || my == 1003")
+						.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
+							p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					.UserCard__description(v-else)
-						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
-						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
-							
-						.UserCard__vote
-							.vote
-								v-btn(
-									@click.stop="postVote(1)"
-									:disabled="!votes.includes(1)"
-									color="secondary"
-								) {{ $t("participantID.vote_1") }}
-							.vote
-								v-btn(
-									@click.stop="postVote(2)"
-									:disabled="!votes.includes(2)"
-									color="secondary"
-								) {{ $t("participantID.vote_2") }}
-							.vote
-								v-btn(
-									@click.stop="postVote(3)"
-									:disabled="!votes.includes(3)"
-									color="secondary"
-								) {{ $t("participantID.vote_3") }}
+						.UserCard__description(v-else)
+							p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
+							p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
+								
+							.UserCard__vote
+								.vote
+									v-btn(
+										@click.stop="postVote(1)"
+										:disabled="!votes.includes(1)"
+										color="secondary"
+									) {{ $t("participantID.vote_1") }}
+								.vote
+									v-btn(
+										@click.stop="postVote(2)"
+										:disabled="!votes.includes(2)"
+										color="secondary"
+									) {{ $t("participantID.vote_2") }}
+								.vote
+									v-btn(
+										@click.stop="postVote(3)"
+										:disabled="!votes.includes(3)"
+										color="secondary"
+									) {{ $t("participantID.vote_3") }}
 
 					
 				v-card.UserCard.d-flex.flex-column.mt-5
