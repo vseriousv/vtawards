@@ -1,4 +1,5 @@
 <template lang="pug">
+v-container
   v-card(style="height: 100%")
     .ParticipansCatalog
         v-row.d-flex.pb-4.ParticipansCatalog__boxBtn
@@ -51,8 +52,8 @@
                     img(:src="`${URL_AVATARS}${item.img}`")
                 td.td_block.text-left(v-if="$t('lang') === 'ru'") {{ item.name_ru }}
                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.name_en }}
-                td.td_block.text-center {{ item.countVote }}
                 td.td_block.text-center {{ item.sumVote }}
+                td.td_block.text-center {{ item.countVote}}
                 td.td_block.text-center {{ item.average }}
                 td.td_block.text-center {{ item.resultRange }}
 </template>
@@ -136,9 +137,9 @@ export default {
       try {
           const data = await restHelper.getEntity(url, true);
           this.setParticipantsArray(data.data);
-          console.log(data.data)
+          // console.log(data.data)
       } catch(e) {
-          console.error("ERROR ParticipantsBlock/getParticipantsFromIdNomination:", e);
+          console.error("ERROR ResultVoting/getParticipantsFromIdNomination:", e);
       }
     },
 
@@ -171,7 +172,7 @@ export default {
           this.parseNominationArray(data.data);
           // console.log(data)
       } catch(e) {
-          console.error("ERROR ParticipantsBlock/getNomination:", e);
+          console.error("ERROR ResultVoting/getNomination:", e);
       }
     },
 
@@ -204,7 +205,7 @@ export default {
           const data = await restHelper.getEntity(url, true);
           this.parseStateArray(data.data);
       } catch(e) {
-          console.error("ERROR ParticipantsBlock/getNomination:", e);
+          console.error("ERROR ResultVoting/getNomination:", e);
       }
     },
 
