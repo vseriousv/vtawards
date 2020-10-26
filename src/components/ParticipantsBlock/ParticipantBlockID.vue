@@ -213,6 +213,14 @@
 					console.log("Ошибка отправки голоса:", e);
 				}
 			},
+			onlyAdmin: function() {
+				const hoAdmin = jwtHelper.jwtParse().role
+				if (hoAdmin == "admin") {
+					return true 
+				} else {
+					return false
+				}
+			}
 		}
 	};
 </script>
@@ -295,7 +303,7 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					div(v-if="my == 1000 || my == 1001 || my == 1002 || my == 1003")
+					div(v-if="onlyAdmin()")
 						.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
 							p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
