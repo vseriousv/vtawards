@@ -34,8 +34,8 @@
               outlined
             )
         v-row
-          h3.px-4(v-if="filterNull && this.$t('lang') === 'ru'") Выберите один из фильтров для отображения результата
-          h3.px-4(v-if="filterNull && this.$t('lang') === 'en'") Select one of the filters to display the result.
+          h3.px-4(v-if="filterNull && this.$t('lang') === 'ru'") Укажите оба фильтра для отображения результата
+          h3.px-4(v-if="filterNull && this.$t('lang') === 'en'") Specify both filters to display the result
           v-data-table.ParticipansCatalog__table(
             :headers="this.$t('lang') === 'ru'? headersUserRu: headersUserEn"
             :items="participants"
@@ -51,7 +51,10 @@
                     img(:src="`${URL_AVATARS}${item.img}`")
                 td.td_block.text-left(v-if="$t('lang') === 'ru'") {{ item.name_ru }}
                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.name_en }}
-                //- td.td_block.text-left {{ item.name_en }}
+                td.td_block.text-center {{ item.countVote }}
+                td.td_block.text-center {{ item.sumVote }}
+                td.td_block.text-center {{ item.average }}
+                td.td_block.text-center {{ item.resultRange }}
 </template>
 
 <script>
@@ -78,19 +81,19 @@ export default {
       headersUserRu: [
           { text: "Аватар", sortable: false, value: "" },
           { text: "ФИО", sortable: true, value: "name_ru" },
-          { text: "Сумма баллов", sortable: false, value: "" },
-          { text: "Сумма голосов", sortable: false, value: "" },
-          { text: "Средний балл", sortable: false, value: "" },
-          { text: "Итоговый балл", sortable: false, value: "" },
+          { text: "Сумма баллов", sortable: false, value: "", align: 'center' },
+          { text: "Сумма голосов", sortable: false, value: "", align: 'center'},
+          { text: "Средний балл", sortable: false, value: "" , align: 'center'},
+          { text: "Итоговый балл", sortable: false, value: "" , align: 'center'},
       ],
 
       headersUserEn: [
           { text: "Avatar", sortable: false, value: "" },
           { text: "Full name", sortable: true, value: "name_en" },
-          { text: "Total points ", sortable: false, value: "" },
-          { text: "Total votes", sortable: false, value: "" },
-          { text: "Average score", sortable: false, value: "" },
-          { text: "Final score", sortable: false, value: "" },
+          { text: "Total points ", sortable: false, value: "" , align: 'center'},
+          { text: "Total votes", sortable: false, value: "" , align: 'center'},
+          { text: "Average score", sortable: false, value: "" , align: 'center'},
+          { text: "Final score", sortable: false, value: "" , align: 'center'},
       ],
       filterNull: true,
       participants: [],
@@ -105,21 +108,21 @@ export default {
 
   watch: {
     nominationSelect: function(newVal, oldVal) {
-      if (newVal==0 && this.statesSelect == 0 ) {
+      if (newVal==0) {
         this.filterNull = true
         return
       }
-      if (newVal>0 && oldVal!==null && newVal!==oldVal) {
+      if (newVal>0 && oldVal!==null && newVal!==oldVal && this.statesSelect !== 0) {
         this.filterNull = false
         this.getParticipantsFromIdNomination(newVal, this.statesSelect);
       }
     },
 		statesSelect: function(newVal, oldVal) {
-      if (newVal==0 && this.nominationSelect == 0 ) {
+      if (newVal==0) {
         this.filterNull = true
         return
       }
-      if (newVal>0 && oldVal!==null && newVal!==oldVal) {
+      if (newVal>0 && oldVal!==null && newVal!==oldVal && this.nominationSelect !== 0) {
         this.filterNull = false
 				this.getParticipantsFromIdNomination(this.nominationSelect, newVal);
       }
@@ -129,11 +132,11 @@ export default {
   methods: {
   
     getParticipantsFromIdNomination: async function(nominationId, stateId) {
-      const url = `/nomination-order/public?filter={"nominationId":${nominationId},"stateId":${stateId}}`;
+      const url = `/user-voting/result/${stateId}/${nominationId}`;
       try {
           const data = await restHelper.getEntity(url, true);
-          this.setParticipantsArray(data.data.rows);
-          // console.log(this.users)
+          this.setParticipantsArray(data.data);
+          console.log(data.data)
       } catch(e) {
           console.error("ERROR ParticipantsBlock/getParticipantsFromIdNomination:", e);
       }
@@ -143,28 +146,21 @@ export default {
       this.participants= []
       for (let i = 0; i < data.length; i++) {
         const userObject = {
-          id: data[i].id,
-          tabNumber: data[i].user.tabNumber,
-          img: data[i].user.img ? data[i].user.img : "null.png",
+          img: data[i].img ? data[i].img : "null.png",
           name_ru:
-            data[i].user.firstnameRu +
+            data[i].firstnameRu +
             " " +
-            data[i].user.patronymicRu +
-            " " +
-            data[i].user.lastnameRu,
-          name_en: data[i].user.firstnameEn + " " + data[i].user.lastnameEn,
-          state_ru: data[i].user.state ? data[i].user.state.value_ru : "",
-          state_en: data[i].user.state ? data[i].user.state.value_en : "",
-          nominationId: data[i].nominationId,
-          nomination_ru: data[i].nomination
-            ? data[i].nomination.valueRu
-            : "",
-          nomination_en: data[i].nomination
-            ? data[i].nomination.valueEn
-            : "",
-          voting: data[i].voting
+            data[i].lastnameRu,
+          name_en: data[i].firstnameEn + " " + data[i].lastnameEn,
+          nominationId: data[i].ominationOrderId,
+          
+          average: data[i].average,
+          countVote: data[i].countVote,
+          resultRange: data[i].resultRange,
+          sumVote: data[i].sumVote,
         };
         this.participants.push(userObject);
+        console.log(this.participants)
       }
     },
 
@@ -259,7 +255,7 @@ export default {
 
   &__row
     width: 100%
-
+  
   &__avatar
     display: flex
     width: 44px
