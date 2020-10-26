@@ -85,7 +85,7 @@ export default {
           { text: "Сумма баллов", sortable: false, value: "", align: 'center' },
           { text: "Сумма голосов", sortable: false, value: "", align: 'center'},
           { text: "Средний балл", sortable: false, value: "" , align: 'center'},
-          { text: "Итоговый балл", sortable: false, value: "" , align: 'center'},
+          { text: "Итоги ранжироввания", sortable: false, value: "" , align: 'center'},
       ],
 
       headersUserEn: [
@@ -94,7 +94,7 @@ export default {
           { text: "Total points ", sortable: false, value: "" , align: 'center'},
           { text: "Total votes", sortable: false, value: "" , align: 'center'},
           { text: "Average score", sortable: false, value: "" , align: 'center'},
-          { text: "Final score", sortable: false, value: "" , align: 'center'},
+          { text: "Ranking results", sortable: false, value: "" , align: 'center'},
       ],
       filterNull: true,
       participants: [],
