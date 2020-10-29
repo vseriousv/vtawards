@@ -130,7 +130,7 @@ export default {
 	methods: {
   	getLastTime: function(){
 			let nowDate = new Date();
-			let achiveDate = new Date(2020,11,5,23,59,59);
+			let achiveDate = new Date(2020,10,5,23,59,59);
 			let result = (achiveDate - nowDate)+1000;
 			if (result < 0) {
 				this.timer.seconds = '--';
@@ -204,7 +204,7 @@ export default {
           @include respond-to(medium-screens) {
             margin-left: 60px;
           }
-          
+
         }
         .lang {
           display: flex;
