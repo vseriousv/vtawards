@@ -315,12 +315,12 @@ export default {
         link: "/",
         target: "_self"
       },
-      // {
-      //   id: 2,
-      //   text: "Итоги голосования",
-      //   link: "/result",
-      //   target: "_self"
-      // },
+      {
+        id: 2,
+        text: "Итоги голосования",
+        link: "/result",
+        target: "_self"
+      },
       // {
       //   id: 3,
       //   text: "Комиссия",
@@ -649,12 +649,12 @@ export default {
         link: "/",
         target: "_self"
       },
-      // {
-      //   id: 2,
-      //   text: "Voting Results",
-      //   link: "/result",
-      //   target: "_self"
-      // },
+      {
+        id: 2,
+        text: "Voting Results",
+        link: "/result",
+        target: "_self"
+      },
       // {
       //   id: 3,
       //   text: "The Committee",

@@ -29,7 +29,7 @@ section.steps#steps
       li.steps-list-item(@click.stop="dialogShow(true, 'semifinal')")
         .steps-list-item-title
           .step-number II
-          p.step-date
+          p.step-date 29.10 - 05.11.2020
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
