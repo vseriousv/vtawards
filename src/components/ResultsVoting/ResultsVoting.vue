@@ -52,10 +52,10 @@ v-container
                     img(:src="`${URL_AVATARS}${item.img}`")
                 td.td_block.text-left(v-if="$t('lang') === 'ru'") {{ item.name_ru }}
                 td.td_block.text-left(v-if="$t('lang') === 'en'") {{ item.name_en }}
-                td.td_block.text-center {{ item.sumVote }}
-                td.td_block.text-center {{ item.countVote}}
-                td.td_block.text-center {{ item.average }}
-                td.td_block.text-center {{ item.resultRange }}
+                td.td_block.text-center {{ item.sumVote.toFixed(3) }}
+                td.td_block.text-center {{ item.countVote.toFixed(3) }}
+                td.td_block.text-center {{ item.average.toFixed(3) }}
+                td.td_block.text-center {{ item.resultRange.toFixed(3) }}
 </template>
 
 <script>
@@ -131,7 +131,7 @@ export default {
   } ,
 
   methods: {
-  
+
     getParticipantsFromIdNomination: async function(nominationId, stateId) {
       const url = `/user-voting/result/${stateId}/${nominationId}`;
       try {
@@ -154,7 +154,7 @@ export default {
             data[i].lastnameRu,
           name_en: data[i].firstnameEn + " " + data[i].lastnameEn,
           nominationId: data[i].ominationOrderId,
-          
+
           average: data[i].average,
           countVote: data[i].countVote,
           resultRange: data[i].resultRange,
@@ -256,7 +256,7 @@ export default {
 
   &__row
     width: 100%
-  
+
   &__avatar
     display: flex
     width: 44px
