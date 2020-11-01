@@ -86,7 +86,7 @@ export default {
                 const voting = {
                     id: item.id,
                     range: item.range,
-                    img: item.img || "null.png",
+                    img: item.user.img || "null.png",
                     nameRuFrom: item.user.firstnameRu + " " + item.user.lastnameRu,
                     nameEnFrom: item.user.firstnameEn + " " + item.user.lastnameEn,
                     nameRuTo: item.nominationOrder.user.firstnameRu + " " + item.nominationOrder.user.lastnameRu,
