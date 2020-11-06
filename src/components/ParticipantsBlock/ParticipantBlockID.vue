@@ -26,7 +26,7 @@
 				],
 				setRating: 0,
 				isCommittee: false,
-				
+
 				votes: [],
 				errorVote: '',
 				userFrom: {},
@@ -115,7 +115,7 @@
 					// console.log(this.comments)
 				});
 			},
-			
+
 			getUserFrom: async function(data, id) {
 				const urn = `/users/` + data;
 				try {
@@ -129,8 +129,8 @@
 			parseUserFrom: function(data, id) {
 				this.comments.forEach(item => {
 					if (item.id == id) {
-						item.name_ru = data.lastnameRu + " " + 
-							data.firstnameRu + " " + 
+						item.name_ru = data.lastnameRu + " " +
+							data.firstnameRu + " " +
 							data.patronymicRu || ''
 						item.name_en = data.firstnameEn + " " + data.lastnameEn || ''
 					}
@@ -173,15 +173,15 @@
 			},
 			errorVotes: function(error) {
 				switch (error) {
-					case "only-my-region": 
+					case "only-my-region":
 						this.errorVote = `${this.$t("participantID.only_my_region")}`
 						break
-					case "is-have": 
+					case "is-have":
 						this.errorVote = `${this.$t("participantID.is_have")}`
 						break
-					case "no-self": 
+					case "no-self":
 						this.errorVote = `${this.$t("participantID.no_self")}`
-						break	
+						break
 				}
 			},
 			postVote: async function(point) {
@@ -216,7 +216,7 @@
 			// onlyAdmin: function() {
 			// 	const hoAdmin = jwtHelper.jwtParse().role
 			// 	if (hoAdmin == "admin") {
-			// 		return true 
+			// 		return true
 			// 	} else {
 			// 		return false
 			// 	}
@@ -303,13 +303,13 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
+					//.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					.UserCard__description(v-else)
+					//.UserCard__description(v-else)
 						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
 						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
-							
+
 						.UserCard__vote
 							.vote
 								v-btn(
@@ -330,7 +330,7 @@ section.ParticipiantBlockId
 									color="secondary"
 								) {{ $t("participantID.vote_3") }}
 
-					
+
 				v-card.UserCard.d-flex.flex-column.mt-5
 					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'ru'"
@@ -340,7 +340,7 @@ section.ParticipiantBlockId
 						id="argumentationTextRu"
 						label='Аргументация'
 						v-html="this.user.argumentationRu"
-					) 
+					)
 
 					h3.UserCard__argumentation.mb-3(
 						v-if="$t('lang') === 'en'"

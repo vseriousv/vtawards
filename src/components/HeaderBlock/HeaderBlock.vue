@@ -77,31 +77,31 @@
       <!-- <v-row class="body-button">
 
       </v-row> -->
-      <v-row class="body-voteStatus">
-        <v-col class="body-voteStatus_col d-flex flex-column align-start">
-					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>
-					<div class="Timer-view d-flex">
-            <div class="boxTime">
-              <p class="boxTime__title">{{$t("header.time.d")}}</p>
-              <span class="Timer-view__card days">{{timer.days}}</span>
-            </div>
-            <div class="boxTime">
-              <p class="boxTime__title">{{$t("header.time.hr")}}</p>
-              <span class="Timer-view__card hours">{{timer.hours}}</span>
-            </div>
-            <div class="boxTime">
-              <p class="boxTime__title">{{$t("header.time.min")}}</p>
-              <span class="Timer-view__card minutes">{{timer.minutes}}</span>
-            </div>
-            <div class="boxTime">
-              <p class="boxTime__title">{{$t("header.time.sec")}}</p>
-              <span class="Timer-view__card seconds">{{timer.seconds}}</span>
-            </div>
-					</div>
-          <!-- <p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p> -->
-          <!-- <p class="body-voteStatus_col__text application_end">{{ $t("header.statusVote.statusApplicEnd") }}</p> -->
-        </v-col>
-      </v-row>
+<!--      <v-row class="body-voteStatus">-->
+<!--        <v-col class="body-voteStatus_col d-flex flex-column align-start">-->
+<!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>-->
+<!--					<div class="Timer-view d-flex">-->
+<!--            <div class="boxTime">-->
+<!--              <p class="boxTime__title">{{$t("header.time.d")}}</p>-->
+<!--              <span class="Timer-view__card days">{{timer.days}}</span>-->
+<!--            </div>-->
+<!--            <div class="boxTime">-->
+<!--              <p class="boxTime__title">{{$t("header.time.hr")}}</p>-->
+<!--              <span class="Timer-view__card hours">{{timer.hours}}</span>-->
+<!--            </div>-->
+<!--            <div class="boxTime">-->
+<!--              <p class="boxTime__title">{{$t("header.time.min")}}</p>-->
+<!--              <span class="Timer-view__card minutes">{{timer.minutes}}</span>-->
+<!--            </div>-->
+<!--            <div class="boxTime">-->
+<!--              <p class="boxTime__title">{{$t("header.time.sec")}}</p>-->
+<!--              <span class="Timer-view__card seconds">{{timer.seconds}}</span>-->
+<!--            </div>-->
+<!--					</div>-->
+<!--          &lt;!&ndash; <p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p> &ndash;&gt;-->
+<!--          &lt;!&ndash; <p class="body-voteStatus_col__text application_end">{{ $t("header.statusVote.statusApplicEnd") }}</p> &ndash;&gt;-->
+<!--        </v-col>-->
+<!--      </v-row>-->
     </v-container>
   </header>
 </template>
