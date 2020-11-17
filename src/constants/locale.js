@@ -66,12 +66,13 @@ export default {
 			nominationLabel: "Выбрать номинацию",
 			commentPost: "Написать аргументацию",
 			fileArgumentation: `Прикрепить к завке файлы для аргументации своей кандидатуры.<br>
-        Разрешенный формат файлов - PNG, JPG, PDF, DOC, PPT`,
+        	Разрешенный формат файлов - PNG, JPG, PDF, DOC, PPT`,
 			labelArgumentation: "Прикрепить файл",
 			btnArgumentation: "Отправить заявку",
 			autocomplete: "Введите данные для поиска *",
 			argumentationBtnTitle: `<p>* – поля обязательны</br>для заполнения</p>`,
-			publishForm: `Опубликовать карточку номинанта для участия в голосовании.`
+			publishForm: `Опубликовать карточку номинанта для участия в голосовании.`,
+			step2: `Опубликовать номинанта как победителя первого этапа голосования.`
 		},
 		infoBlock: {
 			head: "Открытие ежегодного голосования",
@@ -420,12 +421,13 @@ export default {
 			nominationLabel: "Choose a nomination",
 			commentPost: "Write a argumentation",
 			fileArgumentation: `Attach files to the application to justify your candidacy. <br>
-        Allowed file format - PNG, JPG, PDF, DOC, PPT`,
+        	Allowed file format - PNG, JPG, PDF, DOC, PPT`,
 			labelArgumentation: "Attach file",
 			btnArgumentation: "Send a request",
 			autocomplete: "Enter your search data *",
 			argumentationBtnTitle: `<p>* – fields are required</p>`,
-			publishForm: `Publish a nominee's card for voting.`
+			publishForm: `Publish a nominee's card for voting.`,
+			step2: `Publish the nominee as the winner of the first round of voting`
 		},
 		infoBlock: {
 			head: "Opening of annual voting",
