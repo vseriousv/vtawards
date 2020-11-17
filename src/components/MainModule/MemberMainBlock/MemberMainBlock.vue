@@ -145,7 +145,7 @@ export default {
       const url = `/nomination-order/public?filter={"nominationId":0,"stateId":0}`;
       try {
           const {data} = await restHelper.getEntity(url, true);
-          console.log("dssd",data.rows)
+          // console.log("dssd",data.rows)
           this.setUsersArray(data.rows);
       } catch(e) {
           console.error("ERROR MemberMainBlock/getParticipants:", e);
@@ -374,7 +374,7 @@ export default {
 .active_5 .active_5 span,
 .active_6 .active_6 span,
 .active_7 .active_7 span,
-.active_8 .active_8 span,
+.active_8 .active_8 span
 {
   background-color: #fdcc08 !important;
   color: #000 !important;

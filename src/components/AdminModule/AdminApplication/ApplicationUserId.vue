@@ -41,6 +41,7 @@ export default {
 
 			public: false,
 			isSelectedCard: false,
+			step2: false,
     	};
 	},
 
@@ -89,9 +90,12 @@ export default {
 				nominationId: item.nomination.id,
 				public: item.public,
 				isSelected: item.isSelected,
+				step2: (item.step2===null || item.step2===false)? false: item.step2
 			}
 			this.public = item.public;
 			this.isSelectedCard = item.isSelected;
+			this.step2 = (item.step2===null || item.step2===false)? false: item.step2
+			console.log(this.userOrder)
 		},
 
 		setUserFrom: function(data) {
@@ -250,6 +254,7 @@ export default {
 				this.public = false
 			}
 		},
+		
 		selectNomination: function(data) {
 			this.postNewData({"isSelected": data})
 			if (data===true) {
@@ -260,6 +265,18 @@ export default {
 				this.isSelectedCard = false
 			}
 		},
+
+		patchNominationStepTwo: function(data) {
+			this.postNewData({"step2": data})
+			if (data===true) {
+				alert("Карточка номинанта опубликована")
+				this.step2 = true
+			} else {
+				alert("Карточка номинанта снята с публикации")
+				this.step2 = false
+			}
+		},
+
 		showUser: function() {
 			this.$router.push({ path:"/admin/users/id/" + this.userOrder.userFrom});
 		}
@@ -458,7 +475,7 @@ section
 						@click.stop='selectNomination(false)'
 						) Убрать из избранных
 
-				v-card.UserCard.footerApplication
+				v-card.UserCard.footerApplication.mb-5
 					p.footerApplication__text(v-html='$t("ApplicationForm.publishForm")')
 					v-btn(
 						v-if="(this.public === false)"
@@ -471,6 +488,21 @@ section
 						x-small
 						color="error"
 						@click.stop='postCardNomination(false)'
+						) Снять с публикации
+
+				v-card.UserCard.footerApplication.mb-5
+					p.footerApplication__text(v-html='$t("ApplicationForm.step2")')
+					v-btn(
+						v-if="(this.step2 === false)"
+						x-small
+						color="secondary"
+						@click.stop='patchNominationStepTwo(true)'
+						) Опубликовать
+					v-btn(
+						v-else
+						x-small
+						color="error"
+						@click.stop='patchNominationStepTwo(false)'
 						) Снять с публикации
 </template>
 

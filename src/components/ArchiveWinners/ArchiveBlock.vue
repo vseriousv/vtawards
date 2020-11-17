@@ -23,7 +23,7 @@
                 :md="4"
                 :sm="6"
                 )
-                img.boxWinner__imgWinner(:src=`item.imgWinner`)
+                img.boxWinner__imgWinner(:src=`item.imgWinner` :class=`"boxWinner__imgWinner__" + item.id`)
                 p.boxWinner__yearWinner {{item.year}}
                 p.boxWinner__nameWinner {{item.name}}
                 p.boxWinner__positionWinner {{item.position}}    
