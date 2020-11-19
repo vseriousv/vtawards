@@ -111,11 +111,11 @@ export default {
 		winnersAllBlock: {
 			head: {
 				text1: "Победители",
-				semifinal_voting: "полуфинала",
-				autumn_committee_voting: 'осеннего голосования "Звезда"',
-				autumn_users_voting: "осеннего народного голосования",
-				spring_committee_voting: 'весеннего голосования "Звезда"',
-				spring_users_voting: "весеннего народного голосования"
+				semifinal_voting: "регионального этапа этапа конкурса «Лидер перемен ВТ»",
+				autumn_committee_voting: '',
+				autumn_users_voting: "",
+				spring_committee_voting: '',
+				spring_users_voting: ""
 			},
 			year: "года",
 			more: "Подробнее об участнике"
@@ -442,12 +442,12 @@ export default {
 		},
 		winnersAllBlock: {
 			head: {
-				text1: "Winners",
-				semifinal_voting: "semifinal",
-				autumn_committee_voting: 'autumn "Star" voting',
-				autumn_users_voting: "autumn popular vote",
-				spring_committee_voting: 'spring "Star" voting',
-				spring_users_voting: "spring popular vote"
+				text1: "The winners",
+				semifinal_voting: " of the regional stage",
+				autumn_committee_voting: '',
+				autumn_users_voting: "",
+				spring_committee_voting: '',
+				spring_users_voting: ""
 			},
 			year: "year",
 			more: "Member Details"
