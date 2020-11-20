@@ -33,6 +33,8 @@
 				comments: [],
 				commentText: '',
 				my: jwtHelper.jwtParse().id,
+				isAdmin: jwtHelper.isAdmin(),
+				isCommission: jwtHelper.isCommittee(),
 				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
 			};
 		},
@@ -194,23 +196,27 @@
 					if (!promt) return
 				}
 				console.log(point)
-				const urn = "/user-voting";
+				const urn = "/user-voting/сommission";
 				const data = {
 					nominationOrderId: this.$route.params.id,
 					range: point,
-					type: "users",
+					type: "сommission",
 				}
-				try {
-					await restHelper.postEntity(urn, data, true);
-					if (this.$t('lang') === 'ru') {
-						alert("Ваш голос засчитан")
+				if (this.isAdmin || this.isCommission) {
+					try {
+						await restHelper.postEntity(urn, data, true);
+						if (this.$t('lang') === 'ru') {
+							alert("Ваш голос засчитан")
+						}
+						if (this.$t('lang') === 'en') {
+							alert("Your vote has been counted")
+						}
+						this.getUser()
+					} catch (e) {
+						console.log("Ошибка отправки голоса:", e);
 					}
-					if (this.$t('lang') === 'en') {
-						alert("Your vote has been counted")
-					}
-					this.getUser()
-				} catch (e) {
-					console.log("Ошибка отправки голоса:", e);
+				} else {
+					alert('Вы не можете голосованть в данном голосовании')
 				}
 			},
 			// onlyAdmin: function() {
@@ -298,7 +304,7 @@ section.ParticipiantBlockId
 												v-if="$t('lang') === 'en'"
 											) &ensp;{{ user.nomination_en }}
 
-									tr.UserInfo__numberVotes
+									//tr.UserInfo__numberVotes
 										td
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16

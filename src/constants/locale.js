@@ -111,7 +111,7 @@ export default {
 		winnersAllBlock: {
 			head: {
 				text1: "Победители",
-				semifinal_voting: "регионального этапа этапа конкурса «Лидер перемен ВТ»",
+				semifinal_voting: "регионального этапа конкурса «Лидер перемен ВТ»",
 				autumn_committee_voting: '',
 				autumn_users_voting: "",
 				spring_committee_voting: '',
@@ -316,12 +316,12 @@ export default {
 				link: "/",
 				target: "_self"
 			},
-			{
-				id: 2,
-				text: "Итоги голосования",
-				link: "/result",
-				target: "_self"
-			},
+			// {
+			// 	id: 2,
+			// 	text: "Итоги голосования",
+			// 	link: "/result",
+			// 	target: "_self"
+			// },
 			// {
 			//   id: 3,
 			//   text: "Комиссия",
@@ -651,12 +651,12 @@ export default {
 				link: "/",
 				target: "_self"
 			},
-			{
-				id: 2,
-				text: "Voting Results",
-				link: "/result",
-				target: "_self"
-			},
+			// {
+			// 	id: 2,
+			// 	text: "Voting Results",
+			// 	link: "/result",
+			// 	target: "_self"
+			// },
 			// {
 			//   id: 3,
 			//   text: "The Committee",

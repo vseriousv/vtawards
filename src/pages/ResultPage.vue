@@ -1,11 +1,13 @@
 <template>
   <div>
-    <results-voting />
+    <results-voting v-if="admin"/>
   </div>
 </template>
 
 <script>
 import ResultsVoting from "../components/ResultsVoting/ResultsVoting";
+import JwtHelper from "@/helpers/JwtHelper";
+const jwtHelper = new JwtHelper();
 export default {
   name: "ResultPage",
 
@@ -14,7 +16,9 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      admin: jwtHelper.isAdmin()
+    };
   }
 };
 </script>
