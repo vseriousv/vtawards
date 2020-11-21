@@ -72,7 +72,8 @@ export default {
 			autocomplete: "Введите данные для поиска *",
 			argumentationBtnTitle: `<p>* – поля обязательны</br>для заполнения</p>`,
 			publishForm: `Опубликовать карточку номинанта для участия в голосовании.`,
-			step2: `Опубликовать номинанта как победителя первого этапа голосования.`
+			step2: `Опубликовать номинанта как победителя первого этапа голосования.`,
+			step3: `Опубликовать номинанта как победителя второго этапа голосования.`
 		},
 		infoBlock: {
 			head: "Открытие ежегодного голосования",
@@ -112,6 +113,7 @@ export default {
 			head: {
 				text1: "Победители",
 				semifinal_voting: "регионального этапа конкурса «Лидер перемен ВТ»",
+				semifinal_voting2: "полуфинала конкурса «Лидер перемен ВТ»",
 				autumn_committee_voting: '',
 				autumn_users_voting: "",
 				spring_committee_voting: '',
@@ -427,7 +429,8 @@ export default {
 			autocomplete: "Enter your search data *",
 			argumentationBtnTitle: `<p>* – fields are required</p>`,
 			publishForm: `Publish a nominee's card for voting.`,
-			step2: `Publish the nominee as the winner of the first round of voting`
+			step2: `Publish the nominee as the winner of the first round of voting`,
+			step3: `Publish the nominee as the winner of the second round of voting`
 		},
 		infoBlock: {
 			head: "Opening of annual voting",
@@ -444,6 +447,7 @@ export default {
 			head: {
 				text1: "The winners",
 				semifinal_voting: " of the regional stage",
+				semifinal_voting2: " of the semi-final stage",
 				autumn_committee_voting: '',
 				autumn_users_voting: "",
 				spring_committee_voting: '',

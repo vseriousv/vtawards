@@ -8,10 +8,10 @@ const restHelper = new RestHelper();
 
 
 export default {
-  name: "ApplicationUserID",
+	name: "ApplicationUserID",
 
-  data() {
-    return {
+	data() {
+		return {
 			URL_AVATARS: config.URL_AVATARS,
 			userID: this.$route.params.id,
 
@@ -42,13 +42,14 @@ export default {
 			public: false,
 			isSelectedCard: false,
 			step2: false,
-    	};
+			step3: false,
+		};
 	},
 
 	async mounted() {
 		try {
 			await restHelper.getEntity('/nomination-order/read/' + this.userID, true);
-		}	catch (e) {
+		} catch (e) {
 			throw new Error(e);
 		}
 		await this.getUserId(this.userID);
@@ -58,30 +59,29 @@ export default {
 	},
 
 	watch: {
-		userValue: function(newVal, oldVal) {
-			if (oldVal!==null || oldVal>0 && newVal>0 ) {
-				this.user = this.usersAll.find((element) =>
-					{
-						if (element.id == newVal) {
-							return element;
-						}
-					});
+		userValue: function (newVal, oldVal) {
+			if (oldVal !== null || oldVal > 0 && newVal > 0) {
+				this.user = this.usersAll.find((element) => {
+					if (element.id == newVal) {
+						return element;
+					}
+				});
 			}
 		},
 	},
-  	methods: {
-		getUserId: async function(id) {
-            const url = "/nomination-order/"+id;
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseDataUser(data.data);
-            } catch(e) {
-                console.error("ERROR ApplicationUserId/getUserId:", e);
-            }
+	methods: {
+		getUserId: async function (id) {
+			const url = "/nomination-order/" + id;
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseDataUser(data.data);
+			} catch (e) {
+				console.error("ERROR ApplicationUserId/getUserId:", e);
+			}
 		},
 
-        parseDataUser: function(item) {
-            this.userOrder = {
+		parseDataUser: function (item) {
+			this.userOrder = {
 				userId: item.userId,
 				userFrom: item.userFrom,
 				argumentationRu: item.textRu,
@@ -90,15 +90,17 @@ export default {
 				nominationId: item.nomination.id,
 				public: item.public,
 				isSelected: item.isSelected,
-				step2: (item.step2===null || item.step2===false)? false: item.step2
+				step2: (item.step2 === null || item.step2 === false || item.step2 === undefined) ? false : item.step2,
+				step3: (item.step3 === null || item.step3 === false || item.step3 === undefined) ? false : item.step3
 			}
 			this.public = item.public;
 			this.isSelectedCard = item.isSelected;
-			this.step2 = (item.step2===null || item.step2===false)? false: item.step2
-			console.log(this.userOrder)
+			this.step2 = (item.step2 === null || item.step2 === false || item.step2 === undefined) ? false : item.step2
+			this.step3 = (item.step3 === null || item.step3 === false || item.step3 === undefined) ? false : item.step3
+			// console.log(this.userOrder)
 		},
 
-		setUserFrom: function(data) {
+		setUserFrom: function (data) {
 			const userFrom = this.usersAll.find(item => {
 				if (item.id === data) return item;
 			})
@@ -106,67 +108,67 @@ export default {
 			this.userFromEn = userFrom.name_en
 		},
 
-        getUser: async function() {
-            const url = "/users";
-            try {
-                const {data} = await restHelper.getEntity(url, true);
-                this.setUserArray(data)
-            } catch(e) {
-                console.error("ERROR ApplicationUserId/getUser:", e);
-            }
+		getUser: async function () {
+			const url = "/users";
+			try {
+				const {data} = await restHelper.getEntity(url, true);
+				this.setUserArray(data)
+			} catch (e) {
+				console.error("ERROR ApplicationUserId/getUser:", e);
+			}
 		},
 
-		setUserArray: function(users) {
-				this.usersCompleteRu= [];
-				this.usersCompleteEng= [];
-				this.usersAll = [];
-				users.forEach(item => {
-					let userPropRu = {
-						text: item.lastnameRu + " " + item.firstnameRu,
-						value: item.id,
-					};
-					let userPropEng = {
-						text: item.firstnameEn + " " + item.lastnameEn,
-						value: item.id,
-					};
-					let userAll = {
-						id: item.id,
-						img: item.img || "null.png",
-						name_ru:
-							item.lastnameRu + " " + item.firstnameRu + " " + item.patronymicRu,
-						name_en: item.firstnameEn + " " + item.lastnameEn,
-						position_ru: item.positionName ? item.positionName : "",
-						position_en: item.positionNameEng ? item.positionNameEng : "",
-						section_ru: item.sectionName ? item.sectionName : "",
-						section_en: item.sectionNameEng ? item.sectionNameEng : "",
-						state_ru: item.state ? item.state.value_ru : "",
-						state_en: item.state ? item.state.value_en : "",
-						city_ru: item.cityName ? item.cityName : "",
-						city_en: item.cityNameEng ? item.cityNameEng : "",
-						state_id: item.state_id
-					}
-					this.usersAll.push(userAll);
-					this.usersCompleteRu.push(userPropRu);
-					this.usersCompleteEng.push(userPropEng);
-				})
-				this.userValue = this.userOrder.userId
-				this.nominationSelect = this.userOrder.nominationId
-				this.argumentationTextRu = this.userOrder.argumentationRu
-				this.argumentationTextEn = this.userOrder.argumentationEn
-				this.setUserFrom(this.userOrder.userFrom)
-			},
+		setUserArray: function (users) {
+			this.usersCompleteRu = [];
+			this.usersCompleteEng = [];
+			this.usersAll = [];
+			users.forEach(item => {
+				let userPropRu = {
+					text: item.lastnameRu + " " + item.firstnameRu,
+					value: item.id,
+				};
+				let userPropEng = {
+					text: item.firstnameEn + " " + item.lastnameEn,
+					value: item.id,
+				};
+				let userAll = {
+					id: item.id,
+					img: item.img || "null.png",
+					name_ru:
+						item.lastnameRu + " " + item.firstnameRu + " " + item.patronymicRu,
+					name_en: item.firstnameEn + " " + item.lastnameEn,
+					position_ru: item.positionName ? item.positionName : "",
+					position_en: item.positionNameEng ? item.positionNameEng : "",
+					section_ru: item.sectionName ? item.sectionName : "",
+					section_en: item.sectionNameEng ? item.sectionNameEng : "",
+					state_ru: item.state ? item.state.value_ru : "",
+					state_en: item.state ? item.state.value_en : "",
+					city_ru: item.cityName ? item.cityName : "",
+					city_en: item.cityNameEng ? item.cityNameEng : "",
+					state_id: item.state_id
+				}
+				this.usersAll.push(userAll);
+				this.usersCompleteRu.push(userPropRu);
+				this.usersCompleteEng.push(userPropEng);
+			})
+			this.userValue = this.userOrder.userId
+			this.nominationSelect = this.userOrder.nominationId
+			this.argumentationTextRu = this.userOrder.argumentationRu
+			this.argumentationTextEn = this.userOrder.argumentationEn
+			this.setUserFrom(this.userOrder.userFrom)
+		},
 
-		getNomination: async function() {
+		getNomination: async function () {
 			const url = "/nominations";
 			try {
 				const nomination = await restHelper.getEntity(url, true);
 				this.setNomination(nomination);
-			} catch(e) {
+			} catch (e) {
 				console.error("ERROR ApplicationForm/getNomination:", e);
 			}
 		},
 
-		setNomination: function(nominations) {
+		setNomination: function (nominations) {
 			this.nominationItemsRu = [];
 			this.nominationItemsEng = [];
 			nominations.data.forEach(nomin => {
@@ -227,26 +229,27 @@ export default {
 			}
 		},
 
-		postNewData: async function(data) {
+		postNewData: async function (data) {
 			const url = "/nomination-order/" + this.userID;
-				try {
-					const PostFormNomination = await axios.patch(
-						config.API_URL + url,
-						data,
+			try {
+				const PostFormNomination = await axios.patch(
+					config.API_URL + url,
+					data,
 
-						{ headers: {
-								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-							}
-						},
-					);
-					console.log(PostFormNomination)
-				} catch(e) {
-					console.error("ERROR ApplicationUserId/postNewData:", e);
-				}
+					{
+						headers: {
+							Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+						}
+					},
+				);
+				console.log(PostFormNomination)
+			} catch (e) {
+				console.error("ERROR ApplicationUserId/postNewData:", e);
+			}
 		},
-		postCardNomination: function(data) {
+		postCardNomination: function (data) {
 			this.postNewData({"public": data})
-			if (data===true) {
+			if (data === true) {
 				alert("Карточка номинанта опубликована")
 				this.public = true
 			} else {
@@ -254,10 +257,10 @@ export default {
 				this.public = false
 			}
 		},
-		
-		selectNomination: function(data) {
+
+		selectNomination: function (data) {
 			this.postNewData({"isSelected": data})
-			if (data===true) {
+			if (data === true) {
 				alert("Карточка выбрана для публикации")
 				this.isSelectedCard = true
 			} else {
@@ -266,9 +269,9 @@ export default {
 			}
 		},
 
-		patchNominationStepTwo: function(data) {
+		patchNominationStepTwo: function (data) {
 			this.postNewData({"step2": data})
-			if (data===true) {
+			if (data === true) {
 				alert("Карточка номинанта опубликована")
 				this.step2 = true
 			} else {
@@ -277,10 +280,21 @@ export default {
 			}
 		},
 
-		showUser: function() {
-			this.$router.push({ path:"/admin/users/id/" + this.userOrder.userFrom});
+		patchNominationStepThree: function (data) {
+			this.postNewData({"step3": data})
+			if (data === true) {
+				alert("Карточка номинанта опубликована")
+				this.step3 = true
+			} else {
+				alert("Карточка номинанта снята с публикации")
+				this.step3 = false
+			}
+		},
+
+		showUser: function () {
+			this.$router.push({path: "/admin/users/id/" + this.userOrder.userFrom});
 		}
-    }
+	}
 };
 </script>
 
@@ -503,6 +517,21 @@ section
 						x-small
 						color="error"
 						@click.stop='patchNominationStepTwo(false)'
+						) Снять с публикации
+
+				v-card.UserCard.footerApplication.mb-5
+					p.footerApplication__text(v-html='$t("ApplicationForm.step3")')
+					v-btn(
+						v-if="(this.step3 === false)"
+						x-small
+						color="secondary"
+						@click.stop='patchNominationStepThree(true)'
+						) Опубликовать
+					v-btn(
+						v-else
+						x-small
+						color="error"
+						@click.stop='patchNominationStepThree(false)'
 						) Снять с публикации
 </template>
 

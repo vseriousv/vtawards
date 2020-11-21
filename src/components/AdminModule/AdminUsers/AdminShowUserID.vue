@@ -336,6 +336,10 @@ export default {
 					text: "Comittee",
 					value: "comittee"
 				},
+				{
+					text: "Comittee_main",
+					value: "comittee_main"
+				},
 			],
 
 			dataModelInput: function (data) {
