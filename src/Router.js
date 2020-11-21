@@ -32,9 +32,9 @@ import AdminShowUserID from "./components/AdminModule/AdminUsers/AdminShowUserID
 import AdminVoting from "./components/AdminModule/AdminVoting/AdminVoting";
 import AdminCatalogs from "./components/AdminModule/AdminCatalogs/AdminCatalogs";
 import AdminAddNewUser from "./components/AdminModule/AdminUsers/AdminAddNewUser";
-import AdminWinners from "./components/AdminModule/AdminWinners/AdminWinners";
 import ApplicationAll from "./components/AdminModule/AdminApplication/ApplicationAll";
 import ApplicationAllSelected from "./components/AdminModule/AdminApplicationSelected/ApplicationAll";
+import ApplicationAllStep2 from "./components/AdminModule/AdminApplicationStep2/ApplicationAll";
 import ApplicationUserId from "./components/AdminModule/AdminApplication/ApplicationUserId";
 import AdminComments from "./components/AdminModule/AdminComments/AdminComments";
 import AdminShowCommentID from "./components/AdminModule/AdminComments/AdminShowCommentID";
@@ -266,6 +266,12 @@ const routes = [
 				meta: {isAdmin: true}
 			},
 			{
+				name: "applicationStep2Admin",
+				path: "step2",
+				component: ApplicationAllStep2,
+				meta: {isAdmin: true}
+			},
+			{
 				name: "ApplicationUserIdAdmin",
 				path: "applications/id/:id",
 				component: ApplicationUserId,
@@ -289,12 +295,12 @@ const routes = [
 				component: AdminVoting,
 				meta: {isAdmin: true}
 			},
-			{
-				name: "winnersAdmin",
-				path: "winners",
-				component: AdminWinners,
-				meta: {isAdmin: true}
-			},
+			// {
+			// 	name: "winnersAdmin",
+			// 	path: "winners",
+			// 	component: AdminWinners,
+			// 	meta: {isAdmin: true}
+			// },
 			{
 				name: "commentsAdmin",
 				path: "comments",

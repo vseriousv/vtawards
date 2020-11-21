@@ -196,7 +196,7 @@
 					if (!promt) return
 				}
 				console.log(point)
-				const urn = "/user-voting/сommission";
+				const urn = "/user-voting/";
 				const data = {
 					nominationOrderId: this.$route.params.id,
 					range: point,
@@ -309,10 +309,10 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					//.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
+					.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					//.UserCard__description(v-else)
+					.UserCard__description(v-else)
 						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
 						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
 

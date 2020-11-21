@@ -14,6 +14,7 @@
 					{ title: "Пользователи", icon: "mdi-account-group", link: "/admin/users" },
 					{ title: "Заявки", icon: "mdi-account-card-details", link: "/admin/applications" },
 					{ title: "Избранные заявки", icon: "mdi-account-star", link: "/admin/selected" },
+					{ title: "Второй этап", icon: "mdi-debug-step-over", link: "/admin/step2" },
 					{ title: "Комментарии", icon: "mdi-comment-account", link: "/admin/comments" },
 					{ title: "Голосование", icon: "mdi-account-check", link: "/admin/result-voting" },
 					// { title: "Voting", icon: "mdi-ballot-outline", link: "/admin/voting" },
