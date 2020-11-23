@@ -309,10 +309,14 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description(v-if="this.errorVote && this.errorVote !== ''")
+					.UserCard__description(v-if="!this.isCommission")
+						p.text-left.mb-3(v-if="$t('lang') === 'ru'").text-center Голосование закончилось
+						p.text-left.mb-3(v-if="$t('lang') === 'en'").text-center Voting is over
+
+					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isCommission")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					.UserCard__description(v-else)
+					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isCommission")
 						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
 						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
 
