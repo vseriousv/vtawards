@@ -119,6 +119,9 @@ export default {
 				spring_committee_voting: '',
 				spring_users_voting: ""
 			},
+			nomination_1: "Номинация ДОСТИЖЕНИЕ и ЛИДЕРСТВО",
+			nomination_2: "Номинация ПРОФЕССИОНАЛИЗМ и НОВАЦИИ",
+			nomination_3: "Номинация ЗОЛОТОЙ ЧЕЛОВЕК",
 			year: "года",
 			more: "Подробнее об участнике"
 		},
@@ -453,6 +456,9 @@ export default {
 				spring_committee_voting: '',
 				spring_users_voting: ""
 			},
+			nomination_1: "Nomination is ACHIEVEMENT and LEADERSHIP",
+			nomination_2: "Nomination is PROFESSIONALISM and INNOVATIONS",
+			nomination_3: "Nomination is PILLAR OF THE TEAM",
 			year: "year",
 			more: "Member Details"
 		},
