@@ -202,9 +202,7 @@ export default {
                     })
                 }
             )
-            // this.lang = this.$t('lang')
-            // console.log(this.lang)
-            console.log(this.arrWinners_en)
+            // console.log(this.arrWinners_en)
         },
 
         setUsersArray2: function(data) {
@@ -217,17 +215,19 @@ export default {
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameRu + " " + item.user.lastnameRu,
                         nomination: item.nomination.valueRu,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_ru
                     })
                     this.arrWinners2_en.push({
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameEn + " " + item.user.lastnameEn,
                         nomination: item.nomination.valueEn,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_en
                     })
                 }
             )
-            console.log(this.arrWinners_en)
+            // console.log("step3",this.arrWinners2_en)
         },
     }
 
