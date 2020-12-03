@@ -35,6 +35,7 @@
 				my: jwtHelper.jwtParse().id,
 				isAdmin: jwtHelper.isAdmin(),
 				isCommission: jwtHelper.isCommittee(),
+				isFinal: jwtHelper.isFinal(),
 				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
 			};
 		},
@@ -200,9 +201,9 @@
 				const data = {
 					nominationOrderId: this.$route.params.id,
 					range: point,
-					type: "сommission",
+					type: "final",
 				}
-				if (this.isAdmin || this.isCommission) {
+				if (this.isAdmin || this.isFinal) {
 					try {
 						await restHelper.postEntity(urn, data, true);
 						if (this.$t('lang') === 'ru') {
@@ -309,14 +310,14 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description(v-if="!this.isCommission")
+					.UserCard__description(v-if="!this.isFinal")
 						p.text-left.mb-3(v-if="$t('lang') === 'ru'").text-center Голосование закончилось
 						p.text-left.mb-3(v-if="$t('lang') === 'en'").text-center Voting is over
 
-					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isCommission")
+					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isFinal ")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isCommission")
+					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isFinal")
 						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
 						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
 

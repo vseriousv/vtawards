@@ -73,7 +73,7 @@ export default {
 			],
 			search_user: "",
 			typeVoting: "users",
-			typeVotingSelect: ['users', 'сommission']
+			typeVotingSelect: ['users', 'сommission','final']
 		};
 	},
 

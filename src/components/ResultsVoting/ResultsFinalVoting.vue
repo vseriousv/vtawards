@@ -74,7 +74,7 @@ export default {
 
       statesRu:[],
       statesEn:[],
-      statesSelect:999,
+      statesSelect:5555,
 
       nominationRu: [],
       nominationEn: [],

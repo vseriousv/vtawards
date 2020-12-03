@@ -6,7 +6,7 @@
 
 <script>
 // import ResultsVoting from "../components/ResultsVoting/ResultsVoting";
-import ResultsVoting from "../components/ResultsVoting/ResultsCommissionVoting";
+import ResultsVoting from "../components/ResultsVoting/ResultsFinalVoting";
 import JwtHelper from "@/helpers/JwtHelper";
 const jwtHelper = new JwtHelper();
 export default {
