@@ -1,62 +1,107 @@
 <template lang="pug">
-	.containerWinner.px-6
+.containerWinner.px-6
 
-		h2(v-if="arrWinners2_ru.length|| arrWinners2_en.length").mb-8.ml-12(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting2")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
-		v-row
-			v-col.boxWinner(
-				v-if="$t('lang') === 'ru'"
-				v-for="item in arrWinners2_ru"
-				:key="item.id"
-				:lg="3"
-				:md="4"
-				:sm="6"
-			)
-				img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
-				p.boxWinner__nameWinner {{item.name}}
-				p.text-center {{item.nomination}}
-				p.text-center {{item.region}}
+    h2(v-if="arrWinners2_ru.length || arrWinners2_en.length").mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting2")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
+    .nominationSt2(v-if="arrWinners2_ru.length || arrWinners2_en.length")
+        v-row.row-nomination
+            .row1
+                h3(v-if="arrWinners2_ru.length").mb-8.ml-12(v-html='$t("winnersAllBlock.nomination_1")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 1"
+                        v-for="item in arrWinnersSt3"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
 
-			v-col.boxWinner(
-				v-if="$t('lang') === 'en'"
-				v-for="item in arrWinners2_en"
-				:key="item.id"
-				:lg="3"
-				:md="4"
-				:sm="6"
-			)
-				img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
-				p.boxWinner__nameWinner {{item.name}}
-				p.text-center {{item.nomination}}
-				p.text-center {{item.region}}
+            .row2
+                h3(v-if="arrWinners2_ru.length").my-8.ml-12(v-html='$t("winnersAllBlock.nomination_2")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 2"
+                        v-for="item in arrWinnersSt3"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
 
+            .row3
+                h3(v-if="arrWinners2_ru.length").my-8.ml-12(v-html='$t("winnersAllBlock.nomination_3")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 3"
+                        v-for="item in arrWinnersSt3"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
 
-		h2(v-if="arrWinners_ru.length|| arrWinners_en.length").mb-8.ml-12(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
-		v-row
-			v-col.boxWinner(
-				v-if="$t('lang') === 'ru'"
-				v-for="item in arrWinners_ru"
-				:key="item.id"
-				:lg="3"
-				:md="4"
-				:sm="6"
-			)
-				img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
-				p.boxWinner__nameWinner {{item.name}}
-				p.text-center {{item.nomination}}
-				p.text-center {{item.region}}
+    h2(v-if="arrWinners_ru.length || arrWinners_en.length").mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
+    .nominationSt2(v-if="arrWinners_ru.length || arrWinners_en.length")
+        v-row.row-nomination
+            .row1
+                h3(v-if="arrWinners_ru.length").mb-8.ml-12(v-html='$t("winnersAllBlock.nomination_1")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 1"
+                        v-for="item in arrWinnersSt2"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
 
-			v-col.boxWinner(
-				v-if="$t('lang') === 'en'"
-				v-for="item in arrWinners_en"
-				:key="item.id"
-				:lg="3"
-				:md="4"
-				:sm="6"
-			)
-				img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
-				p.boxWinner__nameWinner {{item.name}}
-				p.text-center {{item.nomination}}
-				p.text-center {{item.region}}
+            .row2
+                h3(v-if="arrWinners_ru.length").my-8.ml-12(v-html='$t("winnersAllBlock.nomination_2")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 2"
+                        v-for="item in arrWinnersSt2"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
+
+            .row3
+                h3(v-if="arrWinners_ru.length").my-8.ml-12(v-html='$t("winnersAllBlock.nomination_3")')
+                v-row
+                    v-col.boxWinner(
+                        v-if="item.nominationId == 3"
+                        v-for="item in arrWinnersSt2"
+                        :key="item.id"
+                        :lg="3"
+                        :md="4"
+                        :sm="6"
+                    )
+                        img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                        p.boxWinner__nameWinner {{item.name}}
+                        p.text-center {{item.nomination}}
+                        p.text-center {{item.region}}
 
 </template>
 
@@ -72,7 +117,7 @@ export default {
     data() {
         return {
             URL_AVATARS: config.URL_AVATARS,
-
+            
             arrWinners_ru: [],
             arrWinners_en: [],
 
@@ -81,6 +126,23 @@ export default {
             arrWinners2_en: [],
 
         }
+    },
+
+    computed: {
+        arrWinnersSt2: function() {
+            if (this.$t('lang') == "ru") {
+                return this.arrWinners_ru
+            } else {
+                return this.arrWinners_en
+            }
+        },
+        arrWinnersSt3: function() {
+            if (this.$t('lang') == "ru") {
+                return this.arrWinners2_ru
+            } else {
+                return this.arrWinners2_en
+            }
+        }     
     },
 
     created() {
@@ -93,7 +155,7 @@ export default {
             const url = "/nomination-order/step2"
             try {
                 const dataUser = await restHelper.getEntity(url, true);
-                console.log("winner",dataUser.data.rows)
+                // console.log("winner",dataUser.data.rows)
                 if (dataUser.data.rows.length == 0) {
                     return false
                 } else {
@@ -107,7 +169,7 @@ export default {
             const url = "/nomination-order/step3"
             try {
                 const dataUser = await restHelper.getEntity(url, true);
-                console.log("winner",dataUser.data.rows)
+                // console.log("winner",dataUser.data.rows)
                 if (dataUser.data.rows.length == 0) {
                     return false
                 } else {
@@ -122,23 +184,25 @@ export default {
             this.arrWinners_ru = []
             this.arrWinners_en = []
             const winners = data.filter(winner => winner.step2 === true)
-            console.log(winners)
+            // console.log(winners)
             winners.forEach(item => {
                     this.arrWinners_ru.push({
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameRu + " " + item.user.lastnameRu,
                         nomination: item.nomination.valueRu,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_ru
                     })
                     this.arrWinners_en.push({
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameEn + " " + item.user.lastnameEn,
                         nomination: item.nomination.valueEn,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_en
                     })
                 }
             )
-            console.log(this.arrWinners_en)
+            // console.log(this.arrWinners_en)
         },
 
         setUsersArray2: function(data) {
@@ -151,17 +215,19 @@ export default {
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameRu + " " + item.user.lastnameRu,
                         nomination: item.nomination.valueRu,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_ru
                     })
                     this.arrWinners2_en.push({
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameEn + " " + item.user.lastnameEn,
                         nomination: item.nomination.valueEn,
+                        nominationId: item.nomination.id,
                         region: item.user.state.value_en
                     })
                 }
             )
-            console.log(this.arrWinners_en)
+            // console.log("step3",this.arrWinners2_en)
         },
     }
 
@@ -171,9 +237,20 @@ export default {
 
 <style lang="scss" scoped>
 @import './src/assets/styles/index.scss';
+
+
+.row-nomination {
+    display: flex;
+    flex-direction: column;
+}
+
 .containerWinner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 50px;
+
 }
 .boxWinner {
     display: flex;

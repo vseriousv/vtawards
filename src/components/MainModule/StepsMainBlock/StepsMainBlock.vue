@@ -14,7 +14,7 @@ section.steps#steps
   div.mxw1200
     h2.mx-3(v-html="$t('StepsMainBlock.blockTitle')")
     ul.steps-list
-      li.steps-list-item.active-step(@click.stop="dialogShow(true, 'regionalStage')")
+      li.steps-list-item(@click.stop="dialogShow(true, 'regionalStage')")
         .steps-list-item-title
           .step-number I
           p.step-date 28.09 - 18.10.2020
@@ -26,10 +26,10 @@ section.steps#steps
           //- p «Звезды команд»
         .steps-list-item-text
           p(v-html="$t('StepsMainBlock.descriptionCard')")
-      li.steps-list-item(@click.stop="dialogShow(true, 'semifinal')")
+      li.steps-list-item.active-step(@click.stop="dialogShow(true, 'semifinal')")
         .steps-list-item-title
           .step-number II
-          p.step-date 29.10 - 05.11.2020
+          p.step-date 23.11 - 27.11.2020
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
