@@ -112,8 +112,10 @@ export default {
 		winnersAllBlock: {
 			head: {
 				text1: "Победители",
+				finalistTitle: "Победитель конкурса в номинации",
 				semifinal_voting: "регионального этапа конкурса «Лидер перемен ВТ»",
 				semifinal_voting2: "полуфинала конкурса «Лидер перемен ВТ»",
+				final: "финала конкурса «Лидер перемен ВТ»",
 				autumn_committee_voting: '',
 				autumn_users_voting: "",
 				spring_committee_voting: '',
@@ -449,8 +451,10 @@ export default {
 		winnersAllBlock: {
 			head: {
 				text1: "The winners",
+				finalistTitle: "The winner of the competition in the nomination",
 				semifinal_voting: " of the regional stage",
 				semifinal_voting2: " of the semi-final stage",
+				final: "of the final stage",
 				autumn_committee_voting: '',
 				autumn_users_voting: "",
 				spring_committee_voting: '',

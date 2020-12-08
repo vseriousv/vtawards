@@ -1,6 +1,22 @@
 <template lang="pug">
 .containerWinner.px-6
 
+    h2.mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.final")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
+    .nominationSt2
+        v-row.row-nomination.row-nomination_final
+            v-col.boxWinner(
+                v-for="item in arrWinnersFinal"
+                :key="item.id"
+                :lg="4"
+                :md="4"
+                :sm="6"
+            )   
+                h4.finalistTitle.mb-5 {{$t("winnersAllBlock.head.finalistTitle") + " " + item.nomination}}     
+                img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+                p.boxWinner__nameWinner {{item.name}}
+                //- p.text-center {{item.nomination}}
+                p.text-center {{item.region}}
+
     h2(v-if="arrWinners2_ru.length || arrWinners2_en.length").mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting2")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
     .nominationSt2(v-if="arrWinners2_ru.length || arrWinners2_en.length")
         v-row.row-nomination
@@ -121,11 +137,14 @@ export default {
             arrWinners_ru: [],
             arrWinners_en: [],
 
-
             arrWinners2_ru: [],
             arrWinners2_en: [],
 
-        }
+            arrWinnersFinal_ru: [],
+            arrWinnersFinal_en: [],
+
+            winnersSt2: '',
+        }   
     },
 
     computed: {
@@ -142,7 +161,16 @@ export default {
             } else {
                 return this.arrWinners2_en
             }
-        }     
+        },
+        arrWinnersFinal: function() {
+            if (this.$t('lang') == "ru") {
+                console.log(this.arrWinnersFinal_ru)
+                return this.arrWinnersFinal_ru
+            } else {
+                return this.arrWinnersFinal_en
+            }
+        } 
+
     },
 
     created() {
@@ -209,9 +237,10 @@ export default {
             this.arrWinners2_ru = []
             this.arrWinners2_en = []
             const winners = data.filter(winner => winner.step3 === true)
-            console.log(winners)
+            // console.log(winners)
             winners.forEach(item => {
                     this.arrWinners2_ru.push({
+                        id: item.userId,
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameRu + " " + item.user.lastnameRu,
                         nomination: item.nomination.valueRu,
@@ -219,6 +248,7 @@ export default {
                         region: item.user.state.value_ru
                     })
                     this.arrWinners2_en.push({
+                        id: item.userId,
                         imgWinner: item.user.img || "null.png",
                         name: item.user.firstnameEn + " " + item.user.lastnameEn,
                         nomination: item.nomination.valueEn,
@@ -227,8 +257,26 @@ export default {
                     })
                 }
             )
+            this.setUsersFinal()
             // console.log("step3",this.arrWinners2_en)
         },
+
+        setUsersFinal: function() {
+            this.arrWinnersFinal_ru = []
+            this.arrWinnersFinal_en = []
+            
+            this.arrWinners2_ru.forEach(item => {
+                if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
+                    this.arrWinnersFinal_ru.push(item)
+                }
+            })
+            this.arrWinners2_en.forEach(item => {
+                if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
+                    this.arrWinnersFinal_en.push(item)
+                }
+            })
+            
+        }
     }
 
 };
@@ -242,6 +290,15 @@ export default {
 .row-nomination {
     display: flex;
     flex-direction: column;
+
+    &_final {
+        flex-direction: row;
+    }
+
+    .finalistTitle {
+        max-width: 300px;
+        text-align: center;
+    }
 }
 
 .containerWinner {
@@ -256,6 +313,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+
     &__imgWinner {
         height: 150px;
         width: 150px;
@@ -268,7 +327,6 @@ export default {
         &__6,&__12,&__13 {
             object-position: center -10px;
         }
-
     }
     &__yearWinner {
         font-size: 18px;
