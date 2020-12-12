@@ -335,12 +335,12 @@ export default {
 			//   link: "/committee",
 			//   target: "_self"
 			// },
-			{
-				id: 4,
-				text: "Участники",
-				link: "/participants",
-				target: "_self"
-			},
+			// {
+			// 	id: 4,
+			// 	text: "Участники",
+			// 	link: "/participants",
+			// 	target: "_self"
+			// },
 			{
 				id: 5,
 				text: "Архив победителей",
@@ -677,12 +677,12 @@ export default {
 			//   link: "/committee",
 			//   target: "_self"
 			// },
-			{
-				id: 4,
-				text: "Participants",
-				link: "/participants",
-				target: "_self"
-			},
+			// {
+			// 	id: 4,
+			// 	text: "Participants",
+			// 	link: "/participants",
+			// 	target: "_self"
+			// },
 			{
 				id: 5,
 				text: "Archive of Winners",

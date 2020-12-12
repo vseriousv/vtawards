@@ -49,8 +49,8 @@ export default {
 
     methods: {
         addArrWinners: function() {
-            this.arrWinners_ru = ArchiveWinner().lang_ru
-            this.arrWinners_en = ArchiveWinner().lang_en
+            this.arrWinners_ru = ArchiveWinner().lang_ru.reverse()
+            this.arrWinners_en = ArchiveWinner().lang_en.reverse()
             console.log(this.arrWinners_en)
         },
     }

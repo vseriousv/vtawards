@@ -106,6 +106,27 @@ function ArchiveWinner() {
                 position:"Региональный менеджер по запчастям, г.Красноярск",
                 imgWinner: "/img/archiveWinners/2019_Александра_Игнатьева.jpg",
             },
+            {
+                id:16,
+                year:"2020",
+                name:"Андрей Сысоев",
+                position: "Номинация ЗОЛОТОЙ ЧЕЛОВЕК. Дальневосточный регион",
+                imgWinner: "/img/archiveWinners/2020_Андрей_Сысоев.jpg"
+            },
+            {
+                id:17,
+                year:"2020",
+                name:"Константин Гончаров",
+                position: "Номинация ПРОФЕССИОНАЛИЗМ и НОВАЦИИ. Подразделение расширенной номенклатуры горнопромышленного оборудования",
+                imgWinner: "/img/archiveWinners/2020_Константин_Гончаров.png"
+            },
+            {
+                id:18,
+                year:"2020",
+                name:"Лариса Куликова",
+                position:"Номинация ДОСТИЖЕНИЕ и ЛИДЕРСТВО. Якутия",
+                imgWinner: "/img/archiveWinners/2020_Лариса_Куликова.jpg"
+            },
         ],
         lang_en: [
             {
@@ -212,6 +233,27 @@ function ArchiveWinner() {
                 name:"Alexandra Ignatieva",
                 position:"Regional Parts Manager, Krasnoyarsk",
                 imgWinner: "/img/archiveWinners/2019_Александра_Игнатьева.jpg"
+            },
+            {
+                id:16,
+                year:"2020",
+                name:"Andrey Sysoev",
+                position: "Nomination PILLAR OF THE TEAM. Russian Far East",
+                imgWinner: "/img/archiveWinners/2020_Андрей_Сысоев.jpg"
+            },
+            {
+                id:17,
+                year:"2020",
+                name:"Konstantin Goncharov",
+                position: "Nomination PROFESSIONALISM and INNOVATIONS. EMPR",
+                imgWinner: "/img/archiveWinners/2020_Константин_Гончаров.png"
+            },
+            {
+                id:18,
+                year:"2020",
+                name:"Larisa Kulikova",
+                position:"Nomination ACHIEVEMENT and LEADERSHIP. Yakutiya",
+                imgWinner: "/img/archiveWinners/2020_Лариса_Куликова.jpg"
             },
         ],
     }
