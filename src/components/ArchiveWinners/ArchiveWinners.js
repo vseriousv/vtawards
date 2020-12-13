@@ -110,21 +110,21 @@ function ArchiveWinner() {
                 id:16,
                 year:"2020",
                 name:"Андрей Сысоев",
-                position: "Номинация ЗОЛОТОЙ ЧЕЛОВЕК. Дальневосточный регион",
+                position: "Представитель по продаже сервиса и запасных частей. г.Магадан",
                 imgWinner: "/img/archiveWinners/2020_Андрей_Сысоев.jpg"
             },
             {
                 id:17,
                 year:"2020",
                 name:"Константин Гончаров",
-                position: "Номинация ПРОФЕССИОНАЛИЗМ и НОВАЦИИ. Подразделение расширенной номенклатуры горнопромышленного оборудования",
+                position: "Руководитель службы ремонта. г.Новокузнецк",
                 imgWinner: "/img/archiveWinners/2020_Константин_Гончаров.png"
             },
             {
                 id:18,
                 year:"2020",
                 name:"Лариса Куликова",
-                position:"Номинация ДОСТИЖЕНИЕ и ЛИДЕРСТВО. Якутия",
+                position:"Специалист по ОТ, ПБ и ООС. г.Нерюнгри",
                 imgWinner: "/img/archiveWinners/2020_Лариса_Куликова.jpg"
             },
         ],
@@ -238,23 +238,24 @@ function ArchiveWinner() {
                 id:16,
                 year:"2020",
                 name:"Andrey Sysoev",
-                position: "Nomination PILLAR OF THE TEAM. Russian Far East",
+                position: "PSSR. Magadan",
                 imgWinner: "/img/archiveWinners/2020_Андрей_Сысоев.jpg"
             },
             {
                 id:17,
                 year:"2020",
                 name:"Konstantin Goncharov",
-                position: "Nomination PROFESSIONALISM and INNOVATIONS. EMPR",
+                position: "Repair Service Supervisor. Novokuznetsk EMPR",
                 imgWinner: "/img/archiveWinners/2020_Константин_Гончаров.png"
             },
             {
                 id:18,
                 year:"2020",
                 name:"Larisa Kulikova",
-                position:"Nomination ACHIEVEMENT and LEADERSHIP. Yakutiya",
+                position:"Health, Safety and Environment specialist. Neryungri",
                 imgWinner: "/img/archiveWinners/2020_Лариса_Куликова.jpg"
             },
+            
         ],
     }
     return ArchiveWinners
