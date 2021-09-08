@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <application-form />
-  </div>
+	<div>
+		<application-form />
+	</div>
 </template>
 
 <script>
 import ApplicationForm from "../components/ApplicationForm/ApplicationForm";
 export default {
-  name: "ApplicationPage",
+	name: "ApplicationPage",
 
-  components: {
-    ApplicationForm
-  },
+	components: {
+		ApplicationForm
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

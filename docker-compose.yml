@@ -8,5 +8,5 @@ services:
       - ../envs/vtaward-web.env
     restart: always
     network_mode: host
-    command:
-      "http-server dist"
+#    command:
+#      "http-server dist"

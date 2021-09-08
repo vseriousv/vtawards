@@ -1,14 +1,14 @@
 <template>
-  <section></section>
+	<section></section>
 </template>
 
 <script>
 export default {
-  name: "LogoutPage",
-  created() {
-    localStorage.removeItem("jwt");
-    this.$router.push({ name: "login" });
-  }
+	name: "LogoutPage",
+	created() {
+		localStorage.removeItem("jwt");
+		this.$router.push({ name: "login" });
+	}
 };
 </script>
 

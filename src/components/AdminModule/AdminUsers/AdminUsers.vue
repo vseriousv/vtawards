@@ -1,15 +1,14 @@
 <script>
-	import UsersCatalog from "./UsersCatalog";
-	import RestHelper from "../../../helpers/RestHelper";
+import UsersCatalog from "./UsersCatalog";
+import RestHelper from "../../../helpers/RestHelper";
 
-
-	const restHelper = new RestHelper();
+const restHelper = new RestHelper();
 
 export default {
 	name: "AdminUsers",
 
 	components: {
-		UsersCatalog,
+		UsersCatalog
 	},
 
 	data() {
@@ -23,7 +22,6 @@ export default {
 	},
 
 	methods: {
-
 		addFieldTable: async function(table, dataSend) {
 			const urn = "/" + table + "/create";
 			try {
@@ -32,12 +30,10 @@ export default {
 			} catch (e) {
 				this.errorStr = "Неправильно заполнены поля";
 			}
-		},
-
-	},
+		}
+	}
 };
 </script>
-
 
 <template lang="pug">
 .containerAdmin

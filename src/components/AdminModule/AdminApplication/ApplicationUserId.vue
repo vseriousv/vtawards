@@ -3,9 +3,7 @@ import config from "../../../constants/config";
 import axios from "axios";
 import RestHelper from "../../../helpers/RestHelper";
 
-
 const restHelper = new RestHelper();
-
 
 export default {
 	name: "ApplicationUserID",
@@ -42,35 +40,34 @@ export default {
 			public: false,
 			isSelectedCard: false,
 			step2: false,
-			step3: false,
+			step3: false
 		};
 	},
 
 	async mounted() {
 		try {
-			await restHelper.getEntity('/nomination-order/read/' + this.userID, true);
+			await restHelper.getEntity("/nomination-order/read/" + this.userID, true);
 		} catch (e) {
 			throw new Error(e);
 		}
 		await this.getUserId(this.userID);
 		await this.getUser();
 		await this.getNomination();
-
 	},
 
 	watch: {
-		userValue: function (newVal, oldVal) {
-			if (oldVal !== null || oldVal > 0 && newVal > 0) {
-				this.user = this.usersAll.find((element) => {
+		userValue: function(newVal, oldVal) {
+			if (oldVal !== null || (oldVal > 0 && newVal > 0)) {
+				this.user = this.usersAll.find(element => {
 					if (element.id == newVal) {
 						return element;
 					}
 				});
 			}
-		},
+		}
 	},
 	methods: {
-		getUserId: async function (id) {
+		getUserId: async function(id) {
 			const url = "/nomination-order/" + id;
 			try {
 				const data = await restHelper.getEntity(url, true);
@@ -80,7 +77,7 @@ export default {
 			}
 		},
 
-		parseDataUser: function (item) {
+		parseDataUser: function(item) {
 			this.userOrder = {
 				userId: item.userId,
 				userFrom: item.userFrom,
@@ -90,46 +87,62 @@ export default {
 				nominationId: item.nomination.id,
 				public: item.public,
 				isSelected: item.isSelected,
-				step2: (item.step2 === null || item.step2 === false || item.step2 === undefined) ? false : item.step2,
-				step3: (item.step3 === null || item.step3 === false || item.step3 === undefined) ? false : item.step3
-			}
+				step2:
+					item.step2 === null ||
+					item.step2 === false ||
+					item.step2 === undefined
+						? false
+						: item.step2,
+				step3:
+					item.step3 === null ||
+					item.step3 === false ||
+					item.step3 === undefined
+						? false
+						: item.step3
+			};
 			this.public = item.public;
 			this.isSelectedCard = item.isSelected;
-			this.step2 = (item.step2 === null || item.step2 === false || item.step2 === undefined) ? false : item.step2
-			this.step3 = (item.step3 === null || item.step3 === false || item.step3 === undefined) ? false : item.step3
+			this.step2 =
+				item.step2 === null || item.step2 === false || item.step2 === undefined
+					? false
+					: item.step2;
+			this.step3 =
+				item.step3 === null || item.step3 === false || item.step3 === undefined
+					? false
+					: item.step3;
 			// console.log(this.userOrder)
 		},
 
-		setUserFrom: function (data) {
+		setUserFrom: function(data) {
 			const userFrom = this.usersAll.find(item => {
 				if (item.id === data) return item;
-			})
-			this.userFromRu = userFrom.name_ru
-			this.userFromEn = userFrom.name_en
+			});
+			this.userFromRu = userFrom.name_ru;
+			this.userFromEn = userFrom.name_en;
 		},
 
-		getUser: async function () {
+		getUser: async function() {
 			const url = "/users";
 			try {
-				const {data} = await restHelper.getEntity(url, true);
-				this.setUserArray(data)
+				const { data } = await restHelper.getEntity(url, true);
+				this.setUserArray(data);
 			} catch (e) {
 				console.error("ERROR ApplicationUserId/getUser:", e);
 			}
 		},
 
-		setUserArray: function (users) {
+		setUserArray: function(users) {
 			this.usersCompleteRu = [];
 			this.usersCompleteEng = [];
 			this.usersAll = [];
 			users.forEach(item => {
 				let userPropRu = {
 					text: item.lastnameRu + " " + item.firstnameRu,
-					value: item.id,
+					value: item.id
 				};
 				let userPropEng = {
 					text: item.firstnameEn + " " + item.lastnameEn,
-					value: item.id,
+					value: item.id
 				};
 				let userAll = {
 					id: item.id,
@@ -146,19 +159,19 @@ export default {
 					city_ru: item.cityName ? item.cityName : "",
 					city_en: item.cityNameEng ? item.cityNameEng : "",
 					state_id: item.state_id
-				}
+				};
 				this.usersAll.push(userAll);
 				this.usersCompleteRu.push(userPropRu);
 				this.usersCompleteEng.push(userPropEng);
-			})
-			this.userValue = this.userOrder.userId
-			this.nominationSelect = this.userOrder.nominationId
-			this.argumentationTextRu = this.userOrder.argumentationRu
-			this.argumentationTextEn = this.userOrder.argumentationEn
-			this.setUserFrom(this.userOrder.userFrom)
+			});
+			this.userValue = this.userOrder.userId;
+			this.nominationSelect = this.userOrder.nominationId;
+			this.argumentationTextRu = this.userOrder.argumentationRu;
+			this.argumentationTextEn = this.userOrder.argumentationEn;
+			this.setUserFrom(this.userOrder.userFrom);
 		},
 
-		getNomination: async function () {
+		getNomination: async function() {
 			const url = "/nominations";
 			try {
 				const nomination = await restHelper.getEntity(url, true);
@@ -168,7 +181,7 @@ export default {
 			}
 		},
 
-		setNomination: function (nominations) {
+		setNomination: function(nominations) {
 			this.nominationItemsRu = [];
 			this.nominationItemsEng = [];
 			nominations.data.forEach(nomin => {
@@ -179,57 +192,57 @@ export default {
 				let nominationEng = {
 					text: nomin.valueEn,
 					value: nomin.id
-				}
+				};
 				this.nominationItemsRu.push(nominationRu);
 				this.nominationItemsEng.push(nominationEng);
-			})
+			});
 		},
-		fixsetData: function (data) {
+		fixsetData: function(data) {
 			switch (data) {
 				case "autocomplete":
-					this.autocompleteFix = false
-					this.autocompleteFixBtn = false
-					break
+					this.autocompleteFix = false;
+					this.autocompleteFixBtn = false;
+					break;
 				case "nomination":
-					this.nominationFix = false
-					this.nominationFixBtn = false
-					break
+					this.nominationFix = false;
+					this.nominationFixBtn = false;
+					break;
 				case "argumentationTextRu":
-					this.argumentationFixRu = false
-					this.argumentationFixBtnRu = false
-					break
+					this.argumentationFixRu = false;
+					this.argumentationFixBtnRu = false;
+					break;
 				case "argumentationTextEn":
-					this.argumentationFixEn = false
-					this.argumentationFixBtnEn = false
-					break
+					this.argumentationFixEn = false;
+					this.argumentationFixBtnEn = false;
+					break;
 			}
 		},
-		saveData: function (data) {
+		saveData: function(data) {
 			switch (data) {
 				case "autocomplete":
-					this.autocompleteFix = true
-					this.autocompleteFixBtn = true
-					this.postNewData({"userId": this.userValue})
-					break
+					this.autocompleteFix = true;
+					this.autocompleteFixBtn = true;
+					this.postNewData({ userId: this.userValue });
+					break;
 				case "nomination":
-					this.nominationFix = true
-					this.nominationFixBtn = true
-					this.postNewData({"nominationId": this.nominationSelect})
-					break
+					this.nominationFix = true;
+					this.nominationFixBtn = true;
+					this.postNewData({ nominationId: this.nominationSelect });
+					break;
 				case "argumentationTextRu":
-					this.argumentationFixRu = true
-					this.argumentationFixBtnRu = true
-					this.postNewData({"textRu": this.argumentationTextRu})
-					break
+					this.argumentationFixRu = true;
+					this.argumentationFixBtnRu = true;
+					this.postNewData({ textRu: this.argumentationTextRu });
+					break;
 				case "argumentationTextEn":
-					this.argumentationFixEn = true
-					this.argumentationFixBtnEn = true
-					this.postNewData({"textEn": this.argumentationTextEn})
-					break
+					this.argumentationFixEn = true;
+					this.argumentationFixBtnEn = true;
+					this.postNewData({ textEn: this.argumentationTextEn });
+					break;
 			}
 		},
 
-		postNewData: async function (data) {
+		postNewData: async function(data) {
 			const url = "/nomination-order/" + this.userID;
 			try {
 				const PostFormNomination = await axios.patch(
@@ -238,66 +251,65 @@ export default {
 
 					{
 						headers: {
-							Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+							Authorization: "Bearer " + localStorage.getItem("jwt")
 						}
-					},
+					}
 				);
-				console.log(PostFormNomination)
+				console.log(PostFormNomination);
 			} catch (e) {
 				console.error("ERROR ApplicationUserId/postNewData:", e);
 			}
 		},
-		postCardNomination: function (data) {
-			this.postNewData({"public": data})
+		postCardNomination: function(data) {
+			this.postNewData({ public: data });
 			if (data === true) {
-				alert("Карточка номинанта опубликована")
-				this.public = true
+				alert("Карточка номинанта опубликована");
+				this.public = true;
 			} else {
-				alert("Карточка номинанта снята с публикации")
-				this.public = false
+				alert("Карточка номинанта снята с публикации");
+				this.public = false;
 			}
 		},
 
-		selectNomination: function (data) {
-			this.postNewData({"isSelected": data})
+		selectNomination: function(data) {
+			this.postNewData({ isSelected: data });
 			if (data === true) {
-				alert("Карточка выбрана для публикации")
-				this.isSelectedCard = true
+				alert("Карточка выбрана для публикации");
+				this.isSelectedCard = true;
 			} else {
-				alert("Карточка удалина из избранных")
-				this.isSelectedCard = false
+				alert("Карточка удалина из избранных");
+				this.isSelectedCard = false;
 			}
 		},
 
-		patchNominationStepTwo: function (data) {
-			this.postNewData({"step2": data})
+		patchNominationStepTwo: function(data) {
+			this.postNewData({ step2: data });
 			if (data === true) {
-				alert("Карточка номинанта опубликована")
-				this.step2 = true
+				alert("Карточка номинанта опубликована");
+				this.step2 = true;
 			} else {
-				alert("Карточка номинанта снята с публикации")
-				this.step2 = false
+				alert("Карточка номинанта снята с публикации");
+				this.step2 = false;
 			}
 		},
 
-		patchNominationStepThree: function (data) {
-			this.postNewData({"step3": data})
+		patchNominationStepThree: function(data) {
+			this.postNewData({ step3: data });
 			if (data === true) {
-				alert("Карточка номинанта опубликована")
-				this.step3 = true
+				alert("Карточка номинанта опубликована");
+				this.step3 = true;
 			} else {
-				alert("Карточка номинанта снята с публикации")
-				this.step3 = false
+				alert("Карточка номинанта снята с публикации");
+				this.step3 = false;
 			}
 		},
 
-		showUser: function () {
-			this.$router.push({path: "/admin/users/id/" + this.userOrder.userFrom});
+		showUser: function() {
+			this.$router.push({ path: "/admin/users/id/" + this.userOrder.userFrom });
 		}
 	}
 };
 </script>
-
 
 <template lang="pug">
 section

@@ -65,173 +65,188 @@ import RestHelper from "../../helpers/RestHelper";
 const restHelper = new RestHelper();
 
 export default {
-  name: "ResultsVoting",
-  data() {
-    return {
-      committee: [],
-      URL_AVATARS: config.URL_AVATARS,
+	name: "ResultsVoting",
+	data() {
+		return {
+			committee: [],
+			URL_AVATARS: config.URL_AVATARS,
 
-      statesRu:[],
-      statesEn:[],
-      statesSelect: 0,
+			statesRu: [],
+			statesEn: [],
+			statesSelect: 0,
 
-      nominationRu: [],
-      nominationEn: [],
-      nominationSelect: 0,
+			nominationRu: [],
+			nominationEn: [],
+			nominationSelect: 0,
 
-      headersUserRu: [
-          { text: "Аватар", sortable: false, value: "" },
-          { text: "ФИО", sortable: true, value: "name_ru" },
-          { text: "Сумма баллов", sortable: false, value: "", align: 'center' },
-          { text: "Сумма голосов", sortable: false, value: "", align: 'center'},
-          { text: "Средний балл", sortable: false, value: "" , align: 'center'},
-          { text: "Итоги ранжироввания", sortable: false, value: "" , align: 'center'},
-      ],
+			headersUserRu: [
+				{ text: "Аватар", sortable: false, value: "" },
+				{ text: "ФИО", sortable: true, value: "name_ru" },
+				{ text: "Сумма баллов", sortable: false, value: "", align: "center" },
+				{ text: "Сумма голосов", sortable: false, value: "", align: "center" },
+				{ text: "Средний балл", sortable: false, value: "", align: "center" },
+				{
+					text: "Итоги ранжироввания",
+					sortable: false,
+					value: "",
+					align: "center"
+				}
+			],
 
-      headersUserEn: [
-          { text: "Avatar", sortable: false, value: "" },
-          { text: "Full name", sortable: true, value: "name_en" },
-          { text: "Total points ", sortable: false, value: "" , align: 'center'},
-          { text: "Total votes", sortable: false, value: "" , align: 'center'},
-          { text: "Average score", sortable: false, value: "" , align: 'center'},
-          { text: "Ranking results", sortable: false, value: "" , align: 'center'},
-      ],
-      filterNull: true,
-      participants: [],
-      search_user: "",
-    };
-  },
+			headersUserEn: [
+				{ text: "Avatar", sortable: false, value: "" },
+				{ text: "Full name", sortable: true, value: "name_en" },
+				{ text: "Total points ", sortable: false, value: "", align: "center" },
+				{ text: "Total votes", sortable: false, value: "", align: "center" },
+				{ text: "Average score", sortable: false, value: "", align: "center" },
+				{ text: "Ranking results", sortable: false, value: "", align: "center" }
+			],
+			filterNull: true,
+			participants: [],
+			search_user: ""
+		};
+	},
 
-  created() {
-    this.getNomination();
-    this.getState();
-  },
+	created() {
+		this.getNomination();
+		this.getState();
+	},
 
-  watch: {
-    nominationSelect: function(newVal, oldVal) {
-      if (newVal==0) {
-        this.filterNull = true
-        return
-      }
-      if (newVal>0 && oldVal!==null && newVal!==oldVal && this.statesSelect !== 0) {
-        this.filterNull = false
-        this.getParticipantsFromIdNomination(newVal, this.statesSelect);
-      }
-    },
+	watch: {
+		nominationSelect: function(newVal, oldVal) {
+			if (newVal == 0) {
+				this.filterNull = true;
+				return;
+			}
+			if (
+				newVal > 0 &&
+				oldVal !== null &&
+				newVal !== oldVal &&
+				this.statesSelect !== 0
+			) {
+				this.filterNull = false;
+				this.getParticipantsFromIdNomination(newVal, this.statesSelect);
+			}
+		},
 		statesSelect: function(newVal, oldVal) {
-      if (newVal==0) {
-        this.filterNull = true
-        return
-      }
-      if (newVal>0 && oldVal!==null && newVal!==oldVal && this.nominationSelect !== 0) {
-        this.filterNull = false
+			if (newVal == 0) {
+				this.filterNull = true;
+				return;
+			}
+			if (
+				newVal > 0 &&
+				oldVal !== null &&
+				newVal !== oldVal &&
+				this.nominationSelect !== 0
+			) {
+				this.filterNull = false;
 				this.getParticipantsFromIdNomination(this.nominationSelect, newVal);
-      }
-    },
-  } ,
+			}
+		}
+	},
 
-  methods: {
+	methods: {
+		getParticipantsFromIdNomination: async function(nominationId, stateId) {
+			const url = `/user-voting/result/${stateId}/${nominationId}`;
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.setParticipantsArray(data.data);
+				// console.log(data.data)
+			} catch (e) {
+				console.error("ERROR ResultVoting/getParticipantsFromIdNomination:", e);
+			}
+		},
 
-    getParticipantsFromIdNomination: async function(nominationId, stateId) {
-      const url = `/user-voting/result/${stateId}/${nominationId}`;
-      try {
-          const data = await restHelper.getEntity(url, true);
-          this.setParticipantsArray(data.data);
-          // console.log(data.data)
-      } catch(e) {
-          console.error("ERROR ResultVoting/getParticipantsFromIdNomination:", e);
-      }
-    },
+		setParticipantsArray: async function(data) {
+			this.participants = [];
+			for (let i = 0; i < data.length; i++) {
+				const userObject = {
+					img: data[i].img ? data[i].img : "null.png",
+					name_ru: data[i].firstnameRu + " " + data[i].lastnameRu,
+					name_en: data[i].firstnameEn + " " + data[i].lastnameEn,
+					nominationId: data[i].ominationOrderId,
 
-    setParticipantsArray: async function(data) {
-      this.participants= []
-      for (let i = 0; i < data.length; i++) {
-        const userObject = {
-          img: data[i].img ? data[i].img : "null.png",
-          name_ru:
-            data[i].firstnameRu +
-            " " +
-            data[i].lastnameRu,
-          name_en: data[i].firstnameEn + " " + data[i].lastnameEn,
-          nominationId: data[i].ominationOrderId,
+					average: data[i].average,
+					countVote: data[i].countVote,
+					resultRange: data[i].resultRange,
+					sumVote: data[i].sumVote
+				};
+				this.participants.push(userObject);
+				console.log(this.participants);
+			}
+		},
 
-          average: data[i].average,
-          countVote: data[i].countVote,
-          resultRange: data[i].resultRange,
-          sumVote: data[i].sumVote,
-        };
-        this.participants.push(userObject);
-        console.log(this.participants)
-      }
-    },
+		getNomination: async function() {
+			const url = "/nominations";
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseNominationArray(data.data);
+				// console.log(data)
+			} catch (e) {
+				console.error("ERROR ResultVoting/getNomination:", e);
+			}
+		},
 
-    getNomination: async function() {
-      const url = "/nominations";
-      try {
-          const data = await restHelper.getEntity(url, true);
-          this.parseNominationArray(data.data);
-          // console.log(data)
-      } catch(e) {
-          console.error("ERROR ResultVoting/getNomination:", e);
-      }
-    },
+		parseNominationArray: function(data) {
+			this.nominationRu = [];
+			this.nominationEn = [];
+			this.nominationRu.push({
+				text: "ВСЕ НОМИНАЦИИ",
+				value: 0
+			});
+			this.nominationEn.push({
+				text: "ALL NOMINATIONS",
+				value: 0
+			});
+			data.forEach(nomin => {
+				let nominationRu = {
+					text: nomin.valueRu,
+					value: nomin.id
+				};
+				let nominationEn = {
+					text: nomin.valueEn,
+					value: nomin.id
+				};
+				this.nominationRu.push(nominationRu);
+				this.nominationEn.push(nominationEn);
+			});
+		},
 
-    parseNominationArray: function (data) {
-      this.nominationRu = [];
-      this.nominationEn = [];
-      this.nominationRu.push({
-          text: "ВСЕ НОМИНАЦИИ",
-          value: 0})
-      this.nominationEn.push({
-          text: "ALL NOMINATIONS",
-          value: 0})
-      data.forEach(nomin => {
-        let nominationRu = {
-          text: nomin.valueRu,
-          value: nomin.id
-        };
-        let nominationEn= {
-          text: nomin.valueEn,
-          value: nomin.id
-        }
-        this.nominationRu.push(nominationRu);
-        this.nominationEn.push(nominationEn);
-      })
-    },
+		getState: async function() {
+			const url = "/states";
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseStateArray(data.data);
+			} catch (e) {
+				console.error("ERROR ResultVoting/getNomination:", e);
+			}
+		},
 
-    getState: async function() {
-      const url = "/states";
-      try {
-          const data = await restHelper.getEntity(url, true);
-          this.parseStateArray(data.data);
-      } catch(e) {
-          console.error("ERROR ResultVoting/getNomination:", e);
-      }
-    },
-
-    parseStateArray: function (data) {
-      this.statesRu = [];
-      this.statesEn = [];
-      this.statesRu.push({
-          text: "ВСЕ РЕГИОНЫ",
-          value: 0})
-      this.statesEn.push({
-          text: "ALL REGIONS",
-          value: 0})
-      data.forEach(states => {
-        let statesRu = {
-          text: states.value_ru,
-          value: states.id
-        };
-        let statesEn= {
-          text: states.value_en,
-          value: states.id
-        }
-        this.statesRu.push(statesRu);
-        this.statesEn.push(statesEn);
-      })
-    },
-  }
+		parseStateArray: function(data) {
+			this.statesRu = [];
+			this.statesEn = [];
+			this.statesRu.push({
+				text: "ВСЕ РЕГИОНЫ",
+				value: 0
+			});
+			this.statesEn.push({
+				text: "ALL REGIONS",
+				value: 0
+			});
+			data.forEach(states => {
+				let statesRu = {
+					text: states.value_ru,
+					value: states.id
+				};
+				let statesEn = {
+					text: states.value_en,
+					value: states.id
+				};
+				this.statesRu.push(statesRu);
+				this.statesEn.push(statesEn);
+			});
+		}
+	}
 };
 </script>
 
@@ -270,5 +285,4 @@ export default {
         width: 100%
         height: 100%
         object-fit: cover
-
 </style>

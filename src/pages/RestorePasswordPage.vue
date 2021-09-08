@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <restore-password-block />
-  </div>
+	<div>
+		<restore-password-block />
+	</div>
 </template>
 
 <script>
 import RestorePasswordBlock from "../components/AuthModule/RestorePasswordBlock";
 export default {
-  name: "RestorePasswordPage",
+	name: "RestorePasswordPage",
 
-  components: {
-    RestorePasswordBlock
-  },
+	components: {
+		RestorePasswordBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

@@ -128,223 +128,216 @@ import config from "../../../constants/config";
 const restHelper = new RestHelper();
 
 export default {
-    name: "WinnersBlock",
+	name: "WinnersBlock",
 
-    data() {
-        return {
-            URL_AVATARS: config.URL_AVATARS,
-            
-            arrWinners_ru: [],
-            arrWinners_en: [],
+	data() {
+		return {
+			URL_AVATARS: config.URL_AVATARS,
 
-            arrWinners2_ru: [],
-            arrWinners2_en: [],
+			arrWinners_ru: [],
+			arrWinners_en: [],
 
-            arrWinnersFinal_ru: [],
-            arrWinnersFinal_en: [],
+			arrWinners2_ru: [],
+			arrWinners2_en: [],
 
-            winnersSt2: '',
-        }   
-    },
+			arrWinnersFinal_ru: [],
+			arrWinnersFinal_en: [],
 
-    computed: {
-        arrWinnersSt2: function() {
-            if (this.$t('lang') == "ru") {
-                return this.arrWinners_ru
-            } else {
-                return this.arrWinners_en
-            }
-        },
-        arrWinnersSt3: function() {
-            if (this.$t('lang') == "ru") {
-                return this.arrWinners2_ru
-            } else {
-                return this.arrWinners2_en
-            }
-        },
-        arrWinnersFinal: function() {
-            if (this.$t('lang') == "ru") {
-                console.log(this.arrWinnersFinal_ru)
-                return this.arrWinnersFinal_ru
-            } else {
-                return this.arrWinnersFinal_en
-            }
-        } 
+			winnersSt2: ""
+		};
+	},
 
-    },
+	computed: {
+		arrWinnersSt2: function() {
+			if (this.$t("lang") == "ru") {
+				return this.arrWinners_ru;
+			} else {
+				return this.arrWinners_en;
+			}
+		},
+		arrWinnersSt3: function() {
+			if (this.$t("lang") == "ru") {
+				return this.arrWinners2_ru;
+			} else {
+				return this.arrWinners2_en;
+			}
+		},
+		arrWinnersFinal: function() {
+			if (this.$t("lang") == "ru") {
+				console.log(this.arrWinnersFinal_ru);
+				return this.arrWinnersFinal_ru;
+			} else {
+				return this.arrWinnersFinal_en;
+			}
+		}
+	},
 
-    created() {
-        this.getUsers()
-        this.getUsers2()
-    },
+	created() {
+		this.getUsers();
+		this.getUsers2();
+	},
 
-    methods: {
-        getUsers: async function() {
-            const url = "/nomination-order/step2"
-            try {
-                const dataUser = await restHelper.getEntity(url, true);
-                // console.log("winner",dataUser.data.rows)
-                if (dataUser.data.rows.length == 0) {
-                    return false
-                } else {
-                    this.setUsersArray(dataUser.data.rows);
-                }
-            } catch(e) {
-                console.error("ERROR WinnerBlock/getUser:", e);
-            }
-        },
-        getUsers2: async function() {
-            const url = "/nomination-order/step3"
-            try {
-                const dataUser = await restHelper.getEntity(url, true);
-                // console.log("winner",dataUser.data.rows)
-                if (dataUser.data.rows.length == 0) {
-                    return false
-                } else {
-                    this.setUsersArray2(dataUser.data.rows);
-                }
-            } catch(e) {
-                console.error("ERROR WinnerBlock/getUser:", e);
-            }
-        },
+	methods: {
+		getUsers: async function() {
+			const url = "/nomination-order/step2";
+			try {
+				const dataUser = await restHelper.getEntity(url, true);
+				// console.log("winner",dataUser.data.rows)
+				if (dataUser.data.rows.length == 0) {
+					return false;
+				} else {
+					this.setUsersArray(dataUser.data.rows);
+				}
+			} catch (e) {
+				console.error("ERROR WinnerBlock/getUser:", e);
+			}
+		},
+		getUsers2: async function() {
+			const url = "/nomination-order/step3";
+			try {
+				const dataUser = await restHelper.getEntity(url, true);
+				// console.log("winner",dataUser.data.rows)
+				if (dataUser.data.rows.length == 0) {
+					return false;
+				} else {
+					this.setUsersArray2(dataUser.data.rows);
+				}
+			} catch (e) {
+				console.error("ERROR WinnerBlock/getUser:", e);
+			}
+		},
 
-        setUsersArray: function(data) {
-            this.arrWinners_ru = []
-            this.arrWinners_en = []
-            const winners = data.filter(winner => winner.step2 === true)
-            // console.log(winners)
-            winners.forEach(item => {
-                    this.arrWinners_ru.push({
-                        imgWinner: item.user.img || "null.png",
-                        name: item.user.firstnameRu + " " + item.user.lastnameRu,
-                        nomination: item.nomination.valueRu,
-                        nominationId: item.nomination.id,
-                        region: item.user.state.value_ru
-                    })
-                    this.arrWinners_en.push({
-                        imgWinner: item.user.img || "null.png",
-                        name: item.user.firstnameEn + " " + item.user.lastnameEn,
-                        nomination: item.nomination.valueEn,
-                        nominationId: item.nomination.id,
-                        region: item.user.state.value_en
-                    })
-                }
-            )
-            // console.log(this.arrWinners_en)
-        },
+		setUsersArray: function(data) {
+			this.arrWinners_ru = [];
+			this.arrWinners_en = [];
+			const winners = data.filter(winner => winner.step2 === true);
+			// console.log(winners)
+			winners.forEach(item => {
+				this.arrWinners_ru.push({
+					imgWinner: item.user.img || "null.png",
+					name: item.user.firstnameRu + " " + item.user.lastnameRu,
+					nomination: item.nomination.valueRu,
+					nominationId: item.nomination.id,
+					region: item.user.state.value_ru
+				});
+				this.arrWinners_en.push({
+					imgWinner: item.user.img || "null.png",
+					name: item.user.firstnameEn + " " + item.user.lastnameEn,
+					nomination: item.nomination.valueEn,
+					nominationId: item.nomination.id,
+					region: item.user.state.value_en
+				});
+			});
+			// console.log(this.arrWinners_en)
+		},
 
-        setUsersArray2: function(data) {
-            this.arrWinners2_ru = []
-            this.arrWinners2_en = []
-            const winners = data.filter(winner => winner.step3 === true)
-            // console.log(winners)
-            winners.forEach(item => {
-                    this.arrWinners2_ru.push({
-                        id: item.userId,
-                        imgWinner: item.user.img || "null.png",
-                        name: item.user.firstnameRu + " " + item.user.lastnameRu,
-                        nomination: item.nomination.valueRu,
-                        nominationId: item.nomination.id,
-                        region: item.user.state.value_ru
-                    })
-                    this.arrWinners2_en.push({
-                        id: item.userId,
-                        imgWinner: item.user.img || "null.png",
-                        name: item.user.firstnameEn + " " + item.user.lastnameEn,
-                        nomination: item.nomination.valueEn,
-                        nominationId: item.nomination.id,
-                        region: item.user.state.value_en
-                    })
-                }
-            )
-            this.setUsersFinal()
-            // console.log("step3",this.arrWinners2_en)
-        },
+		setUsersArray2: function(data) {
+			this.arrWinners2_ru = [];
+			this.arrWinners2_en = [];
+			const winners = data.filter(winner => winner.step3 === true);
+			// console.log(winners)
+			winners.forEach(item => {
+				this.arrWinners2_ru.push({
+					id: item.userId,
+					imgWinner: item.user.img || "null.png",
+					name: item.user.firstnameRu + " " + item.user.lastnameRu,
+					nomination: item.nomination.valueRu,
+					nominationId: item.nomination.id,
+					region: item.user.state.value_ru
+				});
+				this.arrWinners2_en.push({
+					id: item.userId,
+					imgWinner: item.user.img || "null.png",
+					name: item.user.firstnameEn + " " + item.user.lastnameEn,
+					nomination: item.nomination.valueEn,
+					nominationId: item.nomination.id,
+					region: item.user.state.value_en
+				});
+			});
+			this.setUsersFinal();
+			// console.log("step3",this.arrWinners2_en)
+		},
 
-        setUsersFinal: function() {
-            this.arrWinnersFinal_ru = []
-            this.arrWinnersFinal_en = []
-            
-            this.arrWinners2_ru.forEach(item => {
-                if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
-                    this.arrWinnersFinal_ru.push(item)
-                }
-            })
-            this.arrWinners2_en.forEach(item => {
-                if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
-                    this.arrWinnersFinal_en.push(item)
-                }
-            })
-            
-        }
-    }
+		setUsersFinal: function() {
+			this.arrWinnersFinal_ru = [];
+			this.arrWinnersFinal_en = [];
 
+			this.arrWinners2_ru.forEach(item => {
+				if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
+					this.arrWinnersFinal_ru.push(item);
+				}
+			});
+			this.arrWinners2_en.forEach(item => {
+				if (item.id == 4893 || item.id == 4710 || item.id == 5235) {
+					this.arrWinnersFinal_en.push(item);
+				}
+			});
+		}
+	}
 };
-
 </script>
 
 <style lang="scss" scoped>
-@import './src/assets/styles/index.scss';
-
+@import "./src/assets/styles/index.scss";
 
 .row-nomination {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    &_final {
-        flex-direction: row;
-    }
+	&_final {
+		flex-direction: row;
+	}
 
-    .finalistTitle {
-        max-width: 300px;
-        text-align: center;
-    }
+	.finalistTitle {
+		max-width: 300px;
+		text-align: center;
+	}
 }
 
 .containerWinner {
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 70px;
-    margin-bottom: 50px;
-
+	max-width: 1400px;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 70px;
+	margin-bottom: 50px;
 }
 .boxWinner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-
-    &__imgWinner {
-        height: 150px;
-        width: 150px;
-        object-fit: cover;
-        border-radius: 100%;
-        margin-bottom: 20px;
-        &__2 {
-            object-position: center -20px;
-        }
-        &__6,&__12,&__13 {
-            object-position: center -10px;
-        }
-    }
-    &__yearWinner {
-        font-size: 18px;
-        margin-bottom: 4px;
-        color: $primaryColor;
-        font-weight: bold;
-    }
-    &__nameWinner {
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        text-align: center;
-    }
-    &__positionWinner {
-        font-size: 14px;
-        text-align: center;
-        max-width: 230px;
-        font-style: italic;
-    }
+	&__imgWinner {
+		height: 150px;
+		width: 150px;
+		object-fit: cover;
+		border-radius: 100%;
+		margin-bottom: 20px;
+		&__2 {
+			object-position: center -20px;
+		}
+		&__6,
+		&__12,
+		&__13 {
+			object-position: center -10px;
+		}
+	}
+	&__yearWinner {
+		font-size: 18px;
+		margin-bottom: 4px;
+		color: $primaryColor;
+		font-weight: bold;
+	}
+	&__nameWinner {
+		font-size: 20px;
+		font-weight: 500;
+		margin-bottom: 8px;
+		text-align: center;
+	}
+	&__positionWinner {
+		font-size: 14px;
+		text-align: center;
+		max-width: 230px;
+		font-style: italic;
+	}
 }
 </style>

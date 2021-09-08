@@ -10,11 +10,11 @@ export default {
 				{
 					text: "Номер",
 					value: "id",
-					align: "start",
+					align: "start"
 				},
 				{ text: "Город (Русский)", value: "value_ru" },
 				{ text: "Город (Англйиский)", value: "value_en" },
-				{ text: "Модификация", value: "modify", align: "end", sortable: false}
+				{ text: "Модификация", value: "modify", align: "end", sortable: false }
 			],
 			search_text: ""
 		};
@@ -23,7 +23,6 @@ export default {
 		this.getData();
 	},
 	methods: {
-
 		createField: function() {
 			this.$emit("handleModal", null, "cities");
 		},
@@ -110,7 +109,6 @@ export default {
 							v-icon mdi-pencil
 
 </template>
-
 
 <style lang="sass" scoped>
 .ContentTable

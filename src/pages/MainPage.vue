@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <start-voting />
-    <!--    <info-block />-->
-    <!--&lt;!&ndash;    {text: 'Финал', value: 'final_voting'},                     &ndash;&gt;-->
-    <!--    <winner-block voting_id="4"/>-->
-    <!--&lt;!&ndash;    {text: 'Полуфинал', value: 'semifinal_voting'},             &ndash;&gt;-->
-    <!--    <winners-all-block voting_id="5"/>-->
-    <!--&lt;!&ndash;    {text: 'Осень "звезда"', value: 'autumn_committee_voting'}, &ndash;&gt;-->
-    <!--    <winners-all-block voting_id="6"/>-->
-    <!--&lt;!&ndash;    {text: 'Осень "народное"', value: 'autumn_users_voting'},   &ndash;&gt;-->
-    <!--    <winners-all-block voting_id="3"/>-->
-    <!--&lt;!&ndash;    {text: 'Весна "звезда"', value: 'spring_committee_voting'}, &ndash;&gt;-->
-    <!--    <winners-all-block voting_id="2"/>-->
-    <!--&lt;!&ndash;    {text: 'Весная "народное"', value: 'spring_users_voting'},  &ndash;&gt;-->
-    <!--    <winners-all-block voting_id="1"/>-->
-  </div>
+	<div>
+		<start-voting />
+		<!--    <info-block />-->
+		<!--&lt;!&ndash;    {text: 'Финал', value: 'final_voting'},                     &ndash;&gt;-->
+		<!--    <winner-block voting_id="4"/>-->
+		<!--&lt;!&ndash;    {text: 'Полуфинал', value: 'semifinal_voting'},             &ndash;&gt;-->
+		<!--    <winners-all-block voting_id="5"/>-->
+		<!--&lt;!&ndash;    {text: 'Осень "звезда"', value: 'autumn_committee_voting'}, &ndash;&gt;-->
+		<!--    <winners-all-block voting_id="6"/>-->
+		<!--&lt;!&ndash;    {text: 'Осень "народное"', value: 'autumn_users_voting'},   &ndash;&gt;-->
+		<!--    <winners-all-block voting_id="3"/>-->
+		<!--&lt;!&ndash;    {text: 'Весна "звезда"', value: 'spring_committee_voting'}, &ndash;&gt;-->
+		<!--    <winners-all-block voting_id="2"/>-->
+		<!--&lt;!&ndash;    {text: 'Весная "народное"', value: 'spring_users_voting'},  &ndash;&gt;-->
+		<!--    <winners-all-block voting_id="1"/>-->
+	</div>
 </template>
 
 <script>
@@ -24,21 +24,21 @@
 import StartVoting from "../components/MainModule/StartVoting";
 
 export default {
-  name: "MainPage",
+	name: "MainPage",
 
-  components: {
-    // InfoBlock,
-    // WinnerBlock,
-    // WinnersAllBlock
-    StartVoting
-  },
+	components: {
+		// InfoBlock,
+		// WinnerBlock,
+		// WinnersAllBlock
+		StartVoting
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/index.scss";
+@import "../assets/styles/index.scss";
 </style>

@@ -10,18 +10,18 @@ Vue.use(VueI18n);
 Vue.config.productionTip = false;
 
 new Vue({
-  vuetify,
-  router,
-  store: mainStore,
-  i18n: {
-    messages: {},
-    sharedMessages: locale,
-    locale: "ru"
-  },
-  created: function() {
-    if (navigator.language.includes("ru")) {
-      this.$i18n.locale = "ru";
-    }
-  },
-  render: h => h(App)
+	vuetify,
+	router,
+	store: mainStore,
+	i18n: {
+		messages: {},
+		sharedMessages: locale,
+		locale: "ru"
+	},
+	created: function() {
+		if (navigator.language.includes("ru")) {
+			this.$i18n.locale = "ru";
+		}
+	},
+	render: h => h(App)
 }).$mount("#app");

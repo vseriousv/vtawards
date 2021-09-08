@@ -1,15 +1,14 @@
 <script>
-	import ApplicationCatalog from "./ApplicationCatalog";
-	// import RestHelper from "../../../helpers/RestHelper";
+import ApplicationCatalog from "./ApplicationCatalog";
+// import RestHelper from "../../../helpers/RestHelper";
 
-
-	// const restHelper = new RestHelper();
+// const restHelper = new RestHelper();
 
 export default {
 	name: "ApplicationAll",
 
 	components: {
-		ApplicationCatalog,
+		ApplicationCatalog
 	},
 
 	data() {
@@ -18,12 +17,11 @@ export default {
 			// dialogTable: "",
 			tab: null,
 			// idField: null,
-            tabs: [{ id: 0, name: "Заявки", value: "orders" },]
+			tabs: [{ id: 0, name: "Заявки", value: "orders" }]
 		};
 	},
 
 	methods: {
-
 		// addFieldTable: async function(table, dataSend) {
 		// 	const urn = "/" + table + "/create";
 		// 	try {
@@ -33,11 +31,9 @@ export default {
 		// 		this.errorStr = "Неправильно заполнены поля";
 		// 	}
 		// },
-
-	},
+	}
 };
 </script>
-
 
 <template lang="pug">
 .containerAdmin

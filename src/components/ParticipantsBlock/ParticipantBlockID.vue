@@ -1,235 +1,253 @@
 <script>
-	import JwtHelper from "../../helpers/JwtHelper";
-	import RestHelper from "../../helpers/RestHelper";
-	import config from "../../constants/config";
-	import axios from "axios";
+import JwtHelper from "../../helpers/JwtHelper";
+import RestHelper from "../../helpers/RestHelper";
+import config from "../../constants/config";
+import axios from "axios";
 
-	const restHelper = new RestHelper();
-	const jwtHelper = new JwtHelper();
+const restHelper = new RestHelper();
+const jwtHelper = new JwtHelper();
 
-	export default {
-		name: "ParticipantBlockID",
+export default {
+	name: "ParticipantBlockID",
 
-		data() {
-			return {
-				user: {},
-				URL_AVATARS: config.URL_AVATARS,
-				itemRating_ru: [
-					{ text: "1 балл", value: 1 },
-					{ text: "2 балла", value: 2 },
-					{ text: "3 балла", value: 3 }
-				],
-				itemRating_en: [
-					{ text: "1 point", value: 1 },
-					{ text: "2 points", value: 2 },
-					{ text: "3 points", value: 3 }
-				],
-				setRating: 0,
-				isCommittee: false,
+	data() {
+		return {
+			user: {},
+			URL_AVATARS: config.URL_AVATARS,
+			itemRating_ru: [
+				{ text: "1 балл", value: 1 },
+				{ text: "2 балла", value: 2 },
+				{ text: "3 балла", value: 3 }
+			],
+			itemRating_en: [
+				{ text: "1 point", value: 1 },
+				{ text: "2 points", value: 2 },
+				{ text: "3 points", value: 3 }
+			],
+			setRating: 0,
+			isCommittee: false,
 
-				votes: [],
-				errorVote: '',
-				userFrom: {},
-				comments: [],
-				commentText: '',
-				my: jwtHelper.jwtParse().id,
-				isAdmin: jwtHelper.isAdmin(),
-				isCommission: jwtHelper.isCommittee(),
-				isFinal: jwtHelper.isFinal(),
-				isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
-			};
+			votes: [],
+			errorVote: "",
+			userFrom: {},
+			comments: [],
+			commentText: "",
+			my: jwtHelper.jwtParse().id,
+			isAdmin: jwtHelper.isAdmin(),
+			isCommission: jwtHelper.isCommittee(),
+			isFinal: jwtHelper.isFinal(),
+			isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
+		};
+	},
+
+	created() {
+		// this.getActiveVoting();
+		this.getUser();
+		this.getComments();
+		this.checkCommittee();
+	},
+
+	methods: {
+		checkCommittee: function() {
+			const jwtHeader = new JwtHelper();
+			this.isCommittee = jwtHeader.isCommittee();
 		},
 
-		created() {
-			// this.getActiveVoting();
-			this.getUser();
-			this.getComments();
-			this.checkCommittee();
-		},
-
-		methods: {
-			checkCommittee: function() {
-				const jwtHeader = new JwtHelper();
-				this.isCommittee = jwtHeader.isCommittee();
-			},
-
-			getUser: function() {
-				const url = config.API_URL + "/nomination-order/" + this.$route.params.id;
-				axios
-					.get(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => {
-						console.log(result.data)
-						this.parseUserData(result.data);
-					})
-					.catch(e => console.error("participants-error:", e));
-			},
-
-			parseUserData: function(data) {
-				this.user = {
-					img: data.user.img || "null.png",
-					name_ru:
-						data.user.lastnameRu + " " + data.user.firstnameRu + " " + data.user.patronymicRu,
-					name_en: data.user.firstnameEn + " " + data.user.lastnameEn,
-					position_ru: data.user.positionName ? data.user.positionName : "",
-					position_en: data.user.positionNameEng ? data.user.positionNameEng : "",
-					section_ru: data.user.sectionName ? data.user.sectionName : "",
-					section_en: data.user.sectionNameEng ? data.user.sectionNameEng : "",
-					state_ru: data.user.state ? data.user.state.value_ru : "",
-					state_en: data.user.state ? data.user.state.value_en : "",
-					city_ru: data.user.cityName ? data.user.cityName : "",
-					city_en: data.user.cityNameEng ? data.user.cityNameEng : "",
-					nomination_ru: data.nomination ? data.nomination.valueRu : "",
-					nomination_en: data.nomination ? data.nomination.valueEn : "",
-					state_id: data.user.state_id,
-					argumentationRu: data.textRu ? data.textRu : "---",
-					argumentationEn: data.textEn ? data.textEn : "---",
-					votes: data.votes,
-					errorVote: data.errorVotes,
-				};
-				this.errorVotes(this.user.errorVote)
-				this.votes = data.votes
-			},
-
-			getComments: async function() {
-				const urn = `/comments/nomination-order/${this.$route.params.id}/public`;
-				try {
-					const comments = await restHelper.getEntity(urn, true);
-					// console.log("comments", comments.data.rows);
-					this.parseComments(comments.data.rows);
-				} catch (e) {
-					console.error(e);
-				}
-			},
-			parseComments(data) {
-				this.comments = [];
-				data.forEach(item => {
-					const newObject = {
-						id: item.id,
-						name_ru: '',
-						name_en: '',
-						isMy: item.userFromId === jwtHelper.jwtParse().id || false,
-						userFromId: item.userFromId,
-						comment: item.comment || ''
-					}
-					this.comments.push(newObject);
-					this.getUserFrom(item.userFromId, newObject.id)
-					// console.log(this.comments)
-				});
-			},
-
-			getUserFrom: async function(data, id) {
-				const urn = `/users/` + data;
-				try {
-					const userFrom = await restHelper.getEntity(urn, true);
-					// console.log("userFrom", userFrom.data);
-					this.parseUserFrom(userFrom.data, id);
-				} catch (e) {
-					console.error(e);
-				}
-			},
-			parseUserFrom: function(data, id) {
-				this.comments.forEach(item => {
-					if (item.id == id) {
-						item.name_ru = data.lastnameRu + " " +
-							data.firstnameRu + " " +
-							data.patronymicRu || ''
-						item.name_en = data.firstnameEn + " " + data.lastnameEn || ''
-					}
+		getUser: function() {
+			const url = config.API_URL + "/nomination-order/" + this.$route.params.id;
+			axios
+				.get(url, {
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
 				})
+				.then(result => {
+					console.log(result.data);
+					this.parseUserData(result.data);
+				})
+				.catch(e => console.error("participants-error:", e));
+		},
+
+		parseUserData: function(data) {
+			this.user = {
+				img: data.user.img || "null.png",
+				name_ru:
+					data.user.lastnameRu +
+					" " +
+					data.user.firstnameRu +
+					" " +
+					data.user.patronymicRu,
+				name_en: data.user.firstnameEn + " " + data.user.lastnameEn,
+				position_ru: data.user.positionName ? data.user.positionName : "",
+				position_en: data.user.positionNameEng ? data.user.positionNameEng : "",
+				section_ru: data.user.sectionName ? data.user.sectionName : "",
+				section_en: data.user.sectionNameEng ? data.user.sectionNameEng : "",
+				state_ru: data.user.state ? data.user.state.value_ru : "",
+				state_en: data.user.state ? data.user.state.value_en : "",
+				city_ru: data.user.cityName ? data.user.cityName : "",
+				city_en: data.user.cityNameEng ? data.user.cityNameEng : "",
+				nomination_ru: data.nomination ? data.nomination.valueRu : "",
+				nomination_en: data.nomination ? data.nomination.valueEn : "",
+				state_id: data.user.state_id,
+				argumentationRu: data.textRu ? data.textRu : "---",
+				argumentationEn: data.textEn ? data.textEn : "---",
+				votes: data.votes,
+				errorVote: data.errorVotes
+			};
+			this.errorVotes(this.user.errorVote);
+			this.votes = data.votes;
+		},
+
+		getComments: async function() {
+			const urn = `/comments/nomination-order/${this.$route.params.id}/public`;
+			try {
+				const comments = await restHelper.getEntity(urn, true);
+				// console.log("comments", comments.data.rows);
+				this.parseComments(comments.data.rows);
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		parseComments(data) {
+			this.comments = [];
+			data.forEach(item => {
+				const newObject = {
+					id: item.id,
+					name_ru: "",
+					name_en: "",
+					isMy: item.userFromId === jwtHelper.jwtParse().id || false,
+					userFromId: item.userFromId,
+					comment: item.comment || ""
+				};
+				this.comments.push(newObject);
+				this.getUserFrom(item.userFromId, newObject.id);
 				// console.log(this.comments)
-			},
+			});
+		},
 
-			async publicComment(){
-				const urn = '/comments';
-				const dataSend = {
-					userFromId: +jwtHelper.jwtParse().id,
-					nominationOrderId: +this.$route.params.id,
-					comment: this.commentText
+		getUserFrom: async function(data, id) {
+			const urn = `/users/` + data;
+			try {
+				const userFrom = await restHelper.getEntity(urn, true);
+				// console.log("userFrom", userFrom.data);
+				this.parseUserFrom(userFrom.data, id);
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		parseUserFrom: function(data, id) {
+			this.comments.forEach(item => {
+				if (item.id == id) {
+					item.name_ru =
+						data.lastnameRu +
+							" " +
+							data.firstnameRu +
+							" " +
+							data.patronymicRu || "";
+					item.name_en = data.firstnameEn + " " + data.lastnameEn || "";
 				}
-				// console.log(dataSend, urn);
-				try {
-					await restHelper.postEntity(urn, dataSend, true);
-					await this.getComments();
-					this.commentText = '';
-					if (this.$t('lang') === 'ru') {
-						alert("Комментарий успешно создан. Он будет опубликован после модерации администратором.")
-					}
-					if (this.$t('lang') === 'en') {
-						alert("The comment was successfully created. It will be published after admin moderation.")
-					}
-				} catch (e) {
-					console.error(e);
-				}
-			},
+			});
+			// console.log(this.comments)
+		},
 
-			async deleteComment(id) {
-				const urn = '/comments/' + id;
+		async publicComment() {
+			const urn = "/comments";
+			const dataSend = {
+				userFromId: +jwtHelper.jwtParse().id,
+				nominationOrderId: +this.$route.params.id,
+				comment: this.commentText
+			};
+			// console.log(dataSend, urn);
+			try {
+				await restHelper.postEntity(urn, dataSend, true);
+				await this.getComments();
+				this.commentText = "";
+				if (this.$t("lang") === "ru") {
+					alert(
+						"Комментарий успешно создан. Он будет опубликован после модерации администратором."
+					);
+				}
+				if (this.$t("lang") === "en") {
+					alert(
+						"The comment was successfully created. It will be published after admin moderation."
+					);
+				}
+			} catch (e) {
+				console.error(e);
+			}
+		},
+
+		async deleteComment(id) {
+			const urn = "/comments/" + id;
+			try {
+				await restHelper.deleteEntity(urn, true);
+				await this.getComments();
+				this.commentText = "";
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		errorVotes: function(error) {
+			switch (error) {
+				case "only-my-region":
+					this.errorVote = `${this.$t("participantID.only_my_region")}`;
+					break;
+				case "is-have":
+					this.errorVote = `${this.$t("participantID.is_have")}`;
+					break;
+				case "no-self":
+					this.errorVote = `${this.$t("participantID.no_self")}`;
+					break;
+			}
+		},
+		postVote: async function(point) {
+			if (this.$t("lang") === "ru") {
+				const promt = confirm(
+					"Вы уверены что хотите отдать свой голос за" +
+						" " +
+						this.user.name_ru +
+						"?"
+				);
+				if (!promt) return;
+			}
+			if (this.$t("lang") === "en") {
+				const promt = confirm(
+					"Are you sure you want to vote for" + " " + this.user.name_en + "?"
+				);
+				if (!promt) return;
+			}
+			console.log(point);
+			const urn = "/user-voting/";
+			const data = {
+				nominationOrderId: this.$route.params.id,
+				range: point,
+				type: "final"
+			};
+			if (this.isAdmin || this.isFinal) {
 				try {
-					await restHelper.deleteEntity(urn,true);
-					await this.getComments();
-					this.commentText = '';
-				} catch (e) {
-					console.error(e);
-				}
-			},
-			errorVotes: function(error) {
-				switch (error) {
-					case "only-my-region":
-						this.errorVote = `${this.$t("participantID.only_my_region")}`
-						break
-					case "is-have":
-						this.errorVote = `${this.$t("participantID.is_have")}`
-						break
-					case "no-self":
-						this.errorVote = `${this.$t("participantID.no_self")}`
-						break
-				}
-			},
-			postVote: async function(point) {
-				if (this.$t('lang') === 'ru') {
-					const promt = confirm("Вы уверены что хотите отдать свой голос за" + " " + this.user.name_ru + "?")
-					if (!promt) return
-				}
-				if (this.$t('lang') === 'en') {
-					const promt = confirm("Are you sure you want to vote for" + " " + this.user.name_en + "?")
-					if (!promt) return
-				}
-				console.log(point)
-				const urn = "/user-voting/";
-				const data = {
-					nominationOrderId: this.$route.params.id,
-					range: point,
-					type: "final",
-				}
-				if (this.isAdmin || this.isFinal) {
-					try {
-						await restHelper.postEntity(urn, data, true);
-						if (this.$t('lang') === 'ru') {
-							alert("Ваш голос засчитан")
-						}
-						if (this.$t('lang') === 'en') {
-							alert("Your vote has been counted")
-						}
-						this.getUser()
-					} catch (e) {
-						console.log("Ошибка отправки голоса:", e);
+					await restHelper.postEntity(urn, data, true);
+					if (this.$t("lang") === "ru") {
+						alert("Ваш голос засчитан");
 					}
-				} else {
-					alert('Вы не можете голосованть в данном голосовании')
+					if (this.$t("lang") === "en") {
+						alert("Your vote has been counted");
+					}
+					this.getUser();
+				} catch (e) {
+					console.log("Ошибка отправки голоса:", e);
 				}
-			},
-			// onlyAdmin: function() {
-			// 	const hoAdmin = jwtHelper.jwtParse().role
-			// 	if (hoAdmin == "admin") {
-			// 		return true
-			// 	} else {
-			// 		return false
-			// 	}
-			// }
+			} else {
+				alert("Вы не можете голосованть в данном голосовании");
+			}
 		}
-	};
+		// onlyAdmin: function() {
+		// 	const hoAdmin = jwtHelper.jwtParse().role
+		// 	if (hoAdmin == "admin") {
+		// 		return true
+		// 	} else {
+		// 		return false
+		// 	}
+		// }
+	}
+};
 </script>
 
 <template lang="pug">
@@ -398,8 +416,6 @@ section.ParticipiantBlockId
 						) {{$t("participantID.send")}}
 
 </template>
-
-
 
 <style lang="sass">
 .UserCard__argumentation

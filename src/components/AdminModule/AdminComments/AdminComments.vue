@@ -47,139 +47,139 @@ import RestHelper from "../../../helpers/RestHelper";
 const restHelper = new RestHelper();
 
 export default {
-    name: "AdminComments",
-    data() {
-        return {
-        URL_AVATARS: config.URL_AVATARS,
+	name: "AdminComments",
+	data() {
+		return {
+			URL_AVATARS: config.URL_AVATARS,
 
-        tabs: [{ id: 0, name: "Комментарии", value: "commits" },],
+			tabs: [{ id: 0, name: "Комментарии", value: "commits" }],
 
-        allUser: [],
+			allUser: [],
 
-        commits:[],
+			commits: [],
 
-        headers_user: [
-            { text: "Аватар", sortable: false, value: "" },
-            { text: "ФИО",sortable: true, value: "name_ru" },
-            { text: "Цель комментария", sortable: true, value: "toNameRu" },
-            { text: "Комментарий", sortable: false, value: "" },
-            { text: "Статус", sortable: false, value: "" },
-        ],
-        search_user: "",
-        };
-    },
+			headers_user: [
+				{ text: "Аватар", sortable: false, value: "" },
+				{ text: "ФИО", sortable: true, value: "name_ru" },
+				{ text: "Цель комментария", sortable: true, value: "toNameRu" },
+				{ text: "Комментарий", sortable: false, value: "" },
+				{ text: "Статус", sortable: false, value: "" }
+			],
+			search_user: ""
+		};
+	},
 
-    async created() {
-        await this.getAllUser();
-        await this.getCommits();
-        await this.getUserPublic();
-    },
+	async created() {
+		await this.getAllUser();
+		await this.getCommits();
+		await this.getUserPublic();
+	},
 
-    methods: {
-        getCommits: async function() {
-            const url = "/comments";
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseCommitsArray(data.data.rows);
-                // console.log(data.data.rows)
-            } catch(e) {
-                console.error("ERROR ParticipantsBlock/getNomination:", e);
-            }
-        },
+	methods: {
+		getCommits: async function() {
+			const url = "/comments";
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseCommitsArray(data.data.rows);
+				// console.log(data.data.rows)
+			} catch (e) {
+				console.error("ERROR ParticipantsBlock/getNomination:", e);
+			}
+		},
 
-        getUserPublic: async function() {
-            const url = "/nomination-order/public?filter={}";
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseUserArray(data.data.rows);
-                console.log(data.data.rows)
-            } catch(e) {
-                console.error("ERROR ParticipantsBlock/getParticipants:", e);
-            }
-        },
+		getUserPublic: async function() {
+			const url = "/nomination-order/public?filter={}";
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseUserArray(data.data.rows);
+				console.log(data.data.rows);
+			} catch (e) {
+				console.error("ERROR ParticipantsBlock/getParticipants:", e);
+			}
+		},
 
-        getAllUser: async function() {
-            const url = "/users";
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseAllUser(data.data);
-                // console.log(data.data)
-            } catch(e) {
-                console.error("ERROR ParticipantsBlock/getAllUser:", e);
-            }
-        },
+		getAllUser: async function() {
+			const url = "/users";
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseAllUser(data.data);
+				// console.log(data.data)
+			} catch (e) {
+				console.error("ERROR ParticipantsBlock/getAllUser:", e);
+			}
+		},
 
-        showComments: function(id) {
-            this.$router.push({ path: "/admin/comment/id/" + id });
-        },
+		showComments: function(id) {
+			this.$router.push({ path: "/admin/comment/id/" + id });
+		},
 
-        parseCommitsArray: async function(data) {
-            this.commits= []
-            for (let i = 0; i < data.length; i++) {
-                const commitObject = {
-                    id: data[i].id,
-                    idTo: data[i].nominationOrderId,
-                    idFrom: data[i].userFromId,
-                    toNameRu: '',
-                    toNameEn: '',
-                    comment: data[i].comment,
-                    img: '',
-                    name_ru: '',
-                    name_en: '',
-                    public: data[i].public,
-                };
-                this.addDataFromUser(commitObject)
-                this.commits.push(commitObject);
-            }
-        },
+		parseCommitsArray: async function(data) {
+			this.commits = [];
+			for (let i = 0; i < data.length; i++) {
+				const commitObject = {
+					id: data[i].id,
+					idTo: data[i].nominationOrderId,
+					idFrom: data[i].userFromId,
+					toNameRu: "",
+					toNameEn: "",
+					comment: data[i].comment,
+					img: "",
+					name_ru: "",
+					name_en: "",
+					public: data[i].public
+				};
+				this.addDataFromUser(commitObject);
+				this.commits.push(commitObject);
+			}
+		},
 
-        parseUserArray: function (data) {
-            data.forEach(item => {
-                let nameUserTo = {
-                    id: item.id,
-                    nameRu: item.user.firstnameRu + " " + item.user.lastnameRu,
-                    nameEn: item.user.firstnameEn + " " + item.user.lastnameEn,
-                };
-                this.UserNameTo(nameUserTo);
-            })
-        },
+		parseUserArray: function(data) {
+			data.forEach(item => {
+				let nameUserTo = {
+					id: item.id,
+					nameRu: item.user.firstnameRu + " " + item.user.lastnameRu,
+					nameEn: item.user.firstnameEn + " " + item.user.lastnameEn
+				};
+				this.UserNameTo(nameUserTo);
+			});
+		},
 
-        UserNameTo: function(data) {
-            this.commits.forEach(item => {
-                if (item.idTo === data.id) {
-                    item.toNameRu = data.nameRu
-                    item.toNameEn = data.nameEn
-                }
-                // console.log(this.commits)
-            })
-        },
+		UserNameTo: function(data) {
+			this.commits.forEach(item => {
+				if (item.idTo === data.id) {
+					item.toNameRu = data.nameRu;
+					item.toNameEn = data.nameEn;
+				}
+				// console.log(this.commits)
+			});
+		},
 
-        parseAllUser: function(data){
-            this.allUser = []
-            data.forEach(item => {
-                let dataUser = {
-                    id: item.id,
-                    img: item.img || 'null.png',
-                    name_ru: item.firstnameRu + " " + item.lastnameRu,
-                    name_en: item.firstnameEn + " " + item.lastnameEn,
-                }
-                this.allUser.push(dataUser)
-            })
-            // console.log(this.allUser)
-        },
+		parseAllUser: function(data) {
+			this.allUser = [];
+			data.forEach(item => {
+				let dataUser = {
+					id: item.id,
+					img: item.img || "null.png",
+					name_ru: item.firstnameRu + " " + item.lastnameRu,
+					name_en: item.firstnameEn + " " + item.lastnameEn
+				};
+				this.allUser.push(dataUser);
+			});
+			// console.log(this.allUser)
+		},
 
-        addDataFromUser: function(data) {
-            this.allUser.forEach(item => {
-                if (item.id === data.idFrom) {
-                    data.img = item.img || "null.png"
-                    data.name_ru = item.name_ru
-                    data.name_en = item.name_en
-                }
-                // console.log(data)
-            })
-        }
-    }
-}
+		addDataFromUser: function(data) {
+			this.allUser.forEach(item => {
+				if (item.id === data.idFrom) {
+					data.img = item.img || "null.png";
+					data.name_ru = item.name_ru;
+					data.name_en = item.name_en;
+				}
+				// console.log(data)
+			});
+		}
+	}
+};
 </script>
 
 <style lang="sass" scoped>

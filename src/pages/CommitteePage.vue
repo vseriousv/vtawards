@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <committee-block />
-  </div>
+	<div>
+		<committee-block />
+	</div>
 </template>
 
 <script>
 import CommitteeBlock from "../components/CommitteeBlock/CommitteeBlock";
 export default {
-  name: "CommitteePage",
+	name: "CommitteePage",
 
-  components: {
-    CommitteeBlock
-  },
+	components: {
+		CommitteeBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

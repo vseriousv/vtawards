@@ -2,59 +2,58 @@
 import axios from "axios";
 import config from "../../../../constants/config";
 export default {
-  name: "PositionsCatalog",
-  data() {
-    return {
-      itemData: [],
-      headersTable: [
-        {
-          text: "Номер",
-          value: "id",
-          align: "start",
-        },
-        { text: "Должность (Русский)", value: "value_ru" },
-        { text: "Должность (Англйиский)", value: "value_en" },
-        { text: "Модификация", value: "modify", align: "end", sortable: false}
-      ],
-      search_text: ""
-    };
-  },
+	name: "PositionsCatalog",
+	data() {
+		return {
+			itemData: [],
+			headersTable: [
+				{
+					text: "Номер",
+					value: "id",
+					align: "start"
+				},
+				{ text: "Должность (Русский)", value: "value_ru" },
+				{ text: "Должность (Англйиский)", value: "value_en" },
+				{ text: "Модификация", value: "modify", align: "end", sortable: false }
+			],
+			search_text: ""
+		};
+	},
 
-  created() {
-    this.getData();
-  },
+	created() {
+		this.getData();
+	},
 
-  methods: {
-    createField: function() {
-      this.$emit("handleModal", null, "positions");
-    },
-    updateID: function(id) {
-      this.$store.commit("setAdminValueRu", "");
-      this.$store.commit("setAdminValueEn", "");
-      this.$store.commit(
-        "setAdminValueRu",
-        this.itemData.find(item => item.id === id).value_ru
-      );
-      this.$store.commit(
-        "setAdminValueEn",
-        this.itemData.find(item => item.id === id).value_en
-      );
-      this.$emit("handleModal", id, "positions");
-    },
+	methods: {
+		createField: function() {
+			this.$emit("handleModal", null, "positions");
+		},
+		updateID: function(id) {
+			this.$store.commit("setAdminValueRu", "");
+			this.$store.commit("setAdminValueEn", "");
+			this.$store.commit(
+				"setAdminValueRu",
+				this.itemData.find(item => item.id === id).value_ru
+			);
+			this.$store.commit(
+				"setAdminValueEn",
+				this.itemData.find(item => item.id === id).value_en
+			);
+			this.$emit("handleModal", id, "positions");
+		},
 
-    getData: function() {
-      const url = config.API_URL + "/positions";
-      axios
-        .get(url, {
-          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-        })
-        .then(result => (this.itemData = result.data))
-        .catch(e => console.error("positions-error:", e));
-    },
-  }
+		getData: function() {
+			const url = config.API_URL + "/positions";
+			axios
+				.get(url, {
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+				})
+				.then(result => (this.itemData = result.data))
+				.catch(e => console.error("positions-error:", e));
+		}
+	}
 };
 </script>
-
 
 <template lang="pug">
   .ContentTabs
@@ -112,13 +111,12 @@ export default {
 
 </template>
 
-
 <style lang="sass" scoped>
-  .ContentTable
-    &__table
-      width: 100%
-      height: 100%
+.ContentTable
+  &__table
+    width: 100%
+    height: 100%
 
-  .manageBTN
-    margin: 0 10px
+.manageBTN
+  margin: 0 10px
 </style>

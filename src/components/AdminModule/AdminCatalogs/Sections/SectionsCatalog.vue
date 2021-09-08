@@ -11,11 +11,11 @@ export default {
 				{
 					text: "Номер",
 					value: "id",
-					align: "start",
+					align: "start"
 				},
 				{ text: "Отдел (Русский)", value: "value_ru" },
 				{ text: "Отдел (Англйиский)", value: "value_en" },
-				{ text: "Модификация", value: "modify", align: "end", sortable: false}
+				{ text: "Модификация", value: "modify", align: "end", sortable: false }
 			],
 			search_text: ""
 		};
@@ -52,11 +52,10 @@ export default {
 				})
 				.then(result => (this.itemData = result.data))
 				.catch(e => console.error("sections-error:", e));
-		},
+		}
 	}
 };
 </script>
-
 
 <template lang="pug">
 .ContentTabs
@@ -114,7 +113,6 @@ export default {
 
 </template>
 
-
 <style lang="sass" scoped>
 .ContentTable
 	&__table
@@ -124,4 +122,3 @@ export default {
 .manageBTN
 	margin: 0 10px
 </style>
-

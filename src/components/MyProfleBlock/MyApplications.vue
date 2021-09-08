@@ -42,101 +42,100 @@ const restHelper = new RestHelper();
 const jwtHelper = new JwtHelper();
 
 export default {
-    name: "MyApplications",
+	name: "MyApplications",
 
-    data() {
-        return {
-            myId: jwtHelper.jwtParse().id,
-            URL_AVATARS: config.URL_AVATARS,
-            
-            headersUserRu: [
-                { text: "Аватар", sortable: false, value: "" },
-                { text: "",sortable: false, value: "" },
-                { text: "Номинант", sortable: false, value: "" },
-                { text: "ФИО", sortable: true, value: "nameRuTo" },
-                { text: "Номинация", sortable: false, value: "" },
-            ],
+	data() {
+		return {
+			myId: jwtHelper.jwtParse().id,
+			URL_AVATARS: config.URL_AVATARS,
 
-            headersUserEn: [
-                { text: "Avatar", sortable: false, value: "" },
-                { text: "",sortable: false, value: "" },
-                { text: "Nominee", sortable: false, value: "" },
-                { text: "Full name", sortable: true, value: "nameEnTo" },
-                { text: "Nomination", sortable: false, value: "" },
-            ],
+			headersUserRu: [
+				{ text: "Аватар", sortable: false, value: "" },
+				{ text: "", sortable: false, value: "" },
+				{ text: "Номинант", sortable: false, value: "" },
+				{ text: "ФИО", sortable: true, value: "nameRuTo" },
+				{ text: "Номинация", sortable: false, value: "" }
+			],
 
-            user: {},
+			headersUserEn: [
+				{ text: "Avatar", sortable: false, value: "" },
+				{ text: "", sortable: false, value: "" },
+				{ text: "Nominee", sortable: false, value: "" },
+				{ text: "Full name", sortable: true, value: "nameEnTo" },
+				{ text: "Nomination", sortable: false, value: "" }
+			],
 
-            applications: [],
+			user: {},
 
-            search_user: "",
-        }
-    },
+			applications: [],
 
-    created(){
-        this.getUser()
-        this.getApplication()
-    },
+			search_user: ""
+		};
+	},
 
-    methods: {
-        getUser: async function() {
+	created() {
+		this.getUser();
+		this.getApplication();
+	},
+
+	methods: {
+		getUser: async function() {
 			const url = "/users/" + this.myId;
 			try {
 				const user = await restHelper.getEntity(url, true);
-                this.parseUser(user.data);
-                // console.log(user.data)
-			} catch(e) {
+				this.parseUser(user.data);
+				// console.log(user.data)
+			} catch (e) {
 				console.error("ERROR MyApplications/getUser:", e);
-            }
-        },
+			}
+		},
 
-        parseUser: function(data) {
-            this.user = {
-                img: data.img || "null.png",
-            }
-        },
+		parseUser: function(data) {
+			this.user = {
+				img: data.img || "null.png"
+			};
+		},
 
-        getApplication: async function() {
-            const url = "/nomination-order";
+		getApplication: async function() {
+			const url = "/nomination-order";
 			try {
 				const application = await restHelper.getEntity(url, true);
-                this.parseApplication(application.data.rows);
-                // console.log(application.data.rows)
-			} catch(e) {
+				this.parseApplication(application.data.rows);
+				// console.log(application.data.rows)
+			} catch (e) {
 				console.error("ERROR MyApplications/getApplication:", e);
-            }
-        },
+			}
+		},
 
-        parseApplication: function(data) {
-            data.forEach(item => {
-                if (item.userFrom == this.myId) {
-                    let application = {
-                        id: item.id,
-                        nameRuFrom: item.user.firstnameRu + " " + item.user.lastnameRu,
-                        nameEnFrom: item.user.firstnameEn + " " + item.user.lastnameEn,
-                        public: item.public,
-                        imgTo: item.userOrder.img || "null.png",
-                        nominationRu: item.nomination.valueRu,
-                        nominationEn: item.nomination.valueEn,
-                        nameRuTo: item.userOrder.firstnameRu + " " + item.userOrder.lastnameRu,
-                        nameEnTo: item.userOrder.firstnameEn + " " + item.userOrder.lastnameEn,
-                    }
-                    this.applications.push(application)
-                    // console.log(this.applications)
-                }
-            })
-        },
-        // showParticipant: function(id, isPublic) {
-        //     isPublic? this.showParticipantId(id): alert ("Заявка на участие в конкурсе этого пользователя еще не прошла подтверждения админимтратором.")
-        // },
-        // showParticipantId: function(id){
-        //     this.$router.push({ path: "/nomination-order/id/" + id })
-        // },
-    }   
-
-
-
-}
+		parseApplication: function(data) {
+			data.forEach(item => {
+				if (item.userFrom == this.myId) {
+					let application = {
+						id: item.id,
+						nameRuFrom: item.user.firstnameRu + " " + item.user.lastnameRu,
+						nameEnFrom: item.user.firstnameEn + " " + item.user.lastnameEn,
+						public: item.public,
+						imgTo: item.userOrder.img || "null.png",
+						nominationRu: item.nomination.valueRu,
+						nominationEn: item.nomination.valueEn,
+						nameRuTo:
+							item.userOrder.firstnameRu + " " + item.userOrder.lastnameRu,
+						nameEnTo:
+							item.userOrder.firstnameEn + " " + item.userOrder.lastnameEn
+					};
+					this.applications.push(application);
+					// console.log(this.applications)
+				}
+			});
+		}
+		// showParticipant: function(id, isPublic) {
+		//     isPublic? this.showParticipantId(id): alert ("Заявка на участие в конкурсе этого пользователя еще не прошла подтверждения админимтратором.")
+		// },
+		// showParticipantId: function(id){
+		//     this.$router.push({ path: "/nomination-order/id/" + id })
+		// },
+	}
+};
 </script>
 
 <style lang="sass" scoped>

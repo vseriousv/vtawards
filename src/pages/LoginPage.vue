@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <login-block />
-  </div>
+	<div>
+		<login-block />
+	</div>
 </template>
 
 <script>
 import LoginBlock from "../components/AuthModule/LoginBlock";
 export default {
-  name: "LoginPage",
+	name: "LoginPage",
 
-  components: {
-    LoginBlock
-  },
+	components: {
+		LoginBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

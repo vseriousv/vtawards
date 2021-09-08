@@ -1,22 +1,22 @@
 <template>
-    <my-profle-block />
+	<my-profle-block />
 </template>
 
 <script>
 import MyProfleBlock from "../components/MyProfleBlock/MyProfleBlock";
 export default {
-    name: "MyProflePage",
+	name: "MyProflePage",
 
-    components: {
-        MyProfleBlock
-    },
+	components: {
+		MyProfleBlock
+	},
 
-    data() {
-        return {};
-    }
+	data() {
+		return {};
+	}
 };
 </script>
 
 <style lang="scss" scoped>
-    @import "../assets/styles/index.scss";
+@import "../assets/styles/index.scss";
 </style>

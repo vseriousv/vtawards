@@ -9,7 +9,6 @@ import HeaderBlockLoginPage from "./components/HeaderBlock/HeaderBlockLoginPage"
 import AppHeader from "./components/AppHeader/AppHeader";
 import FooterBlock from "./components/FooterBlock/FooterBlock";
 
-
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -52,7 +51,7 @@ const routes = [
 			header: HeaderBlockLoginPage,
 			body: LoginPage
 		},
-		meta: {guest: true}
+		meta: { guest: true }
 	},
 	{
 		path: "/restore-password",
@@ -61,7 +60,7 @@ const routes = [
 			header: HeaderBlockLoginPage,
 			body: RestorePasswordPage
 		},
-		meta: {guest: true}
+		meta: { guest: true }
 	},
 	{
 		path: "/registration",
@@ -70,7 +69,7 @@ const routes = [
 			header: HeaderBlockLoginPage,
 			body: RegistrationPage
 		},
-		meta: {guest: true}
+		meta: { guest: true }
 	},
 	{
 		path: "/logout",
@@ -78,7 +77,7 @@ const routes = [
 		components: {
 			body: LogoutPage
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	{
 		path: "/",
@@ -96,7 +95,7 @@ const routes = [
 				headName_ru: "Главная"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	{
 		path: "/result",
@@ -114,7 +113,7 @@ const routes = [
 				headName_ru: "Результаты голосования"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	// {
 	//   path: "/application",
@@ -150,7 +149,7 @@ const routes = [
 				headName_ru: "Комиссия"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	// {
 	// 	path: "/participants",
@@ -186,7 +185,7 @@ const routes = [
 				headName_ru: "Об участнике"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	{
 		path: "/archive",
@@ -204,7 +203,7 @@ const routes = [
 				headName_ru: "Архив"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	{
 		path: "/my-profile",
@@ -222,85 +221,85 @@ const routes = [
 				headName_ru: "Мой профиль"
 			}
 		},
-		meta: {requiresAuth: true}
+		meta: { requiresAuth: true }
 	},
 	{
 		path: "/admin",
 		name: "admin",
-		components: {body: AdminPage},
+		components: { body: AdminPage },
 		redirect: "/admin/general",
 		children: [
 			{
 				name: "generalAdmin",
 				path: "general",
 				component: AdminMain,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "catalogsAdmin",
 				path: "catalogs",
 				component: AdminCatalogs,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "usersAdmin",
 				path: "users",
 				component: AdminUsers,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "newUserAdmin",
 				path: "creat-user",
 				component: AdminAddNewUser,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "applicationAllAdmin",
 				path: "applications",
 				component: ApplicationAll,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "applicationSelectedAdmin",
 				path: "selected",
 				component: ApplicationAllSelected,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "applicationStep2Admin",
 				path: "step2",
 				component: ApplicationAllStep2,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "applicationStep3Admin",
 				path: "step3",
 				component: ApplicationAllStep3,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "ApplicationUserIdAdmin",
 				path: "applications/id/:id",
 				component: ApplicationUserId,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "usersIdAdmin",
 				path: "users/id/:id",
 				component: AdminShowUserID,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "membersAdmin",
 				path: "members",
 				component: AdminMembers,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "votingAdmin",
 				path: "voting",
 				component: AdminVoting,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			// {
 			// 	name: "winnersAdmin",
@@ -312,22 +311,22 @@ const routes = [
 				name: "commentsAdmin",
 				path: "comments",
 				component: AdminComments,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "commentIdAdmin",
 				path: "comment/id/:id",
 				component: AdminShowCommentID,
-				meta: {isAdmin: true}
+				meta: { isAdmin: true }
 			},
 			{
 				name: "resultVotingAdmin",
 				path: "result-voting",
 				component: AdminResultVoting,
-				meta: {isAdmin: true}
-			},
+				meta: { isAdmin: true }
+			}
 		],
-		meta: {isAdmin: true}
+		meta: { isAdmin: true }
 	}
 ];
 
@@ -345,7 +344,7 @@ router.beforeEach((to, from, next) => {
 		if (jwtHeader.isAdmin()) {
 			next();
 		} else {
-			next({name: "main"});
+			next({ name: "main" });
 		}
 	} else if (to.matched.some(record => record.meta.requiresAuth)) {
 		if (!jwtHeader.isJwt()) {
@@ -355,27 +354,27 @@ router.beforeEach((to, from, next) => {
 		} else {
 			axios
 				.get(url, {
-					headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
 				})
 				.then(res => {
 					if (res.data.result === true) {
 						next();
 					} else {
 						localStorage.removeItem("jwt");
-						next({name: "login"});
+						next({ name: "login" });
 					}
 				})
 				.catch(error => {
 					console.error("er", error.response.status);
 					localStorage.removeItem("jwt");
-					next({name: "login"});
+					next({ name: "login" });
 				});
 		}
 	} else if (to.matched.some(record => record.meta.guest)) {
 		if (localStorage.getItem("jwt") == null) {
 			next();
 		} else {
-			next({name: "main"});
+			next({ name: "main" });
 		}
 	} else {
 		next();

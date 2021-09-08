@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "AddressMainBlock"
+	name: "AddressMainBlock"
 };
 </script>
 
@@ -26,15 +26,15 @@ export default {
 @import "../../../assets/styles/index";
 @import "../../../assets/styles/StartVotingOther";
 .address {
-  padding: 30px 20px;
-  margin: 40px 0;
-  border: 8px solid #ffb900;
-  @include respond-to(medium-screens) { 
-    padding: 50px 30px;
-    margin: 70px 0;
-  };  
+	padding: 30px 20px;
+	margin: 40px 0;
+	border: 8px solid #ffb900;
+	@include respond-to(medium-screens) {
+		padding: 50px 30px;
+		margin: 70px 0;
+	}
 }
 .address-text {
-  max-width: 100%;
+	max-width: 100%;
 }
 </style>

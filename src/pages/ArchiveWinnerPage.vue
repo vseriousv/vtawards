@@ -3,22 +3,21 @@
 </template>
 
 <script>
-import ArchiveBlock from "../components/ArchiveWinners/ArchiveBlock"
+import ArchiveBlock from "../components/ArchiveWinners/ArchiveBlock";
 
 export default {
-  name: "ArchiveWinnerPage",
+	name: "ArchiveWinnerPage",
 
-  components: {
-    ArchiveBlock
-  },
+	components: {
+		ArchiveBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/index.scss";
-
 </style>

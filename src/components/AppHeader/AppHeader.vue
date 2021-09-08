@@ -7,30 +7,19 @@
 				:to="menuItem.link"
 				class="hidden-sm-and-down"
 			>
-				<span v-html="menuItem.text"/>
+				<span v-html="menuItem.text" />
 			</router-link>
 
-			<v-app-bar-nav-icon
-				@click="drawer = true"
-				class="hidden-md-and-up"
-			>
+			<v-app-bar-nav-icon @click="drawer = true" class="hidden-md-and-up">
 			</v-app-bar-nav-icon>
-			<v-navigation-drawer
-				v-model="drawer"
-				absolute
-				temporary
-				height="100vh"
-			>
-				<v-list
-					nav
-					dense
-					class="listAppBar d-flex flex-column"
-				>
+			<v-navigation-drawer v-model="drawer" absolute temporary height="100vh">
+				<v-list nav dense class="listAppBar d-flex flex-column">
 					<v-list-item
 						v-for="menuItem in $t('menuItems')"
 						:key="menuItem.id"
 						:to="menuItem.link"
-						class="AppBar__item">
+						class="AppBar__item"
+					>
 						{{ menuItem.text }}
 					</v-list-item>
 				</v-list>
@@ -61,7 +50,7 @@ export default {
 		this.checkAdmin();
 	},
 	methods: {
-		checkAdmin: function () {
+		checkAdmin: function() {
 			const jwtHelper = new JwtHelper();
 			if (jwtHelper.isAdmin()) {
 				this.AdminPanel = "adminTrueNavbar";

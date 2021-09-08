@@ -12,18 +12,18 @@
 
 <script>
 export default {
-  props: {
-      stageTitle: {
-        type: String,
-        default: null
-      },
-      stageText: {
-        type: String,
-        default: null
-      }
-  },
-  
-  name: "StepsMainBlockModal",
+	props: {
+		stageTitle: {
+			type: String,
+			default: null
+		},
+		stageText: {
+			type: String,
+			default: null
+		}
+	},
+
+	name: "StepsMainBlockModal"
 };
 </script>
 
@@ -31,32 +31,33 @@ export default {
 @import "../../../assets/styles/index";
 
 .v-dialog {
-  .stageDialog {
-    .stageDialog__title {
-      font-size: 16px;
-      line-height: normal;
-      @include respond-to(medium-screens) {
-        font-size: 24px;
-      }
-    }
-    .stageDialog__text p,ul {
-      font-size: 14px;
-      line-height: normal;
-      @include respond-to(medium-screens) {
-        font-size: 16px;
-        line-height: normal;
-      }
-      @include respond-to(large-screens) {
-        font-size: 20px;
-        line-height: 28px;
-      }
-    }
-  }
-  .stageDialog__btn {
-    color: black;
-      &:hover {
-        color: #ffb900;
-    }
-  }
+	.stageDialog {
+		.stageDialog__title {
+			font-size: 16px;
+			line-height: normal;
+			@include respond-to(medium-screens) {
+				font-size: 24px;
+			}
+		}
+		.stageDialog__text p,
+		ul {
+			font-size: 14px;
+			line-height: normal;
+			@include respond-to(medium-screens) {
+				font-size: 16px;
+				line-height: normal;
+			}
+			@include respond-to(large-screens) {
+				font-size: 20px;
+				line-height: 28px;
+			}
+		}
+	}
+	.stageDialog__btn {
+		color: black;
+		&:hover {
+			color: #ffb900;
+		}
+	}
 }
 </style>

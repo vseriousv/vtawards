@@ -59,21 +59,21 @@ export default {
 		return {
 			URL_AVATARS: config.URL_AVATARS,
 
-			tabs: [{id: 0, name: "Итоги голосования", value: "votig"},],
+			tabs: [{ id: 0, name: "Итоги голосования", value: "votig" }],
 
 			allVoting: [],
 
 			headers_user: [
-				{text: "ID", sortable: true, value: "id",},
-				{text: "Аватар", sortable: false, value: "",},
-				{text: "ФИО", sortable: true, value: "nameRuFrom",},
-				{text: "Цель голоса", sortable: true, value: "nameRuTo"},
-				{text: "Балл", sortable: false, value: "range", align: 'center'},
-				{text: "Тип", sortable: true, value: "type", align: 'center'},
+				{ text: "ID", sortable: true, value: "id" },
+				{ text: "Аватар", sortable: false, value: "" },
+				{ text: "ФИО", sortable: true, value: "nameRuFrom" },
+				{ text: "Цель голоса", sortable: true, value: "nameRuTo" },
+				{ text: "Балл", sortable: false, value: "range", align: "center" },
+				{ text: "Тип", sortable: true, value: "type", align: "center" }
 			],
 			search_user: "",
 			typeVoting: "users",
-			typeVotingSelect: ['users', 'сommission','final']
+			typeVotingSelect: ["users", "сommission", "final"]
 		};
 	},
 
@@ -82,13 +82,13 @@ export default {
 	},
 
 	watch: {
-		"typeVoting": async function () {
+		typeVoting: async function() {
 			await this.getUserVoting();
 		}
 	},
 
 	methods: {
-		getUserVoting: async function () {
+		getUserVoting: async function() {
 			const url = `/user-voting?filter={"type":"${this.typeVoting}"}`;
 			try {
 				const data = await restHelper.getEntity(url, true);
@@ -98,7 +98,7 @@ export default {
 			}
 		},
 
-		parseUserArray: function (data) {
+		parseUserArray: function(data) {
 			this.allVoting = [];
 			data.forEach(item => {
 				const voting = {
@@ -107,17 +107,21 @@ export default {
 					img: item.user.img || "null.png",
 					nameRuFrom: item.user.firstnameRu + " " + item.user.lastnameRu,
 					nameEnFrom: item.user.firstnameEn + " " + item.user.lastnameEn,
-					nameRuTo: item.nominationOrder.user.firstnameRu + " " + item.nominationOrder.user.lastnameRu,
-					nameEnTo: item.nominationOrder.user.firstnameEn + " " + item.nominationOrder.user.lastnameEn,
-					type: item.type,
-
+					nameRuTo:
+						item.nominationOrder.user.firstnameRu +
+						" " +
+						item.nominationOrder.user.lastnameRu,
+					nameEnTo:
+						item.nominationOrder.user.firstnameEn +
+						" " +
+						item.nominationOrder.user.lastnameEn,
+					type: item.type
 				};
 				this.allVoting.push(voting);
-			})
-		},
-
+			});
+		}
 	}
-}
+};
 </script>
 
 <style lang="sass" scoped>
@@ -161,5 +165,4 @@ export default {
 			width: 100%
 			height: 100%
 			object-fit: cover
-
 </style>

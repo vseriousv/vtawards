@@ -34,76 +34,75 @@
 import ArchiveWinner from "./ArchiveWinners.js";
 
 export default {
-    name: "ArchiveBlock",
+	name: "ArchiveBlock",
 
-    data() {
-        return {
-            arrWinners_ru: [],
-            arrWinners_en: [],
-        }
-    },
+	data() {
+		return {
+			arrWinners_ru: [],
+			arrWinners_en: []
+		};
+	},
 
-    created() {
-        this.addArrWinners()
-    },
+	created() {
+		this.addArrWinners();
+	},
 
-    methods: {
-        addArrWinners: function() {
-            this.arrWinners_ru = ArchiveWinner().lang_ru.reverse()
-            this.arrWinners_en = ArchiveWinner().lang_en.reverse()
-            console.log(this.arrWinners_en)
-        },
-    }
-
+	methods: {
+		addArrWinners: function() {
+			this.arrWinners_ru = ArchiveWinner().lang_ru.reverse();
+			this.arrWinners_en = ArchiveWinner().lang_en.reverse();
+			console.log(this.arrWinners_en);
+		}
+	}
 };
-
 </script>
 
 <style lang="scss" scoped>
-@import './src/assets/styles/index.scss';
+@import "./src/assets/styles/index.scss";
 .containerWinner {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    &__subTitle {
-        font-size: 20px;
-        margin-bottom: 30px;
-    }
+	margin-top: 50px;
+	margin-bottom: 50px;
+	&__subTitle {
+		font-size: 20px;
+		margin-bottom: 30px;
+	}
 }
 .boxWinner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    &__imgWinner {
-        height: 150px;
-        width: 150px;
-        object-fit: cover;
-        border-radius: 100%;
-        margin-bottom: 20px;
-        &__2 {
-            object-position: center -20px;
-        }
-        &__6,&__12,&__13 {
-            object-position: center -10px;
-        }
-        
-    }
-    &__yearWinner {
-        font-size: 18px;
-        margin-bottom: 4px;
-        color: $primaryColor;
-        font-weight: bold;
-    }
-    &__nameWinner {
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        text-align: center;
-    }
-    &__positionWinner {
-        font-size: 14px;
-        text-align: center;
-        max-width: 230px;
-        font-style: italic;
-    }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	&__imgWinner {
+		height: 150px;
+		width: 150px;
+		object-fit: cover;
+		border-radius: 100%;
+		margin-bottom: 20px;
+		&__2 {
+			object-position: center -20px;
+		}
+		&__6,
+		&__12,
+		&__13 {
+			object-position: center -10px;
+		}
+	}
+	&__yearWinner {
+		font-size: 18px;
+		margin-bottom: 4px;
+		color: $primaryColor;
+		font-weight: bold;
+	}
+	&__nameWinner {
+		font-size: 20px;
+		font-weight: 500;
+		margin-bottom: 8px;
+		text-align: center;
+	}
+	&__positionWinner {
+		font-size: 14px;
+		text-align: center;
+		max-width: 230px;
+		font-style: italic;
+	}
 }
 </style>

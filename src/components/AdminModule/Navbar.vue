@@ -1,15 +1,15 @@
 <script>
-	export default {
-		name: "AdminNavbar",
-		methods: {
-			handleDrawer: function() {
-				this.$emit("changeDrawer");
-			},
-			logout: function() {
-				this.$router.push({ name: "main" });
-			}
+export default {
+	name: "AdminNavbar",
+	methods: {
+		handleDrawer: function() {
+			this.$emit("changeDrawer");
+		},
+		logout: function() {
+			this.$router.push({ name: "main" });
 		}
-	};
+	}
+};
 </script>
 
 <template lang="pug">
@@ -31,7 +31,6 @@ v-card(flat tile elevation="0")
 			v-icon mdi-logout
 </template>
 
-
 <style lang="sass" scoped>
 .title
 	display: flex
@@ -45,5 +44,4 @@ v-card(flat tile elevation="0")
 
 a
 	text-decoration: none
-
 </style>

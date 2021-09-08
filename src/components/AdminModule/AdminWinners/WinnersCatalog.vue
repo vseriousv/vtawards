@@ -17,7 +17,7 @@ export default {
 				{ text: "ФИО", value: "name_ru" },
 				{ text: "Год голосования", value: "year" },
 				{ text: "Тип голосования", value: "type" },
-				{ text: "Модификация", value: "modify", align: "end", sortable: false}
+				{ text: "Модификация", value: "modify", align: "end", sortable: false }
 			],
 			userItem: "",
 			search_winner: "",
@@ -30,7 +30,6 @@ export default {
 	},
 
 	methods: {
-
 		createField: function() {
 			this.$emit("handleModal", null, "winners");
 		},
@@ -100,7 +99,7 @@ export default {
 
 		showUser: function(id) {
 			this.$router.push({ path: "/admin/users/id/" + id });
-		},
+		}
 	}
 };
 </script>

@@ -84,7 +84,7 @@ export default {
 
 		showUser: function(id) {
 			this.$router.push({ path: "/admin/users/id/" + id });
-		},
+		}
 	}
 };
 </script>

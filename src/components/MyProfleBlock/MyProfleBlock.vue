@@ -45,37 +45,31 @@ import MyApplications from "./MyApplications";
 // const restHelper = new RestHelper();
 
 export default {
-    name: "ParticipantsBlock",
-    components:{
-        AboutMy,
-        MyApplications,
-    },
+	name: "ParticipantsBlock",
+	components: {
+		AboutMy,
+		MyApplications
+	},
 
-    data() {
-        return {
-            tab: null,
-        }
-    },
+	data() {
+		return {
+			tab: null
+		};
+	},
 
-
-
-    methods: {
-
-    }
-
-}
+	methods: {}
+};
 </script>
 
 <style lang="sass" scoped>
-    .profile
-        &__header
-            box-shadow: 0 0 10px rgba(0,0,0,0.5)
-        &__headerTabs
-            p
-                color: #FEBA13
-                margin-top: 5px
-            .icon
-                font-size: 30px
-                color: #FEBA13
-
+.profile
+    &__header
+        box-shadow: 0 0 10px rgba(0,0,0,0.5)
+    &__headerTabs
+        p
+            color: #FEBA13
+            margin-top: 5px
+        .icon
+            font-size: 30px
+            color: #FEBA13
 </style>

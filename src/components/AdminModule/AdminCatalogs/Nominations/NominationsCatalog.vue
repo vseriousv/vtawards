@@ -10,11 +10,11 @@ export default {
 				{
 					text: "Номер",
 					value: "id",
-					align: "start",
+					align: "start"
 				},
 				{ text: "Номинация (Русский)", value: "value_ru" },
 				{ text: "Номинация (Англйиский)", value: "value_en" },
-				{ text: "Модификация", value: "modify", align: "end", sortable: false}
+				{ text: "Модификация", value: "modify", align: "end", sortable: false }
 			],
 			search_text: ""
 		};
@@ -52,8 +52,8 @@ export default {
 				})
 				.then(result => (this.itemData = result.data))
 				.catch(e => console.error("nominations-error:", e));
-		},
-  }
+		}
+	}
 };
 </script>
 
@@ -112,7 +112,6 @@ export default {
 							v-icon mdi-pencil
 
 </template>
-
 
 <style lang="sass" scoped>
 .ContentTable

@@ -1,56 +1,56 @@
 <script>
-	import axios from "axios";
-	import config from "../../../constants/config";
-	export default {
-		name: "VotingCatalog",
-		data() {
-			return {
-				voting: []
-			};
+import axios from "axios";
+import config from "../../../constants/config";
+export default {
+	name: "VotingCatalog",
+	data() {
+		return {
+			voting: []
+		};
+	},
+	created() {
+		this.getVoting();
+	},
+	methods: {
+		createField: function() {
+			this.$emit("handleModal", null, "votings");
 		},
-		created() {
-			this.getVoting();
+		updateVotingID: function(id) {
+			this.$store.commit("setVotingYear", "");
+			this.$store.commit("setVotingType", "");
+			this.$store.commit(
+				"setVotingYear",
+				this.voting.find(item => item.id === id).year
+			);
+			this.$store.commit(
+				"setVotingType",
+				this.voting.find(item => item.id === id).type_voting
+			);
+			this.$emit("handleModal", id, "votings");
 		},
-		methods: {
-			createField: function() {
-				this.$emit("handleModal", null, "votings");
-			},
-			updateVotingID: function(id) {
-				this.$store.commit("setVotingYear", "");
-				this.$store.commit("setVotingType", "");
-				this.$store.commit(
-					"setVotingYear",
-					this.voting.find(item => item.id === id).year
-				);
-				this.$store.commit(
-					"setVotingType",
-					this.voting.find(item => item.id === id).type_voting
-				);
-				this.$emit("handleModal", id, "votings");
-			},
-			getVoting: function() {
-				const url = config.API_URL + "/votings";
-				axios
-					.get(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => (this.voting = result.data))
-					.catch(e => console.error("voting-error:", e));
-			},
-			removeVoting: function(id) {
-				const url = config.API_URL + "/votings/" + id;
-				axios
-					.delete(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => {
-						this.getVoting();
-						return result;
-					})
-					.catch(e => console.error("voting-error:", e));
-			}
+		getVoting: function() {
+			const url = config.API_URL + "/votings";
+			axios
+				.get(url, {
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+				})
+				.then(result => (this.voting = result.data))
+				.catch(e => console.error("voting-error:", e));
+		},
+		removeVoting: function(id) {
+			const url = config.API_URL + "/votings/" + id;
+			axios
+				.delete(url, {
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+				})
+				.then(result => {
+					this.getVoting();
+					return result;
+				})
+				.catch(e => console.error("voting-error:", e));
 		}
-	};
+	}
+};
 </script>
 
 <template lang="pug">

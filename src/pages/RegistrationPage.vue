@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <registration-block />
-  </div>
+	<div>
+		<registration-block />
+	</div>
 </template>
 
 <script>
 import RegistrationBlock from "../components/AuthModule/RegistrationBlock";
 export default {
-  name: "RegistrationPage",
+	name: "RegistrationPage",
 
-  components: {
-    RegistrationBlock
-  },
+	components: {
+		RegistrationBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

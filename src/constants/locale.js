@@ -19,21 +19,22 @@ export default {
 				statusStart: "Идет голосовнаие",
 				statusCancel: "До конца голосования осталось",
 				statusCancelOrders: "До конца сбора заявок осталось",
-				statusApplicEnd: "Прием заявок завершен",
+				statusApplicEnd: "Прием заявок завершен"
 			},
 			time: {
 				d: "Д",
 				hr: "Ч",
 				min: "Мин",
-				sec: "Сек",
-			},
+				sec: "Сек"
+			}
 		},
 		loginBlock: {
 			headAuth: "Авторизация",
 			headReg: "Регистрация",
 			headForget: "Забыли пароль",
 			restorePassword: "Введите логин",
-			restorePasswordTrue: "Запрос отправлен. Проверьте свою электронную почту и попробуйте войти снова.",
+			restorePasswordTrue:
+				"Запрос отправлен. Проверьте свою электронную почту и попробуйте войти снова.",
 			restorePasswordFalse: "Неправильный таб.номер",
 			form: {
 				email: "Email",
@@ -57,7 +58,7 @@ export default {
 		nameButton: {
 			edit: "Редактировать",
 			save: "Сохранить",
-			change: "Изменить",
+			change: "Изменить"
 		},
 		ApplicationForm: {
 			applicant: "Заявитель",
@@ -116,9 +117,9 @@ export default {
 				semifinal_voting: "регионального этапа конкурса «Лидер перемен ВТ»",
 				semifinal_voting2: "полуфинала конкурса «Лидер перемен ВТ»",
 				final: "финала конкурса «Лидер перемен ВТ»",
-				autumn_committee_voting: '',
+				autumn_committee_voting: "",
 				autumn_users_voting: "",
-				spring_committee_voting: '',
+				spring_committee_voting: "",
 				spring_users_voting: ""
 			},
 			nomination_1: "Номинация ДОСТИЖЕНИЕ и ЛИДЕРСТВО",
@@ -157,11 +158,11 @@ export default {
 		},
 		NominationBlock: {
 			head: "Номинации 2020",
-			headText: "Выдвинуть номинанта в любую из трех номинаций конкурса «Лидер перемен ВТ» может каждый сотрудник или структурное подразделение группы компаний «Восточная Техника», количество заявок от одного человека не ограничено.",
+			headText:
+				"Выдвинуть номинанта в любую из трех номинаций конкурса «Лидер перемен ВТ» может каждый сотрудник или структурное подразделение группы компаний «Восточная Техника», количество заявок от одного человека не ограничено.",
 			liderNom: `Достижение</br>и лидерство`,
 			liderNomTitle: `Номинация <br/>«ДОСТИЖЕНИЕ и ЛИДЕРСТВО» <br/> присуждается если:`,
-			liderNomText:
-				`<ul>
+			liderNomText: `<ul>
         <li>Номинант и его коллеги могут назвать хотя бы один серьезный проект,
         который состоялся благодаря личному участию и поддержке со стороны номинанта.</li>
         <li>Названный проект должен быть ярким, вносить заметный вклад в решение стоящих перед
@@ -174,8 +175,7 @@ export default {
       </ul>`,
 			professionalNom: `Профессионализм</br>и новации`,
 			professionalNomTitle: `Номинация <br/>«ПРОФЕССИОНАЛИЗМ и НОВАЦИИ»<br/>присуждается тем, кто:`,
-			professionalNomText:
-				`<ul>
+			professionalNomText: `<ul>
         <li>«Лидер без титула», который каждый день качественно, эффективно и
         безупречно  выполняет  свои профессиональные обязанности;</li>
         <li>Не боится  управленческих и/или производственных трудных задач,
@@ -194,15 +194,14 @@ export default {
       </ul>`,
 			goldManNom: `<p>Золотой человек</p>`,
 			goldManNomTitle: `Номинация<br/>«ЗОЛОТОЙ ЧЕЛОВЕК» <br/>присуждается тем, кто:`,
-			goldManNomText:
-				`<ul>
+			goldManNomText: `<ul>
         <li>Ответственно относится к работе, доброжелателен и внимателен
         к коллегам, активно передает опыт и делится своими знаниями.</li>
         <li>Тот самый человек, на которого можно положиться в любой ситуации.</li>
         <li>Честно трудится на своем месте, понимая,  каков  его личный вклад
         в повышение эффективности деятельности компании.</li>
       </ul>`,
-			buttonNomText: "Закрыть",
+			buttonNomText: "Закрыть"
 		},
 		StepsMainBlock: {
 			blockTitle: "Выборы победителей",
@@ -301,7 +300,7 @@ export default {
 		},
 		memberMainBlock: {
 			memberMainBlockTitle: "Номинанты",
-			memberMainBlockBtn: 'Все номинанты',
+			memberMainBlockBtn: "Все номинанты"
 		},
 		CallbackMainBlock: {
 			title: `Остались вопросы?`,
@@ -309,11 +308,11 @@ export default {
 			name: `ФИО`,
 			question: `Текст вопроса`,
 			send: `отправить`,
-			resp: 'Форма отправлена'
+			resp: "Форма отправлена"
 		},
 		archiveBlock: {
 			archiveBlockTitle: `Победители конкурса «Лидер перемен ВТ» прошлых лет`,
-			archiveBlockSubTitle: `Должности лауреатов указаны на момент вручения премии`,
+			archiveBlockSubTitle: `Должности лауреатов указаны на момент вручения премии`
 		},
 		footerBlock: {},
 		menuItems: [
@@ -380,22 +379,24 @@ export default {
 				statusProc: "The on-line voting is over",
 				statusStart: "There is a vote",
 				statusCancel: "Until the end of the vote left",
-				statusCancelOrders: "Until the end of the collection of applications left",
-				statusApplicEnd: "Application is closed",
+				statusCancelOrders:
+					"Until the end of the collection of applications left",
+				statusApplicEnd: "Application is closed"
 			},
 			time: {
 				d: "d",
 				hr: "hr",
 				min: "min",
-				sec: "sec",
-			},
+				sec: "sec"
+			}
 		},
 		loginBlock: {
 			headAuth: "Sing in",
 			headReg: "Registration",
 			headForget: "Forget password",
 			restorePassword: "Enter your login",
-			restorePasswordTrue: "The request has been sent. Check your email and try signing in again.",
+			restorePasswordTrue:
+				"The request has been sent. Check your email and try signing in again.",
 			restorePasswordFalse: "Wrong tab.number",
 			form: {
 				email: "Email",
@@ -419,7 +420,7 @@ export default {
 		nameButton: {
 			edit: "Edit",
 			save: "Save",
-			change: "Change",
+			change: "Change"
 		},
 		ApplicationForm: {
 			applicant: "Applicant",
@@ -455,9 +456,9 @@ export default {
 				semifinal_voting: " of the regional stage",
 				semifinal_voting2: " of the semi-final stage",
 				final: "of the final stage",
-				autumn_committee_voting: '',
+				autumn_committee_voting: "",
 				autumn_users_voting: "",
-				spring_committee_voting: '',
+				spring_committee_voting: "",
 				spring_users_voting: ""
 			},
 			nomination_1: "Nomination is ACHIEVEMENT and LEADERSHIP",
@@ -518,13 +519,13 @@ export default {
 		},
 		NominationBlock: {
 			head: "Categories 2020",
-			headText: "Any employee or structural subdivision of Vostochnaya Technica Group can nominate a candidate in any of the three categories. There is no limit as to the number of applications one person may submit.",
+			headText:
+				"Any employee or structural subdivision of Vostochnaya Technica Group can nominate a candidate in any of the three categories. There is no limit as to the number of applications one person may submit.",
 			liderNom: `<p>Achievements</br>and Leadership</p>`,
 			professionalNom: `<p>Professionalism</br>and Innovations</p>`,
 			goldManNom: `<p>Pillar of the Team</p>`,
 			liderNomTitle: `An employee can be nominated<br/> in the ACHIEVEMENTS and LEADERSHIP<br/> category if:`,
-			liderNomText:
-				`<ul>
+			liderNomText: `<ul>
         <li>The nominee or their colleagues can name at least one major project which was
         implemented thanks to the personal participation of, or support from, the nominee.</li>
         <li>The said project must be exciting, contribute significantly to the handling of complex
@@ -536,8 +537,7 @@ export default {
         and led their team to success.</li>
       </ul>`,
 			professionalNomTitle: `An employee can be nominated<br> in the PROFESSIONALISM<br> and INNOVATIONS category if they are:`,
-			professionalNomText:
-				`<ul>
+			professionalNomText: `<ul>
         <li>A ‘Hidden Leader’—someone who does their job competently, efficiently and impeccably every day.</li>
         <li>Not afraid to face managerial and professional challenges, able to concentrate on solving them and
         produce top-notch solutions.</li>
@@ -549,16 +549,16 @@ export default {
         <li>Able to engage with customers in such a way that makes them feel appreciated, at ease and confident in
         our company.</li>
       </ul>`,
-			goldManNomTitle: "An employee can be nominated<br/> in the PILLAR OF THE TEAM<br/> category if they are:",
-			goldManNomText:
-				`<ul>
+			goldManNomTitle:
+				"An employee can be nominated<br/> in the PILLAR OF THE TEAM<br/> category if they are:",
+			goldManNomText: `<ul>
         <li>Serious about their work, nice and considerate towards their colleagues, actively sharing their experience
         and knowledge.</li>
         <li>That one person who can always be counted on in any situation.</li>
         <li>Doing their work diligently, knowing that their contribution to the betterment of the company’s efficiency
         is essential.</li>
       </ul>`,
-			buttonNomText: "Close",
+			buttonNomText: "Close"
 		},
 		StepsMainBlock: {
 			blockTitle: "Voting",
@@ -644,18 +644,18 @@ export default {
 		},
 		memberMainBlock: {
 			memberMainBlockTitle: "Nominees",
-			memberMainBlockBtn: 'ALL NOMINEES',
+			memberMainBlockBtn: "ALL NOMINEES"
 		},
 		CallbackMainBlock: {
 			title: `Any questions?`,
 			subTitle: `Submit your question by filling in this form, and we will reply as soon as possible`,
 			name: `Full name`,
 			question: `Question`,
-			send: `SEND`,
+			send: `SEND`
 		},
 		archiveBlock: {
 			archiveBlockTitle: `VT Change Makers from previous years`,
-			archiveBlockSubTitle: `The positions of the winners are indicated at the time of the award`,
+			archiveBlockSubTitle: `The positions of the winners are indicated at the time of the award`
 		},
 		footerBlock: {},
 		menuItems: [

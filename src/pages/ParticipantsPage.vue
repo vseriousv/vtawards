@@ -1,19 +1,19 @@
 <template>
-  <participants-block />
+	<participants-block />
 </template>
 
 <script>
 import ParticipantsBlock from "../components/ParticipantsBlock/ParticipantsBlock";
 export default {
-  name: "ParticipantsPage",
+	name: "ParticipantsPage",
 
-  components: {
-    ParticipantsBlock
-  },
+	components: {
+		ParticipantsBlock
+	},
 
-  data() {
-    return {};
-  }
+	data() {
+		return {};
+	}
 };
 </script>
 

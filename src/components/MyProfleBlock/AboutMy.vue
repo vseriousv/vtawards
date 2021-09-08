@@ -103,215 +103,218 @@ const restHelper = new RestHelper();
 const jwtHelper = new JwtHelper();
 
 export default {
-    name: "AboutMy",
+	name: "AboutMy",
 
-    data() {
-        return {
-            myId: jwtHelper.jwtParse().id,
-            URL_AVATARS: config.URL_AVATARS,
-            file: '',
-            fileName:'',
-            showPreview: true,
-            imagePreview: '',
-            oldPassword: '',
+	data() {
+		return {
+			myId: jwtHelper.jwtParse().id,
+			URL_AVATARS: config.URL_AVATARS,
+			file: "",
+			fileName: "",
+			showPreview: true,
+			imagePreview: "",
+			oldPassword: "",
 
-            user: {},
-            btnDisabled: {
-                fixsetData: true,
-                saveData: true
-            },
-        }
-    },
+			user: {},
+			btnDisabled: {
+				fixsetData: true,
+				saveData: true
+			}
+		};
+	},
 
-    created(){
-        this.getUser()
-    },
+	created() {
+		this.getUser();
+	},
 
-    methods: {
-        handleFileUpload: function() {
-            this.file = ''
-            this.file = this.$refs.file.files[0];
-            let reader  = new FileReader();
-            reader.addEventListener("load", function () {
-            this.showPreview = true;
-            this.imagePreview = reader.result;
-            }.bind(this), false);
-            if( this.file ){
-                if ( /\.(jpe?g|png|svg)$/i.test( this.file.name ) ) {
-                    reader.readAsDataURL( this.file );
-                    this.fileName = this.file.name
-                }
-            }
-        },
+	methods: {
+		handleFileUpload: function() {
+			this.file = "";
+			this.file = this.$refs.file.files[0];
+			let reader = new FileReader();
+			reader.addEventListener(
+				"load",
+				function() {
+					this.showPreview = true;
+					this.imagePreview = reader.result;
+				}.bind(this),
+				false
+			);
+			if (this.file) {
+				if (/\.(jpe?g|png|svg)$/i.test(this.file.name)) {
+					reader.readAsDataURL(this.file);
+					this.fileName = this.file.name;
+				}
+			}
+		},
 
-        getUser: async function() {
+		getUser: async function() {
 			const url = "/users/" + this.myId;
 			try {
 				const user = await restHelper.getEntity(url, true);
-                this.parseUser(user.data);
-                // console.log(user.data)
-			} catch(e) {
+				this.parseUser(user.data);
+				// console.log(user.data)
+			} catch (e) {
 				console.error("ERROR AboutMy/getUser:", e);
-            }
-        },
-        parseUser: function(data) {
-            this.user = {
-                tabNumber: data.tabNumber,
-                img: data.img || "null.png",
-                name_ru:
-                    data.lastnameRu + " " + data.firstnameRu + " " + data.patronymicRu,
-                name_en: data.firstnameEn + " " + data.lastnameEn,
-                position_ru: data.positionName ? data.positionName : "",
-                position_en: data.positionNameEng ? data.positionNameEng : "",
-                section_ru: data.sectionName ? data.sectionName : "",
-                section_en: data.sectionNameEng ? data.sectionNameEng : "",
-                state_ru: data.state ? data.state.value_ru : "",
-                state_en: data.state ? data.state.value_en : "",
-                city_ru: data.cityName ? data.cityName : "",
-                city_en: data.cityNameEng ? data.cityNameEng : "",
-                pass: data.passwordText
-            }
-            this.imagePreview = data.img || "null.png"
-            this.oldPassword = data.passwordText
-        },
-        btnNoneDisabled: function() {
-            this.btnDisabled = {
-                fixsetData: false,
-                saveData: false,
-            }
-        },
-        saveNewAvatar: function() {
-            if (this.file !== '') {
-                let dataImg = new FormData()
-                dataImg.append("id", this.myId)
-                dataImg.append("file", this.file)
-                this.postNewAvatar(dataImg)
-            } else {
-                console.log("Такая аватарка уже существует и использована")
-                return
-            }
-        },
-        postNewAvatar: async function(data) {
-            const url = "/users/avatar";
+			}
+		},
+		parseUser: function(data) {
+			this.user = {
+				tabNumber: data.tabNumber,
+				img: data.img || "null.png",
+				name_ru:
+					data.lastnameRu + " " + data.firstnameRu + " " + data.patronymicRu,
+				name_en: data.firstnameEn + " " + data.lastnameEn,
+				position_ru: data.positionName ? data.positionName : "",
+				position_en: data.positionNameEng ? data.positionNameEng : "",
+				section_ru: data.sectionName ? data.sectionName : "",
+				section_en: data.sectionNameEng ? data.sectionNameEng : "",
+				state_ru: data.state ? data.state.value_ru : "",
+				state_en: data.state ? data.state.value_en : "",
+				city_ru: data.cityName ? data.cityName : "",
+				city_en: data.cityNameEng ? data.cityNameEng : "",
+				pass: data.passwordText
+			};
+			this.imagePreview = data.img || "null.png";
+			this.oldPassword = data.passwordText;
+		},
+		btnNoneDisabled: function() {
+			this.btnDisabled = {
+				fixsetData: false,
+				saveData: false
+			};
+		},
+		saveNewAvatar: function() {
+			if (this.file !== "") {
+				let dataImg = new FormData();
+				dataImg.append("id", this.myId);
+				dataImg.append("file", this.file);
+				this.postNewAvatar(dataImg);
+			} else {
+				console.log("Такая аватарка уже существует и использована");
+				return;
+			}
+		},
+		postNewAvatar: async function(data) {
+			const url = "/users/avatar";
 			try {
-                const postAvatar = await restHelper.postEntity(url, data, true);
-                console.log(postAvatar)
-                this.fileName = ""
-                this.file = ''
-                this.getUser()
-				if (this.$t('lang') === 'ru') {
-                    alert("Ваша аватарка успешно обновлена")
-                }
-                if (this.$t('lang') === 'en') {
-                    alert("Your avatar has been successfully updated")
-                }
+				const postAvatar = await restHelper.postEntity(url, data, true);
+				console.log(postAvatar);
+				this.fileName = "";
+				this.file = "";
+				this.getUser();
+				if (this.$t("lang") === "ru") {
+					alert("Ваша аватарка успешно обновлена");
+				}
+				if (this.$t("lang") === "en") {
+					alert("Your avatar has been successfully updated");
+				}
 			} catch (e) {
-				alert("Ошибка сервера или запроса" + " " + e)
+				alert("Ошибка сервера или запроса" + " " + e);
 			}
-        },
-        savePassword: async function() {
-            const url = "/users/change-password";
-            const data = {
-                "tabNumber": this.user.tabNumber,
-                "passwordOld": this.oldPassword,
-                "passwordNew": this.user.pass,
-            }
-            try {
-                console.log(data)
-                const postPassword = await restHelper.postEntity(url, data, true);
-                console.log(postPassword)
-                this.btnDisabled = {
-                    fixsetData: true,
-                    saveData: true,
-                }
-				if (this.$t('lang') === 'ru') {
-                    alert("Ваш пароль успешно обновлен")
-                }
-                if (this.$t('lang') === 'en') {
-                    alert("Your password has been successfully updated")
-                }
+		},
+		savePassword: async function() {
+			const url = "/users/change-password";
+			const data = {
+				tabNumber: this.user.tabNumber,
+				passwordOld: this.oldPassword,
+				passwordNew: this.user.pass
+			};
+			try {
+				console.log(data);
+				const postPassword = await restHelper.postEntity(url, data, true);
+				console.log(postPassword);
+				this.btnDisabled = {
+					fixsetData: true,
+					saveData: true
+				};
+				if (this.$t("lang") === "ru") {
+					alert("Ваш пароль успешно обновлен");
+				}
+				if (this.$t("lang") === "en") {
+					alert("Your password has been successfully updated");
+				}
 			} catch (e) {
-				alert("Ошибка сервера или запроса" + " " + e)
+				alert("Ошибка сервера или запроса" + " " + e);
 			}
-        }
-    },
-}
+		}
+	}
+};
 </script>
 
 <style lang="sass" scoped>
-    .aboutMy
-        padding: 25px
-        &__avatar
-            border: 1px solid #FEBA13
-            border-radius: 3px
-            display: flex
-            width: 250px
-            height: 250px
-            overflow: hidden
-            img
-                max-width: 250px
-                max-height: 250px
-                width: 100%
-                height: 100%
-                object-fit: cover
-        &__myPassword
-            display: flex
-            flex-direction: column
-            padding-left: 16px
-        &__description
-            max-width: 250px
-        &__saveAll
-            display: flex
-            justify-content: center
-            margin-top: 15px
-    .passwordBox       
-        &__input
-            display: flex
-            flex-direction: row   
-            p 
-                font-size: 18px
-                padding-top: 16px
-        &__btn
-            margin-top: -10px
-            display: flex
-            justify-content: flex-end
-    .addImg
-        height: 40px
+.aboutMy
+    padding: 25px
+    &__avatar
+        border: 1px solid #FEBA13
+        border-radius: 3px
+        display: flex
+        width: 250px
+        height: 250px
         overflow: hidden
-        background-color: green
-        margin: 20px 0 0 0
-        border-radius: 6px
-        transition: 0.2s ease-out
-        &:hover
-            background-color: #FEBA13
-            p
-                color: white
-        &__label
-            cursor: pointer
+        img
             max-width: 250px
+            max-height: 250px
             width: 100%
             height: 100%
-            position: relative
-            display: flex
-            align-items: center
-            justify-content: center
-            p
-                font-size: 14px
-                margin: 0
-                text-transform: uppercase
-                font-weight: 500
-                color: white
-        &__btn
-            visibility: hidden
-            position: absolute
-            left: 0
-            top: 0
-            max-width: 250px
-            height: 100%
-            
-    .contentMy
-        margin-left: 20px
-        tr td 
+            object-fit: cover
+    &__myPassword
+        display: flex
+        flex-direction: column
+        padding-left: 16px
+    &__description
+        max-width: 250px
+    &__saveAll
+        display: flex
+        justify-content: center
+        margin-top: 15px
+.passwordBox
+    &__input
+        display: flex
+        flex-direction: row
+        p
             font-size: 18px
+            padding-top: 16px
+    &__btn
+        margin-top: -10px
+        display: flex
+        justify-content: flex-end
+.addImg
+    height: 40px
+    overflow: hidden
+    background-color: green
+    margin: 20px 0 0 0
+    border-radius: 6px
+    transition: 0.2s ease-out
+    &:hover
+        background-color: #FEBA13
+        p
+            color: white
+    &__label
+        cursor: pointer
+        max-width: 250px
+        width: 100%
+        height: 100%
+        position: relative
+        display: flex
+        align-items: center
+        justify-content: center
+        p
+            font-size: 14px
+            margin: 0
+            text-transform: uppercase
+            font-weight: 500
+            color: white
+    &__btn
+        visibility: hidden
+        position: absolute
+        left: 0
+        top: 0
+        max-width: 250px
+        height: 100%
 
+.contentMy
+    margin-left: 20px
+    tr td
+        font-size: 18px
 </style>

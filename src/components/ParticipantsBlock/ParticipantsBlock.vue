@@ -79,19 +79,19 @@ export default {
 			URL_AVATARS: config.URL_AVATARS,
 
 			headers_userRu: [
-				{text: "Аватар", sortable: false, value: "img"},
-				{text: "ФИО", value: "name_ru"},
-				{text: "Номинация", sortable: false, value: "nomination"},
-				{text: "Регион", sortable: false, value: "state"},
+				{ text: "Аватар", sortable: false, value: "img" },
+				{ text: "ФИО", value: "name_ru" },
+				{ text: "Номинация", sortable: false, value: "nomination" },
+				{ text: "Регион", sortable: false, value: "state" }
 			],
 			headers_userEn: [
-				{text: "Avatar", sortable: false, value: "img"},
-				{text: "Full name", value: "name_en"},
-				{text: "Nomination", sortable: false, value: "nomination"},
-				{text: "Region", sortable: false, value: "state"},
+				{ text: "Avatar", sortable: false, value: "img" },
+				{ text: "Full name", value: "name_en" },
+				{ text: "Nomination", sortable: false, value: "nomination" },
+				{ text: "Region", sortable: false, value: "state" }
 			],
 			search_user: "",
-			users: [],
+			users: []
 		};
 	},
 
@@ -102,45 +102,46 @@ export default {
 	},
 
 	watch: {
-		nominationSelect: function (newVal, oldVal) {
+		nominationSelect: function(newVal, oldVal) {
 			if (newVal == 0) {
-				this.participants = this.users
+				this.participants = this.users;
 			}
 			if (newVal > 0 && oldVal !== null && newVal !== oldVal) {
 				this.getParticipantsFromIdNomination(newVal, this.statesSelect);
 			}
 		},
-		statesSelect: function (newVal, oldVal) {
+		statesSelect: function(newVal, oldVal) {
 			if (newVal == 0) {
-				this.participants = this.users
+				this.participants = this.users;
 			}
 			if (newVal > 0 && oldVal !== null && newVal !== oldVal) {
 				this.getParticipantsFromIdNomination(this.nominationSelect, newVal);
 			}
-		},
+		}
 	},
 
 	methods: {
-
-		getParticipantsFromIdNomination: async function (nominationId, stateId) {
+		getParticipantsFromIdNomination: async function(nominationId, stateId) {
 			const url = `/nomination-order/public?filter={"nominationId":${nominationId},"stateId":${stateId}}`;
 			try {
 				const data = await restHelper.getEntity(url, true);
 				this.setParticipantsArray(data.data.rows, false);
 				// console.log(this.users)
 			} catch (e) {
-				console.error("ERROR ParticipantsBlock/getParticipantsFromIdNomination:", e);
+				console.error(
+					"ERROR ParticipantsBlock/getParticipantsFromIdNomination:",
+					e
+				);
 			}
 		},
 
-
-		showParticipant: function (id) {
+		showParticipant: function(id) {
 			// this.$router.push({ path: "/nomination-order/id/" + id });
-			const data = this.$router.resolve({path: "/nomination-order/id/" + id});
-			window.open(data.href, '_blank');
+			const data = this.$router.resolve({ path: "/nomination-order/id/" + id });
+			window.open(data.href, "_blank");
 		},
 
-		getParticipants: async function () {
+		getParticipants: async function() {
 			const url = "/nomination-order/public?filter={}";
 			try {
 				const data = await restHelper.getEntity(url, true);
@@ -150,8 +151,8 @@ export default {
 			}
 		},
 
-		setParticipantsArray: async function (data, props) {
-			this.participants = []
+		setParticipantsArray: async function(data, props) {
+			this.participants = [];
 			for (let i = 0; i < data.length; i++) {
 				const userObject = {
 					id: data[i].id,
@@ -167,12 +168,8 @@ export default {
 					state_ru: data[i].user.state ? data[i].user.state.value_ru : "",
 					state_en: data[i].user.state ? data[i].user.state.value_en : "",
 					nominationId: data[i].nominationId,
-					nomination_ru: data[i].nomination
-						? data[i].nomination.valueRu
-						: "",
-					nomination_en: data[i].nomination
-						? data[i].nomination.valueEn
-						: "",
+					nomination_ru: data[i].nomination ? data[i].nomination.valueRu : "",
+					nomination_en: data[i].nomination ? data[i].nomination.valueEn : "",
 					voting: data[i].voting
 				};
 				this.participants.push(userObject);
@@ -182,7 +179,7 @@ export default {
 			}
 		},
 
-		getNomination: async function () {
+		getNomination: async function() {
 			const url = "/nominations";
 			try {
 				const data = await restHelper.getEntity(url, true);
@@ -193,17 +190,17 @@ export default {
 			}
 		},
 
-		parseNominationArray: function (data) {
+		parseNominationArray: function(data) {
 			this.nominationRu = [];
 			this.nominationEn = [];
 			this.nominationRu.push({
 				text: "ВСЕ НОМИНАЦИИ",
 				value: 0
-			})
+			});
 			this.nominationEn.push({
 				text: "ALL NOMINATIONS",
 				value: 0
-			})
+			});
 			data.forEach(nomin => {
 				let nominationRu = {
 					text: nomin.valueRu,
@@ -212,13 +209,13 @@ export default {
 				let nominationEn = {
 					text: nomin.valueEn,
 					value: nomin.id
-				}
+				};
 				this.nominationRu.push(nominationRu);
 				this.nominationEn.push(nominationEn);
-			})
+			});
 		},
 
-		getState: async function () {
+		getState: async function() {
 			const url = "/states";
 			try {
 				const data = await restHelper.getEntity(url, true);
@@ -228,17 +225,17 @@ export default {
 			}
 		},
 
-		parseStateArray: function (data) {
+		parseStateArray: function(data) {
 			this.statesRu = [];
 			this.statesEn = [];
 			this.statesRu.push({
 				text: "ВСЕ РЕГИОНЫ",
 				value: 0
-			})
+			});
 			this.statesEn.push({
 				text: "ALL REGIONS",
 				value: 0
-			})
+			});
 			data.forEach(states => {
 				let statesRu = {
 					text: states.value_ru,
@@ -247,11 +244,11 @@ export default {
 				let statesEn = {
 					text: states.value_en,
 					value: states.id
-				}
+				};
 				this.statesRu.push(statesRu);
 				this.statesEn.push(statesEn);
-			})
-		},
+			});
+		}
 	}
 };
 </script>
@@ -296,5 +293,4 @@ export default {
 			width: 100%
 			height: 100%
 			object-fit: cover
-
 </style>

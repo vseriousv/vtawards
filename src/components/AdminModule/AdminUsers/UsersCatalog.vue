@@ -1,83 +1,81 @@
 <script>
-	import axios from "axios";
-	import config from "../../../constants/config";
+import axios from "axios";
+import config from "../../../constants/config";
 
-	export default {
-		name: "UsersCatalog",
+export default {
+	name: "UsersCatalog",
 
-		data() {
-			return {
-				isActive: true,
-				users: [],
-				headers_user: [
-					{
-						text: "Таб номер",
-						align: "start",
-						sortable: true,
-						value: "tabNumber"
-					},
-					{ text: "Аватар", value: "img" },
-					{ text: "ФИО", sortable: true, value: "name_ru" },
-					{ text: "Full name", value: "name_en" },
-					{ text: "Email", value: "email" },
-					{ text: "Роль", value: "role" }
-				],
-				userItem: "",
-				URL_AVATARS: config.URL_AVATARS,
-				search_user: ""
-			};
+	data() {
+		return {
+			isActive: true,
+			users: [],
+			headers_user: [
+				{
+					text: "Таб номер",
+					align: "start",
+					sortable: true,
+					value: "tabNumber"
+				},
+				{ text: "Аватар", value: "img" },
+				{ text: "ФИО", sortable: true, value: "name_ru" },
+				{ text: "Full name", value: "name_en" },
+				{ text: "Email", value: "email" },
+				{ text: "Роль", value: "role" }
+			],
+			userItem: "",
+			URL_AVATARS: config.URL_AVATARS,
+			search_user: ""
+		};
+	},
+
+	created() {
+		this.getUsers();
+	},
+
+	methods: {
+		createField: function() {
+			this.$router.push({ path: "/admin/creat-user" });
 		},
 
-		created() {
-			this.getUsers();
+		showUser: function(id) {
+			this.$router.push({ path: "/admin/users/id/" + id });
 		},
 
-		methods: {
-			createField: function() {
-				this.$router.push({ path: "/admin/creat-user"});
-			},
+		getUsers: function() {
+			const url = config.API_URL + "/users";
+			axios
+				.get(url, {
+					headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
+				})
+				.then(result => {
+					this.setUsersArray(result.data);
+					// console.log(result.data)
+				})
+				.catch(e => console.error("users-error:", e));
+		},
 
-			showUser: function(id) {
-				this.$router.push({ path: "/admin/users/id/" + id });
-			},
-
-			getUsers: function() {
-				const url = config.API_URL + "/users";
-				axios
-					.get(url, {
-						headers: { Authorization: "Bearer " + localStorage.getItem("jwt") }
-					})
-					.then(result => {
-						this.setUsersArray(result.data);
-						// console.log(result.data)
-					})
-					.catch(e => console.error("users-error:", e));
-			},
-
-			setUsersArray: async function(data) {
-				for (let i = 0; i < data.length; i++) {
-					const userObject = {
-						id: data[i].id,
-						tabNumber: data[i].tabNumber,
-						img: data[i].img ? data[i].img : "null.png",
-						email: data[i].email,
-						role: data[i].role,
-						name_ru:
-							data[i].lastnameRu +
-							" " +
-							data[i].firstnameRu +
-							" " +
-							data[i].patronymicRu,
-						name_en: data[i].firstnameEn + " " + data[i].lastnameEn
-					};
-					this.users.push(userObject);
-				}
+		setUsersArray: async function(data) {
+			for (let i = 0; i < data.length; i++) {
+				const userObject = {
+					id: data[i].id,
+					tabNumber: data[i].tabNumber,
+					img: data[i].img ? data[i].img : "null.png",
+					email: data[i].email,
+					role: data[i].role,
+					name_ru:
+						data[i].lastnameRu +
+						" " +
+						data[i].firstnameRu +
+						" " +
+						data[i].patronymicRu,
+					name_en: data[i].firstnameEn + " " + data[i].lastnameEn
+				};
+				this.users.push(userObject);
 			}
 		}
-	};
+	}
+};
 </script>
-
-
 
 <template lang="pug">
 v-container.UsersCatalog(fluid)
@@ -122,7 +120,6 @@ v-container.UsersCatalog(fluid)
 
 
 </template>
-
 
 <style lang="sass" scoped>
 @import "UsersCatalog"

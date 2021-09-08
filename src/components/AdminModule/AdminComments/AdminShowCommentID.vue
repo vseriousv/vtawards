@@ -70,155 +70,154 @@ import config from "../../../constants/config";
 import axios from "axios";
 import RestHelper from "../../../helpers/RestHelper";
 
-
 const restHelper = new RestHelper();
 
-
 export default {
-    name: "AdminShowCommentID",
+	name: "AdminShowCommentID",
 
-    data() {
-        return {
-            URL_AVATARS: config.URL_AVATARS,
-            commentId: this.$route.params.id,
+	data() {
+		return {
+			URL_AVATARS: config.URL_AVATARS,
+			commentId: this.$route.params.id,
 
-            commitsId: {},
-            propsDisabled: {
-                textareaDisabled: true,
-                saveBtnDisabled: true,
-                publicBtn: "",
-                notPublicBtn: "",
-            }
-        }
-    },
+			commitsId: {},
+			propsDisabled: {
+				textareaDisabled: true,
+				saveBtnDisabled: true,
+				publicBtn: "",
+				notPublicBtn: ""
+			}
+		};
+	},
 
-    created() {
-        this.getCommitsId();
-    },
+	created() {
+		this.getCommitsId();
+	},
 
-    methods: {
+	methods: {
+		getCommitsId: async function() {
+			const url = "/comments/" + this.commentId;
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseCommitsId(data.data);
+				// console.log(data.data)
+			} catch (e) {
+				console.error("ERROR AdminShowCommentID/getCommitsId:", e);
+			}
+		},
 
-        getCommitsId: async function() {
-            const url = "/comments/" + this.commentId;
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseCommitsId(data.data);
-                // console.log(data.data)
-            } catch(e) {
-                console.error("ERROR AdminShowCommentID/getCommitsId:", e);
-            }
-        },
+		parseCommitsId: function(data) {
+			this.commitsId = {};
+			this.commitsId = {
+				id: data.id,
+				idTo: data.nominationOrderId,
+				idFrom: data.userFromId,
+				toNameRu: "",
+				toNameEn: "",
+				imgTo: "",
+				comment: data.comment,
+				imgFrom: "",
+				nameFromRu: "",
+				nameFromEn: "",
+				public: data.public
+			};
+			if (this.commitsId.public == false) {
+				this.propsDisabled.notPublicBtn = true;
+				this.propsDisabled.publicBtn = false;
+			} else {
+				this.propsDisabled.notPublicBtn = false;
+				this.propsDisabled.publicBtn = true;
+			}
+			this.getFromUser(this.commitsId.idFrom);
+			this.getNominationOrderId(this.commitsId.idTo);
+		},
 
-        parseCommitsId: function(data) {
-            this.commitsId = {}
-            this.commitsId = {
-                id: data.id,
-                idTo: data.nominationOrderId,
-                idFrom: data.userFromId,
-                toNameRu: '',
-                toNameEn: '',
-                imgTo: '',
-                comment: data.comment,
-                imgFrom: '',
-                nameFromRu: '',
-                nameFromEn: '',
-                public: data.public,
-            };
-            if (this.commitsId.public == false) {
-                this.propsDisabled.notPublicBtn = true
-                this.propsDisabled.publicBtn = false
-            } else {
-                this.propsDisabled.notPublicBtn = false
-                this.propsDisabled.publicBtn = true
-            }
-            this.getFromUser(this.commitsId.idFrom)
-            this.getNominationOrderId(this.commitsId.idTo)
-        },
+		getFromUser: async function(data) {
+			const url = "/users/" + data;
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseFromUser(data.data);
+				// console.log(data)
+			} catch (e) {
+				console.error("ERROR AdminShowCommentID/getFromUser:", e);
+			}
+		},
 
-        getFromUser: async function(data) {
-            const url = "/users/" + data;
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseFromUser(data.data);
-                // console.log(data)
-            } catch(e) {
-                console.error("ERROR AdminShowCommentID/getFromUser:", e);
-            }
-        },
+		parseFromUser: function(data) {
+			this.commitsId.imgFrom = data.img ? data.img : "null.png";
+			this.commitsId.nameFromRu = data.lastnameRu + " " + data.firstnameRu;
+			this.commitsId.nameFromEn = data.lastnameEn + " " + data.firstnameEn;
+			// console.log(this.commitsId)
+		},
 
-        parseFromUser: function(data) {
-            this.commitsId.imgFrom = data.img? data.img: "null.png"
-            this.commitsId.nameFromRu = data.lastnameRu + " " + data.firstnameRu
-            this.commitsId.nameFromEn = data.lastnameEn + " " + data.firstnameEn
-            // console.log(this.commitsId)
-        },
+		getNominationOrderId: async function(data) {
+			const url = "/nomination-order/" + data;
+			try {
+				const data = await restHelper.getEntity(url, true);
+				this.parseNominationOrderId(data.data);
+				// console.log(data.data)
+			} catch (e) {
+				console.error("ERROR AdminShowCommentID/getFromUser:", e);
+			}
+		},
 
-        getNominationOrderId: async function(data) {
-            const url = "/nomination-order/" + data;
-            try {
-                const data = await restHelper.getEntity(url, true);
-                this.parseNominationOrderId(data.data);
-                // console.log(data.data)
-            } catch(e) {
-                console.error("ERROR AdminShowCommentID/getFromUser:", e);
-            }
-        },
+		parseNominationOrderId: function(data) {
+			this.commitsId.imgTo = data.user.img;
+			this.commitsId.toNameRu =
+				data.user.lastnameRu + " " + data.user.firstnameRu;
+			this.commitsId.toNameEn =
+				data.user.lastnameEn + " " + data.user.firstnameEn;
+			// console.log(data)
+		},
 
-        parseNominationOrderId: function(data) {
-            this.commitsId.imgTo = data.user.img
-            this.commitsId.toNameRu = data.user.lastnameRu + " " + data.user.firstnameRu
-            this.commitsId.toNameEn = data.user.lastnameEn + " " + data.user.firstnameEn
-            // console.log(data)
-        },
+		disabledNone: function() {
+			this.propsDisabled.textareaDisabled = false;
+			this.propsDisabled.saveBtnDisabled = false;
+		},
 
-        disabledNone: function() {
-            this.propsDisabled.textareaDisabled = false
-            this.propsDisabled.saveBtnDisabled = false
-        },
+		saveNewData: async function(props) {
+			let data = {};
+			switch (props) {
+				case "save":
+					data = { comment: this.commitsId.comment };
+					break;
+				case "public":
+					data = { public: true };
+					break;
+				case "notPublic":
+					data = { public: false };
+					break;
+			}
 
-        saveNewData: async function(props) {
-            let  data= {}
-            switch(props){
-                case "save": data = {"comment": this.commitsId.comment}
-                    break
-                case "public": data = {"public": true}
-                    break
-                case "notPublic": data = {"public": false}
-                    break
-            }
-            
-            const url = "/comments/" + this.commentId;
-				try {
-					const postNewData = await axios.patch(
-						config.API_URL + url,
-						data,
-						{ headers: {
-								Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-							}
-						},
-                    );
-                    if (props == "save") {
-                        this.propsDisabled.textareaDisabled = true
-                        this.propsDisabled.saveBtnDisabled = true
-                        alert("Комментарий успешно сохранен")
-                    }
-                    if (props == "public") {
-                        this.propsDisabled.notPublicBtn = false
-                        this.propsDisabled.publicBtn = true
-                        alert("Комментарий успешно опубликован")
-                    }
-                    if (props == "notPublic") {
-                        this.propsDisabled.notPublicBtn = true
-                        this.propsDisabled.publicBtn = false
-                        alert("Комментарий успешно снят с публикации")
-                    }  
-                    console.log(postNewData)
-				} catch(e) {
-					console.error("ERROR AdminShowCommentID/saveNewData:", e);
+			const url = "/comments/" + this.commentId;
+			try {
+				const postNewData = await axios.patch(config.API_URL + url, data, {
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem("jwt")
+					}
+				});
+				if (props == "save") {
+					this.propsDisabled.textareaDisabled = true;
+					this.propsDisabled.saveBtnDisabled = true;
+					alert("Комментарий успешно сохранен");
 				}
-        }
-    }
-}
+				if (props == "public") {
+					this.propsDisabled.notPublicBtn = false;
+					this.propsDisabled.publicBtn = true;
+					alert("Комментарий успешно опубликован");
+				}
+				if (props == "notPublic") {
+					this.propsDisabled.notPublicBtn = true;
+					this.propsDisabled.publicBtn = false;
+					alert("Комментарий успешно снят с публикации");
+				}
+				console.log(postNewData);
+			} catch (e) {
+				console.error("ERROR AdminShowCommentID/saveNewData:", e);
+			}
+		}
+	}
+};
 </script>
 
 <style lang="sass" scoped>
@@ -242,7 +241,7 @@ export default {
         &_boxArrow
             margin: 0 15px
             flex-direction: row
-            .mdi-circle 
+            .mdi-circle
                 font-size: 15px
                 color: #ffb900
                 margin-right: 15px
@@ -265,7 +264,7 @@ export default {
             max-height: 100px
             width: 100%
             height: 100%
-            object-fit: cover 
+            object-fit: cover
 .UserArgumentation
     .nominationText
         display: flex
