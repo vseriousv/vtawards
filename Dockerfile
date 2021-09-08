@@ -6,4 +6,5 @@ RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 8080
+RUN echo 'run http-server dist on port:8080'
 CMD [ "http-server", "dist" ]
