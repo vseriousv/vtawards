@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    container_name: vtaward-web
+    env_file:
+      - ../envs/vtaward-web.env
+    restart: always
+    network_mode: host
+    command:
+      "http-server dist"
