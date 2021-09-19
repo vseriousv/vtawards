@@ -263,7 +263,7 @@
 								</v-list-item>
 
 								<v-list-item class="userData__item">
-									<p class="mb-0">Section:</p>
+									<p class="mb-0">Department:</p>
 									<BtnContainerCardUserId
 										:model="userID.section_en"
 										tableLine="sectionNameEng"
@@ -272,7 +272,7 @@
 								</v-list-item>
 
 								<v-list-item class="userData__item mb-2">
-									<p class="mb-0">State:</p>
+									<p class="mb-0">Region:</p>
 									<v-autocomplete
 										class="mx-3 userData__input userData__input_autocomplete"
 										v-model="userID.stateId"

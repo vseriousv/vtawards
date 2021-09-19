@@ -126,9 +126,9 @@ export default {
 			for (let i = 0; i < data.length; i++) {
 				// Специальные условия:
 				let regionText_ru = "";
-				if (data[i].id === 3) {
+				if (data[i].id === 8) {
 					regionText_ru = data[i].value_en;
-				} else if (data[i].id === 2) {
+				} else if (data[i].id === 3) {
 					regionText_ru = "Дальний Восток";
 				} else {
 					regionText_ru = data[i].value_ru;
@@ -415,56 +415,56 @@ export default {
 	background-color: #fdcc08;
 }
 
-.headoffice,
-.state_6 {
-	left: 10%;
-	top: 72%;
-}
-
-.kuzbass,
-.state_4 {
-	left: 19%;
-	top: 78%;
-}
-
-.zapsib,
-.state_7 {
-	left: 16%;
-	top: 64%;
-}
-
 .westsib,
 .state_1 {
 	left: 36%;
 	top: 74%;
 }
 
-.yakutia,
-.state_8 {
-	left: 65%;
-	top: 48%;
+.headoffice,
+.state_2 {
+	left: 10%;
+	top: 72%;
 }
 
 .fareast,
-.state_2 {
+.state_3 {
 	left: 78%;
 	top: 22%;
 }
 
-.fareast a::before {
-	display: none;
-}
-
 .krasnoyarsk,
-.state_5 {
+.state_4 {
 	top: 47%;
 	left: 30%;
 }
 
+.kuzbass,
+.state_5 {
+	left: 19%;
+	top: 78%;
+}
+
+.zapsib,
+.state_6 {
+	left: 16%;
+	top: 64%;
+}
+
+.yakutia,
+.state_7 {
+	left: 65%;
+	top: 48%;
+}
+
 .novokuz,
-.state_3 {
+.state_8 {
 	left: 19%;
 	top: 86%;
+}
+
+.fareast a::before {
+	display: none;
 }
 
 .strong-state {

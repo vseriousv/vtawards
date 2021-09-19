@@ -17,7 +17,7 @@ import CommitteePage from "./pages/CommitteePage";
 import ArchiveWinnerPage from "./pages/ArchiveWinnerPage";
 // import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
-// import ApplicationPage from "./pages/ApplicationPage";
+import ApplicationPage from "./pages/ApplicationPage";
 import RestorePasswordPage from "./pages/RestorePasswordPage";
 import MyProflePage from "./pages/MyProflePage";
 
@@ -115,24 +115,24 @@ const routes = [
 		},
 		meta: { requiresAuth: true }
 	},
-	// {
-	//   path: "/application",
-	//   name: "application",
-	//   components: {
-	//     adminPanel: AdminPanel,
-	//     header: HeaderBlockOtherPage,
-	//     body: ApplicationPage,
-	//     nav: AppHeader,
-	//     footer: FooterBlock
-	//   },
-	//   props: {
-	//     header: {
-	//       headName_en: "Filing an application",
-	//       headName_ru: "Подача заявки"
-	//     }
-	//   },
-	//   meta: { requiresAuth: true }
-	// },
+	{
+	  path: "/application",
+	  name: "application",
+	  components: {
+	    adminPanel: AdminPanel,
+	    header: HeaderBlockOtherPage,
+	    body: ApplicationPage,
+	    nav: AppHeader,
+	    footer: FooterBlock
+	  },
+	  props: {
+	    header: {
+	      headName_en: "Filing an application",
+	      headName_ru: "Подача заявки"
+	    }
+	  },
+	  meta: { requiresAuth: true }
+	},
 	{
 		path: "/committee",
 		name: "committee",

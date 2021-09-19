@@ -1,4 +1,4 @@
-<template lang="pug"> 
+<template lang="pug">
     v-container.containerWinner
         h2.mb-4(v-html='$t("archiveBlock.archiveBlockTitle")')
         p.containerWinner__subTitle(v-html='$t("archiveBlock.archiveBlockSubTitle")')
@@ -13,6 +13,7 @@
                 )
                 img.boxWinner__imgWinner(:src=`item.imgWinner` :class=`"boxWinner__imgWinner__" + item.id`)
                 p.boxWinner__yearWinner {{item.year}}
+                p.boxWinner__nominationWinner {{item.nomination}}
                 p.boxWinner__nameWinner {{item.name}}
                 p.boxWinner__positionWinner {{item.position}}
             v-col.boxWinner(
@@ -25,9 +26,10 @@
                 )
                 img.boxWinner__imgWinner(:src=`item.imgWinner` :class=`"boxWinner__imgWinner__" + item.id`)
                 p.boxWinner__yearWinner {{item.year}}
+                p.boxWinner__nominationWinner {{item.nomination}}
                 p.boxWinner__nameWinner {{item.name}}
-                p.boxWinner__positionWinner {{item.position}}    
-                
+                p.boxWinner__positionWinner {{item.position}}
+
 </template>
 
 <script>
@@ -88,6 +90,12 @@ export default {
 	}
 	&__yearWinner {
 		font-size: 18px;
+		margin-bottom: 4px;
+		color: $primaryColor;
+		font-weight: bold;
+	}
+	&__nominationWinner {
+		font-size: 12px;
 		margin-bottom: 4px;
 		color: $primaryColor;
 		font-weight: bold;

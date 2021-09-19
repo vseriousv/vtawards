@@ -36,7 +36,8 @@
 							<v-btn color="warning" @click="sendHandler" large>
 								{{ $t("loginBlock.form.submit") }}
 							</v-btn>
-							<span class="Error">{{ errorStr }}</span>
+							<span v-if="$t('lang') === 'ru'" class="Error error_ru">{{ errorStrRu }}</span>
+							<span v-if="$t('lang') === 'en'" class="Error error_en">{{ errorStrEn }}</span>
 						</div>
 					</v-form>
 				</v-col>
@@ -66,7 +67,8 @@ export default {
 				required: value => !!value || "required"
 			},
 			showPass: false,
-			errorStr: ""
+			errorStrRu: "",
+			errorStrEn: ""
 		};
 	},
 	methods: {
@@ -74,11 +76,12 @@ export default {
 			this.errorStr = "";
 			const url = config.API_URL + "/users/login";
 			const dataSend = {
-				tabNumber: this.tabNumber,
-				password: this.password
+				tabNumber: this.tabNumber.trim().toUpperCase(),
+				password: this.password.trim()
 			};
 			if (this.tabNumber === "" || this.password === "") {
-				this.errorStr = "Все поля обязательны для заполнения";
+				this.errorStrRu = "Все поля обязательны для заполнения";
+				this.errorStrEn = "All fields are required";
 			} else {
 				axios
 					.post(url, dataSend)
@@ -90,9 +93,11 @@ export default {
 					})
 					.catch(error => {
 						if (error.response.status === 400) {
-							this.errorStr = "Неправильные Email или пароль";
+							this.errorStrRu = "Неправильные таб номер или пароль";
+							this.errorStrEn = "Incorrect tab number or password";
 						} else {
-							this.errorStr = error.response.status + "";
+							this.errorStrRu = error.response.status + "";
+							this.errorStrEn = error.response.status + "";
 						}
 					});
 			}

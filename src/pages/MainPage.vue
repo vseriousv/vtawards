@@ -1,9 +1,9 @@
 <template>
 	<div>
+<!--		<info-block />-->
 		<start-voting />
-		<!--    <info-block />-->
-		<!--&lt;!&ndash;    {text: 'Финал', value: 'final_voting'},                     &ndash;&gt;-->
-		<!--    <winner-block voting_id="4"/>-->
+<!--		    {text: 'Финал', value: 'final_voting'},-->
+<!--		<winner-block voting_id="4"/>-->
 		<!--&lt;!&ndash;    {text: 'Полуфинал', value: 'semifinal_voting'},             &ndash;&gt;-->
 		<!--    <winners-all-block voting_id="5"/>-->
 		<!--&lt;!&ndash;    {text: 'Осень "звезда"', value: 'autumn_committee_voting'}, &ndash;&gt;-->
