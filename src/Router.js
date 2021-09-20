@@ -15,7 +15,7 @@ import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
 import CommitteePage from "./pages/CommitteePage";
 import ArchiveWinnerPage from "./pages/ArchiveWinnerPage";
-// import ParticipantsPage from "./pages/ParticipantsPage";
+import ParticipantsPage from "./pages/ParticipantsPage";
 import ParticipantBlockID from "./components/ParticipantsBlock/ParticipantBlockID";
 import ApplicationPage from "./pages/ApplicationPage";
 import RestorePasswordPage from "./pages/RestorePasswordPage";
@@ -151,24 +151,24 @@ const routes = [
 		},
 		meta: { requiresAuth: true }
 	},
-	// {
-	// 	path: "/participants",
-	// 	name: "participants",
-	// 	components: {
-	// 		adminPanel: AdminPanel,
-	// 		header: HeaderBlockOtherPage,
-	// 		body: ParticipantsPage,
-	// 		nav: AppHeader,
-	// 		footer: FooterBlock
-	// 	},
-	// 	props: {
-	// 		header: {
-	// 			headName_en: "Participants",
-	// 			headName_ru: "Участники"
-	// 		}
-	// 	},
-	// 	meta: {requiresAuth: true}
-	// },
+	{
+		path: "/participants",
+		name: "participants",
+		components: {
+			adminPanel: AdminPanel,
+			header: HeaderBlockOtherPage,
+			body: ParticipantsPage,
+			nav: AppHeader,
+			footer: FooterBlock
+		},
+		props: {
+			header: {
+				headName_en: "Participants",
+				headName_ru: "Участники"
+			}
+		},
+		meta: {requiresAuth: true}
+	},
 	{
 		path: "/nomination-order/id/:id",
 		name: "nomination-order-id",

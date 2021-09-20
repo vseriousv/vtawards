@@ -184,7 +184,6 @@ export default {
 			try {
 				const data = await restHelper.getEntity(url, true);
 				this.parseNominationArray(data.data);
-				// console.log(data)
 			} catch (e) {
 				console.error("ERROR ParticipantsBlock/getNomination:", e);
 			}
