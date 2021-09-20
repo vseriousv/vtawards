@@ -365,7 +365,7 @@ export default {
 		drawer: {},
 		header: {
 			logotype: "VT_Logo_eng",
-			head: "Change Maker 2020",
+			head: "Change Maker 2021",
 			subHeadText: `Shine a light on your talents!`,
 			bodyText:
 				"The main award of Vostochnaya Technica, presented to employees for outstanding achievements and innovative initiatives since 2005.",
@@ -518,7 +518,7 @@ export default {
               </p> `
 		},
 		NominationBlock: {
-			head: "Categories 2020",
+			head: "Categories 2021",
 			headText:
 				"Any employee or structural subdivision of Vostochnaya Technica Group can nominate a candidate in any of the three categories. There is no limit as to the number of applications one person may submit.",
 			liderNom: `<p>Achievements</br>and Leadership</p>`,

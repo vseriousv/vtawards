@@ -27,7 +27,8 @@ export default {
 			nominationItemsRu: [],
 			nominationItemsEng: [],
 			isMyCard: this.$route.params.id === jwtHelper.jwtParse().id,
-			file: ""
+			file: "",
+			fileName: "",
 		};
 	},
 
