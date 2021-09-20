@@ -376,7 +376,7 @@ export default {
 			},
 			statusVote: {
 				statusEnd: "Voting is closed",
-				statusProc: "The on-line voting is over",
+				statusProc: "The on-line voting will be open soon",
 				statusStart: "There is a vote",
 				statusCancel: "Until the end of the vote left",
 				statusCancelOrders:
