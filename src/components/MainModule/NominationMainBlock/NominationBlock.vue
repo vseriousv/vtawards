@@ -1,88 +1,88 @@
 <template lang="pug">
 
-section.nomination#nomination
-  v-dialog(
-    v-model="dialog"
-    max-width="900"
-    )
-    NominationModal(
-      :nomtitle="nomtitle"
-      :nomtext="nomtext"
-      @dialogShow="dialogShow"
-    )
-  div.mxw1200.nomination-container
-    div.nomination-text
-      h2 {{$t('NominationBlock.head')}}
-      p {{$t('NominationBlock.headText')}}
-      //- router-link(to="/application")
-      //-   input(
-      //-     type="button"
-      //-     id="headerBtn"
-      //-     class="body-button_col__button"
-      //-     :value="$t('header.btnHeader.text')"
-      //-   )
-    div.nomination-icons
-      ul.nomination-list
-        li.nomination-list-item
-          a(@click.stop="dialogShow(true, 'attrLeader')")
-            img(
-              src="/img/imgComponents/StartVoting/networking.svg"
-              alt="Достижения и лидерство"
-              width="58"
-              height="58"
-            )
-            p(v-html="$t('NominationBlock.liderNom')")
+	section.nomination#nomination
+		v-dialog(
+			v-model="dialog"
+			max-width="900"
+		)
+			NominationModal(
+				:nomtitle="nomtitle"
+				:nomtext="nomtext"
+				@dialogShow="dialogShow"
+			)
+		div.mxw1200.nomination-container
+			div.nomination-text
+				h2 {{$t('NominationBlock.head')}}
+				p {{$t('NominationBlock.headText')}}
+				router-link(to="/application")
+					input(
+						type="button"
+						id="headerBtn"
+						class="body-button_col__button"
+						:value="$t('header.btnHeader.text')"
+					)
+			div.nomination-icons
+				ul.nomination-list
+					li.nomination-list-item
+						a(@click.stop="dialogShow(true, 'attrLeader')")
+							img(
+								src="/img/imgComponents/StartVoting/networking.svg"
+								alt="Достижения и лидерство"
+								width="58"
+								height="58"
+							)
+							p(v-html="$t('NominationBlock.liderNom')")
 
-        li.nomination-list-item
-          a(@click.stop="dialogShow(true, 'attrProfi')")
-            img(
-              src="/img/imgComponents/StartVoting/creative.svg"
-              alt="Профессионализм и новации"
-              width="58"
-              height="58"
-            )
-            p(v-html="$t('NominationBlock.professionalNom')")
-                    
-        li.nomination-list-item
-          a(@click.stop="dialogShow(true, 'attrGoldman')")
-            img(
-              src="/img/imgComponents/StartVoting/goal.svg"
-              alt="Золотой человек"
-              width="58"
-              height="58"
-            )
-            p(v-html="$t('NominationBlock.goldManNom')")
+					li.nomination-list-item
+						a(@click.stop="dialogShow(true, 'attrProfi')")
+							img(
+								src="/img/imgComponents/StartVoting/creative.svg"
+								alt="Профессионализм и новации"
+								width="58"
+								height="58"
+							)
+							p(v-html="$t('NominationBlock.professionalNom')")
+
+					li.nomination-list-item
+						a(@click.stop="dialogShow(true, 'attrGoldman')")
+							img(
+								src="/img/imgComponents/StartVoting/goal.svg"
+								alt="Золотой человек"
+								width="58"
+								height="58"
+							)
+							p(v-html="$t('NominationBlock.goldManNom')")
 </template>
 
 <script>
-import NominationModal from "./NominationModal";
+import NominationModal from './NominationModal';
 
 export default {
-	name: "NominationMainBlock",
+	name: 'NominationMainBlock',
 
 	data() {
 		return {
 			dialog: false,
-			nomtitle: "",
-			nomtext: ""
+			nomtitle: '',
+			nomtext: ''
 		};
 	},
 
 	methods: {
-		dialogShow: function(isTrue, name) {
+		dialogShow: function (isTrue, name) {
 			this.dialog = isTrue;
 			switch (name) {
-				case "attrLeader":
-					this.nomtitle = this.$t("NominationBlock.liderNomTitle");
-					this.nomtext = this.$t("NominationBlock.liderNomText");
+				case 'attrLeader':
+					this.nomtitle = this.$t('NominationBlock.liderNomTitle');
+					this.nomtext = this.$t('NominationBlock.liderNomText');
 					break;
-				case "attrProfi":
-					this.nomtitle = this.$t("NominationBlock.professionalNomTitle");
-					this.nomtext = this.$t("NominationBlock.professionalNomText");
+				case 'attrProfi':
+					this.nomtitle = this.$t('NominationBlock.professionalNomTitle');
+					this.nomtext = this.$t('NominationBlock.professionalNomText');
 					break;
-				case "attrGoldman":
-					this.nomtitle = this.$t("NominationBlock.goldManNomTitle");
-					this.nomtext = this.$t("NominationBlock.goldManNomText");
+				case 'attrGoldman':
+					this.nomtitle = this.$t('NominationBlock.goldManNomTitle');
+					this.nomtext = this.$t('NominationBlock.goldManNomText');
 					break;
 				default:
 					break;
@@ -99,6 +99,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/styles/index";
 @import "../../../assets/styles/StartVotingOther";
+
 .nomination {
 	padding-top: 100px;
 	padding-bottom: 90px;
@@ -198,9 +199,9 @@ export default {
 
 .nomination-list-item:hover::before {
 	-webkit-box-shadow: -15px 15px 0px rgba(255, 185, 0, 0.6),
-		0px 15px 0px rgba(255, 185, 0, 0.3);
+	0px 15px 0px rgba(255, 185, 0, 0.3);
 	box-shadow: -15px 15px 0px rgba(255, 185, 0, 0.6),
-		0px 15px 0px rgba(255, 185, 0, 0.3);
+	0px 15px 0px rgba(255, 185, 0, 0.3);
 }
 
 .nomination-icons .btn {
@@ -301,6 +302,7 @@ export default {
 		display: none;
 	}
 }
+
 .body-button_col__button {
 	color: black;
 	width: 220px;
@@ -308,6 +310,7 @@ export default {
 	border: 1px solid black;
 	border-radius: 5px;
 	transition: 0.2s;
+
 	&:hover {
 		transition: 0.2s;
 		color: black;

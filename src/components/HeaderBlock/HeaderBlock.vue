@@ -80,25 +80,26 @@
 			<v-row class="body-voteStatus">
 				<v-col class="body-voteStatus_col d-flex flex-column align-start">
 <!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>-->
-<!--					<div class="Timer-view d-flex">-->
-<!--						<div class="boxTime">-->
-<!--							<p class="boxTime__title">{{$t("header.time.d")}}</p>-->
-<!--							<span class="Timer-view__card days">{{timer.days}}</span>-->
-<!--						</div>-->
-<!--						<div class="boxTime">-->
-<!--							<p class="boxTime__title">{{$t("header.time.hr")}}</p>-->
-<!--							<span class="Timer-view__card hours">{{timer.hours}}</span>-->
-<!--						</div>-->
-<!--						<div class="boxTime">-->
-<!--							<p class="boxTime__title">{{$t("header.time.min")}}</p>-->
-<!--							<span class="Timer-view__card minutes">{{timer.minutes}}</span>-->
-<!--						</div>-->
-<!--						<div class="boxTime">-->
-<!--							<p class="boxTime__title">{{$t("header.time.sec")}}</p>-->
-<!--							<span class="Timer-view__card seconds">{{timer.seconds}}</span>-->
-<!--						</div>-->
-<!--					</div>-->
-					<p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p>
+					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>
+					<div class="Timer-view d-flex">
+						<div class="boxTime">
+							<p class="boxTime__title">{{$t("header.time.d")}}</p>
+							<span class="Timer-view__card days">{{timer.days}}</span>
+						</div>
+						<div class="boxTime">
+							<p class="boxTime__title">{{$t("header.time.hr")}}</p>
+							<span class="Timer-view__card hours">{{timer.hours}}</span>
+						</div>
+						<div class="boxTime">
+							<p class="boxTime__title">{{$t("header.time.min")}}</p>
+							<span class="Timer-view__card minutes">{{timer.minutes}}</span>
+						</div>
+						<div class="boxTime">
+							<p class="boxTime__title">{{$t("header.time.sec")}}</p>
+							<span class="Timer-view__card seconds">{{timer.seconds}}</span>
+						</div>
+					</div>
+<!--					<p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p>-->
 					<!-- <p class="body-voteStatus_col__text application_end">{{ $t("header.statusVote.statusApplicEnd") }}</p> -->
 				</v-col>
 			</v-row>
@@ -132,7 +133,7 @@ export default {
 	methods: {
 		getLastTime: function() {
 			let nowDate = new Date();
-			let achiveDate = new Date(2020, 10, 6, 23, 59, 59);
+			let achiveDate = new Date(2021, 9, 10, 23, 59, 59);
 			let result = achiveDate - nowDate + 1000;
 			if (result < 0) {
 				this.timer.seconds = "--";

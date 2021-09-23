@@ -56,7 +56,7 @@ export default {
 
 	methods: {
 		getUser: async function() {
-			const url = "/users";
+			const url = "/users?isadmin=true";
 			try {
 				const { data } = await restHelper.getEntity(url, true);
 				this.setUserArray(data);
