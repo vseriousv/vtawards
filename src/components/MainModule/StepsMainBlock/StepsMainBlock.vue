@@ -17,7 +17,7 @@ section.steps#steps
       li.steps-list-item.active-step(@click.stop="dialogShow(true, 'regionalStage')")
         .steps-list-item-title
           .step-number I
-          p.step-date 10.10 - 28.10.2021
+          p.step-date 24.09 - 15.10.2021
           img.step-img(
             src="/img/imgComponents/StartVoting/starofteam_ball_transparent.png"
             width="50"
@@ -29,7 +29,7 @@ section.steps#steps
       li.steps-list-item(@click.stop="dialogShow(true, 'semifinal')")
         .steps-list-item-title
           .step-number II
-          p.step-date 23.11 - 27.11.2021
+          p.step-date 18.10 - 29.10.2021
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
@@ -40,7 +40,7 @@ section.steps#steps
       li.steps-list-item(@click.stop="dialogShow(true, 'final')")
         .steps-list-item-title
           .step-number III
-          p.step-date
+          p.step-date 15.11 - 26.11.2021
           img.step-img(
             src="/img/imgComponents/StartVoting/leader_ball.png"
             width="50"
