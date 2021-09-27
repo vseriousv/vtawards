@@ -17,7 +17,7 @@ section.steps#steps
       li.steps-list-item.active-step(@click.stop="dialogShow(true, 'regionalStage')")
         .steps-list-item-title
           .step-number I
-          p.step-date 24.09 - 15.10.2021
+          p.step-date 27.09 - 15.10.2021
           img.step-img(
             src="/img/imgComponents/StartVoting/starofteam_ball_transparent.png"
             width="50"
