@@ -133,11 +133,11 @@ export default {
 	methods: {
 		getLastTime: function() {
 			let nowDate = new Date();
-			const nowDateTime = nowDate.getTime();
-			const utcOffset = nowDate.getTimezoneOffset() * 60 * 1000;
-			const nowUtcDate = nowDateTime + utcOffset;
-			let achiveDate = new Date(2021, 9, 15, 23, 59, 59);
-			let result = achiveDate - new Date(nowUtcDate) + 1000;
+			let archiveDate = new Date(2021, 9, 16, 3, 59, 59);
+			const archiveTime = archiveDate.getTime();
+			const utcOffset = archiveDate.getTimezoneOffset() * 60 * 1000;
+			const archiveUtcDate = archiveTime + utcOffset;
+			let result = new Date(archiveUtcDate) - nowDate + 1000;
 			if (result < 0) {
 				this.timer.seconds = "--";
 				this.timer.minutes = "--";
