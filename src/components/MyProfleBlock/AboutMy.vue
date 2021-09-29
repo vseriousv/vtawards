@@ -10,14 +10,14 @@
                             p {{ $t("nameButton.change") }}
                             input.addImg__btn(type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()")
                     p.aboutMy__description.mt-3(v-if="$t('lang') === 'ru'") Имя файла: {{this.fileName}}
-                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'en'") File name: {{this.fileName}}     
+                    p.aboutMy__description.mt-3(v-if="$t('lang') === 'en'") File name: {{this.fileName}}
                     .aboutMy__saveAll
                         v-btn.mx-1(
                             style="min-width: 115px;"
                             x-small
                             color="primary"
                             @click.stop="saveNewAvatar") {{ $t("nameButton.save") }}
-                
+
                 .aboutMy__content.contentMy
                     v-simple-table
                         tbody.contentMy__info
@@ -30,7 +30,7 @@
                                     span.c-font-16(
                                         v-if="$t('lang') === 'en'"
                                     ) &ensp;{{ user.name_en }}
-                            
+
                             tr.contentMy__position
                                 td
                                     span.c-font-16 {{ $t("loginBlock.form.position") }}:
@@ -69,7 +69,7 @@
                                     ) &ensp;{{ user.city_ru }}
                                     span.c-font-16(
                                         v-if="$t('lang') === 'en'"
-                                    ) &ensp;{{ user.city_en }} 
+                                    ) &ensp;{{ user.city_en }}
                     .aboutMy__myPassword.passwordBox.mt-3
                         .passwordBox__input
                             p.mr-3(v-if="$t('lang') === 'ru'") Мой пароль
@@ -90,8 +90,8 @@
                             :disabled='btnDisabled.saveData'
                             color="primary"
                             @click.stop="savePassword") {{ $t("nameButton.save") }}
-                        
-                        
+
+
 </template>
 
 <script>
