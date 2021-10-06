@@ -28,7 +28,7 @@
 					item-text="text"
 					item-value="value"
 					:items="$t('lang') === 'ru'? statesRu: statesEn"
-					:label="$t('lang') === 'ru'? 'Выбрать регион': 'Select State'"
+					:label="$t('lang') === 'ru'? 'Выбрать регион': 'Select region'"
 					dense
 					outlined
 				)
