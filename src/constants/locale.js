@@ -334,12 +334,12 @@ export default {
 			//   link: "/committee",
 			//   target: "_self"
 			// },
-			// {
-			// 	id: 4,
-			// 	text: "Участники",
-			// 	link: "/participants",
-			// 	target: "_self"
-			// },
+			{
+				id: 4,
+				text: "Участники",
+				link: "/participants",
+				target: "_self"
+			},
 			{
 				id: 5,
 				text: "Архив победителей",

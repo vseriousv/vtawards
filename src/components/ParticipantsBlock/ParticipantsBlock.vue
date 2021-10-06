@@ -31,7 +31,6 @@
 					:label="$t('lang') === 'ru'? 'Выбрать регион': 'Select State'"
 					dense
 					outlined
-					disabled
 				)
 
 		v-row

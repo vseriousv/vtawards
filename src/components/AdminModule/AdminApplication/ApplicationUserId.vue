@@ -437,7 +437,7 @@ section
 								v-model="argumentationTextRu"
 								name="argumentationTextRu"
 								style="max-width: 500px;"
-								:disabled="this.argumentationFixRu"
+								:readonly="this.argumentationFixRu"
 								:label=`$t("ApplicationForm.commentPost")`
 								outlined
 							)
@@ -459,7 +459,7 @@ section
 								v-model="argumentationTextEn"
 								name="argumentationTextEn"
 								style="max-width: 500px;"
-								:disabled="this.argumentationFixEn"
+								:readonly="this.argumentationFixEn"
 								:label=`$t("ApplicationForm.commentPost")`
 								outlined
 							)
@@ -551,6 +551,7 @@ section
 .UserArgumentation
 	textarea
 		min-height: 250px
+		overflow-y: scroll
 </style>
 
 <style lang="sass" scoped>
