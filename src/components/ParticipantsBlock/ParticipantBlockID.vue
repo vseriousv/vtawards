@@ -329,8 +329,8 @@ section.ParticipiantBlockId
 											span.c-font-16
 
 					.UserCard__description(v-if="!this.isFinal")
-						p.text-left.mb-3(v-if="$t('lang') === 'ru'").text-center Голосование закончилось
-						p.text-left.mb-3(v-if="$t('lang') === 'en'").text-center Voting is over
+						p.text-left.mb-3(v-if="$t('lang') === 'ru'").text-center Голосование скоро начнется
+						p.text-left.mb-3(v-if="$t('lang') === 'en'").text-center Voting will start soon
 
 					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isFinal ")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
