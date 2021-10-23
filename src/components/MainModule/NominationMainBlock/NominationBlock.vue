@@ -14,7 +14,7 @@
 			div.nomination-text
 				h2 {{$t('NominationBlock.head')}}
 				p {{$t('NominationBlock.headText')}}
-				router-link(to="/application")
+				//router-link(to="/application")
 					input(
 						type="button"
 						id="headerBtn"
