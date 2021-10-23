@@ -57,7 +57,8 @@
 					/>
 				</div>
 				<div class="body-button ">
-					<p v-html='$t("header.btnHeader.beforeText")'></p>
+<!--					<p v-html='$t("header.btnHeader.beforeText")'></p>-->
+					<p v-html='$t("header.statusVote.statusApplicEnd")'></p>
 <!--					<a :href="`/files/${$t('header.btnHeader.link')}`" target="_blank">-->
 <!--						<input-->
 <!--							type="button"-->
@@ -66,21 +67,22 @@
 <!--							:value="$t('header.btnHeader.text')"-->
 <!--						/>-->
 <!--					</a>-->
-					<router-link to="/application">
-						<input
-							type="button"
-							id="headerBtn"
-							class="body-button_col__button"
-							:value="$t('header.btnHeader.text')"
-						/>
-					</router-link>
+<!--					<router-link to="/application">-->
+<!--						<input-->
+<!--							type="button"-->
+<!--							id="headerBtn"-->
+<!--							class="body-button_col__button"-->
+<!--							:value="$t('header.btnHeader.text')"-->
+<!--						/>-->
+<!--					</router-link>-->
 				</div>
 			</v-row>
 			<v-row class="body-button"></v-row>
 			<v-row class="body-voteStatus">
 				<v-col class="body-voteStatus_col d-flex flex-column align-start">
-<!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>-->
-					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>
+					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusProc")}}</div>
+<!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>-->
+<!--					ТАЙМЕР!!!!-->
 					<div class="Timer-view d-flex">
 						<div class="boxTime">
 							<p class="boxTime__title">{{$t("header.time.d")}}</p>
@@ -99,6 +101,7 @@
 							<span class="Timer-view__card seconds">{{timer.seconds}}</span>
 						</div>
 					</div>
+<!--					ТАЙМЕР!!!! CLOSE-->
 <!--					<p class="body-voteStatus_col__text">{{ $t("header.statusVote.statusProc") }}</p>-->
 					<!-- <p class="body-voteStatus_col__text application_end">{{ $t("header.statusVote.statusApplicEnd") }}</p> -->
 				</v-col>
