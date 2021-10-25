@@ -483,9 +483,10 @@ section
 							target="_blank"
 							:href='"http://files.vtaward.ru" + file.filePath'
 						)
-							img.UserFilesArgumentation__img(
-							:src='"http://files.vtaward.ru" + file.filePath'
-							)
+							p {{file.filePath}}
+							//img.UserFilesArgumentation__img(
+							//:src='"http://files.vtaward.ru" + file.filePath'
+							//)
 				v-card.UserCard.footerApplication.mb-5
 					p.footerApplication__text Выбрать карточку для публикации, нажимая на кнопку, карточка не будет опубликована, а добавится в избранное
 					v-btn(
