@@ -481,10 +481,10 @@ section
 							v-for="file in this.userOrder.files"
 							:key="`file${file.id}`"
 							target="_blank"
-							:href='"https://files.vtaward.ru" + file.filePath'
+							:href='"http://files.vtaward.ru" + file.filePath'
 						)
 							img.UserFilesArgumentation__img(
-							:src='"https://files.vtaward.ru" + file.filePath'
+							:src='"http://files.vtaward.ru" + file.filePath'
 							)
 				v-card.UserCard.footerApplication.mb-5
 					p.footerApplication__text Выбрать карточку для публикации, нажимая на кнопку, карточка не будет опубликована, а добавится в избранное
