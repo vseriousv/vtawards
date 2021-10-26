@@ -55,6 +55,36 @@ class JwtHelper {
 			return false;
 		}
 	}
+
+	isUser() {
+		if (this.isJwt()) {
+			const [hashJWT, dataJwt, secretJWT] = localStorage
+				.getItem("jwt")
+				.split(".");
+			Base64.decode(hashJWT);
+			Base64.decode(secretJWT);
+			const userAuthRole = JSON.parse(Base64.decode(dataJwt)).role;
+			return userAuthRole === "user";
+		} else {
+			return false;
+		}
+	}
+
+	isRight() {
+		const tabNumbersRight = ["ADMINDEV", "VNY", "BRO"];
+		if (this.isJwt()) {
+			const [hashJWT, dataJwt, secretJWT] = localStorage
+				.getItem("jwt")
+				.split(".");
+			Base64.decode(hashJWT);
+			Base64.decode(secretJWT);
+			const userTabNumber = JSON.parse(Base64.decode(dataJwt))["tab_number"];
+			const find = tabNumbersRight.findIndex((item) => item.trim().toLowerCase() === userTabNumber.trim().toLowerCase());
+			return find >= 0;
+		} else {
+			return false;
+		}
+	}
 }
 
 export default JwtHelper;

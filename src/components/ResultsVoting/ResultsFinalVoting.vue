@@ -33,7 +33,6 @@ v-container
               :label="$t('lang') === 'ru'? 'Выбрать регион': 'Select State'"
               dense
               outlined
-							disabled
             )
         v-row
           h3.px-4(v-if="filterNull && this.$t('lang') === 'ru'") Укажите оба фильтра для отображения результата
@@ -180,9 +179,9 @@ export default {
 		getNomination: async function() {
 			const url = "/nominations";
 			try {
-				const data = await restHelper.getEntity(url, true);
-				this.parseNominationArray(data.data);
-				// console.log(data)
+				const { data } = await restHelper.getEntity(url, true);
+				this.parseNominationArray(data);
+				console.log('getNomination', data)
 			} catch (e) {
 				console.error("ERROR ResultVoting/getNomination:", e);
 			}
@@ -216,8 +215,9 @@ export default {
 		getState: async function() {
 			const url = "/states";
 			try {
-				const data = await restHelper.getEntity(url, true);
-				this.parseStateArray(data.data);
+				const { data } = await restHelper.getEntity(url, true);
+				this.parseStateArray(data);
+				console.log('getState', data);
 			} catch (e) {
 				console.error("ERROR ResultVoting/getNomination:", e);
 			}

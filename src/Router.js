@@ -39,7 +39,7 @@ import ApplicationUserId from "./components/AdminModule/AdminApplication/Applica
 import AdminComments from "./components/AdminModule/AdminComments/AdminComments";
 import AdminShowCommentID from "./components/AdminModule/AdminComments/AdminShowCommentID";
 import AdminResultVoting from "./components/AdminModule/AdminResultVoting/AdminResultVoting";
-import ResultPage from "@/pages/ResultPage";
+import ResultPage from "./pages/ResultPage";
 
 Vue.use(VueRouter);
 

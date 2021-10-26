@@ -36,6 +36,8 @@ export default {
 			isAdmin: jwtHelper.isAdmin(),
 			isCommission: jwtHelper.isCommittee(),
 			isFinal: jwtHelper.isFinal(),
+			isUser: jwtHelper.isUser(),
+			isRight: jwtHelper.isRight(),
 			isMyCard: this.$route.params.id === jwtHelper.jwtParse().id
 		};
 	},
@@ -45,6 +47,12 @@ export default {
 		this.getUser();
 		this.getComments();
 		this.checkCommittee();
+		console.log('isFinal', this.isFinal);
+		console.log('isCommission', this.isCommission);
+		console.log('isMyCard', this.isMyCard);
+		console.log('isAdmin', this.isAdmin);
+		console.log('isUser', this.isUser);
+		console.log('isRight', this.isRight);
 	},
 
 	methods: {
@@ -219,9 +227,11 @@ export default {
 			const data = {
 				nominationOrderId: this.$route.params.id,
 				range: point,
-				type: "final"
+				type: "users"
+				// type: "final"
 			};
-			if (this.isAdmin || this.isFinal) {
+			if (this.isAdmin || this.isRight) {
+			// if (this.isAdmin || this.isAdmin) {
 				try {
 					await restHelper.postEntity(urn, data, true);
 					if (this.$t("lang") === "ru") {
@@ -328,14 +338,14 @@ section.ParticipiantBlockId
 											span.c-font-16.label  {{ $t("loginBlock.form.numberOrders") }}:
 											span.c-font-16
 
-					.UserCard__description(v-if="!this.isFinal")
+					.UserCard__description(v-if="!this.isRight")
 						p.text-left.mb-3(v-if="$t('lang') === 'ru'").text-center Голосование скоро начнется
 						p.text-left.mb-3(v-if="$t('lang') === 'en'").text-center Voting will start soon
 
-					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isFinal ")
+					.UserCard__description(v-if="this.errorVote && this.errorVote !== '' && this.isRight")
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
-					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isFinal")
+					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isRight")
 						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
 						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
 
