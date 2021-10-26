@@ -47,12 +47,12 @@ export default {
 		this.getUser();
 		this.getComments();
 		this.checkCommittee();
-		console.log('isFinal', this.isFinal);
-		console.log('isCommission', this.isCommission);
-		console.log('isMyCard', this.isMyCard);
-		console.log('isAdmin', this.isAdmin);
-		console.log('isUser', this.isUser);
-		console.log('isRight', this.isRight);
+		// console.log('isFinal', this.isFinal);
+		// console.log('isCommission', this.isCommission);
+		// console.log('isMyCard', this.isMyCard);
+		// console.log('isAdmin', this.isAdmin);
+		// console.log('isUser', this.isUser);
+		// console.log('isRight', this.isRight);
 	},
 
 	methods: {
@@ -98,7 +98,8 @@ export default {
 				argumentationRu: data.textRu ? data.textRu : "---",
 				argumentationEn: data.textEn ? data.textEn : "---",
 				votes: data.votes,
-				errorVote: data.errorVotes
+				errorVote: data.errorVotes,
+				files: data.files,
 			};
 			this.errorVotes(this.user.errorVote);
 			this.votes = data.votes;
@@ -390,6 +391,14 @@ section.ParticipiantBlockId
 						label='Argumentation'
 						v-html="this.user.argumentationEn"
 					)
+					.UserFilesArgumentation
+						a(
+							v-for="file in this.user.files"
+							:key="`file${file.id}`"
+							target="_blank"
+							:href='"http://files.vtaward.ru" + file.filePath'
+						)
+							p {{file.filePath}}
 
 				.UserComment.d-flex.flex-column.py-10
 					h3 {{$t("participantID.comments")}}
