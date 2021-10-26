@@ -71,7 +71,7 @@ class JwtHelper {
 	}
 
 	isRight() {
-		const tabNumbersRight = ["ADMINDEV", "VNY", "BRO"];
+		const tabNumbersRight = ["ADMINDEV", "VNY", "BRO", "LTA"];
 		if (this.isJwt()) {
 			const [hashJWT, dataJwt, secretJWT] = localStorage
 				.getItem("jwt")
