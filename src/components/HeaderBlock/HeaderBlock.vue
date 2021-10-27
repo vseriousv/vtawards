@@ -137,7 +137,7 @@ export default {
 		getLastTime: function() {
 			let nowDate = new Date();
 			// +7 часов
-			let archiveDate = new Date(2021, 10, 28, 6, 59, 59);
+			let archiveDate = new Date(2021, 11, 3, 6, 59, 59);
 			const archiveTime = archiveDate.getTime();
 			const utcOffset = archiveDate.getTimezoneOffset() * 60 * 1000;
 			const archiveUtcDate = archiveTime + utcOffset;
