@@ -21,7 +21,8 @@
 									<v-img :src="`${URL_AVATARS}${item.img}`" />
 								</v-list-item-avatar>
 								<v-list-item-content>
-									<v-list-item-title v-text="item.name_ru"></v-list-item-title>
+									<v-list-item-title v-if="$t('lang') === 'ru'" v-text="item.name_ru"></v-list-item-title>
+									<v-list-item-title v-if="$t('lang') === 'en'" v-text="item.name_en"></v-list-item-title>
 								</v-list-item-content>
 							</v-list-item>
 						</template>

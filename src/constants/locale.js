@@ -103,7 +103,8 @@ export default {
 			vote_3: "3 балла",
 			only_my_region: "Голосовать можно только за участника своего региона",
 			is_have: "Вы уже голосовали за этого номинанта",
-			no_self: "Вы не можете голосовать за себя"
+			no_self: "Вы не можете голосовать за себя",
+			cancel_your_votes: "У вас нет больше голосов в данной номинации"
 		},
 		winnerBlock: {
 			head: "Победитель голосования",
@@ -488,7 +489,8 @@ export default {
 			vote_3: "3 points",
 			only_my_region: "You can vote only for a member of your region",
 			is_have: "You have already voted for this nominee",
-			no_self: "You cannot vote for yourself."
+			no_self: "You cannot vote for yourself.",
+			cancel_your_votes: "You do not have more votes in this nomination"
 		},
 		addressMainBlock: {
 			head: "Обращение директора",
@@ -677,12 +679,12 @@ export default {
 			//   link: "/committee",
 			//   target: "_self"
 			// },
-			// {
-			// 	id: 4,
-			// 	text: "Participants",
-			// 	link: "/participants",
-			// 	target: "_self"
-			// },
+			{
+				id: 4,
+				text: "Participants",
+				link: "/participants",
+				target: "_self"
+			},
 			{
 				id: 5,
 				text: "Archive of Winners",

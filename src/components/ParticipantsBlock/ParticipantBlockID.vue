@@ -99,7 +99,7 @@ export default {
 				argumentationEn: data.textEn ? data.textEn : "---",
 				votes: data.votes,
 				errorVote: data.errorVotes,
-				files: data.files,
+				files: data.files
 			};
 			this.errorVotes(this.user.errorVote);
 			this.votes = data.votes;
@@ -347,8 +347,10 @@ section.ParticipiantBlockId
 						p.text-center.mt-3 <b>{{this.errorVote}}</b>
 
 					.UserCard__description(v-if="!this.errorVote && this.errorVote === '' && this.isRight")
-						p.text-left.mb-6(v-if="$t('lang') === 'ru'") Голосовать за <b>{{ user.name_ru }}</b>
-						p.text-left.mb-6(v-if="$t('lang') === 'en'") Vote for <b>{{ user.name_en }}</b>
+						p.text-left.mb-6(v-if="$t('lang') === 'ru' && this.votes.length > 0") Голосовать за <b>{{ user.name_ru }}</b>
+						p.text-left.mb-6(v-if="$t('lang') === 'en' && this.votes.length > 0") Vote for <b>{{ user.name_en }}</b>
+						p.text-left.mb-6(v-if="$t('lang') === 'ru' && this.votes.length <= 0") {{$t("participantID.cancel_your_votes")}}</b>
+						p.text-left.mb-6(v-if="$t('lang') === 'en' && this.votes.length <= 0") {{$t("participantID.cancel_your_votes")}}</b>
 
 						.UserCard__vote
 							.vote
