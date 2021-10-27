@@ -80,8 +80,9 @@
 			<v-row class="body-button"></v-row>
 			<v-row class="body-voteStatus">
 				<v-col class="body-voteStatus_col d-flex flex-column align-start">
-					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusProc")}}</div>
+<!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusProc")}}</div>-->
 <!--					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancelOrders")}}</div>-->
+					<div class="body-voteStatus_col__text">{{$t("header.statusVote.statusCancel")}}</div>
 <!--					ТАЙМЕР!!!!-->
 					<div class="Timer-view d-flex">
 						<div class="boxTime">
@@ -137,7 +138,7 @@ export default {
 		getLastTime: function() {
 			let nowDate = new Date();
 			// +7 часов
-			let archiveDate = new Date(2021, 11, 3, 6, 59, 59);
+			let archiveDate = new Date(2021, 10, 3, 6, 59, 59);
 			const archiveTime = archiveDate.getTime();
 			const utcOffset = archiveDate.getTimezoneOffset() * 60 * 1000;
 			const archiveUtcDate = archiveTime + utcOffset;
