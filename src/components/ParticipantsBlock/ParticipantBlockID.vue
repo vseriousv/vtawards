@@ -228,7 +228,8 @@ export default {
 			const data = {
 				nominationOrderId: this.$route.params.id,
 				range: point,
-				type: "users"
+				// type: "users"
+				type: "сommission"
 				// type: "final"
 			};
 			if (this.isAdmin || this.isRight) {

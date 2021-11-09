@@ -31,6 +31,7 @@ v-container
               item-value="value"
               :items="$t('lang') === 'ru'? statesRu: statesEn"
               :label="$t('lang') === 'ru'? 'Выбрать регион': 'Select State'"
+							disabled
               dense
               outlined
             )
@@ -73,7 +74,8 @@ export default {
 
 			statesRu: [],
 			statesEn: [],
-			statesSelect: 5555,
+			// statesSelect: 5555, // for final
+			statesSelect: 999, // for commission
 
 			nominationRu: [],
 			nominationEn: [],

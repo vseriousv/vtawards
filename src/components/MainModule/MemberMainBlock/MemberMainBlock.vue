@@ -146,7 +146,8 @@ export default {
 		},
 
 		getParticipants: async function() {
-			const url = `/nomination-order/public?filter={"nominationId":0,"stateId":0}`;
+			// const url = `/nomination-order/public?filter={"nominationId":0,"stateId":0}`; // для первого этапа
+			const url = `/nomination-order/step2?filter={"nominationId":0,"stateId":0}`; // для второго этапа
 			try {
 				const { data } = await restHelper.getEntity(url, true);
 				// console.log("dssd",data.rows)

@@ -31,6 +31,7 @@
 					:label="$t('lang') === 'ru'? 'Выбрать регион': 'Select region'"
 					dense
 					outlined
+					disabled
 				)
 
 		v-row
@@ -90,7 +91,9 @@ export default {
 				{ text: "Region", sortable: false, value: "state" }
 			],
 			search_user: "",
-			users: []
+			users: [],
+			step2: true,
+			step3: false
 		};
 	},
 
@@ -121,7 +124,7 @@ export default {
 
 	methods: {
 		getParticipantsFromIdNomination: async function(nominationId, stateId) {
-			const url = `/nomination-order/public?filter={"nominationId":${nominationId},"stateId":${stateId}}`;
+			const url = `/nomination-order/public?filter={"nominationId":${nominationId},"stateId":${stateId}, "step2": ${this.step2}}`; // для первого этапа
 			try {
 				const data = await restHelper.getEntity(url, true);
 				this.setParticipantsArray(data.data.rows, false);
@@ -141,7 +144,8 @@ export default {
 		},
 
 		getParticipants: async function() {
-			const url = "/nomination-order/public?filter={}";
+			const url = `/nomination-order/public?filter={"step2": ${this.step2}}`; // для первого этапа
+			// const url = `/nomination-order/step2`; // для второго этапа
 			try {
 				const data = await restHelper.getEntity(url, true);
 				this.setParticipantsArray(data.data.rows, true);

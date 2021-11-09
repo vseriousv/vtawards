@@ -82,19 +82,20 @@ class JwtHelper {
 		// } else {
 		// 	return false;
 		// }
-		const tabNumbersRight = ["ADMINDEV"];
-		if (this.isJwt()) {
-			const [hashJWT, dataJwt, secretJWT] = localStorage
-				.getItem("jwt")
-				.split(".");
-			Base64.decode(hashJWT);
-			Base64.decode(secretJWT);
-			const userTabNumber = JSON.parse(Base64.decode(dataJwt))["tab_number"];
-			const find = tabNumbersRight.findIndex((item) => item.trim().toLowerCase() === userTabNumber.trim().toLowerCase());
-			return find >= 0;
-		} else {
-			return false;
-		}
+		// const tabNumbersRight = ["ADMINDEV"];
+		// if (this.isJwt()) {
+		// 	const [hashJWT, dataJwt, secretJWT] = localStorage
+		// 		.getItem("jwt")
+		// 		.split(".");
+		// 	Base64.decode(hashJWT);
+		// 	Base64.decode(secretJWT);
+		// 	const userTabNumber = JSON.parse(Base64.decode(dataJwt))["tab_number"];
+		// 	const find = tabNumbersRight.findIndex((item) => item.trim().toLowerCase() === userTabNumber.trim().toLowerCase());
+		// 	return find >= 0;
+		// } else {
+		// 	return false;
+		// }
+		return this.isCommittee() || this.isAdmin();
 	}
 }
 
