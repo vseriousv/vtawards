@@ -1,21 +1,21 @@
 <template lang="pug">
 .containerWinner.px-6
 
-    h2.mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.final")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
-    .nominationSt2
-        v-row.row-nomination.row-nomination_final
-            v-col.boxWinner(
-                v-for="item in arrWinnersFinal"
-                :key="item.id"
-                :lg="4"
-                :md="4"
-                :sm="6"
-            )   
-                h4.finalistTitle.mb-5 {{$t("winnersAllBlock.head.finalistTitle") + " " + item.nomination}}     
-                img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
-                p.boxWinner__nameWinner {{item.name}}
-                //- p.text-center {{item.nomination}}
-                p.text-center {{item.region}}
+    //h2.mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.final")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
+    //.nominationSt2
+    //    v-row.row-nomination.row-nomination_final
+    //        v-col.boxWinner(
+    //            v-for="item in arrWinnersFinal"
+    //            :key="item.id"
+    //            :lg="4"
+    //            :md="4"
+    //            :sm="6"
+    //        )
+    //            h4.finalistTitle.mb-5 {{$t("winnersAllBlock.head.finalistTitle") + " " + item.nomination}}
+    //            img.boxWinner__imgWinner(:src="`${URL_AVATARS}${item.imgWinner}`" :class=`"boxWinner__imgWinner__" + item.id`)
+    //            p.boxWinner__nameWinner {{item.name}}
+    //            //- p.text-center {{item.nomination}}
+    //            p.text-center {{item.region}}
 
     h2(v-if="arrWinners2_ru.length || arrWinners2_en.length").mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.semifinal_voting2")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
     .nominationSt2(v-if="arrWinners2_ru.length || arrWinners2_en.length")

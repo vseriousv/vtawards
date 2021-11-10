@@ -1,6 +1,6 @@
 <template>
 	<div>
-<!--		<winners-block />-->
+		<winners-block />
 		<address-main-block />
 		<nomination-main-block />
 		<steps-main-block />
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import WinnersBlock from "./WinnersBlock/WinnersBlock";
+import WinnersBlock from "./WinnersBlock/WinnersBlock";
 import AddressMainBlock from "./AddressMainBlock/AddressMainBlock";
 import NominationMainBlock from "./NominationMainBlock/NominationBlock";
 import StepsMainBlock from "./StepsMainBlock/StepsMainBlock";
@@ -22,7 +22,7 @@ import CallbackMainBlock from "./CallbackMainBlock/CallbackMainBlock";
 export default {
 	name: "StartVoting",
 	components: {
-		// WinnersBlock,
+		WinnersBlock,
 		AddressMainBlock,
 		NominationMainBlock,
 		StepsMainBlock,
