@@ -1,7 +1,7 @@
 <template lang="pug">
 .containerWinner.px-6
 
-    h2.mb-8(v-html='$t("winnersAllBlock.head.text1")+" "+$t("winnersAllBlock.head.final")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
+    h2.mb-8(v-html='$t("winnersAllBlock.head.final")+" "+$t("winnersAllBlock.head.autumn_committee_voting")')
     .nominationSt2
         v-row.row-nomination.row-nomination_final
             v-col.boxWinner(
